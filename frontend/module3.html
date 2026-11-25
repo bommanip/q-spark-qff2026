@@ -1,0 +1,1024 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 | QubitQuest</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #080d1c;
+    color: #f5f5ff;
+    line-height: 1.7;
+}
+
+.navbar {
+    padding: 22px 9%;
+    background: #0b1225;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #a99bff;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.navbar a {
+    color: #dce0f4;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 55px 22px;
+}
+
+.tag {
+    color: #a99bff;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 18px 0;
+    line-height: 1.2;
+}
+
+h1 span {
+    color: #a99bff;
+}
+
+.intro {
+    color: #aeb6cf;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.progress {
+    height: 8px;
+    background: #273252;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8774ef, #46d9dc);
+    transition: width .4s ease;
+}
+
+.progress-status {
+    color: #aeb6cf;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.completion {
+    display: none;
+    padding: 15px;
+    margin: 18px 0;
+    border: 1px solid #46d9dc;
+    border-radius: 10px;
+    background: #102b35;
+    color: #8ef0df;
+}
+
+.lesson-card {
+    background: #111a31;
+    border: 1px solid #273252;
+    border-radius: 15px;
+    padding: 28px;
+    margin: 25px 0;
+}
+
+.lesson-card h2 {
+    color: #a99bff;
+    margin-bottom: 15px;
+}
+
+.lesson-card p {
+    color: #c4cbe0;
+    margin: 12px 0;
+}
+
+.visual {
+    background: #080d1c;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.gate-box {
+    width: 90px;
+    height: 90px;
+    display: grid;
+    place-items: center;
+    margin: 20px auto;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #8774ef, #46d9dc);
+    color: #080d1c;
+    font-size: 35px;
+    font-weight: bold;
+    box-shadow: 0 0 30px #8774ef55;
+}
+
+.primary {
+    background: #8774ef;
+    border: none;
+    padding: 14px 23px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.primary:hover {
+    background: #705ce0;
+}
+
+.primary:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.retry {
+    background: transparent;
+    border: 1px solid #8774ef;
+    padding: 13px 20px;
+    color: #dcd5ff;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 15px 0 0 10px;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 18px;
+    background: #080d1c;
+    border-radius: 9px;
+    color: #46d9dc;
+    display: none;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.result p {
+    color: #c4cbe0;
+}
+
+.result h3 {
+    color: #a99bff;
+    margin: 12px 0;
+}
+
+.result strong {
+    color: #46d9dc;
+}
+
+.result ul {
+    list-style: none;
+    margin: 12px 0;
+}
+
+.result li {
+    padding: 5px 0;
+    color: #c4cbe0;
+}
+
+.example {
+    color: #46d9dc !important;
+    font-weight: bold;
+}
+
+.note {
+    color: #aeb6cf;
+    font-size: 13px;
+    border-left: 3px solid #46d9dc;
+    padding-left: 13px;
+    margin-top: 18px;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 12px 0;
+    text-align: left;
+    border: 1px solid #465174;
+    border-radius: 8px;
+    background: #080d1c;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.quiz-option:hover {
+    border-color: #a99bff;
+}
+
+.quiz-option:disabled {
+    cursor: default;
+    opacity: .75;
+}
+
+.feedback {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background: #19213b;
+    color: #46d9dc;
+    display: none;
+}
+
+.circuit-output {
+    white-space: pre-wrap;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #46d9dc;
+    background: #111a31;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #aeb6cf;
+}
+
+@media(max-width: 600px) {
+    .navbar {
+        padding: 18px;
+    }
+
+    .lesson-card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">✦ QubitQuest</div>
+    <a href="index.html">← Home</a>
+</nav>
+
+<main class="container">
+
+    <span class="tag">MODULE 03 · PRACTICAL LEVEL</span>
+
+    <h1>
+        Meet the <span>quantum gates.</span>
+    </h1>
+
+    <p class="intro">
+        You've learned superposition and entanglement.
+        Now discover how quantum gates change quantum states
+        and how we combine them to build circuits.
+    </p>
+
+    <p>YOUR LEARNING PROGRESS</p>
+
+    <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <p class="progress-status" id="progressText">
+        Module 3 completion: 0%
+    </p>
+
+    <div class="completion" id="completion">
+        ✓ Module 3 completed! Your progress has been saved.
+    </div>
+
+    <!-- X GATE -->
+
+    <section class="lesson-card">
+
+        <h2>01. X Gate — The Bit Flip</h2>
+
+        <p>
+            The X Gate changes |0⟩ into |1⟩
+            and |1⟩ into |0⟩.
+        </p>
+
+        <div class="visual">
+            <div class="gate-box">X</div>
+            <h3>|0⟩ → X Gate → |1⟩</h3>
+
+            <p>
+                Think of it like an ON/OFF switch.
+                The X Gate flips the qubit's state.
+            </p>
+        </div>
+
+        <p class="example">
+            Expected result: 100% measurement of 1
+            when starting from |0⟩.
+        </p>
+
+        <button class="primary" onclick="runGate('x', this)">
+            Run X Gate Experiment →
+        </button>
+
+        <div class="result" id="result-x"></div>
+
+    </section>
+
+    <!-- H GATE -->
+
+    <section class="lesson-card">
+
+        <h2>02. H Gate — Superposition</h2>
+
+        <p>
+            The Hadamard Gate transforms |0⟩ into
+            an equal superposition of |0⟩ and |1⟩.
+        </p>
+
+        <div class="visual">
+            <div class="gate-box">H</div>
+            <h3>|0⟩ → H Gate → Superposition</h3>
+
+            <p>
+                When measured, the outcomes are
+                approximately 50% zero and 50% one.
+            </p>
+        </div>
+
+        <button class="primary" onclick="runGate('h', this)">
+            Run H Gate Experiment →
+        </button>
+
+        <div class="result" id="result-h"></div>
+
+    </section>
+
+    <!-- Z GATE -->
+
+    <section class="lesson-card">
+
+        <h2>03. Z Gate — The Phase Flip</h2>
+
+        <p>
+            The Z Gate changes the phase of the |1⟩
+            component of a quantum state.
+        </p>
+
+        <div class="visual">
+            <div class="gate-box">Z</div>
+            <h3>|0⟩ → Z Gate → |0⟩</h3>
+
+            <p>
+                If the qubit is in |0⟩, applying Z
+                does not change its state.
+            </p>
+
+            <p>
+                If the qubit is in |1⟩, Z changes
+                its phase without changing its measurement value.
+            </p>
+        </div>
+
+        <p class="example">
+            A phase change becomes observable when
+            we combine gates such as H, Z and H.
+        </p>
+
+        <button class="primary" onclick="runGate('z', this)">
+            Run Z Gate Experiment →
+        </button>
+
+        <div class="result" id="result-z"></div>
+
+    </section>
+
+    <!-- CNOT -->
+
+    <section class="lesson-card">
+
+        <h2>04. CNOT Gate — Controlled Operation</h2>
+
+        <p>
+            CNOT is a two-qubit gate.
+            It flips the target qubit only when
+            the control qubit is 1.
+        </p>
+
+        <div class="visual">
+            <div class="gate-box">CX</div>
+
+            <h3>Control Qubit → Target Qubit</h3>
+
+            <p>
+                Control = 0: target remains unchanged.
+            </p>
+
+            <p>
+                Control = 1: target flips.
+            </p>
+        </div>
+
+        <p class="example">
+            This gate is essential for creating
+            entanglement in our Bell State experiment.
+        </p>
+
+        <button class="primary" onclick="runCNOT(this)">
+            Run CNOT Experiment →
+        </button>
+
+        <div class="result" id="result-cnot"></div>
+
+    </section>
+
+    <!-- CIRCUIT COMPOSITION -->
+
+    <section class="lesson-card">
+
+        <h2>05. Combine Gates into a Circuit</h2>
+
+        <p>
+            A quantum circuit is built by applying
+            gates in a particular sequence.
+        </p>
+
+        <div class="visual">
+            <h3>H → X → H → Measurement</h3>
+
+            <p>
+                First, create superposition using H.
+                Then apply X and another H gate.
+                Finally, measure the qubit.
+            </p>
+
+            <p>
+                This sequence demonstrates how gates
+                combine to transform a quantum state.
+            </p>
+        </div>
+
+        <button class="primary" onclick="runCombined(this)">
+            Run Combined Circuit →
+        </button>
+
+        <div class="result" id="result-combined"></div>
+
+    </section>
+
+    <!-- QUIZ -->
+
+    <section class="lesson-card">
+
+        <h2>06. Test Your Knowledge!</h2>
+
+        <p>Question 1: What does the X Gate do?</p>
+
+        <button class="quiz-option" onclick="answer(0,0)">
+            A. Flips the qubit state
+        </button>
+
+        <button class="quiz-option" onclick="answer(0,1)">
+            B. Creates entanglement
+        </button>
+
+        <button class="quiz-option" onclick="answer(0,2)">
+            C. Measures a qubit
+        </button>
+
+        <div id="feedback0" class="feedback"></div>
+
+        <h3>Question 2</h3>
+
+        <p>Which gate creates equal superposition from |0⟩?</p>
+
+        <button class="quiz-option" onclick="answer(1,0)">
+            A. Z Gate
+        </button>
+
+        <button class="quiz-option" onclick="answer(1,1)">
+            B. H Gate
+        </button>
+
+        <button class="quiz-option" onclick="answer(1,2)">
+            C. X Gate
+        </button>
+
+        <div id="feedback1" class="feedback"></div>
+
+        <h3>Question 3</h3>
+
+        <p>When does a CNOT gate flip its target?</p>
+
+        <button class="quiz-option" onclick="answer(2,0)">
+            A. When control is 0
+        </button>
+
+        <button class="quiz-option" onclick="answer(2,1)">
+            B. Always
+        </button>
+
+        <button class="quiz-option" onclick="answer(2,2)">
+            C. When control is 1
+        </button>
+
+        <div id="feedback2" class="feedback"></div>
+
+        <button class="primary" onclick="showScore()">
+            Check My Score →
+        </button>
+
+        <button class="retry" onclick="retryQuiz()">
+            Retry Quiz
+        </button>
+
+        <div id="score" class="feedback"></div>
+
+    </section>
+
+    <section class="lesson-card" style="text-align:center">
+
+        <h2>You're becoming a circuit builder! 🚀</h2>
+
+        <p>
+            You've explored the X, H, Z and CNOT gates.
+            You've also learned how gates work together.
+        </p>
+
+        <p class="example">
+            Next: Explore quantum algorithms and
+            real-world applications.
+        </p>
+
+        <a class="primary"
+           href="module4.html"
+           style="display:inline-block;text-decoration:none;">
+            Continue to Module 4 →
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+    ✦ QubitQuest — Quantum learning for everyone.
+</footer>
+
+<script>
+
+// ==================================
+// SHARED PROGRESS SYSTEM
+// ==================================
+
+const PROGRESS_KEY = "qubitquestProgress";
+
+function readProgress() {
+
+    try {
+
+        const saved = JSON.parse(
+            localStorage.getItem(PROGRESS_KEY) || "{}"
+        );
+
+        return {
+            completedModules: Array.isArray(saved.completedModules)
+                ? saved.completedModules : [],
+
+            quizScores: saved.quizScores &&
+                typeof saved.quizScores === "object"
+                ? saved.quizScores : {}
+        };
+
+    } catch (error) {
+
+        return {
+            completedModules: [],
+            quizScores: {}
+        };
+    }
+}
+
+
+function updateModuleProgress() {
+
+    const progress = readProgress();
+
+    const completed =
+        progress.completedModules.includes(3);
+
+    const percentage = completed ? 100 : 0;
+
+    document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+    document.getElementById("progressText").textContent =
+        "Module 3 completion: " + percentage + "%";
+
+    document.getElementById("completion").style.display =
+        completed ? "block" : "none";
+}
+
+
+function saveModuleCompletion(finalScore) {
+
+    const progress = readProgress();
+
+    if (finalScore === 3 &&
+        !progress.completedModules.includes(3)) {
+
+        progress.completedModules.push(3);
+    }
+
+    progress.quizScores[3] = finalScore;
+
+    localStorage.setItem(
+        PROGRESS_KEY,
+        JSON.stringify(progress)
+    );
+
+    updateModuleProgress();
+}
+
+
+// ==================================
+// QUIZ SYSTEM
+// ==================================
+
+const correctAnswers = [0, 1, 2];
+
+const explanations = [
+    "The X Gate flips |0⟩ to |1⟩ and |1⟩ to |0⟩.",
+    "The H Gate creates an equal superposition from |0⟩.",
+    "CNOT flips its target when the control qubit is 1."
+];
+
+let score = 0;
+
+let answered = [false, false, false];
+
+
+function answer(question, choice) {
+
+    if (answered[question]) return;
+
+    answered[question] = true;
+
+    const feedback = document.getElementById(
+        "feedback" + question
+    );
+
+    feedback.style.display = "block";
+
+    const buttons = document.querySelectorAll(".quiz-option");
+
+    for (
+        let i = question * 3;
+        i < question * 3 + 3;
+        i++
+    ) {
+        buttons[i].disabled = true;
+    }
+
+    if (choice === correctAnswers[question]) {
+
+        score++;
+
+        feedback.textContent =
+            "✓ Correct! " + explanations[question];
+
+    } else {
+
+        feedback.textContent =
+            "Not quite! " + explanations[question];
+    }
+}
+
+
+function showScore() {
+
+    const result = document.getElementById("score");
+
+    result.style.display = "block";
+
+    if (answered.some(value => !value)) {
+
+        result.textContent =
+            "Please answer all three questions first.";
+
+        return;
+    }
+
+    result.textContent =
+        "You scored " + score + " out of 3! " +
+        (score === 3
+            ? "Excellent work! Module 3 completed. 🌟"
+            : "Great effort! You need 3/3 to complete this module.");
+
+    saveModuleCompletion(score);
+}
+
+
+function retryQuiz() {
+
+    score = 0;
+
+    answered = [false, false, false];
+
+    document.querySelectorAll(".quiz-option").forEach(button => {
+        button.disabled = false;
+    });
+
+    for (let i = 0; i < 3; i++) {
+
+        const feedback = document.getElementById("feedback" + i);
+
+        feedback.textContent = "";
+
+        feedback.style.display = "none";
+    }
+
+    const result = document.getElementById("score");
+
+    result.textContent = "";
+
+    result.style.display = "none";
+}
+
+
+// ==================================
+// QISKIT EXPERIMENT SYSTEM
+// ==================================
+
+const BACKEND_URL = "http://127.0.0.1:5000";
+
+
+// Display results from the Qiskit backend
+
+function displayResults(result, resultBox) {
+
+    resultBox.innerHTML = "";
+
+    const title = document.createElement("h3");
+
+    title.textContent =
+        "✓ Experiment Completed Successfully!";
+
+    resultBox.appendChild(title);
+
+
+    const experiment = document.createElement("p");
+
+    experiment.textContent =
+        "Experiment: " + (result.experiment || result.gate);
+
+    resultBox.appendChild(experiment);
+
+
+    const shots = document.createElement("p");
+
+    shots.textContent =
+        "Total shots: " + result.shots;
+
+    resultBox.appendChild(shots);
+
+
+    const countsTitle = document.createElement("h3");
+
+    countsTitle.textContent = "Measurement Results";
+
+    resultBox.appendChild(countsTitle);
+
+
+    const countList = document.createElement("ul");
+
+    const counts = result.counts || {};
+
+    const totalShots = Number(result.shots) || 1024;
+
+
+    Object.entries(counts).forEach(([state, count]) => {
+
+        const percentage = (Number(count) / totalShots) * 100;
+
+        const item = document.createElement("li");
+
+        item.textContent =
+            "|" + state + "⟩ : " +
+            count + " measurements (" +
+            percentage.toFixed(2) + "%)";
+
+        countList.appendChild(item);
+    });
+
+    resultBox.appendChild(countList);
+
+
+    if (result.explanation) {
+
+        const explanationTitle = document.createElement("h3");
+
+        explanationTitle.textContent = "What happened?";
+
+        resultBox.appendChild(explanationTitle);
+
+
+        const explanation = document.createElement("p");
+
+        explanation.textContent = result.explanation;
+
+        resultBox.appendChild(explanation);
+    }
+
+
+    const circuitTitle = document.createElement("h3");
+
+    circuitTitle.textContent = "Qiskit Circuit Diagram";
+
+    resultBox.appendChild(circuitTitle);
+
+
+    const circuit = document.createElement("pre");
+
+    circuit.className = "circuit-output";
+
+    circuit.textContent =
+        result.circuit || "Circuit diagram unavailable.";
+
+    resultBox.appendChild(circuit);
+
+
+    const note = document.createElement("p");
+
+    note.className = "note";
+
+    note.textContent =
+        "Simulation performed using Qiskit Aer on the local computer. " +
+        "These are simulated results, not measurements from physical IBM quantum hardware.";
+
+    resultBox.appendChild(note);
+}
+
+
+// Send experiment requests to Flask backend
+
+async function executeExperiment(
+    endpoint,
+    payload,
+    resultId,
+    button
+) {
+
+    const resultBox = document.getElementById(resultId);
+
+    resultBox.style.display = "block";
+
+    resultBox.textContent =
+        "Running your quantum experiment... Please wait.";
+
+    const originalText = button.textContent;
+
+    button.disabled = true;
+
+    button.textContent = "Running experiment...";
+
+    try {
+
+        const response = await fetch(
+            BACKEND_URL + endpoint,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(payload)
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error || "The experiment could not be completed."
+            );
+        }
+
+        displayResults(data, resultBox);
+
+    } catch (error) {
+
+        resultBox.textContent =
+            "Experiment failed: " + error.message +
+            "\n\nPlease check that your Flask backend is running on port 5000.";
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent = originalText;
+    }
+}
+
+
+// ==================================
+// INDIVIDUAL GATE EXPERIMENTS
+// ==================================
+
+function runGate(gate, button) {
+
+    if (gate === "h") {
+
+        executeExperiment(
+            "/run-circuit",
+            {
+                gate: "h",
+                shots: 1024
+            },
+            "result-h",
+            button
+        );
+
+    } else {
+
+        executeExperiment(
+            "/run-module3",
+            {
+                experiment: gate,
+                shots: 1024
+            },
+            "result-" + gate,
+            button
+        );
+    }
+}
+
+
+// ==================================
+// CNOT EXPERIMENT
+// ==================================
+
+function runCNOT(button) {
+
+    executeExperiment(
+        "/run-module3",
+        {
+            experiment: "cnot",
+            shots: 1024
+        },
+        "result-cnot",
+        button
+    );
+}
+
+
+// ==================================
+// COMBINED GATE EXPERIMENT
+// ==================================
+
+function runCombined(button) {
+
+    executeExperiment(
+        "/run-module3",
+        {
+            experiment: "combined",
+            shots: 1024
+        },
+        "result-combined",
+        button
+    );
+}
+
+
+// ==================================
+// INITIALIZE SAVED PROGRESS
+// ==================================
+
+updateModuleProgress();
+
+</script>
+
+</body>
+</html>
