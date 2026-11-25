@@ -1,5 +1,12 @@
 
-from pathlib import Path
+import base64
+import io
+import math
+import threading
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -7,29 +14,184 @@ from flask_cors import CORS
 from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
 
-import math
-import secrets
 
+# ==========================================
+# APP CONFIGURATION
+# ==========================================
 
-frontend = Path(__file__).resolve().parents[1] / "frontend"
-app = Flask(__name__, static_folder=frontend, static_url_path="")
-app.config["MAX_CONTENT_LENGTH"] = 4096
+app = Flask(__name__)
 CORS(app)
 
 simulator = AerSimulator()
+plot_lock = threading.Lock()
+
+
+# ==========================================
+# VISUALIZATION HELPERS
+# ==========================================
+
+def figure_to_base64(fig):
+    buffer = io.BytesIO()
+
+    fig.savefig(
+        buffer,
+        format="png",
+        dpi=150,
+        bbox_inches="tight",
+        facecolor="#ffffff"
+    )
+
+    buffer.seek(0)
+    encoded = base64.b64encode(buffer.read()).decode("utf-8")
+
+    plt.close(fig)
+
+    return "data:image/png;base64," + encoded
+
+
+def generate_circuit_image(circuit):
+    try:
+        with plot_lock:
+            fig = circuit.draw(
+                output="mpl",
+                fold=-1
+            )
+
+            return figure_to_base64(fig)
+
+    except Exception as error:
+        print("Circuit image error:", error)
+        return None
+
+
+def generate_histogram_image(counts, title="Measurement Results"):
+    try:
+        with plot_lock:
+            labels = list(counts.keys())
+            values = list(counts.values())
+
+            fig, ax = plt.subplots(figsize=(8, 4))
+
+            bars = ax.bar(
+                labels,
+                values,
+                color="#7657E8",
+                edgecolor="#4C35A5",
+                linewidth=1.2
+            )
+
+            ax.set_title(title, fontsize=14, fontweight="bold")
+            ax.set_xlabel("Measurement Outcome")
+            ax.set_ylabel("Number of Measurements")
+            ax.grid(axis="y", alpha=0.25)
+
+            for bar, value in zip(bars, values):
+                ax.text(
+                    bar.get_x() + bar.get_width() / 2,
+                    bar.get_height(),
+                    str(value),
+                    ha="center",
+                    va="bottom"
+                )
+
+            fig.tight_layout()
+
+            return figure_to_base64(fig)
+
+    except Exception as error:
+        print("Histogram image error:", error)
+        return None
+
+
+def add_visualizations(response, circuit, counts, chart_title):
+    response["circuit_image"] = generate_circuit_image(circuit)
+
+    response["histogram_image"] = generate_histogram_image(
+        counts,
+        chart_title
+    )
+
+    return response
+
+
+# ==========================================
+# GENERAL HELPERS
+# ==========================================
+
+def run_circuit(circuit, shots=1024):
+    compiled = circuit.copy()
+
+    result = simulator.run(
+        compiled,
+        shots=shots
+    ).result()
+
+    return result.get_counts()
+
+
+def validate_shots(value, default=1024):
+    try:
+        shots = int(value)
+    except (TypeError, ValueError):
+        shots = default
+
+    return max(1, min(shots, 10000))
+
+
+# ==========================================
+# GROVER ALGORITHM HELPER
+# ==========================================
+
+def execute_grover(marked_state, shots=1024):
+
+    circuit = QuantumCircuit(2, 2)
+
+    # Initial superposition
+    circuit.h([0, 1])
+
+    # Oracle
+    if marked_state[0] == "0":
+        circuit.x(0)
+
+    if marked_state[1] == "0":
+        circuit.x(1)
+
+    circuit.cz(0, 1)
+
+    if marked_state[0] == "0":
+        circuit.x(0)
+
+    if marked_state[1] == "0":
+        circuit.x(1)
+
+    # Diffusion operator
+    circuit.h([0, 1])
+    circuit.x([0, 1])
+    circuit.h(1)
+    circuit.cx(0, 1)
+    circuit.h(1)
+    circuit.x([0, 1])
+    circuit.h([0, 1])
+
+    # Measurement
+    circuit.measure([0, 1], [0, 1])
+
+    counts = run_circuit(circuit, shots)
+
+    return {
+        "counts": counts,
+        "circuit": str(circuit),
+        "circuit_object": circuit
+    }
 
 
 # ==========================================
 # HOME
 # ==========================================
 
-@app.get("/")
-def index():
-    return app.send_static_file("index.html")
+@app.route("/")
+def home():
 
-
-@app.get("/health")
-def health():
     return jsonify({
         "message": "Welcome to QubitQuest!",
         "status": "Quantum simulator is ready."
@@ -37,552 +199,462 @@ def health():
 
 
 # ==========================================
-# MODULE 2: H GATE
+# MODULE 1 - BASIC QUANTUM CIRCUITS
 # ==========================================
 
-@app.post("/api/run-circuit")
 @app.route("/run-circuit", methods=["POST"])
-def run_circuit():
+def run_basic_circuit():
+
     data = request.get_json(silent=True) or {}
 
-    try:
-        gate = data.get("gate", "h").lower()
-        shots = int(data.get("shots", 1024))
+    gate = str(data.get("gate", "H")).upper()
+    shots = validate_shots(data.get("shots", 1024))
 
-        if gate not in ["h", "x"]:
-            return jsonify({"error": "Choose H or X gate."}), 400
+    circuit = QuantumCircuit(1, 1)
 
-        if not 1 <= shots <= 10000:
-            return jsonify({"error": "Shots must be between 1 and 10000."}), 400
+    if gate == "X":
+        circuit.x(0)
+    else:
+        circuit.h(0)
 
-        circuit = QuantumCircuit(1, 1)
+    circuit.measure(0, 0)
 
-        if gate == "h":
-            circuit.h(0)
-        else:
-            circuit.x(0)
+    counts = run_circuit(circuit, shots)
 
-        circuit.measure(0, 0)
+    response = {
+        "experiment": "Basic Quantum Circuit",
+        "gate": gate,
+        "shots": shots,
+        "counts": counts,
+        "circuit": str(circuit),
+        "explanation": (
+            "The Hadamard gate creates a superposition."
+            if gate == "H"
+            else "The Pauli-X gate flips the qubit from 0 to 1."
+        )
+    }
 
-        result = simulator.run(circuit, shots=shots).result()
-        counts = result.get_counts()
-
-        return jsonify({
-            "gate": gate.upper(),
-            "shots": shots,
-            "counts": counts,
-            "circuit": str(circuit.draw(output="text"))
-        })
-
-    except (ValueError, TypeError):
-        return jsonify({"error": "Please enter valid circuit settings."}), 400
-
-    except Exception:
-        return jsonify({"error": "The quantum simulation could not be completed."}), 500
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        counts,
+        "Basic Circuit Measurement Results"
+    ))
 
 
 # ==========================================
-# MODULE 2: BELL STATE ENTANGLEMENT
+# MODULE 2 - ENTANGLEMENT
 # ==========================================
 
-@app.post("/api/run-entanglement")
 @app.route("/run-entanglement", methods=["POST"])
 def run_entanglement():
+
     data = request.get_json(silent=True) or {}
 
-    try:
-        shots = int(data.get("shots", 1024))
-
-        if not 1 <= shots <= 10000:
-            return jsonify({"error": "Shots must be between 1 and 10000."}), 400
-
-        circuit = QuantumCircuit(2, 2)
-        circuit.h(0)
-        circuit.cx(0, 1)
-        circuit.measure([0, 1], [0, 1])
-
-        result = simulator.run(circuit, shots=shots).result()
-        counts = result.get_counts()
-
-        return jsonify({
-            "experiment": "Bell State Entanglement",
-            "shots": shots,
-            "counts": counts,
-            "circuit": str(circuit.draw(output="text")),
-            "explanation": (
-                "The two qubits are entangled. Their measurement "
-                "results are correlated: both are usually 0 or both are 1."
-            )
-        })
-
-    except (ValueError, TypeError):
-        return jsonify({"error": "Please enter valid experiment settings."}), 400
-
-    except Exception:
-        return jsonify({"error": "The entanglement simulation could not be completed."}), 500
-
-
-# ==========================================
-# MODULE 3: QUANTUM GATES
-# ==========================================
-
-@app.post("/api/run-module3")
-@app.route("/run-module3", methods=["POST"])
-def run_module3():
-    data = request.get_json(silent=True) or {}
-
-    try:
-        experiment = data.get("experiment", "").lower()
-        shots = int(data.get("shots", 1024))
-
-        if not 1 <= shots <= 10000:
-            return jsonify({"error": "Shots must be between 1 and 10000."}), 400
-
-        if experiment == "x":
-            circuit = QuantumCircuit(1, 1)
-            circuit.x(0)
-            circuit.measure(0, 0)
-            explanation = "The X gate flips the qubit from |0> to |1>. The expected measurement result is 1."
-
-        elif experiment == "z":
-            circuit = QuantumCircuit(1, 1)
-            circuit.h(0)
-            circuit.z(0)
-            circuit.h(0)
-            circuit.measure(0, 0)
-            explanation = "The Z gate changes the phase of the qubit. The H gates allow us to observe this phase change through interference. The expected result is 1."
-
-        elif experiment == "cnot":
-            circuit = QuantumCircuit(2, 2)
-            circuit.x(0)
-            circuit.cx(0, 1)
-            circuit.measure([0, 1], [0, 1])
-            explanation = "The control qubit starts at 1. The CNOT gate flips the target qubit. The expected measurement result is 11."
-
-        elif experiment == "combined":
-            circuit = QuantumCircuit(1, 1)
-            circuit.h(0)
-            circuit.x(0)
-            circuit.h(0)
-            circuit.measure(0, 0)
-            explanation = "The H, X and H gates are applied in sequence. The expected result is 0."
-
-        else:
-            return jsonify({"error": "Choose x, z, cnot or combined."}), 400
-
-        result = simulator.run(circuit, shots=shots).result()
-        counts = result.get_counts()
-
-        return jsonify({
-            "experiment": experiment,
-            "shots": shots,
-            "counts": counts,
-            "circuit": str(circuit.draw(output="text")),
-            "explanation": explanation
-        })
-
-    except (ValueError, TypeError):
-        return jsonify({"error": "Please enter valid experiment settings."}), 400
-
-    except Exception:
-        return jsonify({"error": "The experiment could not be completed."}), 500
-
-
-# ==========================================
-# SHARED GROVER'S SEARCH ENGINE
-# ==========================================
-
-def execute_grover(marked_state, shots):
-    """
-    Runs a two-qubit Grover search.
-
-    Four possible states:
-    00 = top-left
-    01 = top-right
-    10 = bottom-left
-    11 = bottom-right
-
-    The selected marked state is amplified
-    using one Grover iteration.
-    """
+    shots = validate_shots(data.get("shots", 1024))
 
     circuit = QuantumCircuit(2, 2)
 
-    # Step 1: Create equal superposition.
-    circuit.h([0, 1])
+    circuit.h(0)
+    circuit.cx(0, 1)
 
-    # Step 2: Oracle.
-    # Convert the chosen target into |11>
-    # so that CZ marks the required state.
-
-    if marked_state[1] == "0":
-        circuit.x(0)
-
-    if marked_state[0] == "0":
-        circuit.x(1)
-
-    circuit.cz(0, 1)
-
-    # Undo the temporary X gates.
-    if marked_state[0] == "0":
-        circuit.x(1)
-
-    if marked_state[1] == "0":
-        circuit.x(0)
-
-    # Step 3: Grover diffusion operator.
-    circuit.h([0, 1])
-    circuit.x([0, 1])
-    circuit.cz(0, 1)
-    circuit.x([0, 1])
-    circuit.h([0, 1])
-
-    # Step 4: Measure.
     circuit.measure([0, 1], [0, 1])
 
-    # Step 5: Run simulation.
-    result = simulator.run(circuit, shots=shots).result()
-    counts = result.get_counts()
+    counts = run_circuit(circuit, shots)
 
-    success_count = counts.get(marked_state, 0)
-    success_percentage = round((success_count / shots) * 100, 2)
-
-    return {
+    response = {
+        "experiment": "Quantum Entanglement",
+        "shots": shots,
         "counts": counts,
-        "marked_state": marked_state,
-        "success_count": success_count,
-        "success_percentage": success_percentage,
-        "circuit": str(circuit.draw(output="text"))
+        "circuit": str(circuit),
+        "explanation": (
+            "The Hadamard gate creates superposition. "
+            "The CNOT gate entangles the two qubits. "
+            "Their measurement results are correlated."
+        )
     }
 
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        counts,
+        "Entanglement Measurement Results"
+    ))
+
 
 # ==========================================
-# MODULE 4: ORIGINAL GROVER'S SEARCH
+# MODULE 3 - QUANTUM GATES
 # ==========================================
 
-@app.post("/api/run-grover")
-@app.route("/run-grover", methods=["POST"])
-def run_grover():
+@app.route("/run-module3", methods=["POST"])
+def run_module3():
+
     data = request.get_json(silent=True) or {}
 
-    try:
-        shots = int(data.get("shots", 1024))
+    gate = str(data.get("gate", "X")).upper()
+    shots = validate_shots(data.get("shots", 1024))
 
-        if not 1 <= shots <= 10000:
-            return jsonify({"error": "Shots must be between 1 and 10000."}), 400
+    circuit = QuantumCircuit(2, 2)
 
-        # Preserve the original default marked state.
-        experiment = execute_grover("11", shots)
+    if gate == "X":
+        circuit.x(0)
 
-        return jsonify({
-            "experiment": "Grover's Search Algorithm",
-            "shots": shots,
-            "counts": experiment["counts"],
-            "marked_state": experiment["marked_state"],
-            "circuit": experiment["circuit"],
-            "explanation": (
-                "Grover's algorithm creates an equal superposition "
-                "of four possible answers. The oracle marks 11. "
-                "The diffusion operator amplifies the marked answer. "
-                "One iteration returns 11 with certainty in an ideal simulation."
-            )
-        })
+    elif gate == "Z":
+        circuit.h(0)
+        circuit.z(0)
+        circuit.h(0)
 
-    except (ValueError, TypeError):
-        return jsonify({"error": "Please enter valid experiment settings."}), 400
+    elif gate == "CNOT":
+        circuit.x(0)
+        circuit.cx(0, 1)
 
-    except Exception:
-        return jsonify({"error": "Grover's simulation could not be completed."}), 500
+    elif gate == "H":
+        circuit.h(0)
+
+    else:
+        circuit.h(0)
+        circuit.x(0)
+        circuit.h(0)
+
+    circuit.measure([0, 1], [0, 1])
+
+    counts = run_circuit(circuit, shots)
+
+    response = {
+        "experiment": "Quantum Gates",
+        "gate": gate,
+        "shots": shots,
+        "counts": counts,
+        "circuit": str(circuit),
+        "explanation": (
+            "This experiment demonstrates the action "
+            "of the selected quantum gate."
+        )
+    }
+
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        counts,
+        "Quantum Gate Measurement Results"
+    ))
 
 
 # ==========================================
-# ARCADE GAME 1: COIN LAB
+# MODULE 4 - GROVER'S ALGORITHM
+# ==========================================
+
+@app.route("/run-grover", methods=["POST"])
+def run_grover():
+
+    data = request.get_json(silent=True) or {}
+
+    marked_state = str(data.get("marked_state", "11"))
+
+    if marked_state not in ["00", "01", "10", "11"]:
+        return jsonify({
+            "error": "Marked state must be 00, 01, 10 or 11."
+        }), 400
+
+    shots = validate_shots(data.get("shots", 1024))
+
+    result = execute_grover(marked_state, shots)
+
+    counts = result["counts"]
+    circuit = result["circuit_object"]
+
+    response = {
+        "experiment": "Grover's Search Algorithm",
+        "marked_state": marked_state,
+        "shots": shots,
+        "counts": counts,
+        "circuit": result["circuit"],
+        "explanation": (
+            "Grover's algorithm uses an oracle to mark the target "
+            "state and a diffusion operator to amplify its probability."
+        )
+    }
+
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        counts,
+        "Grover Search Measurement Results"
+    ))
+
+
+# ==========================================
+# COIN LAB
 # ==========================================
 
 @app.route("/run-coin-lab", methods=["POST"])
 def run_coin_lab():
+
     data = request.get_json(silent=True) or {}
 
     try:
-        tilt = float(data.get("tilt_degrees", 90))
-        shots = int(data.get("shots", 1024))
+        tilt_degrees = float(data.get("tilt_degrees", 90))
+    except (TypeError, ValueError):
+        tilt_degrees = 90
 
-        if not 0 <= tilt <= 180:
-            return jsonify({"error": "Tilt must be between 0 and 180 degrees."}), 400
+    tilt_degrees = max(0, min(180, tilt_degrees))
 
-        if not 1 <= shots <= 10000:
-            return jsonify({"error": "Shots must be between 1 and 10000."}), 400
+    shots = validate_shots(data.get("shots", 1024))
 
-        angle = math.radians(tilt)
+    angle = math.radians(tilt_degrees)
 
-        circuit = QuantumCircuit(1, 1)
-        circuit.ry(angle, 0)
-        circuit.measure(0, 0)
+    circuit = QuantumCircuit(1, 1)
 
-        result = simulator.run(circuit, shots=shots).result()
-        counts = result.get_counts()
+    circuit.ry(angle, 0)
+    circuit.measure(0, 0)
 
-        heads_count = counts.get("0", 0)
-        tails_count = counts.get("1", 0)
+    counts = run_circuit(circuit, shots)
 
-        heads_probability = math.cos(angle / 2) ** 2
-        tails_probability = math.sin(angle / 2) ** 2
+    heads = counts.get("0", 0)
+    tails = counts.get("1", 0)
 
-        return jsonify({
-            "experiment": "Coin Lab",
-            "tilt_degrees": tilt,
-            "shots": shots,
-            "counts": {
-                "heads": heads_count,
-                "tails": tails_count
-            },
-            "probabilities": {
-                "heads": round(heads_probability * 100, 2),
-                "tails": round(tails_probability * 100, 2)
-            },
-            "observed_percentages": {
-                "heads": round((heads_count / shots) * 100, 2),
-                "tails": round((tails_count / shots) * 100, 2)
-            },
-            "circuit": str(circuit.draw(output="text")),
-            "explanation": (
-                "The RY gate rotates the qubit by the selected angle. "
-                "Measurement produces one outcome per shot. "
-                "Observed percentages may vary from theoretical probabilities."
-            )
-        })
+    heads_probability = math.cos(angle / 2) ** 2
+    tails_probability = math.sin(angle / 2) ** 2
 
-    except (ValueError, TypeError):
-        return jsonify({"error": "Please enter a valid tilt and shot count."}), 400
+    response = {
+        "experiment": "Quantum Coin Lab",
+        "tilt_degrees": tilt_degrees,
+        "shots": shots,
+        "heads": heads,
+        "tails": tails,
+        "counts": counts,
+        "heads_probability": round(heads_probability * 100, 2),
+        "tails_probability": round(tails_probability * 100, 2),
+        "circuit": str(circuit),
+        "explanation": (
+            "The Ry rotation changes the probability of measuring "
+            "heads or tails. The measurement counts are sampled "
+            "from the quantum simulator."
+        )
+    }
 
-    except Exception:
-        return jsonify({"error": "The Coin Lab simulation could not be completed."}), 500
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        {
+            "Heads": heads,
+            "Tails": tails
+        },
+        "Quantum Coin Measurement Results"
+    ))
 
 
 # ==========================================
-# ARCADE GAME 2: LINKED DICE
+# LINKED DICE
 # ==========================================
 
 @app.route("/run-linked-dice", methods=["POST"])
 def run_linked_dice():
+
     data = request.get_json(silent=True) or {}
 
-    try:
-        mode = data.get("mode", "independent").lower()
-        shots = int(data.get("shots", 1024))
+    mode = str(data.get("mode", "independent")).lower()
 
-        if mode not in ["independent", "entangled"]:
-            return jsonify({
-                "error": "Choose independent or entangled mode."
-            }), 400
-
-        if not 1 <= shots <= 10000:
-            return jsonify({
-                "error": "Shots must be between 1 and 10000."
-            }), 400
-
-        # Each die uses 3 qubits.
-        # Binary outcomes 000 to 101 represent faces 1 to 6.
-        # Outcomes 110 and 111 are rejected.
-
-        if mode == "independent":
-            circuit = QuantumCircuit(6, 6)
-            circuit.h([0, 1, 2, 3, 4, 5])
-
-            explanation = (
-                "Each die is created using three independent qubits. "
-                "Both dice have six equally likely valid outcomes. "
-                "Their results are independent, so matching numbers "
-                "occur by chance."
-            )
-
-        else:
-            circuit = QuantumCircuit(6, 6)
-
-            circuit.h(0)
-            circuit.h(1)
-            circuit.h(2)
-
-            circuit.cx(0, 3)
-            circuit.cx(1, 4)
-            circuit.cx(2, 5)
-
-            explanation = (
-                "Three Bell pairs connect the corresponding qubits "
-                "of the two dice. Their three-bit measurement values "
-                "are perfectly correlated. After invalid outcomes are "
-                "rejected, both fair six-sided dice show the same number."
-            )
-
-        circuit.measure([0, 1, 2, 3, 4, 5], [0, 1, 2, 3, 4, 5])
-
-        pair_counts = {}
-        first_die_counts = {str(i): 0 for i in range(1, 7)}
-        second_die_counts = {str(i): 0 for i in range(1, 7)}
-
-        accepted = 0
-        raw_shots = 0
-        max_raw_shots = shots * 20 + 10000
-
-        while accepted < shots and raw_shots < max_raw_shots:
-
-            remaining = shots - accepted
-            batch_size = min(max(remaining * 2, 256), 10000)
-
-            result = simulator.run(
-                circuit,
-                shots=batch_size
-            ).result()
-
-            counts = result.get_counts()
-            raw_shots += batch_size
-
-            for bitstring, frequency in counts.items():
-
-                bits = bitstring.replace(" ", "")
-
-                first_value = int(bits[-3:], 2)
-                second_value = int(bits[:3], 2)
-
-                if first_value >= 6 or second_value >= 6:
-                    continue
-
-                first_die = first_value + 1
-                second_die = second_value + 1
-
-                usable = min(frequency, shots - accepted)
-
-                if usable <= 0:
-                    continue
-
-                pair = f"{first_die}-{second_die}"
-
-                pair_counts[pair] = pair_counts.get(pair, 0) + usable
-
-                first_die_counts[str(first_die)] += usable
-                second_die_counts[str(second_die)] += usable
-
-                accepted += usable
-
-                if accepted >= shots:
-                    break
-
-        if accepted < shots:
-            return jsonify({
-                "error": "Could not collect enough valid dice rolls. Please try again."
-            }), 500
-
-        matching = sum(
-            count for pair, count in pair_counts.items()
-            if pair.split("-")[0] == pair.split("-")[1]
-        )
-
-        matching_percentage = round((matching / shots) * 100, 2)
-
+    if mode not in ["independent", "entangled"]:
         return jsonify({
-            "experiment": "Linked Dice",
-            "mode": mode,
-            "shots": shots,
-            "accepted_shots": accepted,
-            "raw_shots": raw_shots,
-            "dice": {
-                "die_one": first_die_counts,
-                "die_two": second_die_counts
-            },
-            "pair_counts": pair_counts,
-            "matching_rolls": matching,
-            "matching_percentage": matching_percentage,
-            "circuit": str(circuit.draw(output="text")),
-            "explanation": explanation
-        })
-
-    except (ValueError, TypeError):
-        return jsonify({
-            "error": "Please enter valid Linked Dice settings."
+            "error": "Mode must be independent or entangled."
         }), 400
 
-    except Exception:
+    shots = validate_shots(data.get("shots", 1024))
+
+    circuit = QuantumCircuit(6, 6)
+
+    if mode == "independent":
+        circuit.h(range(6))
+
+    else:
+        circuit.h([0, 1, 2])
+        circuit.cx(0, 3)
+        circuit.cx(1, 4)
+        circuit.cx(2, 5)
+
+    circuit.measure(range(6), range(6))
+
+    result = simulator.run(
+        circuit,
+        shots=shots * 3
+    ).result()
+
+    raw_counts = result.get_counts()
+
+    # Separate distributions for the two dice
+    die_one_counts = {}
+    die_two_counts = {}
+
+    pair_counts = {}
+
+    matching_rolls = 0
+    accepted_shots = 0
+
+    for binary, frequency in raw_counts.items():
+
+        value = int(binary.replace(" ", ""), 2)
+
+        # First die uses qubits 0, 1, 2
+        first_die = value & 7
+
+        # Second die uses qubits 3, 4, 5
+        second_die = (value >> 3) & 7
+
+        # Reject invalid values (6 and 7)
+        if first_die >= 6 or second_die >= 6:
+            continue
+
+        # Convert binary values 0-5 into dice faces 1-6
+        first_die += 1
+        second_die += 1
+
+        pair = f"{first_die}-{second_die}"
+
+        pair_counts[pair] = (
+            pair_counts.get(pair, 0) + frequency
+        )
+
+        die_one_counts[first_die] = (
+            die_one_counts.get(first_die, 0) + frequency
+        )
+
+        die_two_counts[second_die] = (
+            die_two_counts.get(second_die, 0) + frequency
+        )
+
+        accepted_shots += frequency
+
+        if first_die == second_die:
+            matching_rolls += frequency
+
+    if accepted_shots == 0:
         return jsonify({
-            "error": "The Linked Dice simulation could not be completed."
+            "error": "No valid dice results were generated. Please retry."
         }), 500
+
+    # Each die gets its own six-face distribution
+    die_one_distribution = {
+        str(number): die_one_counts.get(number, 0)
+        for number in range(1, 7)
+    }
+
+    die_two_distribution = {
+        str(number): die_two_counts.get(number, 0)
+        for number in range(1, 7)
+    }
+
+    # Preserve the previous combined/legacy distribution field
+    dice_distribution = die_one_distribution.copy()
+
+    # Exact structure expected by the Linked Dice frontend
+    dice = {
+        "die_one": die_one_distribution,
+        "die_two": die_two_distribution
+    }
+
+    response = {
+        "experiment": "Linked Quantum Dice",
+        "mode": mode,
+        "shots": accepted_shots,
+        "accepted_shots": accepted_shots,
+        "raw_shots": shots * 3,
+
+        "dice": dice,
+        "dice_distribution": dice_distribution,
+
+        "pair_counts": pair_counts,
+
+        "matching_rolls": matching_rolls,
+
+        "matching_percentage": round(
+            matching_rolls / accepted_shots * 100,
+            2
+        ),
+
+        "circuit": str(circuit),
+
+        "explanation": (
+            "Independent mode applies Hadamard gates to all six qubits. "
+            "Entangled mode creates correlated qubit pairs using CNOT gates. "
+            "Each die has its own measurement distribution. "
+            "Invalid binary values are rejected so each die has six faces."
+        )
+    }
+
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        pair_counts,
+        "Linked Dice Pair Measurement Results"
+    ))
 
 
 # ==========================================
-# ARCADE GAME 3: QUANTUM TREASURE HUNT
+# QUANTUM TREASURE HUNT
 # ==========================================
 
 @app.route("/run-treasure-hunt", methods=["POST"])
 def run_treasure_hunt():
+
     data = request.get_json(silent=True) or {}
 
-    try:
-        shots = int(data.get("shots", 1024))
+    marked_state = str(data.get("marked_state", "11"))
 
-        if not 1 <= shots <= 10000:
-            return jsonify({
-                "error": "Shots must be between 1 and 10000."
-            }), 400
-
-        # Four possible treasure locations.
-        locations = {
-            "00": "top-left",
-            "01": "top-right",
-            "10": "bottom-left",
-            "11": "bottom-right"
-        }
-
-        # A random treasure is hidden when no target is supplied.
-        # The frontend can also supply a marked_state for a chosen challenge.
-        marked_state = data.get("marked_state")
-
-        if marked_state is None:
-            marked_state = secrets.choice(list(locations.keys()))
-
-        if not isinstance(marked_state, str) or marked_state not in locations:
-            return jsonify({
-                "error": "Invalid treasure location. Choose 00, 01, 10 or 11."
-            }), 400
-
-        # Run Grover's algorithm for the hidden treasure.
-        experiment = execute_grover(marked_state, shots)
-
+    if marked_state not in ["00", "01", "10", "11"]:
         return jsonify({
-            "experiment": "Quantum Treasure Hunt",
-            "algorithm": "Grover's Search Algorithm",
-            "shots": shots,
-            "counts": experiment["counts"],
-            "marked_state": experiment["marked_state"],
-            "treasure_location": locations[marked_state],
-            "treasure_index": int(marked_state, 2),
-            "success_count": experiment["success_count"],
-            "success_percentage": experiment["success_percentage"],
-            "circuit": experiment["circuit"],
-            "explanation": (
-                "Four possible treasure locations are prepared in "
-                "equal superposition. The quantum oracle marks the "
-                "hidden treasure location. Grover's diffusion operator "
-                "amplifies the probability of the marked location. "
-                "One Grover iteration finds the marked location with "
-                "certainty in an ideal two-qubit simulation."
-            )
-        })
-
-    except (ValueError, TypeError):
-        return jsonify({
-            "error": "Please enter valid Treasure Hunt settings."
+            "error": "Choose a valid treasure location."
         }), 400
 
-    except Exception:
-        return jsonify({
-            "error": "The Treasure Hunt simulation could not be completed."
-        }), 500
+    shots = validate_shots(data.get("shots", 1024))
+
+    result = execute_grover(marked_state, shots)
+
+    counts = result["counts"]
+    circuit = result["circuit_object"]
+
+    locations = {
+        "00": "Top Left",
+        "01": "Top Right",
+        "10": "Bottom Left",
+        "11": "Bottom Right"
+    }
+
+    successful_searches = counts.get(marked_state, 0)
+
+    response = {
+        "experiment": "Quantum Treasure Hunt",
+        "marked_state": marked_state,
+        "treasure_location": locations[marked_state],
+        "treasure_index": int(marked_state, 2),
+        "shots": shots,
+        "counts": counts,
+        "success_percentage": round(
+            successful_searches / shots * 100,
+            2
+        ),
+        "circuit": result["circuit"],
+        "explanation": (
+            "Grover's algorithm searches four possible locations. "
+            "The oracle marks the selected location, and the diffusion "
+            "operator amplifies its probability."
+        )
+    }
+
+    return jsonify(add_visualizations(
+        response,
+        circuit,
+        counts,
+        "Treasure Hunt Search Results"
+    ))
 
 
 # ==========================================
-# START FLASK SERVER
+# RUN SERVER
 # ==========================================
 
 if __name__ == "__main__":
+
     app.run(
         debug=True,
         port=5000
