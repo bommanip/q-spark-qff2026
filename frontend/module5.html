@@ -5,286 +5,1580 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 5 | QubitQuest</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Segoe UI",sans-serif;background:#080d1c;color:#f5f5ff;line-height:1.7}
-.navbar{padding:22px 9%;background:#0b1225;display:flex;justify-content:space-between;align-items:center}
+
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:#080d1c;
+    color:#f5f5ff;
+    line-height:1.7
+}
+
+.navbar{
+    padding:22px 9%;
+    background:#0b1225;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap
+}
+
 .logo{color:#a99bff;font-size:23px;font-weight:bold}
 a{color:#dce0f4;text-decoration:none}
+
+.nav-right{display:flex;align-items:center;gap:18px}
+
+.language-select{
+    padding:9px 12px;
+    border:1px solid #465174;
+    border-radius:8px;
+    background:#111a31;
+    color:white;
+    font-size:14px;
+    cursor:pointer
+}
+
 .container{max-width:950px;margin:auto;padding:55px 22px}
-.tag{color:#a99bff;letter-spacing:2px;font-size:12px;font-weight:bold}
-h1{font-size:clamp(34px,6vw,52px);line-height:1.2;margin:18px 0}
+
+.tag{
+    color:#a99bff;
+    letter-spacing:2px;
+    font-size:12px;
+    font-weight:bold
+}
+
+h1{
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.2;
+    margin:18px 0
+}
+
 h1 span,h2{color:#a99bff}
+
 .intro{color:#aeb6cf;font-size:18px;margin-bottom:30px}
-.progress{height:8px;background:#273252;border-radius:20px;overflow:hidden;margin:15px 0}
-.progress-fill{height:100%;width:0;background:#8774ef;transition:width .3s}
+
+.progress{
+    height:8px;
+    background:#273252;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0
+}
+
+.progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#8774ef,#46d9dc);
+    transition:width .3s
+}
+
 .progress-status{color:#aeb6cf;font-size:14px;margin-bottom:25px}
-.completion{display:none;padding:16px;margin:16px 0;border:1px solid #46d9dc;border-radius:10px;background:#102b35;color:#8ef0df}
-.card{background:#111a31;border:1px solid #273252;border-radius:15px;padding:28px;margin:25px 0}
+
+.completion{
+    display:none;
+    padding:16px;
+    margin:16px 0;
+    border:1px solid #46d9dc;
+    border-radius:10px;
+    background:#102b35;
+    color:#8ef0df
+}
+
+.card{
+    background:#111a31;
+    border:1px solid #273252;
+    border-radius:15px;
+    padding:28px;
+    margin:25px 0
+}
+
 .card h2{margin-bottom:15px}
 .card h3{margin:18px 0 8px}
 p{color:#c4cbe0;margin:12px 0}
-.visual{background:#080d1c;padding:24px;border-radius:12px;margin:20px 0;text-align:center}
-.primary{background:#8774ef;border:0;padding:14px 23px;color:white;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:15px}
+
+.visual{
+    background:#080d1c;
+    padding:24px;
+    border-radius:12px;
+    margin:20px 0;
+    text-align:center
+}
+
+.primary{
+    background:#8774ef;
+    border:0;
+    padding:14px 23px;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:15px
+}
+
 .primary:hover{background:#705ce0}
-.quiz-option{display:block;width:100%;padding:15px;margin:12px 0;text-align:left;border:1px solid #465174;border-radius:8px;background:#080d1c;color:white;cursor:pointer;font-size:15px}
+
+.quiz-option{
+    display:block;
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    text-align:left;
+    border:1px solid #465174;
+    border-radius:8px;
+    background:#080d1c;
+    color:white;
+    cursor:pointer;
+    font-size:15px
+}
+
 .quiz-option:hover{border-color:#a99bff}
 .quiz-option:disabled{cursor:default;opacity:.8}
-.feedback{display:none;margin-top:15px;padding:15px;border-radius:8px;background:#19213b;color:#46d9dc}
-.retry{background:transparent;border:1px solid #8774ef;padding:12px 20px;color:#dcd5ff;border-radius:8px;cursor:pointer;margin:15px 0 0 10px}
-.certificate{display:none;margin-top:25px;padding:35px;text-align:center;background:#f8f4e9;color:#20243a;border:8px double #b79b50;border-radius:8px}
-.certificate h2{color:#26365b;font-size:30px}
-.certificate p{color:#343b50}
-.certificate .cert-name{font-size:25px;font-weight:bold;color:#26365b;margin:20px 0}
-.certificate small{color:#596078}
+
+.feedback{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:8px;
+    background:#19213b;
+    color:#46d9dc
+}
+
+.retry{
+    background:transparent;
+    border:1px solid #8774ef;
+    padding:12px 20px;
+    color:#dcd5ff;
+    border-radius:8px;
+    cursor:pointer;
+    margin:15px 0 0 10px
+}
+
+.example{color:#46d9dc!important;font-weight:bold}
+
+.note{
+    font-size:13px;
+    color:#aeb6cf;
+    border-left:3px solid #46d9dc;
+    padding-left:13px;
+    margin-top:18px
+}
+
+.name-input{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:1px solid #465174;
+    border-radius:8px;
+    background:#080d1c;
+    color:white;
+    font-size:16px;
+    outline:none
+}
+
+.name-input:focus{border-color:#a99bff}
+.name-hint{font-size:13px;color:#aeb6cf}
+
+/* CERTIFICATE */
+
+.certificate{
+    display:none;
+    position:relative;
+    width:100%;
+    margin:35px auto;
+    padding:13px;
+    background:#c4a45f;
+    border-radius:5px;
+    box-shadow:0 15px 50px rgba(0,0,0,.35);
+    overflow:hidden
+}
+
+.certificate-inner{
+    position:relative;
+    min-height:570px;
+    padding:45px 55px 35px;
+    background:#f8f6ef;
+    color:#202b48;
+    border:2px solid #e5d7ae;
+    text-align:center;
+    overflow:hidden
+}
+
+.certificate-inner:before,.certificate-inner:after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    border:1px solid rgba(174,137,65,.35);
+    border-radius:50%;
+    pointer-events:none
+}
+
+.certificate-inner:before{
+    top:-95px;
+    left:-95px;
+    box-shadow:0 0 0 12px rgba(174,137,65,.05),
+               0 0 0 24px rgba(174,137,65,.04)
+}
+
+.certificate-inner:after{
+    bottom:-95px;
+    right:-95px;
+    box-shadow:0 0 0 12px rgba(174,137,65,.05),
+               0 0 0 24px rgba(174,137,65,.04)
+}
+
+.certificate-top{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+    margin-bottom:22px
+}
+
+.certificate-logo{width:54px;height:54px;flex-shrink:0}
+
+.brand-name{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:3px;
+    color:#202b48;
+    text-align:left;
+    line-height:1.2
+}
+
+.brand-subtitle{
+    font-size:9px;
+    letter-spacing:2px;
+    color:#8c7547;
+    margin-top:5px
+}
+
+.certificate-line{
+    height:2px;
+    width:100%;
+    background:linear-gradient(90deg,transparent,#bd9a54,transparent);
+    margin:20px 0
+}
+
+.certificate-kicker{
+    color:#a17f3e;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:5px;
+    margin-top:12px
+}
+
+.certificate-title{
+    font-family:Georgia,serif;
+    font-size:clamp(34px,5vw,49px);
+    letter-spacing:3px;
+    color:#202b48;
+    font-weight:normal;
+    margin-top:5px;
+    line-height:1.2
+}
+
+.certificate-subtitle{
+    font-size:14px;
+    letter-spacing:6px;
+    color:#a17f3e;
+    font-weight:600;
+    margin-top:5px
+}
+
+.presented{
+    margin-top:28px;
+    font-size:13px;
+    color:#777b85;
+    letter-spacing:2px
+}
+
+.certificate-name{
+    font-family:Georgia,serif;
+    font-size:clamp(27px,4vw,40px);
+    color:#25365b;
+    font-style:italic;
+    margin:8px 0 12px;
+    overflow-wrap:anywhere
+}
+
+.name-underline{
+    width:62%;
+    height:1px;
+    margin:0 auto;
+    background:linear-gradient(90deg,transparent,#b28d4d,transparent)
+}
+
+.certificate-description{
+    max-width:670px;
+    margin:20px auto 14px;
+    color:#555b68;
+    font-size:14px;
+    line-height:1.9
+}
+
+.program-name{
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:#263858;
+    margin:17px 0 5px
+}
+
+.topic-line{
+    color:#8b7449;
+    font-size:10px;
+    letter-spacing:2px;
+    font-weight:600
+}
+
+.certificate-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:25px;
+    margin-top:43px;
+    text-align:left
+}
+
+.signature-block{width:190px;text-align:center}
+
+.signature-mark{
+    font-family:Georgia,serif;
+    color:#263858;
+    font-size:19px;
+    font-style:italic;
+    margin-bottom:3px
+}
+
+.signature-line{height:1px;background:#a98a4e;margin-bottom:7px}
+
+.signature-label{
+    font-size:10px;
+    color:#6c7180;
+    letter-spacing:1px
+}
+
+.certificate-seal{
+    position:absolute;
+    right:43px;
+    top:42%;
+    width:75px;
+    height:75px;
+    border:2px solid #b18b47;
+    border-radius:50%;
+    color:#a17f3e;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    transform:rotate(12deg);
+    background:rgba(248,246,239,.9)
+}
+
+.certificate-seal strong{font-size:23px;line-height:1}
+.certificate-seal small{font-size:7px;letter-spacing:1px}
+
+.certificate-disclaimer{
+    font-size:9px;
+    color:#85858a;
+    margin-top:28px;
+    letter-spacing:.3px
+}
+
+.certificate-actions{display:none;text-align:center;margin:20px auto}
+.certificate-actions button{margin:5px}
+
 footer{text-align:center;padding:30px;color:#aeb6cf}
-@media(max-width:600px){.navbar{padding:18px}.card{padding:20px}.certificate{padding:18px}}
+
+@media(max-width:700px){
+    .navbar{padding:18px}
+    .card{padding:20px}
+    .certificate-inner{padding:28px 20px;min-height:500px}
+    .certificate-bottom{margin-top:30px}
+    .certificate-seal{display:none}
+    .signature-block{width:45%}
+    .certificate-kicker{letter-spacing:2px}
+    .certificate-subtitle{letter-spacing:3px}
+}
+
 @media print{
-    body{background:white;color:#111}
-    .navbar,main,.footer-text{display:none!important}
-    #certificate{display:block!important;margin:30px auto;max-width:900px}
-    #certificate button{display:none}
-    @page{size:landscape;margin:15mm}
+    @page{size:landscape;margin:8mm}
+
+    html,body{
+        background:white!important;
+        width:100%;
+        height:100%;
+        margin:0!important;
+        padding:0!important;
+        -webkit-print-color-adjust:exact!important;
+        print-color-adjust:exact!important
+    }
+
+    body *{visibility:hidden!important}
+
+    #certificate,#certificate *{visibility:visible!important}
+
+    #certificate{
+        display:block!important;
+        position:absolute!important;
+        left:0!important;
+        top:0!important;
+        width:100%!important;
+        margin:0!important;
+        padding:7px!important;
+        box-shadow:none!important;
+        background:#c4a45f!important;
+        page-break-inside:avoid!important
+    }
+
+    #certificate .certificate-inner{
+        min-height:0!important;
+        height:185mm!important;
+        padding:28px 45px!important
+    }
+
+    #certificate .certificate-actions,#certificate button{display:none!important}
+    #certificate .certificate-bottom{margin-top:30px!important}
+    #certificate .certificate-seal{display:flex!important}
 }
 </style>
 </head>
+
 <body>
 
 <nav class="navbar">
-<div class="logo">✦ QubitQuest</div>
-<a href="index.html">← Home</a>
+    <div class="logo">✦ QubitQuest</div>
+
+    <div class="nav-right">
+        <select class="language-select" id="languageSelect"
+                aria-label="Choose language">
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="hi">हिन्दी</option>
+            <option value="te">తెలుగు</option>
+        </select>
+
+        <a href="index.html" data-i18n="home">← Home</a>
+    </div>
 </nav>
 
 <main class="container">
-<span class="tag">MODULE 05 · FINAL LEVEL</span>
-<h1>Quantum computing for <span>humanity.</span></h1>
-<p class="intro">Explore how quantum research could contribute to healthcare, sustainability and responsible innovation.</p>
 
-<p>YOUR LEARNING PROGRESS</p>
-<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<span class="tag" data-i18n="tag">MODULE 05 · FINAL LEVEL</span>
+
+<h1><span data-i18n="heading">Quantum computing for</span>
+<span data-i18n="humanity">humanity.</span></h1>
+
+<p class="intro" data-i18n="intro">
+Explore how quantum research could contribute to healthcare,
+sustainability and responsible innovation.
+</p>
+
+<p data-i18n="progressHeading">YOUR LEARNING PROGRESS</p>
+
+<div class="progress">
+    <div class="progress-fill" id="progressFill"></div>
+</div>
+
 <p class="progress-status" id="progressText">Module 5 completion: 0%</p>
-<div class="completion" id="completion">✓ Module 5 completed! Your learning progress has been saved.</div>
 
-<section class="card">
-<h2>01. Quantum computing and healthcare</h2>
-<p>Healthcare research involves understanding complex biological systems, molecules and chemical interactions.</p>
-<p>Quantum computing may eventually help researchers simulate molecular behaviour and investigate chemical systems that are difficult to model accurately with classical computers.</p>
-<div class="visual">
-<h3>Possible research areas</h3>
-<p>🧬 Molecular simulation</p>
-<p>💊 Drug discovery research</p>
-<p>🔬 Understanding chemical interactions</p>
+<div class="completion" id="completion" data-i18n="completed">
+✓ Module 5 completed! Your learning progress has been saved.
 </div>
-<p class="note">These are active research areas. Quantum computers are not currently a replacement for existing medical tools or clinical testing.</p>
+
+<section class="card">
+    <h2 data-i18n="section1">01. Quantum computing and healthcare</h2>
+
+    <p data-i18n="health1">
+    Healthcare research involves understanding complex biological
+    systems, molecules and chemical interactions.
+    </p>
+
+    <p data-i18n="health2">
+    Quantum computing may eventually help researchers simulate
+    molecular behaviour and investigate chemical systems that
+    are difficult to model accurately with classical computers.
+    </p>
+
+    <div class="visual">
+        <h3 data-i18n="researchAreas">Possible research areas</h3>
+        <p data-i18n="molecular">🧬 Molecular simulation</p>
+        <p data-i18n="drug">💊 Drug discovery research</p>
+        <p data-i18n="chemical">🔬 Understanding chemical interactions</p>
+    </div>
+
+    <p class="note" data-i18n="healthNote">
+    These are active research areas. Quantum computers are not
+    currently a replacement for existing medical tools or clinical testing.
+    </p>
 </section>
 
 <section class="card">
-<h2>02. Quantum computing and sustainability</h2>
-<p>Climate change and sustainability involve complicated problems across energy, materials, transport and industry.</p>
-<h3>Energy research</h3>
-<p>Quantum simulations may help researchers investigate materials for batteries, solar cells and energy storage.</p>
-<h3>Climate and materials</h3>
-<p>Researchers are exploring whether quantum methods can help model chemical reactions and material properties.</p>
-<h3>Optimisation</h3>
-<p>Some research explores quantum approaches to selected optimisation problems, such as planning and resource allocation.</p>
+    <h2 data-i18n="section2">02. Quantum computing and sustainability</h2>
+
+    <p data-i18n="sustainIntro">
+    Climate change and sustainability involve complicated problems
+    across energy, materials, transport and industry.
+    </p>
+
+    <h3 data-i18n="energyResearch">Energy research</h3>
+    <p data-i18n="energyText">
+    Quantum simulations may help researchers investigate materials
+    for batteries, solar cells and energy storage.
+    </p>
+
+    <h3 data-i18n="climateMaterials">Climate and materials</h3>
+    <p data-i18n="climateText">
+    Researchers are exploring whether quantum methods can help
+    model chemical reactions and material properties.
+    </p>
+
+    <h3 data-i18n="optimisation">Optimisation</h3>
+    <p data-i18n="optimisationText">
+    Some research explores quantum approaches to selected optimisation
+    problems, such as planning and resource allocation.
+    </p>
 </section>
 
 <section class="card">
-<h2>03. Quantum computing and cybersecurity</h2>
-<p>Powerful future quantum computers could threaten some cryptographic systems that are widely used today.</p>
-<p>Post-quantum cryptography develops cryptographic methods designed to resist attacks from quantum computers.</p>
-<div class="visual">
-<h3>Why responsible preparation matters</h3>
-<p>🔐 Protecting digital information</p>
-<p>🛡️ Preparing for future technology</p>
-<p>🌐 Building trustworthy systems</p>
+    <h2 data-i18n="section3">03. Quantum computing and cybersecurity</h2>
+
+    <p data-i18n="cyber1">
+    Powerful future quantum computers could threaten some cryptographic
+    systems that are widely used today.
+    </p>
+
+    <p data-i18n="cyber2">
+    Post-quantum cryptography develops cryptographic methods designed
+    to resist attacks from quantum computers.
+    </p>
+
+    <div class="visual">
+        <h3 data-i18n="securityHeading">Why responsible preparation matters</h3>
+        <p data-i18n="protect">🔐 Protecting digital information</p>
+        <p data-i18n="prepare">🛡️ Preparing for future technology</p>
+        <p data-i18n="trust">🌐 Building trustworthy systems</p>
+    </div>
+</section>
+
+<section class="card">
+    <h2 data-i18n="section4">04. Ethics and responsible innovation</h2>
+
+    <p data-i18n="ethicsIntro">
+    Powerful technologies bring responsibilities. Quantum computing
+    research should consider how its benefits and risks affect
+    people and society.
+    </p>
+
+    <h3 data-i18n="accessibility">Accessibility</h3>
+    <p data-i18n="accessibilityText">
+    Learning resources should be understandable and accessible
+    to people from different educational backgrounds.
+    </p>
+
+    <h3 data-i18n="privacy">Privacy and security</h3>
+    <p data-i18n="privacyText">
+    Researchers and organisations should prepare for the
+    cybersecurity implications of future quantum technologies.
+    </p>
+
+    <h3 data-i18n="honesty">Honest communication</h3>
+    <p data-i18n="honestyText">
+    It is important to distinguish current capabilities from
+    future possibilities and avoid exaggerated claims.
+    </p>
+
+    <h3 data-i18n="collaboration">Collaboration</h3>
+    <p data-i18n="collaborationText">
+    Responsible progress requires researchers, educators,
+    organisations and communities to work together.
+    </p>
+</section>
+
+<section class="card">
+    <h2 data-i18n="section5">05. Your final assessment! 🏆</h2>
+
+    <p data-i18n="assessmentIntro">
+    Answer all three questions correctly to complete
+    your QubitQuest learning journey.
+    </p>
+
+    <p data-i18n="question1">
+    Question 1: How could quantum computing contribute to healthcare research?
+    </p>
+
+    <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">
+    A. By helping researchers simulate molecular systems
+    </button>
+    <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">
+    B. By replacing every doctor
+    </button>
+    <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">
+    C. By eliminating all medical testing
+    </button>
+
+    <div class="feedback" id="feedback0"></div>
+
+    <h3 data-i18n="question2Heading">Question 2</h3>
+    <p data-i18n="question2">What is post-quantum cryptography designed to do?</p>
+
+    <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">
+    A. Make computers display better graphics
+    </button>
+    <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">
+    B. Protect information against attacks from future quantum computers
+    </button>
+    <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">
+    C. Increase internet speed
+    </button>
+
+    <div class="feedback" id="feedback1"></div>
+
+    <h3 data-i18n="question3Heading">Question 3</h3>
+    <p data-i18n="question3">
+    Which is an important principle of responsible quantum innovation?
+    </p>
+
+    <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">
+    A. Communicating capabilities honestly and considering societal impact
+    </button>
+    <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">
+    B. Ignoring security risks
+    </button>
+    <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">
+    C. Making technology accessible to nobody
+    </button>
+
+    <div class="feedback" id="feedback2"></div>
+
+    <button class="primary" onclick="showScore()" data-i18n="submit">
+    Submit Final Assessment →
+    </button>
+
+    <button class="retry" onclick="retryQuiz()" data-i18n="retry">
+    Retry Assessment
+    </button>
+
+    <div class="feedback" id="score"></div>
+</section>
+
+<section class="card">
+    <h2 data-i18n="journeyHeading">Your quantum learning journey! ✨</h2>
+
+    <p data-i18n="journeyText">
+    You've explored the foundations of quantum computing,
+    quantum circuits, algorithms and possible applications.
+    </p>
+
+    <p class="example" data-i18n="journeyQuote">
+    Keep exploring. Keep experimenting. Keep learning.
+    </p>
+
+    <h3 data-i18n="certificateNameHeading">Your certificate name</h3>
+
+    <p data-i18n="certificateNameText">
+    Enter your full name exactly as you want it printed on your certificate.
+    </p>
+
+    <input class="name-input" id="learnerNameInput"
+        type="text" maxlength="60"
+        placeholder="Enter your full name"
+        autocomplete="name"
+        oninput="saveLearnerName()">
+
+    <p class="name-hint" data-i18n="nameHint">
+    Your name is saved in this browser and will appear on your certificate.
+    </p>
+
+    <div id="certificateMessage" class="feedback"></div>
+</section>
+
+<!-- PROFESSIONAL CERTIFICATE -->
+
+<section class="certificate" id="certificate">
+<div class="certificate-inner">
+
+    <div class="certificate-top">
+        <svg class="certificate-logo" viewBox="0 0 100 100"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="43" fill="none"
+                    stroke="#b18b47" stroke-width="2"/>
+            <ellipse cx="50" cy="50" rx="34" ry="13"
+                     fill="none" stroke="#263858" stroke-width="2.5"
+                     transform="rotate(45 50 50)"/>
+            <ellipse cx="50" cy="50" rx="34" ry="13"
+                     fill="none" stroke="#b18b47" stroke-width="2.5"
+                     transform="rotate(-45 50 50)"/>
+            <circle cx="50" cy="50" r="7" fill="#263858"/>
+            <circle cx="25" cy="25" r="4" fill="#b18b47"/>
+            <circle cx="75" cy="25" r="4" fill="#263858"/>
+            <circle cx="25" cy="75" r="4" fill="#263858"/>
+            <circle cx="75" cy="75" r="4" fill="#b18b47"/>
+        </svg>
+
+        <div>
+            <div class="brand-name">QUBITQUEST</div>
+            <div class="brand-subtitle" data-i18n="brandSubtitle">
+                QUANTUM LEARNING EXPERIENCE
+            </div>
+        </div>
+    </div>
+
+    <div class="certificate-line"></div>
+
+    <div class="certificate-kicker" data-i18n="certificateKicker">
+        RECOGNITION OF ACHIEVEMENT
+    </div>
+
+    <h2 class="certificate-title" data-i18n="certificateTitle">CERTIFICATE</h2>
+
+    <div class="certificate-subtitle" data-i18n="certificateSubtitle">
+        OF COMPLETION
+    </div>
+
+    <p class="presented" data-i18n="presented">
+        THIS CERTIFICATE IS PROUDLY PRESENTED TO
+    </p>
+
+    <div class="certificate-name" id="certificateName">QubitQuest Learner</div>
+    <div class="name-underline"></div>
+
+    <p class="certificate-description" data-i18n="certificateDescription">
+        In recognition of successfully completing all five modules
+        of the QubitQuest beginner learning journey in Quantum Computing,
+        demonstrating commitment to learning and exploring the principles
+        of quantum technology.
+    </p>
+
+    <div class="program-name" data-i18n="programName">QUANTUM COMPUTING</div>
+
+    <div class="topic-line" data-i18n="topics1">
+        QUBITS · SUPERPOSITION · ENTANGLEMENT · QUANTUM GATES
+    </div>
+    <div class="topic-line" data-i18n="topics2">
+        ALGORITHMS · APPLICATIONS · RESPONSIBLE INNOVATION
+    </div>
+
+    <div class="certificate-seal">
+        <strong>✦</strong>
+        <small>QUBITQUEST</small>
+        <small data-i18n="verified">VERIFIED</small>
+    </div>
+
+    <div class="certificate-bottom">
+        <div class="signature-block">
+            <div class="signature-mark">QubitQuest Team</div>
+            <div class="signature-line"></div>
+            <div class="signature-label" data-i18n="teamLabel">PROJECT TEAM</div>
+        </div>
+
+        <div class="signature-block">
+            <div class="signature-mark" id="certificateDate">Award Date</div>
+            <div class="signature-line"></div>
+            <div class="signature-label" data-i18n="dateLabel">DATE OF COMPLETION</div>
+        </div>
+    </div>
+
+    <div class="certificate-line"></div>
+
+    <div class="certificate-disclaimer" data-i18n="disclaimer">
+        QUBITQUEST PROJECT COMPLETION ACKNOWLEDGEMENT
+        · NOT AN ACCREDITED QUALIFICATION
+    </div>
 </div>
 </section>
 
-<section class="card">
-<h2>04. Ethics and responsible innovation</h2>
-<p>Powerful technologies bring responsibilities. Quantum computing research should consider how its benefits and risks affect people and society.</p>
-<h3>Accessibility</h3>
-<p>Learning resources should be understandable and accessible to people from different educational backgrounds.</p>
-<h3>Privacy and security</h3>
-<p>Researchers and organisations should prepare for the cybersecurity implications of future quantum technologies.</p>
-<h3>Honest communication</h3>
-<p>It is important to distinguish current capabilities from future possibilities and avoid exaggerated claims.</p>
-<h3>Collaboration</h3>
-<p>Responsible progress requires researchers, educators, organisations and communities to work together.</p>
-</section>
-
-<section class="card">
-<h2>05. Your final assessment! 🏆</h2>
-<p>Answer all three questions correctly to complete your QubitQuest learning journey.</p>
-
-<p>Question 1: How could quantum computing contribute to healthcare research?</p>
-<button class="quiz-option" onclick="answer(0,0)">A. By helping researchers simulate molecular systems</button>
-<button class="quiz-option" onclick="answer(0,1)">B. By replacing every doctor</button>
-<button class="quiz-option" onclick="answer(0,2)">C. By eliminating all medical testing</button>
-<div class="feedback" id="feedback0"></div>
-
-<h3>Question 2</h3>
-<p>What is post-quantum cryptography designed to do?</p>
-<button class="quiz-option" onclick="answer(1,0)">A. Make computers display better graphics</button>
-<button class="quiz-option" onclick="answer(1,1)">B. Protect information against attacks from future quantum computers</button>
-<button class="quiz-option" onclick="answer(1,2)">C. Increase internet speed</button>
-<div class="feedback" id="feedback1"></div>
-
-<h3>Question 3</h3>
-<p>Which is an important principle of responsible quantum innovation?</p>
-<button class="quiz-option" onclick="answer(2,0)">A. Communicating capabilities honestly and considering societal impact</button>
-<button class="quiz-option" onclick="answer(2,1)">B. Ignoring security risks</button>
-<button class="quiz-option" onclick="answer(2,2)">C. Making technology accessible to nobody</button>
-<div class="feedback" id="feedback2"></div>
-
-<button class="primary" onclick="showScore()">Submit Final Assessment →</button>
-<button class="retry" onclick="retryQuiz()">Retry Assessment</button>
-<div class="feedback" id="score"></div>
-</section>
-
-<section class="card" style="text-align:center">
-<h2>Your quantum learning journey! ✨</h2>
-<p>You've explored the foundations of quantum computing, quantum circuits, algorithms and possible applications.</p>
-<p class="example">Keep exploring. Keep experimenting. Keep learning.</p>
-<div id="certificateMessage" class="feedback"></div>
-</section>
-
-<div class="certificate" id="certificate">
-<p>✦ QUBITQUEST ✦</p>
-<h2>Certificate of Completion</h2>
-<p>This acknowledgement is presented to</p>
-<div class="cert-name">QubitQuest Learner</div>
-<p>For successfully completing the five-module beginner learning journey in quantum computing.</p>
-<p>Topics explored: Qubits, Superposition, Entanglement, Quantum Gates, Algorithms and Applications.</p>
-<p style="margin-top:25px">✦ Keep exploring the quantum world! ✦</p>
-<small>QubitQuest project completion acknowledgement — not an accredited qualification.</small>
-<br>
-<button class="primary" onclick="window.print()">Print Certificate</button>
+<div class="certificate-actions" id="certificateActions">
+    <button class="primary" onclick="printCertificate()" data-i18n="print">
+        🖨 Print / Save as PDF
+    </button>
 </div>
 
 </main>
 
-<footer class="footer-text">✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer data-i18n="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
 
 <script>
-const PROGRESS_KEY="qubitquestProgress";
 
-function readProgress(){
-    try{
-        const saved=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}");
-        return{
-            completedModules:Array.isArray(saved.completedModules)?saved.completedModules:[],
-            quizScores:saved.quizScores&&typeof saved.quizScores==="object"?saved.quizScores:{}
+// ==================================
+// TRANSLATIONS
+// ==================================
+
+const translations = {
+
+en: {
+home:"← Home",
+tag:"MODULE 05 · FINAL LEVEL",
+heading:"Quantum computing for",
+humanity:"humanity.",
+intro:"Explore how quantum research could contribute to healthcare, sustainability and responsible innovation.",
+progressHeading:"YOUR LEARNING PROGRESS",
+completed:"✓ Module 5 completed! Your learning progress has been saved.",
+section1:"01. Quantum computing and healthcare",
+health1:"Healthcare research involves understanding complex biological systems, molecules and chemical interactions.",
+health2:"Quantum computing may eventually help researchers simulate molecular behaviour and investigate chemical systems that are difficult to model accurately with classical computers.",
+researchAreas:"Possible research areas",
+molecular:"🧬 Molecular simulation",
+drug:"💊 Drug discovery research",
+chemical:"🔬 Understanding chemical interactions",
+healthNote:"These are active research areas. Quantum computers are not currently a replacement for existing medical tools or clinical testing.",
+section2:"02. Quantum computing and sustainability",
+sustainIntro:"Climate change and sustainability involve complicated problems across energy, materials, transport and industry.",
+energyResearch:"Energy research",
+energyText:"Quantum simulations may help researchers investigate materials for batteries, solar cells and energy storage.",
+climateMaterials:"Climate and materials",
+climateText:"Researchers are exploring whether quantum methods can help model chemical reactions and material properties.",
+optimisation:"Optimisation",
+optimisationText:"Some research explores quantum approaches to selected optimisation problems, such as planning and resource allocation.",
+section3:"03. Quantum computing and cybersecurity",
+cyber1:"Powerful future quantum computers could threaten some cryptographic systems that are widely used today.",
+cyber2:"Post-quantum cryptography develops cryptographic methods designed to resist attacks from quantum computers.",
+securityHeading:"Why responsible preparation matters",
+protect:"🔐 Protecting digital information",
+prepare:"🛡️ Preparing for future technology",
+trust:"🌐 Building trustworthy systems",
+section4:"04. Ethics and responsible innovation",
+ethicsIntro:"Powerful technologies bring responsibilities. Quantum computing research should consider how its benefits and risks affect people and society.",
+accessibility:"Accessibility",
+accessibilityText:"Learning resources should be understandable and accessible to people from different educational backgrounds.",
+privacy:"Privacy and security",
+privacyText:"Researchers and organisations should prepare for the cybersecurity implications of future quantum technologies.",
+honesty:"Honest communication",
+honestyText:"It is important to distinguish current capabilities from future possibilities and avoid exaggerated claims.",
+collaboration:"Collaboration",
+collaborationText:"Responsible progress requires researchers, educators, organisations and communities to work together.",
+section5:"05. Your final assessment! 🏆",
+assessmentIntro:"Answer all three questions correctly to complete your QubitQuest learning journey.",
+question1:"Question 1: How could quantum computing contribute to healthcare research?",
+q1a:"A. By helping researchers simulate molecular systems",
+q1b:"B. By replacing every doctor",
+q1c:"C. By eliminating all medical testing",
+question2Heading:"Question 2",
+question2:"What is post-quantum cryptography designed to do?",
+q2a:"A. Make computers display better graphics",
+q2b:"B. Protect information against attacks from future quantum computers",
+q2c:"C. Increase internet speed",
+question3Heading:"Question 3",
+question3:"Which is an important principle of responsible quantum innovation?",
+q3a:"A. Communicating capabilities honestly and considering societal impact",
+q3b:"B. Ignoring security risks",
+q3c:"C. Making technology accessible to nobody",
+submit:"Submit Final Assessment →",
+retry:"Retry Assessment",
+journeyHeading:"Your quantum learning journey! ✨",
+journeyText:"You've explored the foundations of quantum computing, quantum circuits, algorithms and possible applications.",
+journeyQuote:"Keep exploring. Keep experimenting. Keep learning.",
+certificateNameHeading:"Your certificate name",
+certificateNameText:"Enter your full name exactly as you want it printed on your certificate.",
+namePlaceholder:"Enter your full name",
+nameHint:"Your name is saved in this browser and will appear on your certificate.",
+brandSubtitle:"QUANTUM LEARNING EXPERIENCE",
+certificateKicker:"RECOGNITION OF ACHIEVEMENT",
+certificateTitle:"CERTIFICATE",
+certificateSubtitle:"OF COMPLETION",
+presented:"THIS CERTIFICATE IS PROUDLY PRESENTED TO",
+certificateDescription:"In recognition of successfully completing all five modules of the QubitQuest beginner learning journey in Quantum Computing, demonstrating commitment to learning and exploring the principles of quantum technology.",
+programName:"QUANTUM COMPUTING",
+topics1:"QUBITS · SUPERPOSITION · ENTANGLEMENT · QUANTUM GATES",
+topics2:"ALGORITHMS · APPLICATIONS · RESPONSIBLE INNOVATION",
+verified:"VERIFIED",
+teamLabel:"PROJECT TEAM",
+dateLabel:"DATE OF COMPLETION",
+disclaimer:"QUBITQUEST PROJECT COMPLETION ACKNOWLEDGEMENT · NOT AN ACCREDITED QUALIFICATION",
+print:"🖨 Print / Save as PDF",
+footer:"✦ QubitQuest — Quantum learning for everyone.",
+progressText:"Module 5 completion: {percent}%",
+correct:"✓ Correct! ",
+incorrect:"Not quite! ",
+explanation0:"Quantum methods may help researchers simulate molecular systems.",
+explanation1:"Post-quantum cryptography aims to protect information against future quantum attacks.",
+explanation2:"Responsible innovation includes honest communication and considering societal impact.",
+incomplete:"Please answer all three questions first.",
+score:"Your final score: {score} out of 3! ",
+perfect:"Outstanding! You've completed QubitQuest! 🎉",
+tryAgain:"Good effort! You need 3/3 to complete the final module.",
+certificateReady:"Congratulations! All five modules are complete. Your professional certificate is ready! 🎉",
+needModules:"Complete all five modules and achieve 3/3 in the final assessment to unlock your certificate.",
+needFinal:"Complete the final assessment with a score of 3/3 to unlock your certificate.",
+assessmentComplete:"Congratulations! Your Module 5 assessment is complete.",
+retryCertificate:"Try again to earn your completion certificate.",
+enterName:"Please enter your full name before printing your certificate.",
+completeFirst:"Please complete all five modules and the final assessment first.",
+learner:"QubitQuest Learner"
+},
+
+kn: {
+home:"← ಮುಖಪುಟ",
+tag:"ಮಾಡ್ಯೂಲ್ 05 · ಅಂತಿಮ ಹಂತ",
+heading:"ಮಾನವಕುಲಕ್ಕಾಗಿ",
+humanity:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್.",
+intro:"ಕ್ವಾಂಟಮ್ ಸಂಶೋಧನೆಯು ಆರೋಗ್ಯ, ಸುಸ್ಥಿರತೆ ಮತ್ತು ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
+progressHeading:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",
+completed:"✓ ಮಾಡ್ಯೂಲ್ 5 ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
+section1:"01. ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಮತ್ತು ಆರೋಗ್ಯ ಕ್ಷೇತ್ರ",
+health1:"ಆರೋಗ್ಯ ಸಂಶೋಧನೆಯಲ್ಲಿ ಸಂಕೀರ್ಣ ಜೈವಿಕ ವ್ಯವಸ್ಥೆಗಳು, ಅಣುಗಳು ಮತ್ತು ರಾಸಾಯನಿಕ ಸಂವಹನಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು ಮುಖ್ಯ.",
+health2:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಭವಿಷ್ಯದಲ್ಲಿ ಅಣುಗಳ ವರ್ತನೆಯನ್ನು ಅನುಕರಿಸಲು ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್‌ಗಳಿಂದ ನಿಖರವಾಗಿ ಮಾದರಿಗೊಳಿಸಲು ಕಷ್ಟವಾದ ರಾಸಾಯನಿಕ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಲು ಸಂಶೋಧಕರಿಗೆ ಸಹಾಯ ಮಾಡಬಹುದು.",
+researchAreas:"ಸಂಭಾವ್ಯ ಸಂಶೋಧನಾ ಕ್ಷೇತ್ರಗಳು",
+molecular:"🧬 ಅಣುಗಳ ಅನುಕರಣೆ",
+drug:"💊 ಔಷಧ ಸಂಶೋಧನೆ",
+chemical:"🔬 ರಾಸಾಯನಿಕ ಸಂವಹನಗಳ ಅಧ್ಯಯನ",
+healthNote:"ಇವು ಪ್ರಸ್ತುತ ಸಂಶೋಧನಾ ಕ್ಷೇತ್ರಗಳಾಗಿವೆ. ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಈಗಿರುವ ವೈದ್ಯಕೀಯ ಸಾಧನಗಳು ಅಥವಾ ವೈದ್ಯಕೀಯ ಪರೀಕ್ಷೆಗಳಿಗೆ ಪರ್ಯಾಯವಲ್ಲ.",
+section2:"02. ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಮತ್ತು ಸುಸ್ಥಿರತೆ",
+sustainIntro:"ಹವಾಮಾನ ಬದಲಾವಣೆ ಮತ್ತು ಸುಸ್ಥಿರತೆಯಲ್ಲಿ ಇಂಧನ, ವಸ್ತುಗಳು, ಸಾರಿಗೆ ಮತ್ತು ಕೈಗಾರಿಕೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಸಂಕೀರ್ಣ ಸಮಸ್ಯೆಗಳಿವೆ.",
+energyResearch:"ಇಂಧನ ಸಂಶೋಧನೆ",
+energyText:"ಬ್ಯಾಟರಿಗಳು, ಸೌರಕೋಶಗಳು ಮತ್ತು ಇಂಧನ ಸಂಗ್ರಹಣೆಗೆ ಬೇಕಾದ ವಸ್ತುಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಲು ಕ್ವಾಂಟಮ್ ಅನುಕರಣೆ ಸಹಾಯ ಮಾಡಬಹುದು.",
+climateMaterials:"ಹವಾಮಾನ ಮತ್ತು ವಸ್ತುಗಳು",
+climateText:"ರಾಸಾಯನಿಕ ಪ್ರತಿಕ್ರಿಯೆಗಳು ಮತ್ತು ವಸ್ತುಗಳ ಗುಣಲಕ್ಷಣಗಳನ್ನು ಮಾದರಿಗೊಳಿಸಲು ಕ್ವಾಂಟಮ್ ವಿಧಾನಗಳು ಸಹಾಯ ಮಾಡಬಹುದೇ ಎಂದು ಸಂಶೋಧಕರು ಪರಿಶೀಲಿಸುತ್ತಿದ್ದಾರೆ.",
+optimisation:"ಉತ್ತಮೀಕರಣ",
+optimisationText:"ಯೋಜನೆ ಮತ್ತು ಸಂಪನ್ಮೂಲ ಹಂಚಿಕೆಯಂತಹ ಕೆಲವು ಸಮಸ್ಯೆಗಳಿಗೆ ಕ್ವಾಂಟಮ್ ವಿಧಾನಗಳನ್ನು ಬಳಸುವ ಕುರಿತು ಸಂಶೋಧನೆ ನಡೆಯುತ್ತಿದೆ.",
+section3:"03. ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಮತ್ತು ಸೈಬರ್ ಭದ್ರತೆ",
+cyber1:"ಭವಿಷ್ಯದ ಶಕ್ತಿಶಾಲಿ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಇಂದು ವ್ಯಾಪಕವಾಗಿ ಬಳಸುವ ಕೆಲವು ಎನ್‌ಕ್ರಿಪ್ಶನ್ ವ್ಯವಸ್ಥೆಗಳಿಗೆ ಅಪಾಯವನ್ನು ಉಂಟುಮಾಡಬಹುದು.",
+cyber2:"ಪೋಸ್ಟ್-ಕ್ವಾಂಟಮ್ ಕ್ರಿಪ್ಟೋಗ್ರಫಿ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳ ದಾಳಿಗಳನ್ನು ತಡೆಯಲು ವಿನ್ಯಾಸಗೊಳಿಸಿದ ಭದ್ರತಾ ವಿಧಾನಗಳನ್ನು ಅಭಿವೃದ್ಧಿಪಡಿಸುತ್ತದೆ.",
+securityHeading:"ಜವಾಬ್ದಾರಿಯುತ ಸಿದ್ಧತೆ ಏಕೆ ಮುಖ್ಯ?",
+protect:"🔐 ಡಿಜಿಟಲ್ ಮಾಹಿತಿಯ ರಕ್ಷಣೆ",
+prepare:"🛡️ ಭವಿಷ್ಯದ ತಂತ್ರಜ್ಞಾನಕ್ಕೆ ಸಿದ್ಧತೆ",
+trust:"🌐 ವಿಶ್ವಾಸಾರ್ಹ ವ್ಯವಸ್ಥೆಗಳ ನಿರ್ಮಾಣ",
+section4:"04. ನೈತಿಕತೆ ಮತ್ತು ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆ",
+ethicsIntro:"ಶಕ್ತಿಶಾಲಿ ತಂತ್ರಜ್ಞಾನಗಳೊಂದಿಗೆ ಜವಾಬ್ದಾರಿಗಳೂ ಬರುತ್ತವೆ. ಕ್ವಾಂಟಮ್ ಸಂಶೋಧನೆಯ ಪ್ರಯೋಜನಗಳು ಮತ್ತು ಅಪಾಯಗಳು ಜನರು ಹಾಗೂ ಸಮಾಜದ ಮೇಲೆ ಹೇಗೆ ಪರಿಣಾಮ ಬೀರುತ್ತವೆ ಎಂಬುದನ್ನು ಪರಿಗಣಿಸಬೇಕು.",
+accessibility:"ಸುಲಭ ಪ್ರವೇಶ",
+accessibilityText:"ವಿವಿಧ ಶೈಕ್ಷಣಿಕ ಹಿನ್ನೆಲೆಯ ಜನರಿಗೆ ಕಲಿಕಾ ಸಂಪನ್ಮೂಲಗಳು ಅರ್ಥವಾಗುವಂತೆ ಮತ್ತು ಸುಲಭವಾಗಿ ಲಭ್ಯವಾಗುವಂತೆ ಇರಬೇಕು.",
+privacy:"ಗೌಪ್ಯತೆ ಮತ್ತು ಭದ್ರತೆ",
+privacyText:"ಭವಿಷ್ಯದ ಕ್ವಾಂಟಮ್ ತಂತ್ರಜ್ಞಾನಗಳ ಸೈಬರ್ ಭದ್ರತಾ ಪರಿಣಾಮಗಳಿಗೆ ಸಂಶೋಧಕರು ಮತ್ತು ಸಂಸ್ಥೆಗಳು ಸಿದ್ಧರಾಗಿರಬೇಕು.",
+honesty:"ಪ್ರಾಮಾಣಿಕ ಸಂವಹನ",
+honestyText:"ಪ್ರಸ್ತುತ ಸಾಮರ್ಥ್ಯಗಳು ಮತ್ತು ಭವಿಷ್ಯದ ಸಾಧ್ಯತೆಗಳನ್ನು ಬೇರ್ಪಡಿಸಿ ತೋರಿಸುವುದು ಹಾಗೂ ಅತಿರಂಜಿತ ಹೇಳಿಕೆಗಳನ್ನು ತಪ್ಪಿಸುವುದು ಮುಖ್ಯ.",
+collaboration:"ಸಹಯೋಗ",
+collaborationText:"ಜವಾಬ್ದಾರಿಯುತ ಪ್ರಗತಿಗಾಗಿ ಸಂಶೋಧಕರು, ಶಿಕ್ಷಕರು, ಸಂಸ್ಥೆಗಳು ಮತ್ತು ಸಮುದಾಯಗಳು ಒಟ್ಟಾಗಿ ಕೆಲಸ ಮಾಡಬೇಕು.",
+section5:"05. ನಿಮ್ಮ ಅಂತಿಮ ಪರೀಕ್ಷೆ! 🏆",
+assessmentIntro:"ನಿಮ್ಮ QubitQuest ಕಲಿಕಾ ಪ್ರಯಾಣವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಮೂರೂ ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+question1:"ಪ್ರಶ್ನೆ 1: ಆರೋಗ್ಯ ಸಂಶೋಧನೆಗೆ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
+q1a:"A. ಅಣು ವ್ಯವಸ್ಥೆಗಳನ್ನು ಅನುಕರಿಸಲು ಸಂಶೋಧಕರಿಗೆ ಸಹಾಯ ಮಾಡುವ ಮೂಲಕ",
+q1b:"B. ಪ್ರತಿಯೊಬ್ಬ ವೈದ್ಯರನ್ನೂ ಬದಲಿಸುವ ಮೂಲಕ",
+q1c:"C. ಎಲ್ಲಾ ವೈದ್ಯಕೀಯ ಪರೀಕ್ಷೆಗಳನ್ನು ತೆಗೆದುಹಾಕುವ ಮೂಲಕ",
+question2Heading:"ಪ್ರಶ್ನೆ 2",
+question2:"ಪೋಸ್ಟ್-ಕ್ವಾಂಟಮ್ ಕ್ರಿಪ್ಟೋಗ್ರಫಿಯ ಉದ್ದೇಶವೇನು?",
+q2a:"A. ಕಂಪ್ಯೂಟರ್‌ಗಳಲ್ಲಿ ಉತ್ತಮ ಗ್ರಾಫಿಕ್ಸ್ ತೋರಿಸುವುದು",
+q2b:"B. ಭವಿಷ್ಯದ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳ ದಾಳಿಗಳಿಂದ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸುವುದು",
+q2c:"C. ಇಂಟರ್ನೆಟ್ ವೇಗವನ್ನು ಹೆಚ್ಚಿಸುವುದು",
+question3Heading:"ಪ್ರಶ್ನೆ 3",
+question3:"ಜವಾಬ್ದಾರಿಯುತ ಕ್ವಾಂಟಮ್ ನಾವೀನ್ಯತೆಯ ಪ್ರಮುಖ ತತ್ವ ಯಾವುದು?",
+q3a:"A. ಸಾಮರ್ಥ್ಯಗಳ ಬಗ್ಗೆ ಪ್ರಾಮಾಣಿಕವಾಗಿ ತಿಳಿಸುವುದು ಮತ್ತು ಸಾಮಾಜಿಕ ಪರಿಣಾಮಗಳನ್ನು ಪರಿಗಣಿಸುವುದು",
+q3b:"B. ಭದ್ರತಾ ಅಪಾಯಗಳನ್ನು ನಿರ್ಲಕ್ಷಿಸುವುದು",
+q3c:"C. ತಂತ್ರಜ್ಞಾನವನ್ನು ಯಾರಿಗೂ ಲಭ್ಯವಾಗದಂತೆ ಮಾಡುವುದು",
+submit:"ಅಂತಿಮ ಪರೀಕ್ಷೆಯನ್ನು ಸಲ್ಲಿಸಿ →",
+retry:"ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+journeyHeading:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಕಲಿಕಾ ಪ್ರಯಾಣ! ✨",
+journeyText:"ನೀವು ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್‌ನ ಮೂಲಭೂತ ಅಂಶಗಳು, ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ಗಳು, ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಮತ್ತು ಅವುಗಳ ಅನ್ವಯಗಳನ್ನು ಕಲಿತಿದ್ದೀರಿ.",
+journeyQuote:"ಅನ್ವೇಷಿಸುತ್ತಿರಿ. ಪ್ರಯೋಗಿಸುತ್ತಿರಿ. ಕಲಿಯುತ್ತಿರಿ.",
+certificateNameHeading:"ಪ್ರಮಾಣಪತ್ರದಲ್ಲಿನ ನಿಮ್ಮ ಹೆಸರು",
+certificateNameText:"ಪ್ರಮಾಣಪತ್ರದಲ್ಲಿ ಮುದ್ರಿಸಲು ಬಯಸುವ ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.",
+namePlaceholder:"ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+nameHint:"ನಿಮ್ಮ ಹೆಸರನ್ನು ಈ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಪ್ರಮಾಣಪತ್ರದಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.",
+brandSubtitle:"ಕ್ವಾಂಟಮ್ ಕಲಿಕಾ ಅನುಭವ",
+certificateKicker:"ಸಾಧನೆಯ ಗುರುತింపు",
+certificateTitle:"ಪ್ರಮಾಣಪತ್ರ",
+certificateSubtitle:"ಪೂರ್ಣಗೊಳಿಸಿದ ಪ್ರಮಾಣಪತ್ರ",
+presented:"ಈ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಹೆಮ್ಮೆಯಿಂದ ನೀಡಲಾಗುತ್ತದೆ",
+certificateDescription:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್‌ನಲ್ಲಿ QubitQuest ನ ಆರಂಭಿಕ ಕಲಿಕಾ ಪ್ರಯಾಣದ ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿ, ಕಲಿಕೆ ಮತ್ತು ಕ್ವಾಂಟಮ್ ತಂತ್ರಜ್ಞಾನದ ತತ್ವಗಳನ್ನು ಅನ್ವೇಷಿಸುವ ಬದ್ಧತೆಯನ್ನು ತೋರಿಸಿದ್ದಕ್ಕಾಗಿ ಈ ಪ್ರಮಾಣಪತ್ರವನ್ನು ನೀಡಲಾಗಿದೆ.",
+programName:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್",
+topics1:"ಕ್ಯೂಬಿಟ್‌ಗಳು · ಸೂಪರ್‌ಪೊಸಿಷನ್ · ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ · ಕ್ವಾಂಟಮ್ ಗೇಟ್‌ಗಳು",
+topics2:"ಅಲ್ಗಾರಿದಮ್‌ಗಳು · ಅನ್ವಯಗಳು · ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆ",
+verified:"ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+teamLabel:"ಯೋಜನಾ ತಂಡ",
+dateLabel:"ಪೂರ್ಣಗೊಳಿಸಿದ ದಿನಾಂಕ",
+disclaimer:"QUBITQUEST ಯೋಜನೆ ಪೂರ್ಣಗೊಳಿಸಿದ ಗುರುತింపు · ಮಾನ್ಯತೆ ಪಡೆದ ಶೈಕ್ಷಣಿಕ ಅರ್ಹತೆಯಲ್ಲ",
+print:"🖨 ಮುದ್ರಿಸಿ / PDF ಆಗಿ ಉಳಿಸಿ",
+footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+progressText:"ಮಾಡ್ಯೂಲ್ 5 ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ: {percent}%",
+correct:"✓ ಸರಿಯಾಗಿದೆ! ",
+incorrect:"ಸರಿಯಾದ ಉತ್ತರ ಅಲ್ಲ! ",
+explanation0:"ಕ್ವಾಂಟಮ್ ವಿಧಾನಗಳು ಅಣು ವ್ಯವಸ್ಥೆಗಳನ್ನು ಅನುಕರಿಸಲು ಸಂಶೋಧಕರಿಗೆ ಸಹಾಯ ಮಾಡಬಹುದು.",
+explanation1:"ಪೋಸ್ಟ್-ಕ್ವಾಂಟಮ್ ಕ್ರಿಪ್ಟೋಗ್ರಫಿ ಭವಿಷ್ಯದ ಕ್ವಾಂಟಮ್ ದಾಳಿಗಳಿಂದ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಲು ಉದ್ದೇಶಿಸಿದೆ.",
+explanation2:"ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆಯಲ್ಲಿ ಪ್ರಾಮಾಣಿಕ ಸಂವಹನ ಮತ್ತು ಸಾಮಾಜಿಕ ಪರಿಣಾಮಗಳ ಪರಿಗಣನೆ ಸೇರಿವೆ.",
+incomplete:"ದಯವಿಟ್ಟು ಮೂರೂ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+score:"ನಿಮ್ಮ ಅಂತಿಮ ಅಂಕಗಳು: 3 ರಲ್ಲಿ {score}! ",
+perfect:"ಅದ್ಭುತ! ನೀವು QubitQuest ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ! 🎉",
+tryAgain:"ಉತ್ತಮ ಪ್ರಯತ್ನ! ಅಂತಿಮ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3/3 ಅಗತ್ಯವಿದೆ.",
+certificateReady:"ಅಭಿನಂದನೆಗಳು! ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ. ನಿಮ್ಮ ಪ್ರಮಾಣಪತ್ರ ಸಿದ್ಧವಾಗಿದೆ! 🎉",
+needModules:"ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಲು ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ ಮತ್ತು ಅಂತಿಮ ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಪಡೆಯಿರಿ.",
+needFinal:"ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಲು ಅಂತಿಮ ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಅಂಕಗಳನ್ನು ಪಡೆಯಿರಿ.",
+assessmentComplete:"ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ ಮಾಡ್ಯೂಲ್ 5 ಪರೀಕ್ಷೆ ಪೂರ್ಣಗೊಂಡಿದೆ.",
+retryCertificate:"ಪೂರ್ಣಗೊಳಿಸುವ ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಲು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+enterName:"ಪ್ರಮಾಣಪತ್ರ ಮುದ್ರಿಸುವ ಮೊದಲು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.",
+completeFirst:"ದಯವಿಟ್ಟು ಮೊದಲು ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳು ಮತ್ತು ಅಂತಿಮ ಪರೀಕ್ಷೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
+learner:"QubitQuest ಕಲಿಯುವವರು"
+},
+
+hi: {
+home:"← होम",
+tag:"मॉड्यूल 05 · अंतिम स्तर",
+heading:"मानवता के लिए",
+humanity:"क्वांटम कंप्यूटिंग।",
+intro:"जानें कि क्वांटम अनुसंधान स्वास्थ्य सेवा, स्थिरता और जिम्मेदार नवाचार में कैसे योगदान दे सकता है।",
+progressHeading:"आपकी सीखने की प्रगति",
+completed:"✓ मॉड्यूल 5 पूरा हुआ! आपकी सीखने की प्रगति सहेज ली गई है।",
+section1:"01. क्वांटम कंप्यूटिंग और स्वास्थ्य सेवा",
+health1:"स्वास्थ्य अनुसंधान में जटिल जैविक प्रणालियों, अणुओं और रासायनिक प्रक्रियाओं को समझना शामिल है।",
+health2:"क्वांटम कंप्यूटिंग भविष्य में शोधकर्ताओं को अणुओं के व्यवहार का अनुकरण करने और उन रासायनिक प्रणालियों का अध्ययन करने में मदद कर सकती है जिन्हें पारंपरिक कंप्यूटरों से सटीक रूप से समझना कठिन है।",
+researchAreas:"संभावित अनुसंधान क्षेत्र",
+molecular:"🧬 आणविक अनुकरण",
+drug:"💊 दवा खोज अनुसंधान",
+chemical:"🔬 रासायनिक प्रक्रियाओं को समझना",
+healthNote:"ये सक्रिय अनुसंधान क्षेत्र हैं। क्वांटम कंप्यूटर अभी मौजूदा चिकित्सा उपकरणों या नैदानिक परीक्षणों का विकल्प नहीं हैं।",
+section2:"02. क्वांटम कंप्यूटिंग और स्थिरता",
+sustainIntro:"जलवायु परिवर्तन और स्थिरता में ऊर्जा, सामग्री, परिवहन और उद्योग से जुड़ी जटिल समस्याएँ शामिल हैं।",
+energyResearch:"ऊर्जा अनुसंधान",
+energyText:"क्वांटम अनुकरण बैटरी, सौर सेल और ऊर्जा भंडारण के लिए सामग्री का अध्ययन करने में मदद कर सकता है।",
+climateMaterials:"जलवायु और सामग्री",
+climateText:"शोधकर्ता अध्ययन कर रहे हैं कि क्वांटम विधियाँ रासायनिक प्रतिक्रियाओं और सामग्री के गुणों का मॉडल बनाने में मदद कर सकती हैं या नहीं।",
+optimisation:"अनुकूलन",
+optimisationText:"कुछ अनुसंधान योजना और संसाधन आवंटन जैसी चुनिंदा अनुकूलन समस्याओं के लिए क्वांटम तरीकों का अध्ययन करता है।",
+section3:"03. क्वांटम कंप्यूटिंग और साइबर सुरक्षा",
+cyber1:"भविष्य के शक्तिशाली क्वांटम कंप्यूटर आज व्यापक रूप से उपयोग की जाने वाली कुछ क्रिप्टोग्राफ़िक प्रणालियों के लिए खतरा बन सकते हैं।",
+cyber2:"पोस्ट-क्वांटम क्रिप्टोग्राफी ऐसे सुरक्षा तरीकों को विकसित करती है जिन्हें क्वांटम कंप्यूटर के हमलों का सामना करने के लिए बनाया गया है।",
+securityHeading:"जिम्मेदार तैयारी क्यों महत्वपूर्ण है?",
+protect:"🔐 डिजिटल जानकारी की सुरक्षा",
+prepare:"🛡️ भविष्य की तकनीक के लिए तैयारी",
+trust:"🌐 भरोसेमंद प्रणालियों का निर्माण",
+section4:"04. नैतिकता और जिम्मेदार नवाचार",
+ethicsIntro:"शक्तिशाली तकनीकें जिम्मेदारियाँ भी लाती हैं। क्वांटम अनुसंधान में यह विचार करना चाहिए कि इसके लाभ और जोखिम लोगों और समाज को कैसे प्रभावित करते हैं।",
+accessibility:"सुलभता",
+accessibilityText:"सीखने के संसाधन अलग-अलग शैक्षिक पृष्ठभूमि वाले लोगों के लिए समझने योग्य और सुलभ होने चाहिए।",
+privacy:"गोपनीयता और सुरक्षा",
+privacyText:"शोधकर्ताओं और संगठनों को भविष्य की क्वांटम तकनीकों के साइबर सुरक्षा प्रभावों के लिए तैयारी करनी चाहिए।",
+honesty:"ईमानदार संवाद",
+honestyText:"वर्तमान क्षमताओं और भविष्य की संभावनाओं में अंतर करना और बढ़ा-चढ़ाकर दावे करने से बचना महत्वपूर्ण है।",
+collaboration:"सहयोग",
+collaborationText:"जिम्मेदार प्रगति के लिए शोधकर्ताओं, शिक्षकों, संगठनों और समुदायों को मिलकर काम करना होगा।",
+section5:"05. आपकी अंतिम परीक्षा! 🏆",
+assessmentIntro:"अपनी QubitQuest सीखने की यात्रा पूरी करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+question1:"प्रश्न 1: क्वांटम कंप्यूटिंग स्वास्थ्य अनुसंधान में कैसे योगदान दे सकती है?",
+q1a:"A. शोधकर्ताओं को आणविक प्रणालियों का अनुकरण करने में मदद करके",
+q1b:"B. हर डॉक्टर की जगह लेकर",
+q1c:"C. सभी चिकित्सा परीक्षण समाप्त करके",
+question2Heading:"प्रश्न 2",
+question2:"पोस्ट-क्वांटम क्रिप्टोग्राफी किस उद्देश्य से बनाई गई है?",
+q2a:"A. कंप्यूटर पर बेहतर ग्राफिक्स दिखाने के लिए",
+q2b:"B. भविष्य के क्वांटम कंप्यूटरों के हमलों से जानकारी की रक्षा करने के लिए",
+q2c:"C. इंटरनेट की गति बढ़ाने के लिए",
+question3Heading:"प्रश्न 3",
+question3:"जिम्मेदार क्वांटम नवाचार का एक महत्वपूर्ण सिद्धांत कौन-सा है?",
+q3a:"A. क्षमताओं के बारे में ईमानदारी से बताना और सामाजिक प्रभाव पर विचार करना",
+q3b:"B. सुरक्षा जोखिमों को अनदेखा करना",
+q3c:"C. तकनीक को किसी के लिए भी सुलभ न बनाना",
+submit:"अंतिम परीक्षा जमा करें →",
+retry:"फिर से प्रयास करें",
+journeyHeading:"आपकी क्वांटम सीखने की यात्रा! ✨",
+journeyText:"आपने क्वांटम कंप्यूटिंग की बुनियादी बातें, क्वांटम सर्किट, एल्गोरिदम और संभावित अनुप्रयोगों का अध्ययन किया है।",
+journeyQuote:"खोजते रहें। प्रयोग करते रहें। सीखते रहें।",
+certificateNameHeading:"प्रमाणपत्र पर आपका नाम",
+certificateNameText:"अपना पूरा नाम ठीक उसी तरह लिखें जैसे आप उसे प्रमाणपत्र पर छपवाना चाहते हैं।",
+namePlaceholder:"अपना पूरा नाम लिखें",
+nameHint:"आपका नाम इस ब्राउज़र में सहेजा जाएगा और प्रमाणपत्र पर दिखाई देगा।",
+brandSubtitle:"क्वांटम सीखने का अनुभव",
+certificateKicker:"उपलब्धि की पहचान",
+certificateTitle:"प्रमाणपत्र",
+certificateSubtitle:"पूरा करने का प्रमाणपत्र",
+presented:"यह प्रमाणपत्र गर्वपूर्वक प्रदान किया जाता है",
+certificateDescription:"क्वांटम कंप्यूटिंग में QubitQuest की शुरुआती सीखने की यात्रा के सभी पाँच मॉड्यूल सफलतापूर्वक पूरे करने और क्वांटम तकनीक के सिद्धांतों को सीखने तथा समझने के प्रति समर्पण दिखाने के लिए यह प्रमाणपत्र प्रदान किया जाता है।",
+programName:"क्वांटम कंप्यूटिंग",
+topics1:"क्यूबिट · सुपरपोज़िशन · एंटैंगलमेंट · क्वांटम गेट्स",
+topics2:"एल्गोरिदम · अनुप्रयोग · जिम्मेदार नवाचार",
+verified:"सत्यापित",
+teamLabel:"प्रोजेक्ट टीम",
+dateLabel:"पूरा करने की तारीख",
+disclaimer:"QUBITQUEST परियोजना पूर्णता की मान्यता · मान्यता प्राप्त शैक्षणिक योग्यता नहीं",
+print:"🖨 प्रिंट करें / PDF के रूप में सहेजें",
+footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+progressText:"मॉड्यूल 5 की प्रगति: {percent}%",
+correct:"✓ सही! ",
+incorrect:"सही नहीं है! ",
+explanation0:"क्वांटम तरीके शोधकर्ताओं को आणविक प्रणालियों का अनुकरण करने में मदद कर सकते हैं।",
+explanation1:"पोस्ट-क्वांटम क्रिप्टोग्राफी भविष्य के क्वांटम हमलों से जानकारी की रक्षा करने का लक्ष्य रखती है।",
+explanation2:"जिम्मेदार नवाचार में ईमानदार संवाद और सामाजिक प्रभाव पर विचार करना शामिल है।",
+incomplete:"कृपया पहले तीनों प्रश्नों के उत्तर दें।",
+score:"आपका अंतिम स्कोर: 3 में से {score}! ",
+perfect:"शानदार! आपने QubitQuest पूरा कर लिया! 🎉",
+tryAgain:"अच्छा प्रयास! अंतिम मॉड्यूल पूरा करने के लिए 3/3 अंक चाहिए।",
+certificateReady:"बधाई हो! सभी पाँच मॉड्यूल पूरे हो गए हैं। आपका प्रमाणपत्र तैयार है! 🎉",
+needModules:"प्रमाणपत्र पाने के लिए सभी पाँच मॉड्यूल पूरे करें और अंतिम परीक्षा में 3/3 अंक प्राप्त करें।",
+needFinal:"प्रमाणपत्र पाने के लिए अंतिम परीक्षा में 3/3 अंक प्राप्त करें।",
+assessmentComplete:"बधाई हो! आपका मॉड्यूल 5 मूल्यांकन पूरा हो गया है।",
+retryCertificate:"अपना प्रमाणपत्र पाने के लिए फिर से प्रयास करें।",
+enterName:"प्रमाणपत्र प्रिंट करने से पहले अपना पूरा नाम लिखें।",
+completeFirst:"कृपया पहले सभी पाँच मॉड्यूल और अंतिम परीक्षा पूरी करें।",
+learner:"QubitQuest विद्यार्थी"
+},
+
+te: {
+home:"← హోమ్",
+tag:"మాడ్యూల్ 05 · చివరి స్థాయి",
+heading:"మానవాళి కోసం",
+humanity:"క్వాంటం కంప్యూటింగ్.",
+intro:"క్వాంటం పరిశోధన ఆరోగ్య సంరక్షణ, సుస్థిరత మరియు బాధ్యతాయుతమైన ఆవిష్కరణలకు ఎలా తోడ్పడగలదో తెలుసుకోండి.",
+progressHeading:"మీ అభ్యాస పురోగతి",
+completed:"✓ మాడ్యూల్ 5 పూర్తయింది! మీ అభ్యాస పురోగతి సేవ్ చేయబడింది.",
+section1:"01. క్వాంటం కంప్యూటింగ్ మరియు ఆరోగ్య సంరక్షణ",
+health1:"ఆరోగ్య పరిశోధనలో సంక్లిష్ట జీవ వ్యవస్థలు, అణువులు మరియు రసాయన పరస్పర చర్యలను అర్థం చేసుకోవడం ఉంటుంది.",
+health2:"భవిష్యత్తులో క్వాంటం కంప్యూటింగ్ అణువుల ప్రవర్తనను అనుకరించడానికి మరియు సాంప్రదాయ కంప్యూటర్లతో ఖచ్చితంగా నమూనా చేయడం కష్టమైన రసాయన వ్యవస్థలను పరిశీలించడానికి పరిశోధకులకు సహాయపడవచ్చు.",
+researchAreas:"సాధ్యమైన పరిశోధనా రంగాలు",
+molecular:"🧬 అణు అనుకరణ",
+drug:"💊 ఔషధ ఆవిష్కరణ పరిశోధన",
+chemical:"🔬 రసాయన పరస్పర చర్యలను అర్థం చేసుకోవడం",
+healthNote:"ఇవి ప్రస్తుతం పరిశోధనలో ఉన్న రంగాలు. క్వాంటం కంప్యూటర్లు ప్రస్తుతం ఉన్న వైద్య పరికరాలకు లేదా వైద్య పరీక్షలకు ప్రత్యామ్నాయం కావు.",
+section2:"02. క్వాంటం కంప్యూటింగ్ మరియు సుస్థిరత",
+sustainIntro:"వాతావరణ మార్పు మరియు సుస్థిరతలో శక్తి, పదార్థాలు, రవాణా మరియు పరిశ్రమలకు సంబంధించిన క్లిష్టమైన సమస్యలు ఉంటాయి.",
+energyResearch:"శక్తి పరిశోధన",
+energyText:"బ్యాటరీలు, సౌర ఘటాలు మరియు శక్తి నిల్వ కోసం ఉపయోగించే పదార్థాలను పరిశీలించడంలో క్వాంటం అనుకరణలు సహాయపడవచ్చు.",
+climateMaterials:"వాతావరణం మరియు పదార్థాలు",
+climateText:"రసాయన ప్రతిచర్యలు మరియు పదార్థాల లక్షణాలను నమూనా చేయడంలో క్వాంటం పద్ధతులు సహాయపడగలవా అని పరిశోధకులు పరిశీలిస్తున్నారు.",
+optimisation:"ఆప్టిమైజేషన్",
+optimisationText:"ప్రణాళిక మరియు వనరుల కేటాయింపు వంటి కొన్ని ఆప్టిమైజేషన్ సమస్యలకు క్వాంటం పద్ధతులను ఉపయోగించే పరిశోధనలు జరుగుతున్నాయి.",
+section3:"03. క్వాంటం కంప్యూటింగ్ మరియు సైబర్ భద్రత",
+cyber1:"భవిష్యత్తులో శక్తివంతమైన క్వాంటం కంప్యూటర్లు ప్రస్తుతం విస్తృతంగా ఉపయోగించే కొన్ని క్రిప్టోగ్రాఫిక్ వ్యవస్థలకు ముప్పు కలిగించవచ్చు.",
+cyber2:"పోస్ట్-క్వాంటం క్రిప్టోగ్రఫీ క్వాంటం కంప్యూటర్ల దాడులను తట్టుకునేలా రూపొందించిన భద్రతా పద్ధతులను అభివృద్ధి చేస్తుంది.",
+securityHeading:"బాధ్యతాయుతమైన సన్నద్ధత ఎందుకు ముఖ్యం?",
+protect:"🔐 డిజిటల్ సమాచారాన్ని రక్షించడం",
+prepare:"🛡️ భవిష్యత్తు సాంకేతికతకు సిద్ధపడటం",
+trust:"🌐 నమ్మకమైన వ్యవస్థలను నిర్మించడం",
+section4:"04. నైతికత మరియు బాధ్యతాయుతమైన ఆవిష్కరణ",
+ethicsIntro:"శక్తివంతమైన సాంకేతికతలు బాధ్యతలను కూడా తీసుకువస్తాయి. క్వాంటం పరిశోధన వల్ల కలిగే ప్రయోజనాలు మరియు ప్రమాదాలు ప్రజలు, సమాజంపై ఎలా ప్రభావం చూపుతాయో పరిగణించాలి.",
+accessibility:"అందుబాటు",
+accessibilityText:"వివిధ విద్యా నేపథ్యాలున్న వారికి అభ్యాస వనరులు అర్థమయ్యేలా మరియు అందుబాటులో ఉండాలి.",
+privacy:"గోప్యత మరియు భద్రత",
+privacyText:"భవిష్యత్తు క్వాంటం సాంకేతికతల సైబర్ భద్రతా ప్రభావాలకు పరిశోధకులు మరియు సంస్థలు సిద్ధంగా ఉండాలి.",
+honesty:"నిజాయితీతో కూడిన సమాచారం",
+honestyText:"ప్రస్తుత సామర్థ్యాలు మరియు భవిష్యత్తు అవకాశాల మధ్య తేడాను స్పష్టంగా తెలియజేయడం, అతిశయోక్తి వాదనలను నివారించడం ముఖ్యం.",
+collaboration:"సహకారం",
+collaborationText:"బాధ్యతాయుతమైన పురోగతికి పరిశోధకులు, విద్యావేత్తలు, సంస్థలు మరియు సమాజాలు కలిసి పనిచేయాలి.",
+section5:"05. మీ చివరి పరీక్ష! 🏆",
+assessmentIntro:"మీ QubitQuest అభ్యాస ప్రయాణాన్ని పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
+question1:"ప్రశ్న 1: ఆరోగ్య పరిశోధనకు క్వాంటం కంప్యూటింగ్ ఎలా సహాయపడగలదు?",
+q1a:"A. అణు వ్యవస్థలను అనుకరించడంలో పరిశోధకులకు సహాయపడటం ద్వారా",
+q1b:"B. ప్రతి వైద్యుడిని భర్తీ చేయడం ద్వారా",
+q1c:"C. అన్ని వైద్య పరీక్షలను తొలగించడం ద్వారా",
+question2Heading:"ప్రశ్న 2",
+question2:"పోస్ట్-క్వాంటం క్రిప్టోగ్రఫీ దేనికోసం రూపొందించబడింది?",
+q2a:"A. కంప్యూటర్లలో మెరుగైన గ్రాఫిక్స్ చూపించడం",
+q2b:"B. భవిష్యత్తు క్వాంటం కంప్యూటర్ల దాడుల నుంచి సమాచారాన్ని రక్షించడం",
+q2c:"C. ఇంటర్నెట్ వేగాన్ని పెంచడం",
+question3Heading:"ప్రశ్న 3",
+question3:"బాధ్యతాయుతమైన క్వాంటం ఆవిష్కరణలో ముఖ్యమైన సూత్రం ఏది?",
+q3a:"A. సామర్థ్యాల గురించి నిజాయితీగా తెలియజేయడం మరియు సామాజిక ప్రభావాన్ని పరిగణించడం",
+q3b:"B. భద్రతా ప్రమాదాలను పట్టించుకోకపోవడం",
+q3c:"C. సాంకేతికతను ఎవరికీ అందుబాటులో లేకుండా చేయడం",
+submit:"చివరి పరీక్షను సమర్పించండి →",
+retry:"మళ్లీ ప్రయత్నించండి",
+journeyHeading:"మీ క్వాంటం అభ్యాస ప్రయాణం! ✨",
+journeyText:"మీరు క్వాంటం కంప్యూటింగ్ పునాదులు, క్వాంటం సర్క్యూట్లు, అల్గారిథమ్‌లు మరియు వాటి సాధ్యమైన అనువర్తనాలను నేర్చుకున్నారు.",
+journeyQuote:"అన్వేషించండి. ప్రయోగించండి. నేర్చుకుంటూ ఉండండి.",
+certificateNameHeading:"సర్టిఫికెట్‌పై మీ పేరు",
+certificateNameText:"సర్టిఫికెట్‌పై ముద్రించాలనుకునే మీ పూర్తి పేరును నమోదు చేయండి.",
+namePlaceholder:"మీ పూర్తి పేరును నమోదు చేయండి",
+nameHint:"మీ పేరు ఈ బ్రౌజర్‌లో సేవ్ చేయబడుతుంది మరియు సర్టిఫికెట్‌పై కనిపిస్తుంది.",
+brandSubtitle:"క్వాంటం అభ్యాస అనుభవం",
+certificateKicker:"సాధనకు గుర్తింపు",
+certificateTitle:"సర్టిఫికెట్",
+certificateSubtitle:"పూర్తి చేసినందుకు",
+presented:"ఈ సర్టిఫికెట్ గర్వంగా అందించబడుతోంది",
+certificateDescription:"క్వాంటం కంప్యూటింగ్‌లో QubitQuest ప్రారంభ అభ్యాస ప్రయాణంలోని ఐదు మాడ్యూళ్లన్నింటినీ విజయవంతంగా పూర్తి చేసి, క్వాంటం సాంకేతికత సూత్రాలను నేర్చుకోవడం మరియు అన్వేషించడంలో నిబద్ధత చూపినందుకు ఈ సర్టిఫికెట్ అందించబడుతోంది.",
+programName:"క్వాంటం కంప్యూటింగ్",
+topics1:"క్యూబిట్లు · సూపర్‌పొజిషన్ · ఎంటాంగిల్‌మెంట్ · క్వాంటం గేట్లు",
+topics2:"అల్గారిథమ్‌లు · అనువర్తనాలు · బాధ్యతాయుతమైన ఆవిష్కరణ",
+verified:"ధృవీకరించబడింది",
+teamLabel:"ప్రాజెక్ట్ బృందం",
+dateLabel:"పూర్తి చేసిన తేదీ",
+disclaimer:"QUBITQUEST ప్రాజెక్ట్ పూర్తి చేసిన గుర్తింపు · గుర్తింపు పొందిన విద్యార్హత కాదు",
+print:"🖨 ప్రింట్ చేయండి / PDFగా సేవ్ చేయండి",
+footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+progressText:"మాడ్యూల్ 5 పూర్తి: {percent}%",
+correct:"✓ సరైన సమాధానం! ",
+incorrect:"సరైన సమాధానం కాదు! ",
+explanation0:"క్వాంటం పద్ధతులు అణు వ్యవస్థలను అనుకరించడంలో పరిశోధకులకు సహాయపడవచ్చు.",
+explanation1:"పోస్ట్-క్వాంటం క్రిప్టోగ్రఫీ భవిష్యత్తు క్వాంటం దాడుల నుంచి సమాచారాన్ని రక్షించడానికి ఉద్దేశించబడింది.",
+explanation2:"బాధ్యతాయుతమైన ఆవిష్కరణలో నిజాయితీతో కూడిన సమాచారం మరియు సామాజిక ప్రభావాన్ని పరిగణించడం ఉంటాయి.",
+incomplete:"దయచేసి ముందుగా మూడు ప్రశ్నలకూ సమాధానాలు ఇవ్వండి.",
+score:"మీ చివరి స్కోరు: 3లో {score}! ",
+perfect:"అద్భుతం! మీరు QubitQuest పూర్తి చేశారు! 🎉",
+tryAgain:"మంచి ప్రయత్నం! చివరి మాడ్యూల్ పూర్తి చేయడానికి 3/3 అవసరం.",
+certificateReady:"అభినందనలు! ఐదు మాడ్యూళ్లన్నీ పూర్తయ్యాయి. మీ సర్టిఫికెట్ సిద్ధంగా ఉంది! 🎉",
+needModules:"సర్టిఫికెట్ పొందడానికి ఐదు మాడ్యూళ్లన్నీ పూర్తి చేసి చివరి పరీక్షలో 3/3 సాధించండి.",
+needFinal:"సర్టిఫికెట్ పొందడానికి చివరి పరీక్షలో 3/3 సాధించండి.",
+assessmentComplete:"అభినందనలు! మీ మాడ్యూల్ 5 పరీక్ష పూర్తయింది.",
+retryCertificate:"మీ పూర్తి చేసిన సర్టిఫికెట్ పొందడానికి మళ్లీ ప్రయత్నించండి.",
+enterName:"సర్టిఫికెట్ ప్రింట్ చేయడానికి ముందు మీ పూర్తి పేరును నమోదు చేయండి.",
+completeFirst:"దయచేసి ముందుగా ఐదు మాడ్యూళ్లన్నీ మరియు చివరి పరీక్షను పూర్తి చేయండి.",
+learner:"QubitQuest అభ్యాసకుడు"
+}
+
+};
+
+// ==================================
+// LANGUAGE SYSTEM
+// ==================================
+
+const LANGUAGE_KEY = "qubitquestLanguage";
+let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || "en";
+
+if (!translations[currentLanguage]) currentLanguage = "en";
+
+function t(key) {
+    return translations[currentLanguage][key] ??
+           translations.en[key] ??
+           key;
+}
+
+function applyLanguage(language) {
+    if (!translations[language]) language = "en";
+
+    currentLanguage = language;
+    localStorage.setItem(LANGUAGE_KEY, language);
+
+    document.documentElement.lang = language;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.dataset.i18n;
+        element.textContent = t(key);
+    });
+
+    document.getElementById("learnerNameInput").placeholder =
+        t("namePlaceholder");
+
+    document.getElementById("languageSelect").value = language;
+
+    updateProgress();
+    updateQuizLanguage();
+    updateCertificateName();
+}
+
+document.getElementById("languageSelect").addEventListener("change", function() {
+    applyLanguage(this.value);
+});
+
+// ==================================
+// SHARED PROGRESS SYSTEM
+// ==================================
+
+const PROGRESS_KEY = "qubitquestProgress";
+
+function readProgress() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
+
+        return {
+            ...saved,
+            completedModules: Array.isArray(saved.completedModules)
+                ? [...new Set(saved.completedModules.map(Number).filter(Number.isFinite))]
+                : [],
+            quizScores: saved.quizScores &&
+                typeof saved.quizScores === "object" &&
+                !Array.isArray(saved.quizScores)
+                ? {...saved.quizScores}
+                : {}
         };
-    }catch(e){
-        return{completedModules:[],quizScores:{}};
+    } catch (error) {
+        return {completedModules: [], quizScores: {}};
     }
 }
 
-function updateProgress(){
-    const progress=readProgress();
-    const completed=progress.completedModules.includes(5);
-    const percent=completed?100:0;
-    document.getElementById("progressFill").style.width=percent+"%";
-    document.getElementById("progressText").textContent="Module 5 completion: "+percent+"%";
-    document.getElementById("completion").style.display=completed?"block":"none";
+function writeProgress(progress) {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+}
 
-    if(progress.quizScores[5]===3){
-        document.getElementById("certificate").style.display="block";
-        document.getElementById("certificateMessage").style.display="block";
-        document.getElementById("certificateMessage").textContent="Your completion certificate is ready!";
+// ==================================
+// LEARNER NAME
+// ==================================
+
+function saveLearnerName() {
+    const input = document.getElementById("learnerNameInput");
+    const progress = readProgress();
+
+    progress.learnerName = input.value.trim();
+
+    writeProgress(progress);
+    updateCertificateName();
+}
+
+function updateCertificateName() {
+    const progress = readProgress();
+    const name = progress.learnerName || t("learner");
+
+    document.getElementById("certificateName").textContent = name;
+
+    const input = document.getElementById("learnerNameInput");
+
+    if (input && input.value !== (progress.learnerName || "")) {
+        input.value = progress.learnerName || "";
     }
 }
 
-function saveCompletion(finalScore){
-    const progress=readProgress();
-    if(finalScore===3&&!progress.completedModules.includes(5)){
+// ==================================
+// MODULE COMPLETION CHECK
+// ==================================
+
+function allModulesCompleted(progress) {
+    return [1,2,3,4,5].every(number =>
+        progress.completedModules.includes(number)
+    );
+}
+
+// ==================================
+// CERTIFICATE DATE
+// ==================================
+
+function updateCertificateDate() {
+    const localeMap = {
+        en:"en-IN",
+        kn:"kn-IN",
+        hi:"hi-IN",
+        te:"te-IN"
+    };
+
+    const date = new Date();
+
+    const formattedDate = date.toLocaleDateString(
+        localeMap[currentLanguage] || "en-IN",
+        {
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+    document.getElementById("certificateDate").textContent = formattedDate;
+}
+
+// ==================================
+// UPDATE PROGRESS AND CERTIFICATE
+// ==================================
+
+function updateProgress() {
+    const progress = readProgress();
+
+    const completed = progress.completedModules.includes(5);
+    const percent = completed ? 100 : 0;
+
+    document.getElementById("progressFill").style.width = percent + "%";
+
+    document.getElementById("progressText").textContent =
+        t("progressText").replace("{percent}", percent);
+
+    document.getElementById("completion").style.display =
+        completed ? "block" : "none";
+
+    const certificateReady =
+        allModulesCompleted(progress) &&
+        Number(progress.quizScores[5]) === 3;
+
+    document.getElementById("certificate").style.display =
+        certificateReady ? "block" : "none";
+
+    document.getElementById("certificateActions").style.display =
+        certificateReady ? "block" : "none";
+
+    const message = document.getElementById("certificateMessage");
+
+    message.style.display = "block";
+
+    if (certificateReady) {
+        message.textContent = t("certificateReady");
+        updateCertificateDate();
+    } else if (!allModulesCompleted(progress)) {
+        message.textContent = t("needModules");
+    } else {
+        message.textContent = t("needFinal");
+    }
+
+    updateCertificateName();
+}
+
+// ==================================
+// SAVE MODULE COMPLETION
+// ==================================
+
+function saveCompletion(finalScore) {
+    const progress = readProgress();
+
+    const previousBest = Number(progress.quizScores[5]) || 0;
+
+    progress.quizScores[5] = Math.max(previousBest, finalScore);
+
+    if (finalScore === 3 && !progress.completedModules.includes(5)) {
         progress.completedModules.push(5);
     }
-    progress.quizScores[5]=finalScore;
-    localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+
+    writeProgress(progress);
     updateProgress();
 }
 
-const correctAnswers=[0,1,0];
-const explanations=[
-    "Quantum methods may help researchers simulate molecular systems.",
-    "Post-quantum cryptography aims to protect information against future quantum attacks.",
-    "Responsible innovation includes honest communication and considering societal impact."
-];
+window.addEventListener("storage", function(event) {
+    if (event.key === PROGRESS_KEY) updateProgress();
 
-let score=0;
-let answered=[false,false,false];
+    if (event.key === LANGUAGE_KEY && translations[event.newValue]) {
+        applyLanguage(event.newValue);
+    }
+});
 
-function answer(question,choice){
-    if(answered[question])return;
-    answered[question]=true;
+// ==================================
+// FINAL QUIZ SYSTEM
+// ==================================
 
-    const buttons=document.querySelectorAll(".quiz-option");
-    for(let i=question*3;i<question*3+3;i++){
-        buttons[i].disabled=true;
+const correctAnswers = [0,1,0];
+
+let score = 0;
+let answered = [false,false,false];
+let selectedAnswers = [null,null,null];
+
+function answer(question, choice) {
+    if (answered[question]) return;
+
+    answered[question] = true;
+    selectedAnswers[question] = choice;
+
+    const buttons = document.querySelectorAll(".quiz-option");
+
+    for (let i = question * 3; i < question * 3 + 3; i++) {
+        buttons[i].disabled = true;
     }
 
-    const feedback=document.getElementById("feedback"+question);
-    feedback.style.display="block";
+    if (choice === correctAnswers[question]) score++;
 
-    if(choice===correctAnswers[question]){
-        score++;
-        feedback.textContent="✓ Correct! "+explanations[question];
-    }else{
-        feedback.textContent="Not quite! "+explanations[question];
+    showQuestionFeedback(question);
+}
+
+function showQuestionFeedback(question) {
+    const feedback = document.getElementById("feedback" + question);
+
+    feedback.style.display = "block";
+
+    if (selectedAnswers[question] === correctAnswers[question]) {
+        feedback.textContent =
+            t("correct") + t("explanation" + question);
+    } else {
+        feedback.textContent =
+            t("incorrect") + t("explanation" + question);
     }
 }
 
-function showScore(){
-    const result=document.getElementById("score");
-    result.style.display="block";
+function updateQuizLanguage() {
+    for (let i = 0; i < 3; i++) {
+        if (answered[i]) showQuestionFeedback(i);
+    }
 
-    if(answered.some(value=>!value)){
-        result.textContent="Please answer all three questions first.";
+    const result = document.getElementById("score");
+
+    if (result.dataset.result === "incomplete") {
+        result.textContent = t("incomplete");
+    } else if (result.dataset.result === "submitted") {
+        renderScore();
+    }
+
+    updateCertificateName();
+}
+
+// ==================================
+// SUBMIT FINAL ASSESSMENT
+// ==================================
+
+function showScore() {
+    const result = document.getElementById("score");
+
+    result.style.display = "block";
+
+    if (answered.some(value => !value)) {
+        result.dataset.result = "incomplete";
+        result.textContent = t("incomplete");
         return;
     }
 
-    result.textContent="Your final score: "+score+" out of 3! "+
-        (score===3?"Outstanding! You've completed QubitQuest! 🎉":"Good effort! You need 3/3 to complete the final module.");
+    result.dataset.result = "submitted";
 
     saveCompletion(score);
+    renderScore();
 
-    const message=document.getElementById("certificateMessage");
-    message.style.display="block";
+    const message = document.getElementById("certificateMessage");
+    message.style.display = "block";
 
-    if(score===3){
-        message.textContent="Congratulations! Your certificate is ready below.";
-    }else{
-        message.textContent="Try again to earn your completion certificate.";
-    }
+    message.textContent = score === 3
+        ? t("assessmentComplete")
+        : t("retryCertificate");
+
+    updateProgress();
 }
 
-function retryQuiz(){
-    score=0;
-    answered=[false,false,false];
+function renderScore() {
+    const result = document.getElementById("score");
 
-    document.querySelectorAll(".quiz-option").forEach(button=>{
-        button.disabled=false;
+    result.textContent =
+        t("score").replace("{score}", score) +
+        (score === 3 ? t("perfect") : t("tryAgain"));
+}
+
+// ==================================
+// RETRY ASSESSMENT
+// ==================================
+
+function retryQuiz() {
+    score = 0;
+    answered = [false,false,false];
+    selectedAnswers = [null,null,null];
+
+    document.querySelectorAll(".quiz-option").forEach(button => {
+        button.disabled = false;
     });
 
-    for(let i=0;i<3;i++){
-        const feedback=document.getElementById("feedback"+i);
-        feedback.textContent="";
-        feedback.style.display="none";
+    for (let i = 0; i < 3; i++) {
+        const feedback = document.getElementById("feedback" + i);
+        feedback.textContent = "";
+        feedback.style.display = "none";
     }
 
-    const result=document.getElementById("score");
-    result.textContent="";
-    result.style.display="none";
+    const result = document.getElementById("score");
+    result.textContent = "";
+    result.style.display = "none";
+    result.dataset.result = "";
 
-    const message=document.getElementById("certificateMessage");
-    message.textContent="";
-    message.style.display="none";
+    updateProgress();
 }
 
-updateProgress();
+// ==================================
+// PRINT CERTIFICATE
+// ==================================
+
+function printCertificate() {
+    const progress = readProgress();
+
+    if (!allModulesCompleted(progress) ||
+        Number(progress.quizScores[5]) !== 3) {
+        alert(t("completeFirst"));
+        return;
+    }
+
+    if (!progress.learnerName || !progress.learnerName.trim()) {
+        alert(t("enterName"));
+        document.getElementById("learnerNameInput").focus();
+        return;
+    }
+
+    updateCertificateName();
+    updateCertificateDate();
+
+    window.print();
+}
+
+// ==================================
+// INITIALIZE
+// ==================================
+
+document.getElementById("learnerNameInput").value =
+    readProgress().learnerName || "";
+
+applyLanguage(currentLanguage);
+
 </script>
+
 </body>
 </html>
