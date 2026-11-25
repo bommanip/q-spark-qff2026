@@ -7,698 +7,489 @@
 <title>Linked Dice | QubitQuest Arcade</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+    --purple:#a58bff;
+    --cyan:#55e5ed;
+    --navy:#080d1c;
+    --panel:#111a31;
+    --muted:#a5aec8;
 }
 
-:root {
-    --purple: #a58bff;
-    --cyan: #55e5ed;
-    --navy: #080d1c;
-    --panel: #111a31;
-    --muted: #a5aec8;
+body{
+    background:radial-gradient(ellipse at 50% 15%,#202044 0%,transparent 48%),#080d1c;
+    color:#f5f5ff;
+    font-family:"Segoe UI",sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-body {
-    background:
-        radial-gradient(ellipse at 50% 15%, #202044 0%, transparent 48%),
-        #080d1c;
-    color: #f5f5ff;
-    font-family: "Segoe UI", sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+header{
+    padding:21px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(8,13,28,.8);
 }
 
-header {
-    padding: 21px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    background: rgba(8,13,28,.8);
+.logo{font-size:23px;font-weight:800;color:#b6a5ff}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
 }
 
-.logo {
-    font-size: 23px;
-    font-weight: 800;
-    color: #b6a5ff;
+.back{color:#c7bdff;text-decoration:none;font-size:14px}
+
+.language-select{
+    padding:10px 12px;
+    color:white;
+    background:#202b48;
+    border:1px solid #465477;
+    border-radius:10px;
+    font-size:13px;
+    cursor:pointer;
 }
 
-.back {
-    color: #c7bdff;
-    text-decoration: none;
-    font-size: 14px;
+.container{width:min(1120px,92%);margin:auto;padding:43px 0 70px}
+
+.tag{
+    color:#b39cff;
+    font-size:12px;
+    letter-spacing:3px;
+    font-weight:800;
+    text-transform:uppercase;
 }
 
-.container {
-    width: min(1120px, 92%);
-    margin: auto;
-    padding: 43px 0 70px;
+h1{font-size:clamp(34px,5vw,52px);margin:12px 0}
+
+.subtitle{
+    color:var(--muted);
+    max-width:690px;
+    line-height:1.8;
+    font-size:15px;
 }
 
-.tag {
-    color: #b39cff;
-    font-size: 12px;
-    letter-spacing: 3px;
-    font-weight: 800;
-    text-transform: uppercase;
+.game-panel{
+    margin-top:34px;
+    padding:30px;
+    background:linear-gradient(145deg,#141d38,#10162b);
+    border:1px solid rgba(165,139,255,.2);
+    border-radius:23px;
+    box-shadow:0 20px 65px rgba(0,0,0,.25);
 }
 
-h1 {
-    font-size: clamp(34px, 5vw, 52px);
-    margin: 12px 0;
+.mode-row{display:flex;gap:12px;flex-wrap:wrap}
+
+.mode-button{
+    flex:1;
+    min-width:180px;
+    padding:15px;
+    background:#1c2745;
+    color:#bfc8e4;
+    border:1px solid #344263;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
+    transition:.25s;
 }
 
-.subtitle {
-    color: var(--muted);
-    max-width: 690px;
-    line-height: 1.8;
-    font-size: 15px;
+.mode-button.active{
+    color:white;
+    background:linear-gradient(110deg,#7156d9,#977cf2);
+    border-color:#b39cff;
+    box-shadow:0 0 25px rgba(143,113,244,.25);
 }
 
-.game-panel {
-    margin-top: 34px;
-    padding: 30px;
-    background: linear-gradient(145deg, #141d38, #10162b);
-    border: 1px solid rgba(165,139,255,.2);
-    border-radius: 23px;
-    box-shadow: 0 20px 65px rgba(0,0,0,.25);
+.mode-button:hover{transform:translateY(-2px)}
+
+/* 3D DICE */
+
+.game-stage{
+    position:relative;
+    min-height:390px;
+    margin:25px 0;
+    padding:35px 10px 65px;
+    border-radius:20px;
+    background:radial-gradient(ellipse at center,rgba(99,84,190,.2),transparent 65%),#0b1226;
+    border:1px solid rgba(255,255,255,.06);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:clamp(65px,15vw,175px);
+    overflow:hidden;
+    perspective:1000px;
 }
 
-.mode-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+.game-stage::before{
+    content:"";
+    position:absolute;
+    width:75%;
+    height:1px;
+    left:12.5%;
+    bottom:65px;
+    background:linear-gradient(90deg,transparent,rgba(165,139,255,.3),rgba(85,229,237,.3),transparent);
+    box-shadow:0 0 25px rgba(165,139,255,.25);
 }
 
-.mode-button {
-    flex: 1;
-    min-width: 180px;
-    padding: 15px;
-    background: #1c2745;
-    color: #bfc8e4;
-    border: 1px solid #344263;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 14px;
-    transition: .25s;
+.dice-side{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
-.mode-button.active {
-    color: white;
-    background: linear-gradient(110deg, #7156d9, #977cf2);
-    border-color: #b39cff;
-    box-shadow: 0 0 25px rgba(143,113,244,.25);
+.dice-label{
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:800;
+    margin-bottom:35px;
 }
 
-.mode-button:hover {
-    transform: translateY(-2px);
+.dice-label.purple{color:#b39cff}
+.dice-label.cyan{color:#63e7ef}
+
+.dice-space{
+    width:132px;
+    height:132px;
+    position:relative;
+    perspective:700px;
+    transform-style:preserve-3d;
 }
 
-/* =====================================
-   3D DICE STAGE
-===================================== */
-
-.game-stage {
-    position: relative;
-    min-height: 390px;
-    margin: 25px 0;
-    padding: 35px 10px 65px;
-    border-radius: 20px;
-    background:
-        radial-gradient(ellipse at center, rgba(99,84,190,.2), transparent 65%),
-        #0b1226;
-    border: 1px solid rgba(255,255,255,.06);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(65px, 15vw, 175px);
-    overflow: hidden;
-    perspective: 1000px;
+.die-cube{
+    width:112px;
+    height:112px;
+    position:absolute;
+    top:10px;
+    left:10px;
+    transform-style:preserve-3d;
+    transform:rotateX(-15deg) rotateY(-25deg);
+    transition:transform .75s cubic-bezier(.2,.8,.2,1);
 }
 
-.game-stage::before {
-    content: "";
-    position: absolute;
-    width: 75%;
-    height: 1px;
-    left: 12.5%;
-    bottom: 65px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(165,139,255,.3),
-        rgba(85,229,237,.3),
-        transparent
-    );
-    box-shadow: 0 0 25px rgba(165,139,255,.25);
+.die-face{
+    position:absolute;
+    width:112px;
+    height:112px;
+    border-radius:19px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:repeat(3,1fr);
+    padding:16px;
+    gap:5px;
+    backface-visibility:hidden;
+    border:2px solid rgba(190,174,255,.95);
+    background:linear-gradient(145deg,#40316d,#211b45 65%,#33265e);
+    box-shadow:inset 0 0 20px rgba(185,158,255,.2),inset 0 0 4px rgba(255,255,255,.5),0 0 13px rgba(165,139,255,.45);
 }
 
-.dice-side {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.cyan-cube .die-face{
+    border-color:rgba(105,245,255,.95);
+    background:linear-gradient(145deg,#1b5367,#123346 65%,#1a465b);
+    box-shadow:inset 0 0 20px rgba(85,229,237,.2),inset 0 0 4px rgba(255,255,255,.5),0 0 13px rgba(85,229,237,.45);
 }
 
-.dice-label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 800;
-    margin-bottom: 35px;
+.die-face.front{transform:translateZ(56px)}
+.die-face.back{transform:rotateY(180deg) translateZ(56px)}
+.die-face.right{transform:rotateY(90deg) translateZ(56px)}
+.die-face.left{transform:rotateY(-90deg) translateZ(56px)}
+.die-face.top{transform:rotateX(90deg) translateZ(56px)}
+.die-face.bottom{transform:rotateX(-90deg) translateZ(56px)}
+
+.pip{
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:#e5dcff;
+    opacity:0;
+    align-self:center;
+    justify-self:center;
+    box-shadow:inset 0 2px 4px rgba(255,255,255,.7),0 0 8px rgba(221,211,255,.5);
 }
 
-.dice-label.purple {
-    color: #b39cff;
+.cyan-cube .pip{
+    background:#b7fcff;
+    box-shadow:inset 0 2px 4px rgba(255,255,255,.7),0 0 8px rgba(125,247,255,.6);
 }
 
-.dice-label.cyan {
-    color: #63e7ef;
-}
+.pip:nth-child(1){grid-area:1/1}
+.pip:nth-child(2){grid-area:1/2}
+.pip:nth-child(3){grid-area:1/3}
+.pip:nth-child(4){grid-area:2/1}
+.pip:nth-child(5){grid-area:2/2}
+.pip:nth-child(6){grid-area:2/3}
+.pip:nth-child(7){grid-area:3/1}
+.pip:nth-child(8){grid-area:3/2}
+.pip:nth-child(9){grid-area:3/3}
 
-.dice-space {
-    width: 132px;
-    height: 132px;
-    position: relative;
-    perspective: 700px;
-    transform-style: preserve-3d;
-}
-
-.die-cube {
-    width: 112px;
-    height: 112px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    transform-style: preserve-3d;
-    transform: rotateX(-15deg) rotateY(-25deg);
-    transition: transform .75s cubic-bezier(.2,.8,.2,1);
-}
-
-.die-face {
-    position: absolute;
-    width: 112px;
-    height: 112px;
-    border-radius: 19px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    padding: 16px;
-    gap: 5px;
-    backface-visibility: hidden;
-    border: 2px solid rgba(190,174,255,.95);
-    background:
-        linear-gradient(145deg, #40316d, #211b45 65%, #33265e);
-    box-shadow:
-        inset 0 0 20px rgba(185,158,255,.2),
-        inset 0 0 4px rgba(255,255,255,.5),
-        0 0 13px rgba(165,139,255,.45);
-}
-
-.cyan-cube .die-face {
-    border-color: rgba(105,245,255,.95);
-    background:
-        linear-gradient(145deg, #1b5367, #123346 65%, #1a465b);
-    box-shadow:
-        inset 0 0 20px rgba(85,229,237,.2),
-        inset 0 0 4px rgba(255,255,255,.5),
-        0 0 13px rgba(85,229,237,.45);
-}
-
-.die-face.front {
-    transform: translateZ(56px);
-}
-
-.die-face.back {
-    transform: rotateY(180deg) translateZ(56px);
-}
-
-.die-face.right {
-    transform: rotateY(90deg) translateZ(56px);
-}
-
-.die-face.left {
-    transform: rotateY(-90deg) translateZ(56px);
-}
-
-.die-face.top {
-    transform: rotateX(90deg) translateZ(56px);
-}
-
-.die-face.bottom {
-    transform: rotateX(-90deg) translateZ(56px);
-}
-
-/* DICE DOTS */
-
-.pip {
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background: #e5dcff;
-    opacity: 0;
-    align-self: center;
-    justify-self: center;
-    box-shadow:
-        inset 0 2px 4px rgba(255,255,255,.7),
-        0 0 8px rgba(221,211,255,.5);
-}
-
-.cyan-cube .pip {
-    background: #b7fcff;
-    box-shadow:
-        inset 0 2px 4px rgba(255,255,255,.7),
-        0 0 8px rgba(125,247,255,.6);
-}
-
-.pip:nth-child(1) { grid-area: 1 / 1; }
-.pip:nth-child(2) { grid-area: 1 / 2; }
-.pip:nth-child(3) { grid-area: 1 / 3; }
-.pip:nth-child(4) { grid-area: 2 / 1; }
-.pip:nth-child(5) { grid-area: 2 / 2; }
-.pip:nth-child(6) { grid-area: 2 / 3; }
-.pip:nth-child(7) { grid-area: 3 / 1; }
-.pip:nth-child(8) { grid-area: 3 / 2; }
-.pip:nth-child(9) { grid-area: 3 / 3; }
-
-/* Face 1 */
-.die-face.face-1 .pip:nth-child(5) {
-    opacity: 1;
-}
-
-/* Face 2 */
+.die-face.face-1 .pip:nth-child(5){opacity:1}
 .die-face.face-2 .pip:nth-child(3),
-.die-face.face-2 .pip:nth-child(7) {
-    opacity: 1;
-}
-
-/* Face 3 */
+.die-face.face-2 .pip:nth-child(7){opacity:1}
 .die-face.face-3 .pip:nth-child(1),
 .die-face.face-3 .pip:nth-child(5),
-.die-face.face-3 .pip:nth-child(9) {
-    opacity: 1;
-}
-
-/* Face 4 */
+.die-face.face-3 .pip:nth-child(9){opacity:1}
 .die-face.face-4 .pip:nth-child(1),
 .die-face.face-4 .pip:nth-child(3),
 .die-face.face-4 .pip:nth-child(7),
-.die-face.face-4 .pip:nth-child(9) {
-    opacity: 1;
-}
-
-/* Face 5 */
+.die-face.face-4 .pip:nth-child(9){opacity:1}
 .die-face.face-5 .pip:nth-child(1),
 .die-face.face-5 .pip:nth-child(3),
 .die-face.face-5 .pip:nth-child(5),
 .die-face.face-5 .pip:nth-child(7),
-.die-face.face-5 .pip:nth-child(9) {
-    opacity: 1;
-}
-
-/* Face 6 */
+.die-face.face-5 .pip:nth-child(9){opacity:1}
 .die-face.face-6 .pip:nth-child(1),
 .die-face.face-6 .pip:nth-child(3),
 .die-face.face-6 .pip:nth-child(4),
 .die-face.face-6 .pip:nth-child(6),
 .die-face.face-6 .pip:nth-child(7),
-.die-face.face-6 .pip:nth-child(9) {
-    opacity: 1;
+.die-face.face-6 .pip:nth-child(9){opacity:1}
+
+.die-cube.rolling{animation:tumble 1.05s cubic-bezier(.25,.8,.3,1)}
+
+@keyframes tumble{
+    0%{transform:rotateX(-15deg) rotateY(-25deg) scale(1)}
+    25%{transform:rotateX(160deg) rotateY(150deg) scale(1.18)}
+    50%{transform:rotateX(340deg) rotateY(300deg) scale(.9)}
+    75%{transform:rotateX(510deg) rotateY(510deg) scale(1.12)}
+    100%{transform:rotateX(700deg) rotateY(690deg) scale(1)}
 }
 
-.die-cube.rolling {
-    animation: tumble 1.05s cubic-bezier(.25,.8,.3,1);
+.dice-shadow{
+    position:absolute;
+    width:105px;
+    height:20px;
+    left:13px;
+    bottom:-15px;
+    border-radius:50%;
+    background:rgba(0,0,0,.6);
+    filter:blur(12px);
 }
 
-@keyframes tumble {
-    0% {
-        transform: rotateX(-15deg) rotateY(-25deg) scale(1);
-    }
-    25% {
-        transform: rotateX(160deg) rotateY(150deg) scale(1.18);
-    }
-    50% {
-        transform: rotateX(340deg) rotateY(300deg) scale(.9);
-    }
-    75% {
-        transform: rotateX(510deg) rotateY(510deg) scale(1.12);
-    }
-    100% {
-        transform: rotateX(700deg) rotateY(690deg) scale(1);
-    }
+.cube-glow{
+    position:absolute;
+    width:155px;
+    height:155px;
+    left:-12px;
+    top:-12px;
+    border-radius:50%;
+    background:rgba(155,127,255,.12);
+    filter:blur(30px);
+    z-index:-1;
 }
 
-.dice-shadow {
-    position: absolute;
-    width: 105px;
-    height: 20px;
-    left: 13px;
-    bottom: -15px;
-    border-radius: 50%;
-    background: rgba(0,0,0,.6);
-    filter: blur(12px);
+.cyan-cube .cube-glow{background:rgba(85,229,237,.13)}
+
+.dice-number{
+    font-size:14px;
+    margin-top:38px;
+    color:#dce1ff;
+    font-weight:700;
 }
 
-.cube-glow {
-    position: absolute;
-    width: 155px;
-    height: 155px;
-    left: -12px;
-    top: -12px;
-    border-radius: 50%;
-    background: rgba(155,127,255,.12);
-    filter: blur(30px);
-    z-index: -1;
+.energy{
+    position:absolute;
+    left:29%;
+    right:29%;
+    top:48%;
+    height:3px;
+    transform:translateY(-50%);
+    background:linear-gradient(90deg,#a18aff,#fff,#55e5ed);
+    box-shadow:0 0 12px #a18aff,0 0 28px #55e5ed;
+    opacity:.12;
+    transition:.5s;
 }
 
-.cyan-cube .cube-glow {
-    background: rgba(85,229,237,.13);
+.energy::after{
+    content:"";
+    position:absolute;
+    inset:-7px 0;
+    background:inherit;
+    filter:blur(9px);
 }
 
-.dice-number {
-    font-size: 14px;
-    margin-top: 38px;
-    color: #dce1ff;
-    font-weight: 700;
+.energy.active{opacity:1;animation:pulse 1.4s infinite alternate}
+
+@keyframes pulse{
+    from{opacity:.55}
+    to{opacity:1}
 }
 
-.energy {
-    position: absolute;
-    left: 29%;
-    right: 29%;
-    top: 48%;
-    height: 3px;
-    transform: translateY(-50%);
-    background: linear-gradient(90deg, #a18aff, #fff, #55e5ed);
-    box-shadow: 0 0 12px #a18aff, 0 0 28px #55e5ed;
-    opacity: .12;
-    transition: .5s;
+.connection-label{
+    position:absolute;
+    bottom:22px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#b7a9ff;
 }
 
-.energy::after {
-    content: "";
-    position: absolute;
-    inset: -7px 0;
-    background: inherit;
-    filter: blur(9px);
+/* CONTROLS AND RESULTS */
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:15px;
+    align-items:end;
 }
 
-.energy.active {
-    opacity: 1;
-    animation: pulse 1.4s infinite alternate;
+.shots-control label{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:9px;
 }
 
-@keyframes pulse {
-    from { opacity: .55; }
-    to { opacity: 1; }
+select:not(.language-select){
+    width:100%;
+    max-width:240px;
+    padding:13px;
+    color:white;
+    background:#202b48;
+    border:1px solid #465477;
+    border-radius:10px;
 }
 
-.connection-label {
-    position: absolute;
-    bottom: 22px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #b7a9ff;
+.roll-button{
+    padding:15px 35px;
+    border:0;
+    border-radius:12px;
+    color:white;
+    font-weight:800;
+    font-size:15px;
+    cursor:pointer;
+    background:linear-gradient(110deg,#7657e4,#ad8bff);
+    box-shadow:0 8px 25px rgba(130,101,240,.22);
+    transition:.25s;
 }
 
-/* =====================================
-   CONTROLS AND RESULTS
-===================================== */
-
-.controls {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 15px;
-    align-items: end;
+.roll-button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(130,101,240,.35);
 }
 
-.shots-control label {
-    display: block;
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 9px;
+.roll-button:disabled{opacity:.6;cursor:wait;transform:none}
+
+.status{margin-top:19px;color:var(--muted);font-size:13px;line-height:1.6}
+.status.success{color:#72edbb}
+.status.error{color:#ff8c9b}
+
+.results{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:25px;
 }
 
-select {
-    width: 100%;
-    max-width: 240px;
-    padding: 13px;
-    color: white;
-    background: #202b48;
-    border: 1px solid #465477;
-    border-radius: 10px;
+.result-card{
+    background:#111a31;
+    border:1px solid rgba(165,139,255,.13);
+    border-radius:16px;
+    padding:21px;
 }
 
-.roll-button {
-    padding: 15px 35px;
-    border: 0;
-    border-radius: 12px;
-    color: white;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-    background: linear-gradient(110deg, #7657e4, #ad8bff);
-    box-shadow: 0 8px 25px rgba(130,101,240,.22);
-    transition: .25s;
+.result-card small{
+    display:block;
+    color:#9ca9c8;
+    font-size:12px;
+    margin-bottom:11px;
 }
 
-.roll-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(130,101,240,.35);
+.result-card strong{color:#c5b5ff;font-size:28px}
+.result-card p{color:#8f9bb8;font-size:12px;margin-top:8px}
+
+.section{
+    margin-top:25px;
+    background:#111a31;
+    border:1px solid rgba(165,139,255,.13);
+    border-radius:17px;
+    padding:25px;
 }
 
-.roll-button:disabled {
-    opacity: .6;
-    cursor: wait;
-    transform: none;
+.section h2{font-size:19px;margin-bottom:13px}
+.section p{color:var(--muted);font-size:14px;line-height:1.8}
+
+.distribution{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:20px;
 }
 
-.status {
-    margin-top: 19px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.6;
+.distribution h3{color:#c2b4ff;font-size:13px;margin-bottom:12px}
+.distribution.cyan-title h3{color:#72eaf0}
+
+.die-row{
+    display:grid;
+    grid-template-columns:20px 1fr 35px;
+    gap:9px;
+    align-items:center;
+    margin:9px 0;
+    font-size:12px;
+    color:#aab5d0;
 }
 
-.status.success {
-    color: #72edbb;
+.mini-bar{height:8px;border-radius:10px;background:#26314d;overflow:hidden}
+.mini-fill{
+    height:100%;
+    width:0;
+    border-radius:10px;
+    background:linear-gradient(90deg,#785be2,#b49cff);
+    transition:width .5s;
+}
+.mini-fill.cyan-fill{background:linear-gradient(90deg,#299cae,#68eaf1)}
+
+.circuit{
+    margin-top:15px;
+    background:#080d1c;
+    color:#8ee9e2;
+    border-radius:12px;
+    padding:17px;
+    overflow-x:auto;
+    white-space:pre;
+    font:12px Consolas,monospace;
+    min-height:70px;
 }
 
-.status.error {
-    color: #ff8c9b;
+.learn-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:18px;
 }
 
-.results {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 25px;
-}
+.learn-card{padding:18px;border-radius:13px;background:#1a2541}
+.learn-card h3{color:#b8a6ff;font-size:15px;margin-bottom:9px}
+.learn-card p{font-size:13px}
 
-.result-card {
-    background: #111a31;
-    border: 1px solid rgba(165,139,255,.13);
-    border-radius: 16px;
-    padding: 21px;
-}
+.footer{text-align:center;color:#75809e;font-size:12px;margin-top:40px}
 
-.result-card small {
-    display: block;
-    color: #9ca9c8;
-    font-size: 12px;
-    margin-bottom: 11px;
-}
-
-.result-card strong {
-    color: #c5b5ff;
-    font-size: 28px;
-}
-
-.result-card p {
-    color: #8f9bb8;
-    font-size: 12px;
-    margin-top: 8px;
-}
-
-.section {
-    margin-top: 25px;
-    background: #111a31;
-    border: 1px solid rgba(165,139,255,.13);
-    border-radius: 17px;
-    padding: 25px;
-}
-
-.section h2 {
-    font-size: 19px;
-    margin-bottom: 13px;
-}
-
-.section p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.distribution {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    margin-top: 20px;
-}
-
-.distribution h3 {
-    color: #c2b4ff;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-.distribution.cyan-title h3 {
-    color: #72eaf0;
-}
-
-.die-row {
-    display: grid;
-    grid-template-columns: 20px 1fr 35px;
-    gap: 9px;
-    align-items: center;
-    margin: 9px 0;
-    font-size: 12px;
-    color: #aab5d0;
-}
-
-.mini-bar {
-    height: 8px;
-    border-radius: 10px;
-    background: #26314d;
-    overflow: hidden;
-}
-
-.mini-fill {
-    height: 100%;
-    width: 0;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #785be2, #b49cff);
-    transition: width .5s;
-}
-
-.mini-fill.cyan-fill {
-    background: linear-gradient(90deg, #299cae, #68eaf1);
-}
-
-.circuit {
-    margin-top: 15px;
-    background: #080d1c;
-    color: #8ee9e2;
-    border-radius: 12px;
-    padding: 17px;
-    overflow-x: auto;
-    white-space: pre;
-    font: 12px Consolas, monospace;
-    min-height: 70px;
-}
-
-.learn-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 18px;
-}
-
-.learn-card {
-    padding: 18px;
-    border-radius: 13px;
-    background: #1a2541;
-}
-
-.learn-card h3 {
-    color: #b8a6ff;
-    font-size: 15px;
-    margin-bottom: 9px;
-}
-
-.learn-card p {
-    font-size: 13px;
-}
-
-.footer {
-    text-align: center;
-    color: #75809e;
-    font-size: 12px;
-    margin-top: 40px;
-}
-
-@media(max-width: 700px) {
-    header {
-        padding: 18px 5%;
-    }
-
-    .container {
-        padding-top: 30px;
-    }
-
-    .game-panel {
-        padding: 18px;
-    }
-
-    .game-stage {
-        min-height: 330px;
-        gap: 25px;
-        padding-top: 35px;
-    }
-
-    .dice-space {
-        width: 100px;
-        height: 100px;
-        transform: scale(.78);
-        transform-origin: top center;
-        margin-bottom: -25px;
-    }
-
-    .dice-label {
-        margin-bottom: 22px;
-    }
-
-    .dice-number {
-        margin-top: 25px;
-    }
-
-    .die-face {
-        border-radius: 16px;
-    }
-
-    .pip {
-        width: 14px;
-        height: 14px;
-    }
-
-    .results {
-        grid-template-columns: 1fr;
-    }
-
-    .controls {
-        grid-template-columns: 1fr;
-    }
-
-    .roll-button {
-        width: 100%;
-    }
-
-    .distribution, .learn-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .energy {
-        left: 25%;
-        right: 25%;
-    }
+@media(max-width:700px){
+    header{padding:18px 5%}
+    .container{padding-top:30px}
+    .game-panel{padding:18px}
+    .game-stage{min-height:330px;gap:25px;padding-top:35px}
+    .dice-space{width:100px;height:100px;transform:scale(.78);transform-origin:top center;margin-bottom:-25px}
+    .dice-label{margin-bottom:22px}
+    .dice-number{margin-top:25px}
+    .die-face{border-radius:16px}
+    .pip{width:14px;height:14px}
+    .results{grid-template-columns:1fr}
+    .controls{grid-template-columns:1fr}
+    .roll-button{width:100%}
+    .distribution,.learn-grid{grid-template-columns:1fr}
+    .energy{left:25%;right:25%}
 }
 </style>
 </head>
@@ -707,15 +498,25 @@ select {
 
 <header>
     <div class="logo">✦ QubitQuest</div>
-    <a href="index.html" class="back">← Back to Home</a>
+
+    <div class="header-right">
+        <select class="language-select" id="languageSelect" aria-label="Choose language">
+            <option value="en">🇬🇧 English</option>
+            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="te">🇮🇳 తెలుగు</option>
+        </select>
+
+        <a href="index.html" class="back" data-i18n="back">← Back to Home</a>
+    </div>
 </header>
 
 <main class="container">
 
-    <div class="tag">QubitQuest Arcade · Game 02</div>
-    <h1>🎲 Linked Dice</h1>
+    <div class="tag" data-i18n="tag">QubitQuest Arcade · Game 02</div>
+    <h1 data-i18n="title">🎲 Linked Dice</h1>
 
-    <p class="subtitle">
+    <p class="subtitle" data-i18n="subtitle">
         Two dice. Two quantum experiments. One fascinating discovery.
         Roll independently or connect the dice through quantum
         entanglement and explore how their outcomes are related.
@@ -724,15 +525,13 @@ select {
     <section class="game-panel">
 
         <div class="mode-row">
-            <button class="mode-button active"
-                id="independentMode"
-                onclick="setMode('independent')">
+            <button class="mode-button active" id="independentMode"
+                onclick="setMode('independent')" data-i18n="independentMode">
                 🎲 Independent Dice
             </button>
 
-            <button class="mode-button"
-                id="entangledMode"
-                onclick="setMode('entangled')">
+            <button class="mode-button" id="entangledMode"
+                onclick="setMode('entangled')" data-i18n="entangledMode">
                 ⚡ Entangled Dice
             </button>
         </div>
@@ -742,7 +541,7 @@ select {
             <div class="energy" id="energy"></div>
 
             <div class="dice-side">
-                <div class="dice-label purple">DICE 01</div>
+                <div class="dice-label purple" data-i18n="diceOne">DICE 01</div>
 
                 <div class="dice-space">
                     <div class="cube-glow"></div>
@@ -762,7 +561,7 @@ select {
             </div>
 
             <div class="dice-side">
-                <div class="dice-label cyan">DICE 02</div>
+                <div class="dice-label cyan" data-i18n="diceTwo">DICE 02</div>
 
                 <div class="dice-space">
                     <div class="cube-glow"></div>
@@ -781,7 +580,7 @@ select {
                 <div class="dice-number" id="numberTwo">READY</div>
             </div>
 
-            <div class="connection-label" id="connectionLabel">
+            <div class="connection-label" id="connectionLabel" data-i18n="independentLabel">
                 TWO INDEPENDENT QUANTUM DICE
             </div>
 
@@ -790,24 +589,27 @@ select {
         <div class="controls">
 
             <div class="shots-control">
-                <label for="shots">Number of quantum measurements</label>
+                <label for="shots" data-i18n="measurementsLabel">
+                    Number of quantum measurements
+                </label>
+
                 <select id="shots">
-                    <option value="256">256 measurements</option>
-                    <option value="512">512 measurements</option>
-                    <option value="1024" selected>1024 measurements</option>
-                    <option value="2048">2048 measurements</option>
-                    <option value="4096">4096 measurements</option>
+                    <option value="256" data-i18n="shots256">256 measurements</option>
+                    <option value="512" data-i18n="shots512">512 measurements</option>
+                    <option value="1024" selected data-i18n="shots1024">1024 measurements</option>
+                    <option value="2048" data-i18n="shots2048">2048 measurements</option>
+                    <option value="4096" data-i18n="shots4096">4096 measurements</option>
                 </select>
             </div>
 
             <button class="roll-button" id="rollButton"
-                onclick="rollDice()">
+                onclick="rollDice()" data-i18n="rollButton">
                 ✨ Roll Quantum Dice
             </button>
 
         </div>
 
-        <div class="status" id="status">
+        <div class="status" id="status" data-i18n="readyStatus">
             Choose a game mode and roll your dice to begin!
         </div>
 
@@ -816,61 +618,59 @@ select {
     <section class="results">
 
         <div class="result-card">
-            <small>MEASUREMENTS</small>
+            <small data-i18n="measurements">MEASUREMENTS</small>
             <strong id="totalShots">—</strong>
-            <p>Accepted valid rolls</p>
+            <p data-i18n="acceptedRolls">Accepted valid rolls</p>
         </div>
 
         <div class="result-card">
-            <small>MATCHING ROLLS</small>
-            <strong id="matchingRolls">—</strong>
-            <p>Both dice show the same number</p>
+            <small data-i18n="matchingRolls">MATCHING ROLLS</small>
+            <strong id="matchingRollsValue">—</strong>
+            <p data-i18n="sameNumber">Both dice show the same number</p>
         </div>
 
         <div class="result-card">
-            <small>CORRELATION</small>
+            <small data-i18n="correlation">CORRELATION</small>
             <strong id="matchingPercent">—</strong>
-            <p>Percentage of matching outcomes</p>
+            <p data-i18n="matchingOutcomes">Percentage of matching outcomes</p>
         </div>
 
     </section>
 
     <section class="section">
 
-        <h2>📊 Dice Measurement Distribution</h2>
+        <h2 data-i18n="distributionTitle">📊 Dice Measurement Distribution</h2>
 
-        <p>
+        <p data-i18n="distributionDescription">
             Explore how frequently each face appeared in the quantum
             measurements. The results come directly from your Qiskit
             simulator.
         </p>
 
         <div class="distribution">
-
             <div>
-                <h3>FIRST DICE</h3>
+                <h3 data-i18n="firstDice">FIRST DICE</h3>
                 <div id="firstDistribution"></div>
             </div>
 
             <div class="cyan-title">
-                <h3>SECOND DICE</h3>
+                <h3 data-i18n="secondDice">SECOND DICE</h3>
                 <div id="secondDistribution"></div>
             </div>
-
         </div>
 
     </section>
 
     <section class="section">
 
-        <h2>⚛️ Quantum Circuit</h2>
+        <h2 data-i18n="circuitTitle">⚛️ Quantum Circuit</h2>
 
-        <p>
+        <p data-i18n="circuitDescription">
             The circuit below shows the actual quantum operations
             used for your experiment.
         </p>
 
-        <div class="circuit" id="circuit">
+        <div class="circuit" id="circuit" data-i18n="circuitPlaceholder">
             Your Qiskit circuit will appear here after your first roll.
         </div>
 
@@ -878,13 +678,13 @@ select {
 
     <section class="section">
 
-        <h2>🧠 Discover the Quantum Secret</h2>
+        <h2 data-i18n="learnTitle">🧠 Discover the Quantum Secret</h2>
 
         <div class="learn-grid">
 
             <div class="learn-card">
-                <h3>🎲 Independent Dice</h3>
-                <p>
+                <h3 data-i18n="independentLearnTitle">🎲 Independent Dice</h3>
+                <p data-i18n="independentLearn">
                     Each die uses its own three qubits. The outcomes
                     are independent. Matching numbers can happen,
                     but only by chance.
@@ -892,8 +692,8 @@ select {
             </div>
 
             <div class="learn-card">
-                <h3>⚡ Entangled Dice</h3>
-                <p>
+                <h3 data-i18n="entangledLearnTitle">⚡ Entangled Dice</h3>
+                <p data-i18n="entangledLearn">
                     Three Bell pairs connect the corresponding
                     qubits of the two dice. Their measurement
                     outcomes are correlated, so the dice match.
@@ -902,29 +702,341 @@ select {
 
         </div>
 
-        <p id="learningExplanation" style="margin-top:20px;">
+        <p id="learningExplanation" style="margin-top:20px;" data-i18n="initialLearning">
             Start with Independent Dice, then switch to Entangled
             Dice and compare the results.
         </p>
 
     </section>
 
-    <div class="footer">
+    <div class="footer" data-i18n="footer">
         QubitQuest · Explore. Experiment. Understand.
     </div>
 
 </main>
 
 <script>
+"use strict";
+
+// =====================================
+// TRANSLATIONS
+// =====================================
+
+const translations = {
+
+en: {
+    back:"← Back to Home",
+    tag:"QubitQuest Arcade · Game 02",
+    title:"🎲 Linked Dice",
+    subtitle:"Two dice. Two quantum experiments. One fascinating discovery. Roll independently or connect the dice through quantum entanglement and explore how their outcomes are related.",
+    independentMode:"🎲 Independent Dice",
+    entangledMode:"⚡ Entangled Dice",
+    diceOne:"DICE 01",
+    diceTwo:"DICE 02",
+    ready:"READY",
+    result:"RESULT: ",
+    independentLabel:"TWO INDEPENDENT QUANTUM DICE",
+    entangledLabel:"QUANTUM ENTANGLEMENT ESTABLISHED",
+    measurementsLabel:"Number of quantum measurements",
+    shots256:"256 measurements",
+    shots512:"512 measurements",
+    shots1024:"1024 measurements",
+    shots2048:"2048 measurements",
+    shots4096:"4096 measurements",
+    rollButton:"✨ Roll Quantum Dice",
+    rollingButton:"⏳ Rolling Quantum Dice...",
+    readyStatus:"Choose a game mode and roll your dice to begin!",
+    building:"Building your quantum circuit and running Qiskit...",
+    measurements:"MEASUREMENTS",
+    acceptedRolls:"Accepted valid rolls",
+    matchingRolls:"MATCHING ROLLS",
+    sameNumber:"Both dice show the same number",
+    correlation:"CORRELATION",
+    matchingOutcomes:"Percentage of matching outcomes",
+    distributionTitle:"📊 Dice Measurement Distribution",
+    distributionDescription:"Explore how frequently each face appeared in the quantum measurements. The results come directly from your Qiskit simulator.",
+    firstDice:"FIRST DICE",
+    secondDice:"SECOND DICE",
+    circuitTitle:"⚛️ Quantum Circuit",
+    circuitDescription:"The circuit below shows the actual quantum operations used for your experiment.",
+    circuitPlaceholder:"Your Qiskit circuit will appear here after your first roll.",
+    learnTitle:"🧠 Discover the Quantum Secret",
+    independentLearnTitle:"🎲 Independent Dice",
+    independentLearn:"Each die uses its own three qubits. The outcomes are independent. Matching numbers can happen, but only by chance.",
+    entangledLearnTitle:"⚡ Entangled Dice",
+    entangledLearn:"Three Bell pairs connect the corresponding qubits of the two dice. Their measurement outcomes are correlated, so the dice match.",
+    initialLearning:"Start with Independent Dice, then switch to Entangled Dice and compare the results.",
+    independentSelected:"Independent mode selected. Ready for two separate rolls!",
+    entangledSelected:"Entangled mode selected. Ready to connect your dice!",
+    independentExplanation:"The dice use independent qubits. Each has six equally likely outcomes. Matching numbers can happen by chance.",
+    entangledExplanation:"Three pairs of qubits are connected using CNOT gates. Their measurement outcomes are correlated, so both dice show the same valid face.",
+    independentSuccess:"✓ Independent quantum experiment completed! Your dice show {first} and {second}. Matching results occur by chance.",
+    entangledSuccess:"✓ Quantum entanglement experiment completed! Your dice show {first} and {second}. All accepted rolls were matching.",
+    error:"Experiment error: {error}. Please check that your Flask backend is running.",
+    invalidResults:"No valid dice outcomes were returned.",
+    invalidFace:"The simulator returned an invalid dice result.",
+    validRolls:"Accepted valid rolls",
+    counts:"counts",
+    footer:"QubitQuest · Explore. Experiment. Understand."
+},
+
+kn: {
+    back:"← ಮುಖ್ಯ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+    tag:"QubitQuest ಆರ್ಕೇಡ್ · ಆಟ 02",
+    title:"🎲 ಸಂಪರ್ಕಿತ ದಾಳಗಳು",
+    subtitle:"ಎರಡು ದಾಳಗಳು. ಎರಡು ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗಗಳು. ಒಂದು ಅದ್ಭುತ ಆವಿಷ್ಕಾರ. ಪ್ರತ್ಯೇಕವಾಗಿ ದಾಳಗಳನ್ನು ಉರುಳಿಸಿ ಅಥವಾ Quantum Entanglement ಮೂಲಕ ಅವುಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ಅವುಗಳ ಫಲಿತಾಂಶಗಳ ಸಂಬಂಧವನ್ನು ಅನ್ವೇಷಿಸಿ.",
+    independentMode:"🎲 ಸ್ವತಂತ್ರ ದಾಳಗಳು",
+    entangledMode:"⚡ ಎಂಟ್ಯಾಂಗಲ್ ಮಾಡಿದ ದಾಳಗಳು",
+    diceOne:"ದಾಳ 01",
+    diceTwo:"ದಾಳ 02",
+    ready:"ಸಿದ್ಧ",
+    result:"ಫಲಿತಾಂಶ: ",
+    independentLabel:"ಎರಡು ಸ್ವತಂತ್ರ ಕ್ವಾಂಟಮ್ ದಾಳಗಳು",
+    entangledLabel:"ಕ್ವಾಂಟಮ್ ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಸ್ಥಾಪಿಸಲಾಗಿದೆ",
+    measurementsLabel:"ಕ್ವಾಂಟಮ್ ಮಾಪನಗಳ ಸಂಖ್ಯೆ",
+    shots256:"256 ಮಾಪನಗಳು",
+    shots512:"512 ಮಾಪನಗಳು",
+    shots1024:"1024 ಮಾಪನಗಳು",
+    shots2048:"2048 ಮಾಪನಗಳು",
+    shots4096:"4096 ಮಾಪನಗಳು",
+    rollButton:"✨ ಕ್ವಾಂಟಮ್ ದಾಳಗಳನ್ನು ಉರುಳಿಸಿ",
+    rollingButton:"⏳ ಕ್ವಾಂಟಮ್ ದಾಳಗಳು ಉರುಳುತ್ತಿವೆ...",
+    readyStatus:"ಆಟದ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು ದಾಳಗಳನ್ನು ಉರುಳಿಸಿ!",
+    building:"ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್ ನಿರ್ಮಿಸಿ Qiskit ಪ್ರಯೋಗ ನಡೆಸಲಾಗುತ್ತಿದೆ...",
+    measurements:"ಮಾಪನಗಳು",
+    acceptedRolls:"ಸ್ವೀಕರಿಸಿದ ಮಾನ್ಯ ಫಲಿತಾಂಶಗಳು",
+    matchingRolls:"ಹೊಂದಾಣಿಕೆಯ ಫಲಿತಾಂಶಗಳು",
+    sameNumber:"ಎರಡೂ ದಾಳಗಳಲ್ಲಿ ಒಂದೇ ಸಂಖ್ಯೆ ಕಾಣಿಸುತ್ತದೆ",
+    correlation:"ಸಹಸಂಬಂಧ",
+    matchingOutcomes:"ಹೊಂದಾಣಿಕೆಯ ಫಲಿತಾಂಶಗಳ ಶೇಕಡಾವಾರು",
+    distributionTitle:"📊 ದಾಳಗಳ ಮಾಪನ ವಿತರಣೆ",
+    distributionDescription:"ಕ್ವಾಂಟಮ್ ಮಾಪನಗಳಲ್ಲಿ ಪ್ರತಿ ಮುಖ ಎಷ್ಟು ಬಾರಿ ಕಾಣಿಸಿಕೊಂಡಿದೆ ಎಂಬುದನ್ನು ಅನ್ವೇಷಿಸಿ. ಫಲಿತಾಂಶಗಳು ನೇರವಾಗಿ Qiskit ಸಿಮ್ಯುಲೇಟರ್‌ನಿಂದ ಬರುತ್ತವೆ.",
+    firstDice:"ಮೊದಲ ದಾಳ",
+    secondDice:"ಎರಡನೇ ದಾಳ",
+    circuitTitle:"⚛️ ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್",
+    circuitDescription:"ಕೆಳಗಿನ ಸರ್ಕ್ಯೂಟ್ ನಿಮ್ಮ ಪ್ರಯೋಗದಲ್ಲಿ ಬಳಸಿದ ನೈಜ ಕ್ವಾಂಟಮ್ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.",
+    circuitPlaceholder:"ನಿಮ್ಮ ಮೊದಲ ಉರುಳಿಸುವಿಕೆಯ ನಂತರ Qiskit ಸರ್ಕ್ಯೂಟ್ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.",
+    learnTitle:"🧠 ಕ್ವಾಂಟಮ್ ರಹಸ್ಯವನ್ನು ತಿಳಿಯಿರಿ",
+    independentLearnTitle:"🎲 ಸ್ವತಂತ್ರ ದಾಳಗಳು",
+    independentLearn:"ಪ್ರತಿಯೊಂದು ದಾಳವು ತನ್ನದೇ ಆದ ಮೂರು Qubits ಅನ್ನು ಬಳಸುತ್ತದೆ. ಫಲಿತಾಂಶಗಳು ಸ್ವತಂತ್ರವಾಗಿರುತ್ತವೆ. ಒಂದೇ ಸಂಖ್ಯೆಗಳು ಬರಬಹುದು, ಆದರೆ ಅದು ಕೇವಲ ಆಕಸ್ಮಿಕವಾಗಿ.",
+    entangledLearnTitle:"⚡ ಎಂಟ್ಯಾಂಗಲ್ ಮಾಡಿದ ದಾಳಗಳು",
+    entangledLearn:"ಮೂರು Bell ಜೋಡಿಗಳು ಎರಡು ದಾಳಗಳ ಸಂಬಂಧಿತ Qubits ಗಳನ್ನು ಸಂಪರ್ಕಿಸುತ್ತವೆ. ಅವುಗಳ ಮಾಪನ ಫಲಿತಾಂಶಗಳು ಪರಸ್ಪರ ಸಂಬಂಧ ಹೊಂದಿರುವುದರಿಂದ ದಾಳಗಳಲ್ಲಿ ಒಂದೇ ಸಂಖ್ಯೆ ಬರುತ್ತದೆ.",
+    initialLearning:"ಮೊದಲು ಸ್ವತಂತ್ರ ದಾಳಗಳನ್ನು ಪ್ರಯತ್ನಿಸಿ. ನಂತರ ಎಂಟ್ಯಾಂಗಲ್ ಮಾಡಿದ ದಾಳಗಳಿಗೆ ಬದಲಾಯಿಸಿ ಫಲಿತಾಂಶಗಳನ್ನು ಹೋಲಿಸಿ.",
+    independentSelected:"ಸ್ವತಂತ್ರ ವಿಧಾನ ಆಯ್ಕೆಯಾಗಿದೆ. ಎರಡು ಪ್ರತ್ಯೇಕ ಉರುಳಿಸುವಿಕೆಗಳಿಗೆ ಸಿದ್ಧ!",
+    entangledSelected:"ಎಂಟ್ಯಾಂಗಲ್ ವಿಧಾನ ಆಯ್ಕೆಯಾಗಿದೆ. ನಿಮ್ಮ ದಾಳಗಳನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಿದ್ಧ!",
+    independentExplanation:"ದಾಳಗಳು ಸ್ವತಂತ್ರ Qubits ಅನ್ನು ಬಳಸುತ್ತವೆ. ಪ್ರತಿಯೊಂದಕ್ಕೂ ಆರು ಸಮಾನ ಸಂಭವನೀಯ ಫಲಿತಾಂಶಗಳಿವೆ. ಒಂದೇ ಸಂಖ್ಯೆಗಳು ಆಕಸ್ಮಿಕವಾಗಿ ಬರಬಹುದು.",
+    entangledExplanation:"ಮೂರು ಜೋಡಿ Qubits ಗಳನ್ನು CNOT ಗೇಟ್‌ಗಳ ಮೂಲಕ ಸಂಪರ್ಕಿಸಲಾಗಿದೆ. ಅವುಗಳ ಮಾಪನ ಫಲಿತಾಂಶಗಳು ಪರಸ್ಪರ ಸಂಬಂಧ ಹೊಂದಿವೆ, ಆದ್ದರಿಂದ ಎರಡೂ ದಾಳಗಳಲ್ಲಿ ಒಂದೇ ಮಾನ್ಯ ಸಂಖ್ಯೆ ಬರುತ್ತದೆ.",
+    independentSuccess:"✓ ಸ್ವತಂತ್ರ ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗ ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ದಾಳಗಳಲ್ಲಿ {first} ಮತ್ತು {second} ಬಂದಿದೆ. ಹೊಂದಾಣಿಕೆಯ ಫಲಿತಾಂಶಗಳು ಆಕಸ್ಮಿಕವಾಗಿ ಸಂಭವಿಸುತ್ತವೆ.",
+    entangledSuccess:"✓ ಕ್ವಾಂಟಮ್ ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಪ್ರಯೋಗ ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ದಾಳಗಳಲ್ಲಿ {first} ಮತ್ತು {second} ಬಂದಿದೆ. ಸ್ವೀಕರಿಸಿದ ಎಲ್ಲಾ ಫಲಿತಾಂಶಗಳು ಹೊಂದಾಣಿಕೆಯಾಗಿವೆ.",
+    error:"ಪ್ರಯೋಗದ ದೋಷ: {error}. ನಿಮ್ಮ Flask backend ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
+    invalidResults:"ಮಾನ್ಯ ದಾಳ ಫಲಿತಾಂಶಗಳು ದೊರೆಯಲಿಲ್ಲ.",
+    invalidFace:"ಸಿಮ್ಯುಲೇಟರ್ ಅಮಾನ್ಯ ದಾಳ ಫಲಿತಾಂಶವನ್ನು ನೀಡಿದೆ.",
+    validRolls:"ಸ್ವೀಕರಿಸಿದ ಮಾನ್ಯ ಫಲಿತಾಂಶಗಳು",
+    counts:"ಎಣಿಕೆಗಳು",
+    footer:"QubitQuest · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ."
+},
+
+hi: {
+    back:"← होम पेज पर वापस जाएँ",
+    tag:"QubitQuest आर्केड · गेम 02",
+    title:"🎲 लिंक्ड डाइस",
+    subtitle:"दो पासे। दो क्वांटम प्रयोग। एक अद्भुत खोज। पासों को स्वतंत्र रूप से फेंकें या Quantum Entanglement के माध्यम से जोड़ें और जानें कि उनके परिणाम आपस में कैसे संबंधित हैं।",
+    independentMode:"🎲 स्वतंत्र पासे",
+    entangledMode:"⚡ एंटैंगल्ड पासे",
+    diceOne:"पासा 01",
+    diceTwo:"पासा 02",
+    ready:"तैयार",
+    result:"परिणाम: ",
+    independentLabel:"दो स्वतंत्र क्वांटम पासे",
+    entangledLabel:"क्वांटम एंटैंगलमेंट स्थापित",
+    measurementsLabel:"क्वांटम मापों की संख्या",
+    shots256:"256 माप",
+    shots512:"512 माप",
+    shots1024:"1024 माप",
+    shots2048:"2048 माप",
+    shots4096:"4096 माप",
+    rollButton:"✨ क्वांटम पासे फेंकें",
+    rollingButton:"⏳ क्वांटम पासे फेंके जा रहे हैं...",
+    readyStatus:"शुरू करने के लिए गेम मोड चुनें और पासे फेंकें!",
+    building:"क्वांटम सर्किट बनाया जा रहा है और Qiskit चल रहा है...",
+    measurements:"माप",
+    acceptedRolls:"स्वीकृत वैध परिणाम",
+    matchingRolls:"मिलते-जुलते परिणाम",
+    sameNumber:"दोनों पासों पर एक ही संख्या आती है",
+    correlation:"सहसंबंध",
+    matchingOutcomes:"मेल खाने वाले परिणामों का प्रतिशत",
+    distributionTitle:"📊 पासों के मापन का वितरण",
+    distributionDescription:"जानें कि क्वांटम मापों में प्रत्येक अंक कितनी बार आया। परिणाम सीधे आपके Qiskit सिम्युलेटर से प्राप्त होते हैं।",
+    firstDice:"पहला पासा",
+    secondDice:"दूसरा पासा",
+    circuitTitle:"⚛️ क्वांटम सर्किट",
+    circuitDescription:"नीचे दिया गया सर्किट आपके प्रयोग में उपयोग किए गए वास्तविक क्वांटम ऑपरेशन दिखाता है।",
+    circuitPlaceholder:"आपका पहला रोल पूरा होने के बाद Qiskit सर्किट यहाँ दिखाई देगा।",
+    learnTitle:"🧠 क्वांटम रहस्य जानें",
+    independentLearnTitle:"🎲 स्वतंत्र पासे",
+    independentLearn:"प्रत्येक पासा अपने तीन Qubits का उपयोग करता है। परिणाम स्वतंत्र होते हैं। एक जैसे अंक आ सकते हैं, लेकिन केवल संयोग से।",
+    entangledLearnTitle:"⚡ एंटैंगल्ड पासे",
+    entangledLearn:"तीन Bell जोड़े दोनों पासों के संबंधित Qubits को जोड़ते हैं। उनके मापन परिणाम आपस में संबंधित होते हैं, इसलिए दोनों पासों पर एक ही अंक आता है।",
+    initialLearning:"पहले स्वतंत्र पासों से शुरुआत करें। फिर एंटैंगल्ड पासों पर जाएँ और परिणामों की तुलना करें।",
+    independentSelected:"स्वतंत्र मोड चुना गया। दो अलग-अलग रोल के लिए तैयार!",
+    entangledSelected:"एंटैंगल्ड मोड चुना गया। अपने पासों को जोड़ने के लिए तैयार!",
+    independentExplanation:"पासे स्वतंत्र Qubits का उपयोग करते हैं। प्रत्येक के छह समान रूप से संभावित परिणाम होते हैं। एक जैसे अंक संयोग से आ सकते हैं।",
+    entangledExplanation:"तीन जोड़ी Qubits को CNOT गेट्स से जोड़ा गया है। उनके मापन परिणाम संबंधित होते हैं, इसलिए दोनों पासों पर समान वैध अंक आता है।",
+    independentSuccess:"✓ स्वतंत्र क्वांटम प्रयोग पूरा हुआ! आपके पासों पर {first} और {second} आया। समान परिणाम संयोग से आते हैं।",
+    entangledSuccess:"✓ क्वांटम एंटैंगलमेंट प्रयोग पूरा हुआ! आपके पासों पर {first} और {second} आया। सभी स्वीकृत परिणाम एक जैसे थे।",
+    error:"प्रयोग में त्रुटि: {error}। कृपया जाँचें कि आपका Flask backend चल रहा है या नहीं।",
+    invalidResults:"कोई वैध पासा परिणाम प्राप्त नहीं हुआ।",
+    invalidFace:"सिम्युलेटर ने पासे का अमान्य परिणाम दिया।",
+    validRolls:"स्वीकृत वैध परिणाम",
+    counts:"गणनाएँ",
+    footer:"QubitQuest · खोजें। प्रयोग करें। समझें।"
+},
+
+te: {
+    back:"← హోమ్ పేజీకి తిరిగి వెళ్ళండి",
+    tag:"QubitQuest ఆర్కేడ్ · గేమ్ 02",
+    title:"🎲 లింక్డ్ డైస్",
+    subtitle:"రెండు పాచికలు. రెండు క్వాంటమ్ ప్రయోగాలు. ఒక అద్భుతమైన ఆవిష్కరణ. పాచికలను విడివిడిగా వేయండి లేదా Quantum Entanglement ద్వారా అనుసంధానించి వాటి ఫలితాల మధ్య సంబంధాన్ని అన్వేషించండి.",
+    independentMode:"🎲 స్వతంత్ర పాచికలు",
+    entangledMode:"⚡ ఎంటాంగిల్డ్ పాచికలు",
+    diceOne:"పాచిక 01",
+    diceTwo:"పాచిక 02",
+    ready:"సిద్ధం",
+    result:"ఫలితం: ",
+    independentLabel:"రెండు స్వతంత్ర క్వాంటమ్ పాచికలు",
+    entangledLabel:"క్వాంటమ్ ఎంటాంగిల్‌మెంట్ ఏర్పడింది",
+    measurementsLabel:"క్వాంటమ్ కొలతల సంఖ్య",
+    shots256:"256 కొలతలు",
+    shots512:"512 కొలతలు",
+    shots1024:"1024 కొలతలు",
+    shots2048:"2048 కొలతలు",
+    shots4096:"4096 కొలతలు",
+    rollButton:"✨ క్వాంటమ్ పాచికలను వేయండి",
+    rollingButton:"⏳ క్వాంటమ్ పాచికలు వేయబడుతున్నాయి...",
+    readyStatus:"ప్రారంభించడానికి గేమ్ మోడ్ ఎంచుకుని పాచికలను వేయండి!",
+    building:"క్వాంటమ్ సర్క్యూట్ నిర్మించి Qiskit ప్రయోగం నడుస్తోంది...",
+    measurements:"కొలతలు",
+    acceptedRolls:"అంగీకరించిన సరైన ఫలితాలు",
+    matchingRolls:"సరిపోలిన ఫలితాలు",
+    sameNumber:"రెండు పాచికలపై ఒకే సంఖ్య కనిపిస్తుంది",
+    correlation:"సహసంబంధం",
+    matchingOutcomes:"సరిపోలిన ఫలితాల శాతం",
+    distributionTitle:"📊 పాచికల కొలతల పంపిణీ",
+    distributionDescription:"క్వాంటమ్ కొలతల్లో ప్రతి ముఖం ఎన్నిసార్లు వచ్చిందో అన్వేషించండి. ఫలితాలు నేరుగా మీ Qiskit సిమ్యులేటర్ నుండి వస్తాయి.",
+    firstDice:"మొదటి పాచిక",
+    secondDice:"రెండవ పాచిక",
+    circuitTitle:"⚛️ క్వాంటమ్ సర్క్యూట్",
+    circuitDescription:"క్రింది సర్క్యూట్ మీ ప్రయోగంలో ఉపయోగించిన నిజమైన క్వాంటమ్ చర్యలను చూపిస్తుంది.",
+    circuitPlaceholder:"మీ మొదటి రోల్ తర్వాత Qiskit సర్క్యూట్ ఇక్కడ కనిపిస్తుంది.",
+    learnTitle:"🧠 క్వాంటమ్ రహస్యాన్ని తెలుసుకోండి",
+    independentLearnTitle:"🎲 స్వతంత్ర పాచికలు",
+    independentLearn:"ప్రతి పాచిక తన సొంత మూడు Qubits ను ఉపయోగిస్తుంది. ఫలితాలు స్వతంత్రంగా ఉంటాయి. ఒకే సంఖ్యలు రావచ్చు, కానీ అది యాదృచ్ఛికంగా మాత్రమే.",
+    entangledLearnTitle:"⚡ ఎంటాంగిల్డ్ పాచికలు",
+    entangledLearn:"మూడు Bell జంటలు రెండు పాచికల సంబంధిత Qubits ను అనుసంధానిస్తాయి. వాటి కొలత ఫలితాలు పరస్పరం సంబంధం కలిగి ఉంటాయి, కాబట్టి రెండు పాచికలపై ఒకే సంఖ్య వస్తుంది.",
+    initialLearning:"మొదట స్వతంత్ర పాచికలతో ప్రారంభించండి. తరువాత ఎంటాంగిల్డ్ పాచికలకు మారి ఫలితాలను పోల్చండి.",
+    independentSelected:"స్వతంత్ర మోడ్ ఎంచుకోబడింది. రెండు వేర్వేరు రోల్స్‌కు సిద్ధం!",
+    entangledSelected:"ఎంటాంగిల్డ్ మోడ్ ఎంచుకోబడింది. మీ పాచికలను అనుసంధానించడానికి సిద్ధం!",
+    independentExplanation:"పాచికలు స్వతంత్ర Qubits ను ఉపయోగిస్తాయి. ప్రతి పాచికకు సమాన అవకాశంతో ఆరు ఫలితాలు ఉంటాయి. ఒకే సంఖ్యలు యాదృచ్ఛికంగా రావచ్చు.",
+    entangledExplanation:"మూడు జతల Qubits CNOT గేట్ల ద్వారా అనుసంధానించబడ్డాయి. వాటి కొలత ఫలితాలు పరస్పరం సంబంధం కలిగి ఉంటాయి, కాబట్టి రెండు పాచికలపై ఒకే సరైన సంఖ్య వస్తుంది.",
+    independentSuccess:"✓ స్వతంత్ర క్వాంటమ్ ప్రయోగం పూర్తయింది! మీ పాచికలపై {first} మరియు {second} వచ్చాయి. సరిపోలిన ఫలితాలు యాదృచ్ఛికంగా వస్తాయి.",
+    entangledSuccess:"✓ క్వాంటమ్ ఎంటాంగిల్‌మెంట్ ప్రయోగం పూర్తయింది! మీ పాచికలపై {first} మరియు {second} వచ్చాయి. అంగీకరించిన అన్ని ఫలితాలు సరిపోలాయి.",
+    error:"ప్రయోగంలో లోపం: {error}. మీ Flask backend నడుస్తోందో లేదో తనిఖీ చేయండి.",
+    invalidResults:"సరైన పాచికల ఫలితాలు తిరిగి రాలేదు.",
+    invalidFace:"సిమ్యులేటర్ చెల్లని పాచిక ఫలితాన్ని ఇచ్చింది.",
+    validRolls:"అంగీకరించిన సరైన ఫలితాలు",
+    counts:"లెక్కలు",
+    footer:"QubitQuest · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి."
+}
+
+};
+
+// =====================================
+// LANGUAGE MANAGEMENT
+// =====================================
+
+const LANGUAGE_KEY = "qubitquestLanguage";
+const languageSelect = document.getElementById("languageSelect");
+
+let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || "en";
+
+if (!translations[currentLanguage]) {
+    currentLanguage = "en";
+}
+
 let currentMode = "independent";
 let isRolling = false;
+let lastResult = null;
 
-/* =====================================
-   FIX: CREATE DOTS ON ALL SIX FACES
-===================================== */
+function t(key, values = {}) {
+    let message =
+        translations[currentLanguage][key] ||
+        translations.en[key] ||
+        key;
+
+    Object.keys(values).forEach(function(placeholder) {
+        message = message.replaceAll(
+            "{" + placeholder + "}",
+            String(values[placeholder])
+        );
+    });
+
+    return message;
+}
+
+// =====================================
+// APPLY TRANSLATIONS
+// =====================================
+
+function applyLanguage() {
+
+    document.documentElement.lang = currentLanguage;
+    languageSelect.value = currentLanguage;
+
+    document.querySelectorAll("[data-i18n]").forEach(function(element) {
+
+        const key = element.getAttribute("data-i18n");
+
+        if (translations[currentLanguage][key] !== undefined) {
+            element.textContent = t(key);
+        }
+    });
+
+    updateModeDisplay();
+
+    if (lastResult) {
+        showExperimentResult(lastResult);
+    }
+
+    const button = document.getElementById("rollButton");
+
+    button.textContent = isRolling
+        ? t("rollingButton")
+        : t("rollButton");
+}
+
+languageSelect.addEventListener("change", function() {
+
+    const selectedLanguage = this.value;
+
+    if (!translations[selectedLanguage]) {
+        return;
+    }
+
+    currentLanguage = selectedLanguage;
+
+    localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+
+    applyLanguage();
+});
+
+// =====================================
+// DICE FACE CREATION
+// =====================================
 
 function buildDiceFaces() {
-    document.querySelectorAll(".die-face").forEach(face => {
+
+    document.querySelectorAll(".die-face").forEach(function(face) {
+
         face.innerHTML = "";
 
         for (let i = 0; i < 9; i++) {
@@ -937,81 +1049,93 @@ function buildDiceFaces() {
 
 buildDiceFaces();
 
-/*
-   Face orientation:
-   1 = front
-   2 = top
-   3 = right
-   4 = left
-   5 = bottom
-   6 = back
-*/
-
 const faceRotations = {
-    1: "rotateX(0deg) rotateY(0deg)",
-    2: "rotateX(-90deg) rotateY(0deg)",
-    3: "rotateX(0deg) rotateY(-90deg)",
-    4: "rotateX(0deg) rotateY(90deg)",
-    5: "rotateX(90deg) rotateY(0deg)",
-    6: "rotateX(0deg) rotateY(180deg)"
+    1:"rotateX(0deg) rotateY(0deg)",
+    2:"rotateX(-90deg) rotateY(0deg)",
+    3:"rotateX(0deg) rotateY(-90deg)",
+    4:"rotateX(0deg) rotateY(90deg)",
+    5:"rotateX(90deg) rotateY(0deg)",
+    6:"rotateX(0deg) rotateY(180deg)"
 };
 
 function setCubeFace(elementId, face) {
+
     const cube = document.getElementById(elementId);
 
     cube.classList.remove("rolling");
     cube.style.transform = faceRotations[face];
 }
 
+// =====================================
+// MODE DISPLAY
+// =====================================
+
+function updateModeDisplay() {
+
+    document.getElementById("independentMode")
+        .classList.toggle("active", currentMode === "independent");
+
+    document.getElementById("entangledMode")
+        .classList.toggle("active", currentMode === "entangled");
+
+    const energy = document.getElementById("energy");
+
+    const label = document.getElementById("connectionLabel");
+
+    if (currentMode === "entangled") {
+
+        energy.classList.add("active");
+        label.textContent = t("entangledLabel");
+
+        document.getElementById("learningExplanation").textContent =
+            t("entangledExplanation");
+
+    } else {
+
+        energy.classList.remove("active");
+        label.textContent = t("independentLabel");
+
+        document.getElementById("learningExplanation").textContent =
+            t("independentExplanation");
+    }
+}
+
 function setMode(mode) {
+
     if (isRolling) return;
 
     currentMode = mode;
+    lastResult = null;
 
-    document.getElementById("independentMode")
-        .classList.toggle("active", mode === "independent");
+    updateModeDisplay();
 
-    document.getElementById("entangledMode")
-        .classList.toggle("active", mode === "entangled");
+    const status = document.getElementById("status");
 
-    const energy = document.getElementById("energy");
-    const label = document.getElementById("connectionLabel");
+    status.className = "status";
 
-    if (mode === "entangled") {
-        energy.classList.add("active");
-        label.textContent = "QUANTUM ENTANGLEMENT ESTABLISHED";
-
-        document.getElementById("learningExplanation").textContent =
-            "Three pairs of qubits are connected using CNOT gates. " +
-            "Their measurement outcomes are correlated, so both dice " +
-            "show the same valid face.";
-
-    } else {
-        energy.classList.remove("active");
-        label.textContent = "TWO INDEPENDENT QUANTUM DICE";
-
-        document.getElementById("learningExplanation").textContent =
-            "The dice use independent qubits. Each has six equally " +
-            "likely outcomes. Matching numbers can happen by chance.";
-    }
-
-    document.getElementById("status").className = "status";
-
-    document.getElementById("status").textContent =
-        mode === "entangled"
-            ? "Entangled mode selected. Ready to connect your dice!"
-            : "Independent mode selected. Ready for two separate rolls!";
+    status.textContent = mode === "entangled"
+        ? t("entangledSelected")
+        : t("independentSelected");
 }
 
+// =====================================
+// DISTRIBUTION DISPLAY
+// =====================================
+
 function createDistribution(elementId, counts, colorClass) {
+
     const container = document.getElementById(elementId);
+
     container.innerHTML = "";
 
     const values = Object.values(counts).map(Number);
+
     const maxValue = Math.max(...values, 1);
 
     for (let face = 1; face <= 6; face++) {
+
         const count = Number(counts[String(face)] || 0);
+
         const width = (count / maxValue) * 100;
 
         const row = document.createElement("div");
@@ -1033,11 +1157,17 @@ function createDistribution(elementId, counts, colorClass) {
         countLabel.textContent = count;
 
         row.append(faceLabel, bar, countLabel);
+
         container.appendChild(row);
     }
 }
 
+// =====================================
+// ANIMATION
+// =====================================
+
 function animateDice() {
+
     const dieOne = document.getElementById("dieOne");
     const dieTwo = document.getElementById("dieTwo");
 
@@ -1050,35 +1180,105 @@ function animateDice() {
     dieTwo.classList.add("rolling");
 }
 
+// =====================================
+// SHOW EXPERIMENT RESULT
+// =====================================
+
+function showExperimentResult(result) {
+
+    const data = result.data;
+
+    const first = result.first;
+    const second = result.second;
+
+    document.getElementById("numberOne").textContent =
+        t("result") + first;
+
+    document.getElementById("numberTwo").textContent =
+        t("result") + second;
+
+    document.getElementById("totalShots").textContent =
+        Number(data.accepted_shots).toLocaleString();
+
+    document.getElementById("matchingRollsValue").textContent =
+        Number(data.matching_rolls).toLocaleString();
+
+    document.getElementById("matchingPercent").textContent =
+        data.matching_percentage + "%";
+
+    createDistribution(
+        "firstDistribution",
+        data.dice.die_one,
+        ""
+    );
+
+    createDistribution(
+        "secondDistribution",
+        data.dice.die_two,
+        "cyan-fill"
+    );
+
+    document.getElementById("circuit").textContent =
+        data.circuit;
+
+    const status = document.getElementById("status");
+
+    status.className = "status success";
+
+    if (result.mode === "entangled") {
+
+        status.textContent = t("entangledSuccess", {
+            first:first,
+            second:second
+        });
+
+    } else {
+
+        status.textContent = t("independentSuccess", {
+            first:first,
+            second:second
+        });
+    }
+}
+
+// =====================================
+// RUN QUANTUM DICE EXPERIMENT
+// =====================================
+
 async function rollDice() {
+
     if (isRolling) return;
 
     isRolling = true;
 
     const button = document.getElementById("rollButton");
+
     const status = document.getElementById("status");
 
     const shots = Number(document.getElementById("shots").value);
 
+    const modeAtStart = currentMode;
+
     button.disabled = true;
-    button.textContent = "⏳ Rolling Quantum Dice...";
+    button.textContent = t("rollingButton");
 
     status.className = "status";
-    status.textContent = "Building your quantum circuit and running Qiskit...";
+    status.textContent = t("building");
 
     animateDice();
 
     try {
+
         const response = await fetch(
             "http://127.0.0.1:5000/run-linked-dice",
             {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
                 },
-                body: JSON.stringify({
-                    mode: currentMode,
-                    shots: shots
+                body:JSON.stringify({
+                    mode:modeAtStart,
+                    shots:shots
                 })
             }
         );
@@ -1092,15 +1292,18 @@ async function rollDice() {
         const pairEntries = Object.entries(data.pair_counts || {});
 
         if (pairEntries.length === 0) {
-            throw new Error("No valid dice outcomes were returned.");
+            throw new Error(t("invalidResults"));
         }
 
-        // Select a pair actually measured by Qiskit.
+        // Select a result that was actually measured by Qiskit.
         const selectedPair = pairEntries[
             Math.floor(Math.random() * pairEntries.length)
         ][0];
 
-        const [first, second] = selectedPair.split("-").map(Number);
+        const parts = selectedPair.split("-").map(Number);
+
+        const first = parts[0];
+        const second = parts[1];
 
         if (
             !Number.isInteger(first) ||
@@ -1108,75 +1311,47 @@ async function rollDice() {
             first < 1 || first > 6 ||
             second < 1 || second > 6
         ) {
-            throw new Error("The simulator returned an invalid dice result.");
+            throw new Error(t("invalidFace"));
         }
 
-        // Allow the 3D tumbling animation to finish.
         await new Promise(resolve => setTimeout(resolve, 1100));
 
         setCubeFace("dieOne", first);
         setCubeFace("dieTwo", second);
 
-        document.getElementById("numberOne").textContent =
-            "RESULT: " + first;
+        lastResult = {
+            data:data,
+            first:first,
+            second:second,
+            mode:modeAtStart
+        };
 
-        document.getElementById("numberTwo").textContent =
-            "RESULT: " + second;
-
-        document.getElementById("totalShots").textContent =
-            Number(data.accepted_shots).toLocaleString();
-
-        document.getElementById("matchingRolls").textContent =
-            Number(data.matching_rolls).toLocaleString();
-
-        document.getElementById("matchingPercent").textContent =
-            data.matching_percentage + "%";
-
-        createDistribution(
-            "firstDistribution",
-            data.dice.die_one,
-            ""
-        );
-
-        createDistribution(
-            "secondDistribution",
-            data.dice.die_two,
-            "cyan-fill"
-        );
-
-        document.getElementById("circuit").textContent =
-            data.circuit;
-
-        if (currentMode === "entangled") {
-            status.className = "status success";
-
-            status.textContent =
-                "✓ Quantum entanglement experiment completed! " +
-                "Your dice show " + first + " and " + second +
-                ". All accepted rolls were matching.";
-
-        } else {
-            status.className = "status success";
-
-            status.textContent =
-                "✓ Independent quantum experiment completed! " +
-                "Your dice show " + first + " and " + second +
-                ". Matching results occur by chance.";
-        }
+        showExperimentResult(lastResult);
 
     } catch (error) {
+
         status.className = "status error";
 
-        status.textContent =
-            "Experiment error: " + error.message +
-            ". Please check that your Flask backend is running.";
+        status.textContent = t("error", {
+            error:error.message
+        });
 
     } finally {
-        button.disabled = false;
-        button.textContent = "✨ Roll Quantum Dice";
+
         isRolling = false;
+
+        button.disabled = false;
+        button.textContent = t("rollButton");
     }
 }
+
+// =====================================
+// INITIALIZE PAGE
+// =====================================
+
+applyLanguage();
+updateModeDisplay();
+
 </script>
 
 </body>
