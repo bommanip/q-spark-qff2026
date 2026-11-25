@@ -26,6 +26,8 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(255,255,255,0.08);
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -34,10 +36,27 @@ header {
     color: #a99bff;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
 .back {
     color: #c9c1ff;
     text-decoration: none;
     font-size: 14px;
+}
+
+.language-select {
+    background: #202b48;
+    color: white;
+    border: 1px solid #354261;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
 }
 
 .container {
@@ -180,7 +199,7 @@ button:disabled {
     transform: none;
 }
 
-select {
+.shots-select {
     background: #202b48;
     color: white;
     border: 1px solid #354261;
@@ -295,15 +314,29 @@ select {
 
 <header>
     <div class="logo">✦ QubitQuest</div>
-    <a class="back" href="index.html">← Back to Home</a>
+
+    <div class="header-right">
+        <select class="language-select" id="languageSelect"
+                aria-label="Choose language">
+            <option value="en">🇬🇧 English</option>
+            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="te">🇮🇳 తెలుగు</option>
+        </select>
+
+        <a class="back" href="index.html" data-i18n="back">
+            ← Back to Home
+        </a>
+    </div>
 </header>
 
 <main class="container">
 
-    <div class="tag">QubitQuest Arcade · Game 01</div>
-    <h1>🪙 Coin Lab</h1>
+    <div class="tag" data-i18n="tag">QubitQuest Arcade · Game 01</div>
 
-    <p class="subtitle">
+    <h1 data-i18n="title">🪙 Coin Lab</h1>
+
+    <p class="subtitle" data-i18n="subtitle">
         Tilt the quantum coin, explore probability, and discover
         how a qubit can exist in a superposition of states before
         measurement.
@@ -313,9 +346,9 @@ select {
 
         <section class="card">
 
-            <h2>Your Quantum Coin</h2>
+            <h2 data-i18n="yourCoin">Your Quantum Coin</h2>
 
-            <p class="section-text">
+            <p class="section-text" data-i18n="coinDescription">
                 Adjust the angle and see how the probability of
                 Heads and Tails changes.
             </p>
@@ -325,7 +358,9 @@ select {
             </div>
 
             <div class="slider-heading">
-                <label for="tilt">Quantum rotation angle</label>
+                <label for="tilt" data-i18n="rotation">
+                    Quantum rotation angle
+                </label>
                 <span class="angle" id="angleValue">90°</span>
             </div>
 
@@ -344,21 +379,24 @@ select {
             </div>
 
             <div class="slider-heading">
-                <label for="shots">Measurement shots</label>
+                <label for="shots" data-i18n="shotsLabel">
+                    Measurement shots
+                </label>
             </div>
 
-            <select id="shots">
+            <select id="shots" class="shots-select">
                 <option value="512">512 shots</option>
                 <option value="1024" selected>1024 shots</option>
                 <option value="2048">2048 shots</option>
                 <option value="4096">4096 shots</option>
             </select>
 
-            <button id="flipButton" onclick="runCoinLab()">
+            <button id="flipButton" onclick="runCoinLab()"
+                    data-i18n="flipButton">
                 ✨ Flip Quantum Coin
             </button>
 
-            <p class="status" id="status">
+            <p class="status" id="status" data-i18n="ready">
                 Ready to explore! Adjust the angle and run your
                 first experiment.
             </p>
@@ -367,9 +405,11 @@ select {
 
         <section class="card">
 
-            <h2>Probability Observatory</h2>
+            <h2 data-i18n="observatory">
+                Probability Observatory
+            </h2>
 
-            <p class="section-text">
+            <p class="section-text" data-i18n="observatoryDescription">
                 These values show the theoretical probability and
                 the actual measurement results from Qiskit.
             </p>
@@ -377,29 +417,31 @@ select {
             <div class="result-grid">
 
                 <div class="result-box">
-                    <h3>HEADS</h3>
+                    <h3 data-i18n="heads">HEADS</h3>
                     <strong id="headsPercent">50%</strong>
                     <div class="bar">
                         <div class="bar-fill" id="headsBar"></div>
                     </div>
-                    <p class="section-text" id="headsCount">0 counts</p>
+                    <p class="section-text" id="headsCount"
+                       data-i18n="zeroCounts">0 counts</p>
                 </div>
 
                 <div class="result-box">
-                    <h3>TAILS</h3>
+                    <h3 data-i18n="tails">TAILS</h3>
                     <strong id="tailsPercent">50%</strong>
                     <div class="bar">
                         <div class="bar-fill" id="tailsBar"></div>
                     </div>
-                    <p class="section-text" id="tailsCount">0 counts</p>
+                    <p class="section-text" id="tailsCount"
+                       data-i18n="zeroCounts">0 counts</p>
                 </div>
 
             </div>
 
             <div class="info">
-                <h2>What is happening?</h2>
+                <h2 data-i18n="happening">What is happening?</h2>
 
-                <p id="explanation">
+                <p id="explanation" data-i18n="initialExplanation">
                     At 90°, the RY gate creates an equal
                     probability of measuring Heads or Tails.
                     Run the experiment to see the results.
@@ -407,12 +449,15 @@ select {
             </div>
 
             <div class="info">
-                <h2>Your Qiskit Circuit</h2>
-                <p class="section-text">
+                <h2 data-i18n="circuitTitle">Your Qiskit Circuit</h2>
+
+                <p class="section-text" data-i18n="circuitDescription">
                     This circuit uses an RY rotation gate followed
                     by measurement.
                 </p>
-                <div class="circuit" id="circuit">
+
+                <div class="circuit" id="circuit"
+                     data-i18n="circuitPlaceholder">
                     Your circuit will appear here after simulation.
                 </div>
             </div>
@@ -422,15 +467,18 @@ select {
     </div>
 
     <section class="card info">
-        <h2>🧠 Learn the Quantum Secret</h2>
 
-        <p>
+        <h2 data-i18n="learnTitle">
+            🧠 Learn the Quantum Secret
+        </h2>
+
+        <p data-i18n="learnParagraph1">
             A qubit can be in a superposition of the states
             |0⟩ and |1⟩ before measurement. In this game,
             we represent those outcomes as Heads and Tails.
         </p>
 
-        <p>
+        <p data-i18n="learnParagraph2">
             The RY gate rotates the qubit. Changing the angle
             changes the probability of measuring each outcome.
             When we measure the qubit, we get one result:
@@ -438,32 +486,290 @@ select {
         </p>
 
         <p>
-            <strong>Important:</strong> The coin is a visual
-            metaphor, not a physical quantum coin. The quantum
-            experiment is performed by Qiskit on a simulator.
+            <strong data-i18n="important">Important:</strong>
+            <span data-i18n="learnParagraph3">
+                The coin is a visual metaphor, not a physical quantum coin.
+                The quantum experiment is performed by Qiskit on a simulator.
+            </span>
         </p>
+
     </section>
 
-    <div class="footer">
+    <div class="footer" data-i18n="footer">
         QubitQuest · Explore. Experiment. Understand.
     </div>
 
 </main>
 
 <script>
+"use strict";
+
+// =====================================
+// LANGUAGE TRANSLATIONS
+// =====================================
+
+const translations = {
+
+en: {
+    back: "← Back to Home",
+    tag: "QubitQuest Arcade · Game 01",
+    title: "🪙 Coin Lab",
+    subtitle: "Tilt the quantum coin, explore probability, and discover how a qubit can exist in a superposition of states before measurement.",
+    yourCoin: "Your Quantum Coin",
+    coinDescription: "Adjust the angle and see how the probability of Heads and Tails changes.",
+    rotation: "Quantum rotation angle",
+    shotsLabel: "Measurement shots",
+    flipButton: "✨ Flip Quantum Coin",
+    runningButton: "⏳ Running Quantum Experiment...",
+    ready: "Ready to explore! Adjust the angle and run your first experiment.",
+    connecting: "Connecting to Qiskit simulator...",
+    observatory: "Probability Observatory",
+    observatoryDescription: "These values show the theoretical probability and the actual measurement results from Qiskit.",
+    heads: "HEADS",
+    tails: "TAILS",
+    happening: "What is happening?",
+    initialExplanation: "At 90°, the RY gate creates an equal probability of measuring Heads or Tails. Run the experiment to see the results.",
+    circuitTitle: "Your Qiskit Circuit",
+    circuitDescription: "This circuit uses an RY rotation gate followed by measurement.",
+    circuitPlaceholder: "Your circuit will appear here after simulation.",
+    learnTitle: "🧠 Learn the Quantum Secret",
+    learnParagraph1: "A qubit can be in a superposition of the states |0⟩ and |1⟩ before measurement. In this game, we represent those outcomes as Heads and Tails.",
+    learnParagraph2: "The RY gate rotates the qubit. Changing the angle changes the probability of measuring each outcome. When we measure the qubit, we get one result: Heads or Tails.",
+    important: "Important:",
+    learnParagraph3: "The coin is a visual metaphor, not a physical quantum coin. The quantum experiment is performed by Qiskit on a simulator.",
+    footer: "QubitQuest · Explore. Experiment. Understand.",
+    zeroCounts: "0 counts",
+    counts: "counts",
+    statusSuccess: "✓ Experiment completed successfully! {shots} measurements performed using Qiskit Aer.",
+    statusError: "Could not run the experiment: {error}. Check that your Flask backend is running on port 5000.",
+    explanation: "At {angle}°, the theoretical probability is {heads}% Heads and {tails}% Tails. Run the experiment to compare these probabilities with actual Qiskit measurements.",
+    resultExplanation: "At {angle}°, the theoretical probability is {theoreticalHeads}% Heads and {theoreticalTails}% Tails. Out of {shots} measurements, Qiskit observed {heads} Heads and {tails} Tails."
+},
+
+kn: {
+    back: "← ಮುಖ್ಯ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+    tag: "QubitQuest ಆರ್ಕೇಡ್ · ಆಟ 01",
+    title: "🪙 ನಾಣ್ಯ ಪ್ರಯೋಗಾಲಯ",
+    subtitle: "ಕ್ವಾಂಟಮ್ ನಾಣ್ಯವನ್ನು ತಿರುಗಿಸಿ, ಸಂಭವನೀಯತೆಯನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ಮಾಪನಕ್ಕೂ ಮೊದಲು Qubit ಹೇಗೆ Superposition ಸ್ಥಿತಿಯಲ್ಲಿರಬಹುದು ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
+    yourCoin: "ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ನಾಣ್ಯ",
+    coinDescription: "ಕೋನವನ್ನು ಬದಲಾಯಿಸಿ ಮತ್ತು Head ಹಾಗೂ Tail ಸಂಭವನೀಯತೆ ಹೇಗೆ ಬದಲಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ.",
+    rotation: "ಕ್ವಾಂಟಮ್ ತಿರುಗುವಿಕೆಯ ಕೋನ",
+    shotsLabel: "ಮಾಪನಗಳ ಸಂಖ್ಯೆ",
+    flipButton: "✨ ಕ್ವಾಂಟಮ್ ನಾಣ್ಯವನ್ನು ತಿರುಗಿಸಿ",
+    runningButton: "⏳ ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗ ನಡೆಯುತ್ತಿದೆ...",
+    ready: "ಅನ್ವೇಷಣೆಗೆ ಸಿದ್ಧ! ಕೋನವನ್ನು ಹೊಂದಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಮೊದಲ ಪ್ರಯೋಗವನ್ನು ಪ್ರಾರಂಭಿಸಿ.",
+    connecting: "Qiskit ಸಿಮ್ಯುಲೇಟರ್‌ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...",
+    observatory: "ಸಂಭವನೀಯತೆ ವೀಕ್ಷಣಾಲಯ",
+    observatoryDescription: "ಈ ಮೌಲ್ಯಗಳು ಸೈದ್ಧಾಂತಿಕ ಸಂಭವನೀಯತೆ ಮತ್ತು Qiskit ನ ನೈಜ ಮಾಪನ ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸುತ್ತವೆ.",
+    heads: "ಹೆಡ್",
+    tails: "ಟೇಲ್",
+    happening: "ಇಲ್ಲಿ ಏನಾಗುತ್ತಿದೆ?",
+    initialExplanation: "90° ನಲ್ಲಿ RY ಗೇಟ್ Head ಅಥವಾ Tail ಬರುವ ಸಮಾನ ಸಂಭವನೀಯತೆಯನ್ನು ಸೃಷ್ಟಿಸುತ್ತದೆ. ಫಲಿತಾಂಶಗಳನ್ನು ನೋಡಲು ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ.",
+    circuitTitle: "ನಿಮ್ಮ Qiskit ಸರ್ಕ್ಯೂಟ್",
+    circuitDescription: "ಈ ಸರ್ಕ್ಯೂಟ್ RY ತಿರುಗುವಿಕೆ ಗೇಟ್ ಮತ್ತು ನಂತರದ ಮಾಪನವನ್ನು ಬಳಸುತ್ತದೆ.",
+    circuitPlaceholder: "ಸಿಮ್ಯುಲೇಶನ್ ನಂತರ ನಿಮ್ಮ ಸರ್ಕ್ಯೂಟ್ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.",
+    learnTitle: "🧠 ಕ್ವಾಂಟಮ್ ರಹಸ್ಯವನ್ನು ತಿಳಿಯಿರಿ",
+    learnParagraph1: "ಮಾಪನಕ್ಕೂ ಮೊದಲು Qubit |0⟩ ಮತ್ತು |1⟩ ಸ್ಥಿತಿಗಳ Superposition ನಲ್ಲಿ ಇರಬಹುದು. ಈ ಆಟದಲ್ಲಿ ನಾವು ಆ ಫಲಿತಾಂಶಗಳನ್ನು Head ಮತ್ತು Tail ಎಂದು ತೋರಿಸುತ್ತೇವೆ.",
+    learnParagraph2: "RY ಗೇಟ್ Qubit ಅನ್ನು ತಿರುಗಿಸುತ್ತದೆ. ಕೋನವನ್ನು ಬದಲಾಯಿಸಿದಾಗ ಪ್ರತಿಯೊಂದು ಫಲಿತಾಂಶದ ಸಂಭವನೀಯತೆಯೂ ಬದಲಾಗುತ್ತದೆ. Qubit ಅನ್ನು ಮಾಪನ ಮಾಡಿದಾಗ ಒಂದು ಫಲಿತಾಂಶ ಸಿಗುತ್ತದೆ: Head ಅಥವಾ Tail.",
+    important: "ಮುಖ್ಯ ಸೂಚನೆ:",
+    learnParagraph3: "ಈ ನಾಣ್ಯವು ಕೇವಲ ದೃಶ್ಯ ರೂಪಕವಾಗಿದೆ; ಇದು ನಿಜವಾದ ಭೌತಿಕ ಕ್ವಾಂಟಮ್ ನಾಣ್ಯವಲ್ಲ. Qiskit ಸಿಮ್ಯುಲೇಟರ್ ಮೂಲಕ ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗವನ್ನು ನಡೆಸಲಾಗುತ್ತದೆ.",
+    footer: "QubitQuest · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
+    zeroCounts: "0 ಎಣಿಕೆಗಳು",
+    counts: "ಎಣಿಕೆಗಳು",
+    statusSuccess: "✓ ಪ್ರಯೋಗ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ! Qiskit Aer ಬಳಸಿ {shots} ಮಾಪನಗಳನ್ನು ನಡೆಸಲಾಗಿದೆ.",
+    statusError: "ಪ್ರಯೋಗವನ್ನು ನಡೆಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: {error}. Flask backend ಪೋರ್ಟ್ 5000 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
+    explanation: "{angle}° ನಲ್ಲಿ ಸೈದ್ಧಾಂತಿಕ ಸಂಭವನೀಯತೆ Head {heads}% ಮತ್ತು Tail {tails}%. ನೈಜ Qiskit ಮಾಪನಗಳೊಂದಿಗೆ ಹೋಲಿಸಲು ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ.",
+    resultExplanation: "{angle}° ನಲ್ಲಿ ಸೈದ್ಧಾಂತಿಕ ಸಂಭವನೀಯತೆ Head {theoreticalHeads}% ಮತ್ತು Tail {theoreticalTails}%. ಒಟ್ಟು {shots} ಮಾಪನಗಳಲ್ಲಿ Qiskit {heads} Head ಮತ್ತು {tails} Tail ಫಲಿತಾಂಶಗಳನ್ನು ನೀಡಿದೆ."
+},
+
+hi: {
+    back: "← होम पेज पर वापस जाएँ",
+    tag: "QubitQuest आर्केड · गेम 01",
+    title: "🪙 कॉइन लैब",
+    subtitle: "क्वांटम सिक्के को झुकाएँ, प्रायिकता को समझें और जानें कि मापन से पहले एक Qubit Superposition अवस्था में कैसे रह सकता है।",
+    yourCoin: "आपका क्वांटम सिक्का",
+    coinDescription: "कोण बदलें और देखें कि Heads और Tails की प्रायिकता कैसे बदलती है।",
+    rotation: "क्वांटम घूर्णन कोण",
+    shotsLabel: "मापन की संख्या",
+    flipButton: "✨ क्वांटम सिक्का उछालें",
+    runningButton: "⏳ क्वांटम प्रयोग चल रहा है...",
+    ready: "अन्वेषण के लिए तैयार! कोण बदलें और अपना पहला प्रयोग शुरू करें।",
+    connecting: "Qiskit सिम्युलेटर से कनेक्ट हो रहा है...",
+    observatory: "प्रायिकता वेधशाला",
+    observatoryDescription: "ये मान सैद्धांतिक प्रायिकता और Qiskit से प्राप्त वास्तविक मापन परिणाम दिखाते हैं।",
+    heads: "हेड्स",
+    tails: "टेल्स",
+    happening: "यहाँ क्या हो रहा है?",
+    initialExplanation: "90° पर RY गेट से Heads या Tails आने की समान प्रायिकता बनती है। परिणाम देखने के लिए प्रयोग चलाएँ।",
+    circuitTitle: "आपका Qiskit सर्किट",
+    circuitDescription: "यह सर्किट RY रोटेशन गेट और उसके बाद मापन का उपयोग करता है।",
+    circuitPlaceholder: "सिमुलेशन के बाद आपका सर्किट यहाँ दिखाई देगा।",
+    learnTitle: "🧠 क्वांटम रहस्य जानें",
+    learnParagraph1: "मापन से पहले एक Qubit |0⟩ और |1⟩ अवस्थाओं के Superposition में हो सकता है। इस गेम में हम इन परिणामों को Heads और Tails के रूप में दिखाते हैं।",
+    learnParagraph2: "RY गेट Qubit को घुमाता है। कोण बदलने से प्रत्येक परिणाम की प्रायिकता बदलती है। Qubit का मापन करने पर हमें एक परिणाम मिलता है: Heads या Tails।",
+    important: "महत्वपूर्ण:",
+    learnParagraph3: "यह सिक्का केवल एक दृश्य उदाहरण है, वास्तविक भौतिक क्वांटम सिक्का नहीं। क्वांटम प्रयोग Qiskit सिम्युलेटर पर किया जाता है।",
+    footer: "QubitQuest · खोजें। प्रयोग करें। समझें।",
+    zeroCounts: "0 गणनाएँ",
+    counts: "गणनाएँ",
+    statusSuccess: "✓ प्रयोग सफलतापूर्वक पूरा हुआ! Qiskit Aer का उपयोग करके {shots} मापन किए गए।",
+    statusError: "प्रयोग नहीं चल सका: {error}। जाँचें कि Flask backend पोर्ट 5000 पर चल रहा है या नहीं।",
+    explanation: "{angle}° पर सैद्धांतिक प्रायिकता Heads {heads}% और Tails {tails}% है। वास्तविक Qiskit मापन से तुलना करने के लिए प्रयोग चलाएँ।",
+    resultExplanation: "{angle}° पर सैद्धांतिक प्रायिकता Heads {theoreticalHeads}% और Tails {theoreticalTails}% है। {shots} मापनों में Qiskit ने {heads} Heads और {tails} Tails प्राप्त किए।"
+},
+
+te: {
+    back: "← హోమ్ పేజీకి తిరిగి వెళ్ళండి",
+    tag: "QubitQuest ఆర్కేడ్ · గేమ్ 01",
+    title: "🪙 కాయిన్ ల్యాబ్",
+    subtitle: "క్వాంటమ్ నాణెం కోణాన్ని మార్చండి, సంభావ్యతను అన్వేషించండి మరియు కొలతకు ముందు Qubit Superposition స్థితిలో ఎలా ఉండగలదో తెలుసుకోండి.",
+    yourCoin: "మీ క్వాంటమ్ నాణెం",
+    coinDescription: "కోణాన్ని మార్చి Heads మరియు Tails సంభావ్యత ఎలా మారుతుందో చూడండి.",
+    rotation: "క్వాంటమ్ భ్రమణ కోణం",
+    shotsLabel: "కొలతల సంఖ్య",
+    flipButton: "✨ క్వాంటమ్ నాణెం తిప్పండి",
+    runningButton: "⏳ క్వాంటమ్ ప్రయోగం జరుగుతోంది...",
+    ready: "అన్వేషణకు సిద్ధంగా ఉన్నారా! కోణాన్ని మార్చి మీ మొదటి ప్రయోగాన్ని ప్రారంభించండి.",
+    connecting: "Qiskit సిమ్యులేటర్‌కు కనెక్ట్ అవుతోంది...",
+    observatory: "సంభావ్యత పరిశీలనా కేంద్రం",
+    observatoryDescription: "ఈ విలువలు సైద్ధాంతిక సంభావ్యతను మరియు Qiskit నుండి వచ్చిన నిజమైన కొలత ఫలితాలను చూపిస్తాయి.",
+    heads: "హెడ్స్",
+    tails: "టెయిల్స్",
+    happening: "ఇక్కడ ఏమి జరుగుతోంది?",
+    initialExplanation: "90° వద్ద RY గేట్ Heads లేదా Tails వచ్చే సమాన సంభావ్యతను సృష్టిస్తుంది. ఫలితాలను చూడటానికి ప్రయోగాన్ని ప్రారంభించండి.",
+    circuitTitle: "మీ Qiskit సర్క్యూట్",
+    circuitDescription: "ఈ సర్క్యూట్ RY రొటేషన్ గేట్ మరియు దాని తర్వాత కొలతను ఉపయోగిస్తుంది.",
+    circuitPlaceholder: "సిమ్యులేషన్ తర్వాత మీ సర్క్యూట్ ఇక్కడ కనిపిస్తుంది.",
+    learnTitle: "🧠 క్వాంటమ్ రహస్యాన్ని తెలుసుకోండి",
+    learnParagraph1: "కొలతకు ముందు ఒక Qubit |0⟩ మరియు |1⟩ స్థితుల Superposition లో ఉండగలదు. ఈ గేమ్‌లో ఆ ఫలితాలను Heads మరియు Tails గా చూపిస్తాము.",
+    learnParagraph2: "RY గేట్ Qubit ను తిప్పుతుంది. కోణాన్ని మార్చినప్పుడు ప్రతి ఫలితం యొక్క సంభావ్యత మారుతుంది. Qubit ను కొలిచినప్పుడు ఒక ఫలితం వస్తుంది: Heads లేదా Tails.",
+    important: "ముఖ్యమైన విషయం:",
+    learnParagraph3: "ఈ నాణెం కేవలం దృశ్య రూపకం మాత్రమే; ఇది నిజమైన భౌతిక క్వాంటమ్ నాణెం కాదు. Qiskit సిమ్యులేటర్ ద్వారా క్వాంటమ్ ప్రయోగం నిర్వహించబడుతుంది.",
+    footer: "QubitQuest · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి.",
+    zeroCounts: "0 లెక్కలు",
+    counts: "లెక్కలు",
+    statusSuccess: "✓ ప్రయోగం విజయవంతంగా పూర్తయింది! Qiskit Aer ఉపయోగించి {shots} కొలతలు నిర్వహించబడ్డాయి.",
+    statusError: "ప్రయోగాన్ని నిర్వహించలేకపోయాము: {error}. Flask backend పోర్ట్ 5000 పై నడుస్తోందో లేదో తనిఖీ చేయండి.",
+    explanation: "{angle}° వద్ద సైద్ధాంతిక సంభావ్యత Heads {heads}% మరియు Tails {tails}%. నిజమైన Qiskit కొలతలతో పోల్చడానికి ప్రయోగాన్ని ప్రారంభించండి.",
+    resultExplanation: "{angle}° వద్ద సైద్ధాంతిక సంభావ్యత Heads {theoreticalHeads}% మరియు Tails {theoreticalTails}%. {shots} కొలతలలో Qiskit {heads} Heads మరియు {tails} Tails ఫలితాలను పొందింది."
+}
+
+};
+
+
+// =====================================
+// LANGUAGE AND PAGE ELEMENTS
+// =====================================
+
+const LANGUAGE_KEY = "qubitquestLanguage";
+
 const tiltSlider = document.getElementById("tilt");
 const angleValue = document.getElementById("angleValue");
 const coin = document.getElementById("coin");
 const statusText = document.getElementById("status");
 const flipButton = document.getElementById("flipButton");
 
-tiltSlider.addEventListener("input", function () {
-    const angle = Number(this.value);
+const languageSelect = document.getElementById("languageSelect");
 
-    angleValue.textContent = angle + "°";
+let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || "en";
+
+if (!translations[currentLanguage]) {
+    currentLanguage = "en";
+}
+
+let experimentRunning = false;
+let lastResult = null;
+
+
+// =====================================
+// TRANSLATION HELPER
+// =====================================
+
+function t(key, values = {}) {
+
+    let message =
+        translations[currentLanguage][key] ||
+        translations.en[key] ||
+        key;
+
+    Object.keys(values).forEach(function (placeholder) {
+        message = message.replaceAll(
+            "{" + placeholder + "}",
+            String(values[placeholder])
+        );
+    });
+
+    return message;
+}
+
+
+// =====================================
+// APPLY LANGUAGE
+// =====================================
+
+function applyLanguage() {
+
+    document.documentElement.lang = currentLanguage;
+
+    languageSelect.value = currentLanguage;
+
+    document.querySelectorAll("[data-i18n]").forEach(function (element) {
+
+        const key = element.getAttribute("data-i18n");
+
+        if (translations[currentLanguage][key]) {
+            element.textContent = t(key);
+        }
+
+    });
+
+    if (lastResult) {
+        showExperimentResult(lastResult);
+    } else {
+        updateLiveProbability();
+    }
+
+    if (experimentRunning) {
+        flipButton.textContent = t("runningButton");
+    } else {
+        flipButton.textContent = t("flipButton");
+    }
+}
+
+
+// =====================================
+// LANGUAGE SELECTOR
+// =====================================
+
+languageSelect.addEventListener("change", function () {
+
+    const selectedLanguage = this.value;
+
+    if (!translations[selectedLanguage]) {
+        return;
+    }
+
+    currentLanguage = selectedLanguage;
+
+    localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+
+    applyLanguage();
+
+});
+
+
+// =====================================
+// LIVE PROBABILITY CALCULATION
+// =====================================
+
+function updateLiveProbability() {
+
+    const angle = Number(tiltSlider.value);
 
     const heads = Math.cos(angle * Math.PI / 360) ** 2 * 100;
     const tails = 100 - heads;
+
+    angleValue.textContent = angle + "°";
 
     document.getElementById("headsPercent").textContent =
         heads.toFixed(1) + "%";
@@ -477,28 +783,115 @@ tiltSlider.addEventListener("input", function () {
     document.getElementById("tailsBar").style.width =
         tails + "%";
 
-    document.getElementById("explanation").textContent =
-        "At " + angle + "°, the theoretical probability is " +
-        heads.toFixed(1) + "% Heads and " +
-        tails.toFixed(1) + "% Tails. Run the experiment to " +
-        "compare these probabilities with actual Qiskit measurements.";
+    if (!lastResult) {
+        document.getElementById("explanation").textContent =
+            t("explanation", {
+                angle: angle,
+                heads: heads.toFixed(1),
+                tails: tails.toFixed(1)
+            });
+    }
+}
+
+tiltSlider.addEventListener("input", function () {
+
+    lastResult = null;
+
+    updateLiveProbability();
+
+    document.getElementById("headsCount").textContent =
+        t("zeroCounts");
+
+    document.getElementById("tailsCount").textContent =
+        t("zeroCounts");
+
 });
 
+
+// =====================================
+// DISPLAY EXPERIMENT RESULTS
+// =====================================
+
+function showExperimentResult(result) {
+
+    const data = result.data;
+    const tilt = result.tilt;
+    const shots = result.shots;
+
+    const heads = data.heads;
+    const tails = data.tails;
+
+    const observedHeads = Number(data.heads / data.shots * 100);
+    const observedTails = Number(data.tails / data.shots * 100);
+
+    document.getElementById("headsPercent").textContent =
+        observedHeads.toFixed(1) + "%";
+
+    document.getElementById("tailsPercent").textContent =
+        observedTails.toFixed(1) + "%";
+
+    document.getElementById("headsCount").textContent =
+        heads + " " + t("counts");
+
+    document.getElementById("tailsCount").textContent =
+        tails + " " + t("counts");
+
+    document.getElementById("headsBar").style.width =
+        observedHeads + "%";
+
+    document.getElementById("tailsBar").style.width =
+        observedTails + "%";
+
+    document.getElementById("explanation").textContent =
+        t("resultExplanation", {
+            angle: tilt,
+            theoreticalHeads: data.heads_probability,
+            theoreticalTails: data.tails_probability,
+            shots: shots,
+            heads: heads,
+            tails: tails
+        });
+
+    document.getElementById("circuit").textContent =
+        data.circuit;
+
+    statusText.className = "status success";
+
+    statusText.textContent =
+        t("statusSuccess", { shots: data.shots });
+
+    coin.textContent = observedHeads >= observedTails
+        ? "H" : "T";
+}
+
+
+// =====================================
+// RUN QUANTUM COIN EXPERIMENT
+// =====================================
+
 async function runCoinLab() {
+
+    if (experimentRunning) {
+        return;
+    }
+
     const tilt = Number(tiltSlider.value);
     const shots = Number(document.getElementById("shots").value);
 
+    experimentRunning = true;
+
     flipButton.disabled = true;
-    flipButton.textContent = "⏳ Running Quantum Experiment...";
+    flipButton.textContent = t("runningButton");
 
     statusText.className = "status";
-    statusText.textContent = "Connecting to Qiskit simulator...";
+    statusText.textContent = t("connecting");
 
     coin.classList.remove("flipping");
     void coin.offsetWidth;
     coin.classList.add("flipping");
 
     try {
+
         const response = await fetch(
             "http://127.0.0.1:5000/run-coin-lab",
             {
@@ -519,58 +912,55 @@ async function runCoinLab() {
             throw new Error(data.error || "Experiment failed.");
         }
 
-        const heads = data.counts.heads;
-        const tails = data.counts.tails;
+        // Validate the actual Flask backend response structure.
+        if (
+            typeof data.heads !== "number" ||
+            typeof data.tails !== "number" ||
+            typeof data.shots !== "number" ||
+            typeof data.heads_probability !== "number" ||
+            typeof data.tails_probability !== "number" ||
+            typeof data.circuit !== "string"
+        ) {
+            throw new Error("Invalid experiment response from backend.");
+        }
 
-        const observedHeads = data.observed_percentages.heads;
-        const observedTails = data.observed_percentages.tails;
+        if (data.shots <= 0 || data.heads + data.tails !== data.shots) {
+            throw new Error("Invalid measurement counts received from backend.");
+        }
 
-        document.getElementById("headsPercent").textContent =
-            observedHeads + "%";
+        lastResult = {
+            data: data,
+            tilt: tilt,
+            shots: shots
+        };
 
-        document.getElementById("tailsPercent").textContent =
-            observedTails + "%";
-
-        document.getElementById("headsCount").textContent =
-            heads + " counts";
-
-        document.getElementById("tailsCount").textContent =
-            tails + " counts";
-
-        document.getElementById("headsBar").style.width =
-            observedHeads + "%";
-
-        document.getElementById("tailsBar").style.width =
-            observedTails + "%";
-
-        document.getElementById("explanation").textContent =
-            "At " + tilt + "°, the theoretical probability is " +
-            data.probabilities.heads + "% Heads and " +
-            data.probabilities.tails + "% Tails. Out of " +
-            shots + " measurements, Qiskit observed " +
-            heads + " Heads and " + tails + " Tails.";
-
-        document.getElementById("circuit").textContent =
-            data.circuit;
-
-        statusText.className = "status success";
-        statusText.textContent =
-            "✓ Experiment completed successfully! " +
-            shots + " measurements performed using Qiskit Aer.";
-
-        coin.textContent = observedHeads >= observedTails
-            ? "H" : "T";
+        showExperimentResult(lastResult);
 
     } catch (error) {
+
         statusText.className = "status error";
+
         statusText.textContent =
-            "Could not run the experiment: " + error.message +
-            ". Check that your Flask backend is running on port 5000.";
+            t("statusError", { error: error.message });
+
     } finally {
+
+        experimentRunning = false;
+
         flipButton.disabled = false;
-        flipButton.textContent = "✨ Flip Quantum Coin";
+        flipButton.textContent = t("flipButton");
+
     }
 }
+
+
+// =====================================
+// INITIALIZE PAGE
+// =====================================
+
+applyLanguage();
+updateLiveProbability();
+
 </script>
 
 </body>
