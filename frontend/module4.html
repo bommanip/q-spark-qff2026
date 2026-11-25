@@ -5,278 +5,1280 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 4 | QubitQuest</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Segoe UI",sans-serif;background:#080d1c;color:#f5f5ff;line-height:1.7}
-.navbar{padding:22px 9%;background:#0b1225;display:flex;justify-content:space-between;align-items:center}
+
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:#080d1c;
+    color:#f5f5ff;
+    line-height:1.7
+}
+
+.navbar{
+    padding:22px 9%;
+    background:#0b1225;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap
+}
+
 .logo{color:#a99bff;font-size:23px;font-weight:bold}
+.nav-right{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 a{color:#dce0f4;text-decoration:none}
+
+.language-select{
+    background:#111a31;
+    color:#fff;
+    border:1px solid #465174;
+    padding:9px 12px;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer
+}
+
 .container{max-width:950px;margin:auto;padding:55px 22px}
-.tag{color:#a99bff;letter-spacing:2px;font-size:12px;font-weight:bold}
-h1{font-size:clamp(34px,6vw,52px);line-height:1.2;margin:18px 0}
+
+.tag{
+    color:#a99bff;
+    letter-spacing:2px;
+    font-size:12px;
+    font-weight:bold
+}
+
+h1{
+    font-size:clamp(34px,6vw,52px);
+    line-height:1.2;
+    margin:18px 0
+}
+
 h1 span,h2{color:#a99bff}
+
 .intro{color:#aeb6cf;font-size:18px;margin-bottom:30px}
-.progress{height:8px;background:#273252;border-radius:20px;overflow:hidden;margin:15px 0}
-.progress-fill{height:100%;width:0;background:#8774ef;transition:width .3s}
+
+.progress{
+    height:8px;
+    background:#273252;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0
+}
+
+.progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#8774ef,#46d9dc);
+    transition:width .3s
+}
+
 .progress-status{color:#aeb6cf;font-size:14px;margin-bottom:25px}
-.completion{display:none;padding:16px;margin:16px 0;border:1px solid #46d9dc;border-radius:10px;background:#102b35;color:#8ef0df}
-.card{background:#111a31;border:1px solid #273252;border-radius:15px;padding:28px;margin:25px 0}
+
+.completion{
+    display:none;
+    padding:16px;
+    margin:16px 0;
+    border:1px solid #46d9dc;
+    border-radius:10px;
+    background:#102b35;
+    color:#8ef0df
+}
+
+.card{
+    background:#111a31;
+    border:1px solid #273252;
+    border-radius:15px;
+    padding:28px;
+    margin:25px 0
+}
+
 .card h2{margin-bottom:15px}
 .card h3{margin:18px 0 8px}
 p{color:#c4cbe0;margin:12px 0}
-.visual{background:#080d1c;padding:24px;border-radius:12px;margin:20px 0;text-align:center}
-.primary{background:#8774ef;border:0;padding:14px 23px;color:white;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:15px}
+
+.visual{
+    background:#080d1c;
+    padding:24px;
+    border-radius:12px;
+    margin:20px 0;
+    text-align:center
+}
+
+.primary{
+    background:#8774ef;
+    border:0;
+    padding:14px 23px;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:15px;
+    display:inline-block
+}
+
 .primary:hover{background:#705ce0}
 .primary:disabled{opacity:.6;cursor:wait}
-.result{display:none;margin-top:20px;padding:18px;background:#080d1c;border-radius:9px;color:#46d9dc;overflow-wrap:anywhere;text-align:left}
+
+.result{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+    background:#080d1c;
+    border-radius:9px;
+    color:#46d9dc;
+    overflow-wrap:anywhere;
+    text-align:left
+}
+
 .result p{color:#c4cbe0}
-pre{white-space:pre-wrap;overflow-x:auto;background:#111a31;padding:15px;border-radius:8px;color:#46d9dc;font-family:Consolas,monospace;font-size:13px}
+
+pre{
+    white-space:pre-wrap;
+    overflow-x:auto;
+    background:#111a31;
+    padding:15px;
+    border-radius:8px;
+    color:#46d9dc;
+    font-family:Consolas,monospace;
+    font-size:13px
+}
+
 .example{color:#46d9dc!important;font-weight:bold}
-.note{font-size:13px;color:#aeb6cf;border-left:3px solid #46d9dc;padding-left:13px;margin-top:18px}
-.quiz-option{display:block;width:100%;padding:15px;margin:12px 0;text-align:left;border:1px solid #465174;border-radius:8px;background:#080d1c;color:white;cursor:pointer;font-size:15px}
+
+.note{
+    font-size:13px;
+    color:#aeb6cf;
+    border-left:3px solid #46d9dc;
+    padding-left:13px;
+    margin-top:18px
+}
+
+.quiz-option{
+    display:block;
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    text-align:left;
+    border:1px solid #465174;
+    border-radius:8px;
+    background:#080d1c;
+    color:white;
+    cursor:pointer;
+    font-size:15px
+}
+
 .quiz-option:hover{border-color:#a99bff}
 .quiz-option:disabled{cursor:default;opacity:.8}
-.feedback{display:none;margin-top:15px;padding:15px;border-radius:8px;background:#19213b;color:#46d9dc}
-.retry{background:transparent;border:1px solid #8774ef;padding:12px 20px;color:#dcd5ff;border-radius:8px;cursor:pointer;margin:15px 0 0 10px}
+
+.feedback{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:8px;
+    background:#19213b;
+    color:#46d9dc
+}
+
+.retry{
+    background:transparent;
+    border:1px solid #8774ef;
+    padding:12px 20px;
+    color:#dcd5ff;
+    border-radius:8px;
+    cursor:pointer;
+    margin:15px 0 0 10px
+}
+
+.visualization-panel{
+    margin-top:22px;
+    padding:18px;
+    background:#111a31;
+    border:1px solid #273252;
+    border-radius:12px
+}
+
+.visualization-panel h3{
+    color:#a99bff;
+    margin:15px 0 10px
+}
+
+.visualization-caption{
+    color:#aeb6cf;
+    font-size:13px;
+    margin-bottom:12px
+}
+
+.visualization-image{
+    display:block;
+    width:100%;
+    max-width:760px;
+    height:auto;
+    margin:12px auto 22px;
+    background:#fff;
+    border-radius:10px;
+    padding:8px
+}
+
+.visualization-missing{
+    color:#aeb6cf;
+    background:#080d1c;
+    padding:12px;
+    border-radius:8px;
+    font-size:13px
+}
+
 footer{text-align:center;padding:30px;color:#aeb6cf}
-@media(max-width:600px){.navbar{padding:18px}.card{padding:20px}}
+
+@media(max-width:600px){
+    .navbar{padding:18px}
+    .card{padding:20px}
+    .visualization-panel{padding:12px}
+}
 </style>
 </head>
+
 <body>
 
 <nav class="navbar">
-<div class="logo">✦ QubitQuest</div>
-<a href="index.html">← Home</a>
+    <div class="logo">✦ QubitQuest</div>
+
+    <div class="nav-right">
+        <select class="language-select" id="languageSelect"
+                aria-label="Select language">
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="hi">हिन्दी</option>
+            <option value="te">తెలుగు</option>
+        </select>
+
+        <a href="index.html" id="homeLink">← Home</a>
+    </div>
 </nav>
 
 <main class="container">
-<span class="tag">MODULE 04 · INTERMEDIATE LEVEL</span>
-<h1>Discover the power of <span>quantum algorithms.</span></h1>
-<p class="intro">Explore how quantum computers approach searching, factoring and real-world challenges.</p>
 
-<p>YOUR LEARNING PROGRESS</p>
-<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
-<p class="progress-status" id="progressText">Module 4 completion: 0%</p>
-<div class="completion" id="completion">✓ Module 4 completed! Your progress has been saved.</div>
+<span class="tag" id="moduleTag">MODULE 04 · INTERMEDIATE LEVEL</span>
 
-<section class="card">
-<h2>01. What is a quantum algorithm?</h2>
-<p>A quantum algorithm is a sequence of operations designed to use quantum properties such as superposition and entanglement to solve a computational problem.</p>
-<p>Quantum algorithms do not make every task faster. They can offer advantages for particular problems when the right algorithm and hardware are available.</p>
-<div class="visual">
-<h3>Classical computing vs Quantum computing</h3>
-<p><strong>Classical:</strong> Processes information using bits, represented by 0 or 1.</p>
-<p><strong>Quantum:</strong> Uses qubits and quantum operations to process quantum states.</p>
+<h1 id="mainHeading">Discover the power of <span>quantum algorithms.</span></h1>
+
+<p class="intro" id="intro">
+Explore how quantum computers approach searching, factoring and real-world challenges.
+</p>
+
+<p id="progressLabel">YOUR LEARNING PROGRESS</p>
+
+<div class="progress">
+    <div class="progress-fill" id="progressFill"></div>
 </div>
-</section>
 
-<section class="card">
-<h2>02. Grover's Search Algorithm</h2>
-<p>Imagine searching through a collection of possibilities to find one special answer.</p>
-<p>Grover's algorithm is a quantum search algorithm that can search an unstructured collection of N possibilities in roughly the square root of N queries, compared with a classical search that may require checking many possibilities.</p>
-<p class="example">Our experiment uses two qubits and marks the answer |11⟩.</p>
-<div class="visual">
-<h3>Try Grover's Algorithm</h3>
-<p>Run the two-qubit Grover search using your Qiskit Aer simulator.</p>
-<button class="primary" id="groverButton" onclick="runGrover()">Run Grover Experiment →</button>
-<div class="result" id="groverResult"></div>
+<p class="progress-status" id="progressText">
+Module 4 completion: 0%
+</p>
+
+<div class="completion" id="completion">
+✓ Module 4 completed! Your progress has been saved.
 </div>
-<p class="note">This is a local Qiskit Aer simulation, not a run on physical quantum hardware. The simulator's result is based on the circuit and its measurement shots.</p>
+
+<section class="card">
+    <h2 id="section1Title">01. What is a quantum algorithm?</h2>
+
+    <p id="section1Text1">
+    A quantum algorithm is a sequence of operations designed to use
+    quantum properties such as superposition and entanglement to solve
+    a computational problem.
+    </p>
+
+    <p id="section1Text2">
+    Quantum algorithms do not make every task faster. They can offer
+    advantages for particular problems when the right algorithm and
+    hardware are available.
+    </p>
+
+    <div class="visual">
+        <h3 id="comparisonTitle">Classical computing vs Quantum computing</h3>
+        <p id="classicalText"><strong>Classical:</strong> Processes information using bits, represented by 0 or 1.</p>
+        <p id="quantumText"><strong>Quantum:</strong> Uses qubits and quantum operations to process quantum states.</p>
+    </div>
 </section>
 
 <section class="card">
-<h2>03. What is Shor's Algorithm?</h2>
-<p>Shor's algorithm is a quantum algorithm for factoring large integers. Integer factorization means finding the smaller numbers that multiply together to produce a given number.</p>
-<div class="visual">
-<h3>A simple example</h3>
-<p>15 = 3 × 5</p>
-<p>3 and 5 are factors of 15.</p>
-</div>
-<p>Shor's algorithm is important because sufficiently powerful fault-tolerant quantum computers could use it to factor large numbers much more efficiently than known classical methods.</p>
-<p class="note">Today's quantum computers are not yet capable of breaking widely used large-scale RSA encryption with Shor's algorithm.</p>
+    <h2 id="section2Title">02. Grover's Search Algorithm</h2>
+
+    <p id="groverText1">
+    Imagine searching through a collection of possibilities to find
+    one special answer.
+    </p>
+
+    <p id="groverText2">
+    Grover's algorithm is a quantum search algorithm that can search
+    an unstructured collection of N possibilities in roughly the
+    square root of N queries, compared with a classical search that
+    may require checking many possibilities.
+    </p>
+
+    <p class="example" id="groverExample">
+    Our experiment uses two qubits and marks the answer |11⟩.
+    </p>
+
+    <div class="visual">
+        <h3 id="experimentTitle">Try Grover's Algorithm</h3>
+        <p id="experimentDescription">Run the two-qubit Grover search using your Qiskit Aer simulator.</p>
+
+        <button class="primary" id="groverButton" onclick="runGrover()">
+            Run Grover Experiment →
+        </button>
+
+        <div class="result" id="groverResult"></div>
+    </div>
+
+    <p class="note" id="groverNote">
+    This is a local Qiskit Aer simulation, not a run on physical quantum
+    hardware. The simulator's result is based on the circuit and its measurement shots.
+    </p>
 </section>
 
 <section class="card">
-<h2>04. Quantum computing in the real world</h2>
-<h3>Healthcare and drug discovery</h3>
-<p>Researchers are exploring quantum methods for modelling molecules and studying chemical systems.</p>
-<h3>Materials and energy</h3>
-<p>Quantum simulations may help researchers investigate materials, batteries and chemical processes.</p>
-<h3>Cybersecurity</h3>
-<p>Quantum computing has important implications for cryptography. Post-quantum cryptography develops methods designed to resist attacks from future quantum computers.</p>
-<h3>Artificial intelligence</h3>
-<p>Quantum machine learning is an active research area exploring how quantum circuits may be used in machine-learning workflows.</p>
+    <h2 id="section3Title">03. What is Shor's Algorithm?</h2>
+
+    <p id="shorText1">
+    Shor's algorithm is a quantum algorithm for factoring large integers.
+    Integer factorization means finding the smaller numbers that multiply
+    together to produce a given number.
+    </p>
+
+    <div class="visual">
+        <h3 id="simpleExampleTitle">A simple example</h3>
+        <p>15 = 3 × 5</p>
+        <p id="factorText">3 and 5 are factors of 15.</p>
+    </div>
+
+    <p id="shorText2">
+    Shor's algorithm is important because sufficiently powerful
+    fault-tolerant quantum computers could use it to factor large
+    numbers much more efficiently than known classical methods.
+    </p>
+
+    <p class="note" id="shorNote">
+    Today's quantum computers are not yet capable of breaking widely
+    used large-scale RSA encryption with Shor's algorithm.
+    </p>
 </section>
 
 <section class="card">
-<h2>05. Test your knowledge!</h2>
+    <h2 id="section4Title">04. Quantum computing in the real world</h2>
 
-<p>Question 1: What is Grover's algorithm mainly used for?</p>
-<button class="quiz-option" onclick="answer(0,0)">A. Searching an unstructured collection</button>
-<button class="quiz-option" onclick="answer(0,1)">B. Creating a website</button>
-<button class="quiz-option" onclick="answer(0,2)">C. Storing photographs</button>
-<div class="feedback" id="feedback0"></div>
+    <h3 id="healthTitle">Healthcare and drug discovery</h3>
+    <p id="healthText">Researchers are exploring quantum methods for modelling molecules and studying chemical systems.</p>
 
-<h3>Question 2</h3>
-<p>What problem is Shor's algorithm known for?</p>
-<button class="quiz-option" onclick="answer(1,0)">A. Image editing</button>
-<button class="quiz-option" onclick="answer(1,1)">B. Integer factorization</button>
-<button class="quiz-option" onclick="answer(1,2)">C. Video streaming</button>
-<div class="feedback" id="feedback1"></div>
+    <h3 id="materialsTitle">Materials and energy</h3>
+    <p id="materialsText">Quantum simulations may help researchers investigate materials, batteries and chemical processes.</p>
 
-<h3>Question 3</h3>
-<p>Which statement about quantum computing is correct?</p>
-<button class="quiz-option" onclick="answer(2,0)">A. It makes every computer task faster</button>
-<button class="quiz-option" onclick="answer(2,1)">B. It has no possible real-world applications</button>
-<button class="quiz-option" onclick="answer(2,2)">C. It may offer advantages for particular problems</button>
-<div class="feedback" id="feedback2"></div>
+    <h3 id="securityTitle">Cybersecurity</h3>
+    <p id="securityText">Quantum computing has important implications for cryptography. Post-quantum cryptography develops methods designed to resist attacks from future quantum computers.</p>
 
-<button class="primary" onclick="showScore()">Check My Score →</button>
-<button class="retry" onclick="retryQuiz()">Retry Quiz</button>
-<div class="feedback" id="score"></div>
+    <h3 id="aiTitle">Artificial intelligence</h3>
+    <p id="aiText">Quantum machine learning is an active research area exploring how quantum circuits may be used in machine-learning workflows.</p>
+</section>
+
+<section class="card">
+    <h2 id="quizTitle">05. Test your knowledge!</h2>
+
+    <p id="question0">Question 1: What is Grover's algorithm mainly used for?</p>
+
+    <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. Searching an unstructured collection</button>
+    <button class="quiz-option" onclick="answer(0,1)" id="q0b">B. Creating a website</button>
+    <button class="quiz-option" onclick="answer(0,2)" id="q0c">C. Storing photographs</button>
+
+    <div class="feedback" id="feedback0"></div>
+
+    <h3 id="question2Heading">Question 2</h3>
+    <p id="question1">What problem is Shor's algorithm known for?</p>
+
+    <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. Image editing</button>
+    <button class="quiz-option" onclick="answer(1,1)" id="q1b">B. Integer factorization</button>
+    <button class="quiz-option" onclick="answer(1,2)" id="q1c">C. Video streaming</button>
+
+    <div class="feedback" id="feedback1"></div>
+
+    <h3 id="question3Heading">Question 3</h3>
+    <p id="question2">Which statement about quantum computing is correct?</p>
+
+    <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. It makes every computer task faster</button>
+    <button class="quiz-option" onclick="answer(2,1)" id="q2b">B. It has no possible real-world applications</button>
+    <button class="quiz-option" onclick="answer(2,2)" id="q2c">C. It may offer advantages for particular problems</button>
+
+    <div class="feedback" id="feedback2"></div>
+
+    <button class="primary" onclick="showScore()" id="checkButton">Check My Score →</button>
+    <button class="retry" onclick="retryQuiz()" id="retryButton">Retry Quiz</button>
+
+    <div class="feedback" id="score"></div>
 </section>
 
 <section class="card" style="text-align:center">
-<h2>Ready for the final module? 🎉</h2>
-<p>You've explored quantum algorithms and their possible applications.</p>
-<p class="example">Next: Discover how quantum computing could contribute to humanity.</p>
-<a class="primary" href="module5.html" style="display:inline-block">Continue to Module 5 →</a>
+    <h2 id="finalTitle">Ready for the final module? 🎉</h2>
+
+    <p id="finalText">You've explored quantum algorithms and their possible applications.</p>
+
+    <p class="example" id="nextText">
+    Next: Discover how quantum computing could contribute to humanity.
+    </p>
+
+    <a class="primary" href="module5.html" id="nextModule" style="display:none">
+        Continue to Module 5 →
+    </a>
+
+    <p class="note" id="lockedMessage">
+    Pass the Module 4 quiz with 3/3 to unlock Module 5.
+    </p>
 </section>
+
 </main>
 
-<footer>✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer id="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
 
 <script>
+
+// ==================================
+// LANGUAGE SYSTEM
+// ==================================
+
+const LANGUAGE_KEY = "qubitquestLanguage";
+
+const translations = {
+
+en: {
+home:"← Home",
+tag:"MODULE 04 · INTERMEDIATE LEVEL",
+heading:'Discover the power of <span>quantum algorithms.</span>',
+intro:"Explore how quantum computers approach searching, factoring and real-world challenges.",
+progressLabel:"YOUR LEARNING PROGRESS",
+progress:"Module 4 completion: ",
+completed:"✓ Module 4 completed! Your progress has been saved.",
+s1:"01. What is a quantum algorithm?",
+s1a:"A quantum algorithm is a sequence of operations designed to use quantum properties such as superposition and entanglement to solve a computational problem.",
+s1b:"Quantum algorithms do not make every task faster. They can offer advantages for particular problems when the right algorithm and hardware are available.",
+comparison:"Classical computing vs Quantum computing",
+classical:"Classical: Processes information using bits, represented by 0 or 1.",
+quantum:"Quantum: Uses qubits and quantum operations to process quantum states.",
+s2:"02. Grover's Search Algorithm",
+g1:"Imagine searching through a collection of possibilities to find one special answer.",
+g2:"Grover's algorithm is a quantum search algorithm that can search an unstructured collection of N possibilities in roughly the square root of N queries, compared with a classical search that may require checking many possibilities.",
+gExample:"Our experiment uses two qubits and marks the answer |11⟩.",
+experiment:"Try Grover's Algorithm",
+experimentDesc:"Run the two-qubit Grover search using your Qiskit Aer simulator.",
+run:"Run Grover Experiment →",
+running:"Running Grover experiment...",
+connecting:"Connecting to Qiskit Aer simulator...",
+gNote:"This is a local Qiskit Aer simulation, not a run on physical quantum hardware. The simulator's result is based on the circuit and its measurement shots.",
+s3:"03. What is Shor's Algorithm?",
+shor1:"Shor's algorithm is a quantum algorithm for factoring large integers. Integer factorization means finding the smaller numbers that multiply together to produce a given number.",
+simple:"A simple example",
+factor:"3 and 5 are factors of 15.",
+shor2:"Shor's algorithm is important because sufficiently powerful fault-tolerant quantum computers could use it to factor large numbers much more efficiently than known classical methods.",
+shorNote:"Today's quantum computers are not yet capable of breaking widely used large-scale RSA encryption with Shor's algorithm.",
+s4:"04. Quantum computing in the real world",
+health:"Healthcare and drug discovery",
+healthText:"Researchers are exploring quantum methods for modelling molecules and studying chemical systems.",
+materials:"Materials and energy",
+materialsText:"Quantum simulations may help researchers investigate materials, batteries and chemical processes.",
+security:"Cybersecurity",
+securityText:"Quantum computing has important implications for cryptography. Post-quantum cryptography develops methods designed to resist attacks from future quantum computers.",
+ai:"Artificial intelligence",
+aiText:"Quantum machine learning is an active research area exploring how quantum circuits may be used in machine-learning workflows.",
+quiz:"05. Test your knowledge!",
+q0:"Question 1: What is Grover's algorithm mainly used for?",
+q0a:"A. Searching an unstructured collection",
+q0b:"B. Creating a website",
+q0c:"C. Storing photographs",
+q2heading:"Question 2",
+q1:"What problem is Shor's algorithm known for?",
+q1a:"A. Image editing",
+q1b:"B. Integer factorization",
+q1c:"C. Video streaming",
+q3heading:"Question 3",
+q2:"Which statement about quantum computing is correct?",
+q2a:"A. It makes every computer task faster",
+q2b:"B. It has no possible real-world applications",
+q2c:"C. It may offer advantages for particular problems",
+check:"Check My Score →",
+retry:"Retry Quiz",
+correct:"✓ Correct! ",
+incorrect:"Not quite! ",
+explain0:"Grover's algorithm is designed for searching an unstructured collection.",
+explain1:"Shor's algorithm is known for integer factorization.",
+explain2:"Quantum computers may offer advantages for particular problems, not every task.",
+answerAll:"Please answer all three questions first.",
+score:"You scored ",
+outOf:" out of 3! ",
+excellent:"Excellent work! Module 4 completed. 🌟",
+effort:"Good effort! You need 3/3 to complete this module.",
+finalTitle:"Ready for the final module? 🎉",
+finalText:"You've explored quantum algorithms and their possible applications.",
+nextText:"Next: Discover how quantum computing could contribute to humanity.",
+continue:"Continue to Module 5 →",
+locked:"Pass the Module 4 quiz with 3/3 to unlock Module 5.",
+footer:"✦ QubitQuest — Quantum learning for everyone.",
+resultTitle:"Grover experiment completed! ✨",
+total:"Total measurements: ",
+marked:"Marked answer: ",
+measurement:"Measurement Results",
+outcome:"Outcome ",
+measurements:" measurements (",
+circuitTitle:"Text Circuit Output",
+circuitMissing:"Circuit diagram not provided by the backend.",
+circuitImage:"Real Qiskit Circuit Diagram",
+circuitCaption:"Generated from the actual Grover quantum circuit using Qiskit.",
+histogramTitle:"Measurement Histogram",
+histogramCaption:"Visual representation of the measurement counts from the Qiskit Aer simulation.",
+missingCircuit:"Circuit image was not returned by the backend. The text circuit is shown above.",
+missingHistogram:"Histogram image was not returned by the backend.",
+explanation:"The Grover circuit marks the target state and applies a diffusion operation to amplify its probability.",
+error:"Check that your Flask backend is running."
+},
+
+kn: {
+home:"← ಮುಖಪುಟ",
+tag:"ಮಾಡ್ಯೂಲ್ 04 · ಮಧ್ಯಂತರ ಹಂತ",
+heading:'<span>ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳ</span> ಶಕ್ತಿಯನ್ನು ಅನ್ವೇಷಿಸಿ.',
+intro:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಹುಡುಕಾಟ, ಅಪವರ್ತನ ಮತ್ತು ನೈಜ ಜಗತ್ತಿನ ಸವಾಲುಗಳನ್ನು ಹೇಗೆ ಎದುರಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
+progressLabel:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",
+progress:"ಮಾಡ್ಯೂಲ್ 4 ಪೂರ್ಣಗೊಂಡಿದೆ: ",
+completed:"✓ ಮಾಡ್ಯೂಲ್ 4 ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
+s1:"01. ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್ ಎಂದರೇನು?",
+s1a:"ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್ ಎಂದರೆ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್‌ನಂತಹ ಕ್ವಾಂಟಮ್ ಗುಣಲಕ್ಷಣಗಳನ್ನು ಬಳಸಿ ಗಣಕ ಸಮಸ್ಯೆಯನ್ನು ಪರಿಹರಿಸುವ ಕಾರ್ಯಾಚರಣೆಗಳ ಸರಣಿ.",
+s1b:"ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಪ್ರತಿಯೊಂದು ಕೆಲಸವನ್ನೂ ವೇಗಗೊಳಿಸುವುದಿಲ್ಲ. ಸರಿಯಾದ ಅಲ್ಗಾರಿದಮ್ ಮತ್ತು ಹಾರ್ಡ್‌ವೇರ್ ಇದ್ದಾಗ ಕೆಲವು ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆಗಳಿಗೆ ಪ್ರಯೋಜನ ನೀಡಬಹುದು.",
+comparison:"ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟಿಂಗ್ ಮತ್ತು ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್",
+classical:"ಸಾಂಪ್ರದಾಯಿಕ: 0 ಅಥವಾ 1 ಎಂದು ಸೂಚಿಸುವ ಬಿಟ್‌ಗಳನ್ನು ಬಳಸಿ ಮಾಹಿತಿಯನ್ನು ಸಂಸ್ಕರಿಸುತ್ತದೆ.",
+quantum:"ಕ್ವಾಂಟಮ್: ಕ್ಯೂಬಿಟ್‌ಗಳು ಮತ್ತು ಕ್ವಾಂಟಮ್ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ಬಳಸಿ ಕ್ವಾಂಟಮ್ ಸ್ಥಿತಿಗಳನ್ನು ಸಂಸ್ಕರಿಸುತ್ತದೆ.",
+s2:"02. ಗ್ರೋವರ್‌ನ ಹುಡುಕಾಟ ಅಲ್ಗಾರಿದಮ್",
+g1:"ಹಲವು ಸಾಧ್ಯತೆಗಳ ನಡುವೆ ಒಂದು ವಿಶೇಷ ಉತ್ತರವನ್ನು ಹುಡುಕುತ್ತಿರುವುದನ್ನು ಕಲ್ಪಿಸಿಕೊಳ್ಳಿ.",
+g2:"ಗ್ರೋವರ್‌ನ ಅಲ್ಗಾರಿದಮ್ ಒಂದು ಕ್ವಾಂಟಮ್ ಹುಡುಕಾಟ ವಿಧಾನವಾಗಿದೆ. ಇದು N ಸಾಧ್ಯತೆಗಳಿರುವ ಅಸಂಘಟಿತ ಸಂಗ್ರಹದಲ್ಲಿ ಸುಮಾರು √N ಪ್ರಶ್ನೆಗಳಲ್ಲಿ ಹುಡುಕಬಹುದು. ಸಾಂಪ್ರದಾಯಿಕ ಹುಡುಕಾಟದಲ್ಲಿ ಅನೇಕ ಸಾಧ್ಯತೆಗಳನ್ನು ಪರಿಶೀಲಿಸಬೇಕಾಗಬಹುದು.",
+gExample:"ನಮ್ಮ ಪ್ರಯೋಗವು ಎರಡು ಕ್ಯೂಬಿಟ್‌ಗಳನ್ನು ಬಳಸುತ್ತದೆ ಮತ್ತು |11⟩ ಉತ್ತರವನ್ನು ಗುರುತಿಸುತ್ತದೆ.",
+experiment:"ಗ್ರೋವರ್ ಅಲ್ಗಾರಿದಮ್ ಪ್ರಯತ್ನಿಸಿ",
+experimentDesc:"ನಿಮ್ಮ Qiskit Aer ಸಿಮ್ಯುಲೇಟರ್ ಬಳಸಿ ಎರಡು ಕ್ಯೂಬಿಟ್‌ಗಳ ಗ್ರೋವರ್ ಹುಡುಕಾಟವನ್ನು ಚಲಾಯಿಸಿ.",
+run:"ಗ್ರೋವರ್ ಪ್ರಯೋಗ ಚಲಾಯಿಸಿ →",
+running:"ಗ್ರೋವರ್ ಪ್ರಯೋಗ ನಡೆಯುತ್ತಿದೆ...",
+connecting:"Qiskit Aer ಸಿಮ್ಯುಲೇಟರ್‌ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...",
+gNote:"ಇದು ಸ್ಥಳೀಯ Qiskit Aer ಸಿಮ್ಯುಲೇಶನ್ ಆಗಿದೆ; ನೈಜ ಕ್ವಾಂಟಮ್ ಹಾರ್ಡ್‌ವೇರ್‌ನಲ್ಲಿ ನಡೆಸಲಾಗಿಲ್ಲ. ಫಲಿತಾಂಶವು ಸರ್ಕ್ಯೂಟ್ ಮತ್ತು ಅಳತೆಗಳ ಸಂಖ್ಯೆಯನ್ನು ಆಧರಿಸಿದೆ.",
+s3:"03. ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ಎಂದರೇನು?",
+shor1:"ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ದೊಡ್ಡ ಪೂರ್ಣಾಂಕಗಳನ್ನು ಅಪವರ್ತನಗೊಳಿಸುವ ಕ್ವಾಂಟಮ್ ವಿಧಾನವಾಗಿದೆ. ಪೂರ್ಣಾಂಕ ಅಪವರ್ತನ ಎಂದರೆ ಒಂದು ಸಂಖ್ಯೆಯನ್ನು ಗುಣಿಸಿದಾಗ ಪಡೆಯುವ ಚಿಕ್ಕ ಸಂಖ್ಯೆಗಳನ್ನು ಕಂಡುಹಿಡಿಯುವುದು.",
+simple:"ಒಂದು ಸರಳ ಉದಾಹರಣೆ",
+factor:"3 ಮತ್ತು 5 ಎಂಬುವು 15ರ ಅಪವರ್ತನಗಳು.",
+shor2:"ಸಾಕಷ್ಟು ಶಕ್ತಿಯುತ ದೋಷ-ಸಹಿಷ್ಣು ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ದೊಡ್ಡ ಸಂಖ್ಯೆಗಳನ್ನು ಸಾಂಪ್ರದಾಯಿಕ ವಿಧಾನಗಳಿಗಿಂತ ಹೆಚ್ಚು ಪರಿಣಾಮಕಾರಿಯಾಗಿ ಅಪವರ್ತನಗೊಳಿಸಲು ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ಬಳಸಬಹುದು.",
+shorNote:"ಇಂದಿನ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ಬಳಸಿ ವ್ಯಾಪಕವಾಗಿ ಬಳಸುವ ದೊಡ್ಡ RSA ಎನ್‌ಕ್ರಿಪ್ಶನ್ ಅನ್ನು ಮುರಿಯಲು ಇನ್ನೂ ಸಮರ್ಥವಾಗಿಲ್ಲ.",
+s4:"04. ನೈಜ ಜಗತ್ತಿನಲ್ಲಿ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್",
+health:"ಆರೋಗ್ಯ ಮತ್ತು ಔಷಧ ಸಂಶೋಧನೆ",
+healthText:"ಅಣುಗಳ ಮಾದರಿಗಳನ್ನು ರೂಪಿಸಲು ಮತ್ತು ರಾಸಾಯನಿಕ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಲು ಸಂಶೋಧಕರು ಕ್ವಾಂಟಮ್ ವಿಧಾನಗಳನ್ನು ಅನ್ವೇಷಿಸುತ್ತಿದ್ದಾರೆ.",
+materials:"ವಸ್ತುಗಳು ಮತ್ತು ಶಕ್ತಿ",
+materialsText:"ವಸ್ತುಗಳು, ಬ್ಯಾಟರಿಗಳು ಮತ್ತು ರಾಸಾಯನಿಕ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಲು ಕ್ವಾಂಟಮ್ ಸಿಮ್ಯುಲೇಶನ್‌ಗಳು ಸಹಾಯ ಮಾಡಬಹುದು.",
+security:"ಸೈಬರ್ ಭದ್ರತೆ",
+securityText:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಕ್ರಿಪ್ಟೋಗ್ರಫಿಗೆ ಮಹತ್ವದ ಪರಿಣಾಮಗಳನ್ನು ಹೊಂದಿದೆ. ಭವಿಷ್ಯದ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳ ದಾಳಿಯನ್ನು ತಡೆಯುವ ವಿಧಾನಗಳನ್ನು ಪೋಸ್ಟ್-ಕ್ವಾಂಟಮ್ ಕ್ರಿಪ್ಟೋಗ್ರಫಿ ಅಭಿವೃದ್ಧಿಪಡಿಸುತ್ತದೆ.",
+ai:"ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ",
+aiText:"ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ಗಳನ್ನು ಯಂತ್ರ ಕಲಿಕೆಯಲ್ಲಿ ಹೇಗೆ ಬಳಸಬಹುದು ಎಂಬುದನ್ನು ಕ್ವಾಂಟಮ್ ಮೆಷಿನ್ ಲರ್ನಿಂಗ್ ಸಂಶೋಧಿಸುತ್ತದೆ.",
+quiz:"05. ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿ!",
+q0:"ಪ್ರಶ್ನೆ 1: ಗ್ರೋವರ್ ಅಲ್ಗಾರಿದಮ್ ಅನ್ನು ಮುಖ್ಯವಾಗಿ ಯಾವುದಕ್ಕೆ ಬಳಸಲಾಗುತ್ತದೆ?",
+q0a:"A. ಅಸಂಘಟಿತ ಸಂಗ್ರಹದಲ್ಲಿ ಹುಡುಕಲು",
+q0b:"B. ವೆಬ್‌ಸೈಟ್ ರಚಿಸಲು",
+q0c:"C. ಛಾಯಾಚಿತ್ರಗಳನ್ನು ಸಂಗ್ರಹಿಸಲು",
+q2heading:"ಪ್ರಶ್ನೆ 2",
+q1:"ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ಯಾವ ಸಮಸ್ಯೆಗೆ ಪ್ರಸಿದ್ಧವಾಗಿದೆ?",
+q1a:"A. ಚಿತ್ರ ಸಂಪಾದನೆ",
+q1b:"B. ಪೂರ್ಣಾಂಕ ಅಪವರ್ತನ",
+q1c:"C. ವೀಡಿಯೊ ಸ್ಟ್ರೀಮಿಂಗ್",
+q3heading:"ಪ್ರಶ್ನೆ 3",
+q2:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಬಗ್ಗೆ ಯಾವ ಹೇಳಿಕೆ ಸರಿಯಾಗಿದೆ?",
+q2a:"A. ಇದು ಪ್ರತಿಯೊಂದು ಕಂಪ್ಯೂಟರ್ ಕೆಲಸವನ್ನೂ ವೇಗಗೊಳಿಸುತ್ತದೆ",
+q2b:"B. ಇದಕ್ಕೆ ನೈಜ ಜಗತ್ತಿನಲ್ಲಿ ಯಾವುದೇ ಬಳಕೆಗಳಿಲ್ಲ",
+q2c:"C. ಕೆಲವು ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆಗಳಿಗೆ ಇದು ಪ್ರಯೋಜನ ನೀಡಬಹುದು",
+check:"ನನ್ನ ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸಿ →",
+retry:"ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+correct:"✓ ಸರಿಯಾಗಿದೆ! ",
+incorrect:"ಸರಿಯಾಗಿಲ್ಲ! ",
+explain0:"ಗ್ರೋವರ್ ಅಲ್ಗಾರಿದಮ್ ಅಸಂಘಟಿತ ಸಂಗ್ರಹದಲ್ಲಿ ಹುಡುಕಲು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
+explain1:"ಶೋರ್ ಅಲ್ಗಾರಿದಮ್ ಪೂರ್ಣಾಂಕ ಅಪವರ್ತನಕ್ಕೆ ಪ್ರಸಿದ್ಧವಾಗಿದೆ.",
+explain2:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಪ್ರತಿಯೊಂದು ಕೆಲಸಕ್ಕೂ ಅಲ್ಲ, ಕೆಲವು ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆಗಳಿಗೆ ಪ್ರಯೋಜನ ನೀಡಬಹುದು.",
+answerAll:"ಮೊದಲು ಎಲ್ಲಾ ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+score:"ನಿಮ್ಮ ಅಂಕಗಳು: ",
+outOf:" / 3! ",
+excellent:"ಅದ್ಭುತ! ಮಾಡ್ಯೂಲ್ 4 ಪೂರ್ಣಗೊಂಡಿದೆ. 🌟",
+effort:"ಉತ್ತಮ ಪ್ರಯತ್ನ! ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3/3 ಅಂಕಗಳು ಅಗತ್ಯ.",
+finalTitle:"ಕೊನೆಯ ಮಾಡ್ಯೂಲ್‌ಗೆ ಸಿದ್ಧರಿದ್ದೀರಾ? 🎉",
+finalText:"ನೀವು ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಮತ್ತು ಅವುಗಳ ಬಳಕೆಗಳನ್ನು ಕಲಿತಿದ್ದೀರಿ.",
+nextText:"ಮುಂದೆ: ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಮಾನವಕುಲಕ್ಕೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
+continue:"ಮಾಡ್ಯೂಲ್ 5ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",
+locked:"ಮಾಡ್ಯೂಲ್ 5 ತೆರೆಯಲು ಮಾಡ್ಯೂಲ್ 4 ರಲ್ಲಿ 3/3 ಅಂಕಗಳನ್ನು ಪಡೆಯಿರಿ.",
+footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+resultTitle:"ಗ್ರೋವರ್ ಪ್ರಯೋಗ ಪೂರ್ಣಗೊಂಡಿದೆ! ✨",
+total:"ಒಟ್ಟು ಅಳತೆಗಳು: ",
+marked:"ಗುರುತಿಸಲಾದ ಉತ್ತರ: ",
+measurement:"ಅಳತೆಯ ಫಲಿತಾಂಶಗಳು",
+outcome:"ಫಲಿತಾಂಶ ",
+measurements:" ಅಳತೆಗಳು (",
+circuitTitle:"ಪಠ್ಯ ಸರ್ಕ್ಯೂಟ್ ಫಲಿತಾಂಶ",
+circuitMissing:"ಬ್ಯಾಕೆಂಡ್ ಸರ್ಕ್ಯೂಟ್ ಅನ್ನು ಒದಗಿಸಿಲ್ಲ.",
+circuitImage:"ನೈಜ Qiskit ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ",
+circuitCaption:"Qiskit ಬಳಸಿ ನೈಜ ಗ್ರೋವರ್ ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ನಿಂದ ರಚಿಸಲಾಗಿದೆ.",
+histogramTitle:"ಅಳತೆಗಳ ಹಿಸ್ಟೋಗ್ರಾಮ್",
+histogramCaption:"Qiskit Aer ಸಿಮ್ಯುಲೇಶನ್‌ನ ಅಳತೆ ಎಣಿಕೆಗಳ ದೃಶ್ಯ ರೂಪ.",
+missingCircuit:"ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ ಲಭ್ಯವಿಲ್ಲ. ಮೇಲಿನ ಪಠ್ಯ ಸರ್ಕ್ಯೂಟ್ ಅನ್ನು ನೋಡಿ.",
+missingHistogram:"ಹಿಸ್ಟೋಗ್ರಾಮ್ ಚಿತ್ರ ಲಭ್ಯವಿಲ್ಲ.",
+explanation:"ಗ್ರೋವರ್ ಸರ್ಕ್ಯೂಟ್ ಗುರಿ ಸ್ಥಿತಿಯನ್ನು ಗುರುತಿಸಿ ಅದರ ಸಂಭವನೀಯತೆಯನ್ನು ಹೆಚ್ಚಿಸಲು ಡಿಫ್ಯೂಷನ್ ಕಾರ್ಯಾಚರಣೆಯನ್ನು ಬಳಸುತ್ತದೆ.",
+error:"ನಿಮ್ಮ Flask ಬ್ಯಾಕೆಂಡ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ."
+},
+
+hi: {
+home:"← होम",
+tag:"मॉड्यूल 04 · मध्यवर्ती स्तर",
+heading:'<span>क्वांटम एल्गोरिदम</span> की शक्ति जानें।',
+intro:"जानें कि क्वांटम कंप्यूटर खोज, गुणनखंड और वास्तविक दुनिया की चुनौतियों को कैसे हल करते हैं।",
+progressLabel:"आपकी सीखने की प्रगति",
+progress:"मॉड्यूल 4 की पूर्णता: ",
+completed:"✓ मॉड्यूल 4 पूरा हुआ! आपकी प्रगति सहेज ली गई है।",
+s1:"01. क्वांटम एल्गोरिदम क्या है?",
+s1a:"क्वांटम एल्गोरिदम निर्देशों का एक क्रम है, जो सुपरपोज़िशन और एंटैंगलमेंट जैसे क्वांटम गुणों का उपयोग करके गणना संबंधी समस्याओं को हल करता है।",
+s1b:"क्वांटम एल्गोरिदम हर काम को तेज़ नहीं बनाते। सही एल्गोरिदम और हार्डवेयर उपलब्ध होने पर वे कुछ विशेष समस्याओं में लाभ दे सकते हैं।",
+comparison:"क्लासिकल कंप्यूटिंग बनाम क्वांटम कंप्यूटिंग",
+classical:"क्लासिकल: बिट्स का उपयोग करके जानकारी संसाधित करता है, जिन्हें 0 या 1 के रूप में दर्शाया जाता है।",
+quantum:"क्वांटम: क्विबिट और क्वांटम ऑपरेशन का उपयोग करके क्वांटम अवस्थाओं को संसाधित करता है।",
+s2:"02. ग्रोवर का सर्च एल्गोरिदम",
+g1:"कल्पना कीजिए कि आप कई संभावनाओं में से एक विशेष उत्तर खोज रहे हैं।",
+g2:"ग्रोवर का एल्गोरिदम एक क्वांटम सर्च एल्गोरिदम है। यह N संभावनाओं के असंगठित संग्रह में लगभग √N प्रश्नों में खोज कर सकता है, जबकि क्लासिकल खोज में कई संभावनाओं की जाँच करनी पड़ सकती है।",
+gExample:"हमारा प्रयोग दो क्विबिट का उपयोग करता है और उत्तर |11⟩ को चिह्नित करता है।",
+experiment:"ग्रोवर एल्गोरिदम आज़माएँ",
+experimentDesc:"अपने Qiskit Aer सिम्युलेटर से दो-क्विबिट ग्रोवर सर्च चलाएँ।",
+run:"ग्रोवर प्रयोग चलाएँ →",
+running:"ग्रोवर प्रयोग चल रहा है...",
+connecting:"Qiskit Aer सिम्युलेटर से कनेक्ट हो रहा है...",
+gNote:"यह स्थानीय Qiskit Aer सिमुलेशन है, वास्तविक क्वांटम हार्डवेयर पर नहीं चलाया गया है। परिणाम सर्किट और मापन की संख्या पर आधारित है।",
+s3:"03. शोर का एल्गोरिदम क्या है?",
+shor1:"शोर का एल्गोरिदम बड़ी पूर्णांकों के गुणनखंड निकालने वाला क्वांटम एल्गोरिदम है। पूर्णांक गुणनखंड का अर्थ है ऐसी छोटी संख्याएँ ढूँढना जिनका गुणन करने पर दी गई संख्या प्राप्त हो।",
+simple:"एक सरल उदाहरण",
+factor:"3 और 5, 15 के गुणनखंड हैं।",
+shor2:"पर्याप्त शक्तिशाली और त्रुटि-सहिष्णु क्वांटम कंप्यूटर शोर एल्गोरिदम का उपयोग करके बड़ी संख्याओं के गुणनखंड पारंपरिक तरीकों से अधिक कुशलता से निकाल सकते हैं।",
+shorNote:"आज के क्वांटम कंप्यूटर अभी शोर एल्गोरिदम से व्यापक रूप से उपयोग किए जाने वाले बड़े RSA एन्क्रिप्शन को तोड़ने में सक्षम नहीं हैं।",
+s4:"04. वास्तविक दुनिया में क्वांटम कंप्यूटिंग",
+health:"स्वास्थ्य सेवा और दवा खोज",
+healthText:"शोधकर्ता अणुओं के मॉडल बनाने और रासायनिक प्रणालियों का अध्ययन करने के लिए क्वांटम तरीकों की खोज कर रहे हैं।",
+materials:"सामग्री और ऊर्जा",
+materialsText:"क्वांटम सिमुलेशन सामग्री, बैटरी और रासायनिक प्रक्रियाओं के अध्ययन में मदद कर सकते हैं।",
+security:"साइबर सुरक्षा",
+securityText:"क्वांटम कंप्यूटिंग का क्रिप्टोग्राफी पर महत्वपूर्ण प्रभाव है। पोस्ट-क्वांटम क्रिप्टोग्राफी भविष्य के क्वांटम कंप्यूटरों के हमलों से बचाव के तरीके विकसित करती है।",
+ai:"कृत्रिम बुद्धिमत्ता",
+aiText:"क्वांटम मशीन लर्निंग एक शोध क्षेत्र है, जो मशीन लर्निंग में क्वांटम सर्किट के उपयोग की खोज करता है।",
+quiz:"05. अपना ज्ञान जाँचें!",
+q0:"प्रश्न 1: ग्रोवर एल्गोरिदम का मुख्य उपयोग क्या है?",
+q0a:"A. असंगठित संग्रह में खोज करना",
+q0b:"B. वेबसाइट बनाना",
+q0c:"C. तस्वीरें संग्रहीत करना",
+q2heading:"प्रश्न 2",
+q1:"शोर एल्गोरिदम किस समस्या के लिए प्रसिद्ध है?",
+q1a:"A. चित्र संपादन",
+q1b:"B. पूर्णांक गुणनखंड",
+q1c:"C. वीडियो स्ट्रीमिंग",
+q3heading:"प्रश्न 3",
+q2:"क्वांटम कंप्यूटिंग के बारे में कौन-सा कथन सही है?",
+q2a:"A. यह हर कंप्यूटर कार्य को तेज़ बनाती है",
+q2b:"B. इसका वास्तविक दुनिया में कोई उपयोग नहीं है",
+q2c:"C. यह कुछ विशेष समस्याओं में लाभ दे सकती है",
+check:"मेरा स्कोर देखें →",
+retry:"फिर से प्रयास करें",
+correct:"✓ सही! ",
+incorrect:"पूरी तरह सही नहीं! ",
+explain0:"ग्रोवर एल्गोरिदम असंगठित संग्रह में खोज करने के लिए बनाया गया है।",
+explain1:"शोर एल्गोरिदम पूर्णांक गुणनखंड के लिए प्रसिद्ध है।",
+explain2:"क्वांटम कंप्यूटर कुछ विशेष समस्याओं में लाभ दे सकते हैं, हर काम में नहीं।",
+answerAll:"कृपया पहले तीनों प्रश्नों के उत्तर दें।",
+score:"आपका स्कोर ",
+outOf:" / 3! ",
+excellent:"बहुत बढ़िया! मॉड्यूल 4 पूरा हुआ। 🌟",
+effort:"अच्छा प्रयास! इस मॉड्यूल को पूरा करने के लिए 3/3 अंक चाहिए।",
+finalTitle:"अंतिम मॉड्यूल के लिए तैयार हैं? 🎉",
+finalText:"आपने क्वांटम एल्गोरिदम और उनके संभावित उपयोगों के बारे में सीखा है।",
+nextText:"अगला: जानें कि क्वांटम कंप्यूटिंग मानवता की कैसे मदद कर सकती है।",
+continue:"मॉड्यूल 5 पर जाएँ →",
+locked:"मॉड्यूल 5 खोलने के लिए मॉड्यूल 4 में 3/3 अंक प्राप्त करें।",
+footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+resultTitle:"ग्रोवर प्रयोग पूरा हुआ! ✨",
+total:"कुल मापन: ",
+marked:"चिह्नित उत्तर: ",
+measurement:"मापन के परिणाम",
+outcome:"परिणाम ",
+measurements:" मापन (",
+circuitTitle:"टेक्स्ट सर्किट परिणाम",
+circuitMissing:"बैकएंड ने सर्किट उपलब्ध नहीं कराया।",
+circuitImage:"वास्तविक Qiskit सर्किट चित्र",
+circuitCaption:"Qiskit का उपयोग करके वास्तविक ग्रोवर क्वांटम सर्किट से बनाया गया।",
+histogramTitle:"मापन हिस्टोग्राम",
+histogramCaption:"Qiskit Aer सिमुलेशन के मापन परिणामों का दृश्य रूप।",
+missingCircuit:"सर्किट चित्र उपलब्ध नहीं है। ऊपर टेक्स्ट सर्किट दिखाया गया है।",
+missingHistogram:"हिस्टोग्राम चित्र उपलब्ध नहीं है।",
+explanation:"ग्रोवर सर्किट लक्ष्य अवस्था को चिह्नित करता है और उसकी संभावना बढ़ाने के लिए डिफ्यूज़न ऑपरेशन लागू करता है।",
+error:"जाँचें कि आपका Flask बैकएंड चल रहा है।"
+},
+
+te: {
+home:"← హోమ్",
+tag:"మాడ్యూల్ 04 · మధ్యస్థ స్థాయి",
+heading:'<span>క్వాంటం అల్గారిథమ్‌ల</span> శక్తిని తెలుసుకోండి.',
+intro:"క్వాంటం కంప్యూటర్లు శోధన, గుణక విభజన మరియు నిజ జీవిత సమస్యలను ఎలా ఎదుర్కొంటాయో తెలుసుకోండి.",
+progressLabel:"మీ అభ్యాస పురోగతి",
+progress:"మాడ్యూల్ 4 పూర్తయింది: ",
+completed:"✓ మాడ్యూల్ 4 పూర్తయింది! మీ పురోగతి సేవ్ చేయబడింది.",
+s1:"01. క్వాంటం అల్గారిథమ్ అంటే ఏమిటి?",
+s1a:"క్వాంటం అల్గారిథమ్ అనేది సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ వంటి క్వాంటం లక్షణాలను ఉపయోగించి గణన సమస్యను పరిష్కరించే చర్యల క్రమం.",
+s1b:"క్వాంటం అల్గారిథమ్‌లు ప్రతి పనినీ వేగవంతం చేయవు. సరైన అల్గారిథమ్ మరియు హార్డ్‌వేర్ ఉన్నప్పుడు కొన్ని ప్రత్యేక సమస్యలకు ప్రయోజనం అందించగలవు.",
+comparison:"సాంప్రదాయ కంప్యూటింగ్ vs క్వాంటం కంప్యూటింగ్",
+classical:"సాంప్రదాయ: 0 లేదా 1గా సూచించే బిట్‌లను ఉపయోగించి సమాచారాన్ని ప్రాసెస్ చేస్తుంది.",
+quantum:"క్వాంటం: క్యూబిట్‌లు మరియు క్వాంటం ఆపరేషన్‌లను ఉపయోగించి క్వాంటం స్థితులను ప్రాసెస్ చేస్తుంది.",
+s2:"02. గ్రోవర్ శోధన అల్గారిథమ్",
+g1:"అనేక అవకాశాల మధ్య ఒక ప్రత్యేక సమాధానాన్ని వెతుకుతున్నట్లు ఊహించుకోండి.",
+g2:"గ్రోవర్ అల్గారిథమ్ ఒక క్వాంటం శోధన పద్ధతి. ఇది N అవకాశాలున్న క్రమబద్ధం కాని సమూహంలో సుమారు √N ప్రశ్నల్లో శోధించగలదు. సాంప్రదాయ శోధనలో అనేక అవకాశాలను తనిఖీ చేయాల్సి రావచ్చు.",
+gExample:"మన ప్రయోగం రెండు క్యూబిట్‌లను ఉపయోగించి |11⟩ సమాధానాన్ని గుర్తిస్తుంది.",
+experiment:"గ్రోవర్ అల్గారిథమ్‌ను ప్రయత్నించండి",
+experimentDesc:"మీ Qiskit Aer సిమ్యులేటర్‌తో రెండు క్యూబిట్‌ల గ్రోవర్ శోధనను అమలు చేయండి.",
+run:"గ్రోవర్ ప్రయోగాన్ని అమలు చేయండి →",
+running:"గ్రోవర్ ప్రయోగం జరుగుతోంది...",
+connecting:"Qiskit Aer సిమ్యులేటర్‌కు కనెక్ట్ అవుతోంది...",
+gNote:"ఇది స్థానిక Qiskit Aer సిమ్యులేషన్ మాత్రమే; నిజమైన క్వాంటం హార్డ్‌వేర్‌పై అమలు చేయబడలేదు. ఫలితం సర్క్యూట్ మరియు కొలతల సంఖ్యపై ఆధారపడి ఉంటుంది.",
+s3:"03. షోర్ అల్గారిథమ్ అంటే ఏమిటి?",
+shor1:"షోర్ అల్గారిథమ్ పెద్ద పూర్ణాంకాలను గుణక విభజన చేసే క్వాంటం అల్గారిథమ్. గుణక విభజన అంటే ఇచ్చిన సంఖ్యను గుణించి పొందగల చిన్న సంఖ్యలను కనుగొనడం.",
+simple:"ఒక సులభమైన ఉదాహరణ",
+factor:"3 మరియు 5 అనేవి 15 యొక్క గుణకాలు.",
+shor2:"తగినంత శక్తివంతమైన లోపాలను తట్టుకునే క్వాంటం కంప్యూటర్లు షోర్ అల్గారిథమ్‌తో పెద్ద సంఖ్యలను తెలిసిన సాంప్రదాయ పద్ధతుల కంటే మరింత సమర్థవంతంగా గుణక విభజన చేయగలవు.",
+shorNote:"ప్రస్తుత క్వాంటం కంప్యూటర్లు షోర్ అల్గారిథమ్‌తో విస్తృతంగా ఉపయోగించే పెద్ద RSA ఎన్‌క్రిప్షన్‌ను ఛేదించగల స్థాయిలో ఇంకా లేవు.",
+s4:"04. నిజ జీవితంలో క్వాంటం కంప్యూటింగ్",
+health:"ఆరోగ్య సంరక్షణ మరియు ఔషధ పరిశోధన",
+healthText:"అణువుల నమూనాలను రూపొందించడానికి మరియు రసాయన వ్యవస్థలను అధ్యయనం చేయడానికి పరిశోధకులు క్వాంటం పద్ధతులను అన్వేషిస్తున్నారు.",
+materials:"పదార్థాలు మరియు శక్తి",
+materialsText:"క్వాంటం సిమ్యులేషన్‌లు పదార్థాలు, బ్యాటరీలు మరియు రసాయన ప్రక్రియలను పరిశోధించడంలో సహాయపడవచ్చు.",
+security:"సైబర్ భద్రత",
+securityText:"క్వాంటం కంప్యూటింగ్ క్రిప్టోగ్రఫీపై ముఖ్యమైన ప్రభావాలను కలిగి ఉంది. భవిష్యత్తులో క్వాంటం కంప్యూటర్ల దాడులను తట్టుకునే పద్ధతులను పోస్ట్-క్వాంటం క్రిప్టోగ్రఫీ అభివృద్ధి చేస్తుంది.",
+ai:"కృత్రిమ మేధస్సు",
+aiText:"క్వాంటం మెషిన్ లెర్నింగ్ అనేది మెషిన్ లెర్నింగ్ ప్రక్రియల్లో క్వాంటం సర్క్యూట్‌లను ఉపయోగించే అవకాశాలను పరిశోధించే రంగం.",
+quiz:"05. మీ జ్ఞానాన్ని పరీక్షించుకోండి!",
+q0:"ప్రశ్న 1: గ్రోవర్ అల్గారిథమ్ ప్రధానంగా దేనికి ఉపయోగపడుతుంది?",
+q0a:"A. క్రమబద్ధం కాని సమూహంలో శోధించడం",
+q0b:"B. వెబ్‌సైట్ తయారు చేయడం",
+q0c:"C. ఫోటోలను నిల్వ చేయడం",
+q2heading:"ప్రశ్న 2",
+q1:"షోర్ అల్గారిథమ్ ఏ సమస్యకు ప్రసిద్ధి చెందింది?",
+q1a:"A. చిత్రాల సవరణ",
+q1b:"B. పూర్ణాంకాల గుణక విభజన",
+q1c:"C. వీడియో స్ట్రీమింగ్",
+q3heading:"ప్రశ్న 3",
+q2:"క్వాంటం కంప్యూటింగ్ గురించి సరైన వాక్యం ఏది?",
+q2a:"A. ఇది ప్రతి కంప్యూటర్ పనినీ వేగవంతం చేస్తుంది",
+q2b:"B. దీనికి నిజ జీవితంలో ఉపయోగాలు లేవు",
+q2c:"C. కొన్ని ప్రత్యేక సమస్యలకు ఇది ప్రయోజనం అందించవచ్చు",
+check:"నా స్కోర్‌ను తనిఖీ చేయండి →",
+retry:"మళ్లీ ప్రయత్నించండి",
+correct:"✓ సరైనది! ",
+incorrect:"సరిగ్గా లేదు! ",
+explain0:"గ్రోవర్ అల్గారిథమ్ క్రమబద్ధం కాని సమూహంలో శోధించడానికి రూపొందించబడింది.",
+explain1:"షోర్ అల్గారిథమ్ పూర్ణాంకాల గుణక విభజనకు ప్రసిద్ధి చెందింది.",
+explain2:"క్వాంటం కంప్యూటర్లు ప్రతి పనికి కాదు, కొన్ని ప్రత్యేక సమస్యలకు ప్రయోజనం అందించవచ్చు.",
+answerAll:"దయచేసి ముందుగా మూడు ప్రశ్నలకు సమాధానాలు ఇవ్వండి.",
+score:"మీ స్కోర్ ",
+outOf:" / 3! ",
+excellent:"అద్భుతం! మాడ్యూల్ 4 పూర్తయింది. 🌟",
+effort:"మంచి ప్రయత్నం! ఈ మాడ్యూల్ పూర్తి చేయడానికి 3/3 స్కోర్ అవసరం.",
+finalTitle:"చివరి మాడ్యూల్‌కు సిద్ధంగా ఉన్నారా? 🎉",
+finalText:"మీరు క్వాంటం అల్గారిథమ్‌లు మరియు వాటి ఉపయోగాల గురించి తెలుసుకున్నారు.",
+nextText:"తర్వాత: క్వాంటం కంప్యూటింగ్ మానవాళికి ఎలా సహాయపడగలదో తెలుసుకోండి.",
+continue:"మాడ్యూల్ 5కి కొనసాగండి →",
+locked:"మాడ్యూల్ 5ను తెరవడానికి మాడ్యూల్ 4లో 3/3 స్కోర్ సాధించండి.",
+footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+resultTitle:"గ్రోవర్ ప్రయోగం పూర్తయింది! ✨",
+total:"మొత్తం కొలతలు: ",
+marked:"గుర్తించిన సమాధానం: ",
+measurement:"కొలత ఫలితాలు",
+outcome:"ఫలితం ",
+measurements:" కొలతలు (",
+circuitTitle:"టెక్స్ట్ సర్క్యూట్ ఫలితం",
+circuitMissing:"బ్యాకెండ్ సర్క్యూట్‌ను అందించలేదు.",
+circuitImage:"నిజమైన Qiskit సర్క్యూట్ చిత్రం",
+circuitCaption:"Qiskit ఉపయోగించి నిజమైన గ్రోవర్ క్వాంటం సర్క్యూట్ నుండి రూపొందించబడింది.",
+histogramTitle:"కొలతల హిస్టోగ్రామ్",
+histogramCaption:"Qiskit Aer సిమ్యులేషన్ కొలతల సంఖ్యకు దృశ్య రూపం.",
+missingCircuit:"సర్క్యూట్ చిత్రం అందుబాటులో లేదు. పైన టెక్స్ట్ సర్క్యూట్ చూపబడింది.",
+missingHistogram:"హిస్టోగ్రామ్ చిత్రం అందుబాటులో లేదు.",
+explanation:"గ్రోవర్ సర్క్యూట్ లక్ష్య స్థితిని గుర్తించి దాని సంభావ్యతను పెంచడానికి డిఫ్యూషన్ ఆపరేషన్‌ను ఉపయోగిస్తుంది.",
+error:"మీ Flask బ్యాకెండ్ నడుస్తోందో లేదో తనిఖీ చేయండి."
+}
+
+};
+
+// ==================================
+// APPLY LANGUAGE
+// ==================================
+
+const textIds = [
+"homeLink","moduleTag","intro","progressLabel",
+"section1Title","section1Text1","section1Text2",
+"comparisonTitle","classicalText","quantumText",
+"section2Title","groverText1","groverText2","groverExample",
+"experimentTitle","experimentDescription","groverNote",
+"section3Title","shorText1","simpleExampleTitle","factorText",
+"shorText2","shorNote","section4Title",
+"healthTitle","healthText","materialsTitle","materialsText",
+"securityTitle","securityText","aiTitle","aiText",
+"quizTitle","question0","q0a","q0b","q0c",
+"question2Heading","question1","q1a","q1b","q1c",
+"question3Heading","question2","q2a","q2b","q2c",
+"checkButton","retryButton","finalTitle","finalText",
+"nextText","nextModule","lockedMessage","footer"
+];
+
+const translationKeys = [
+"home","tag",null,"progressLabel",
+"s1","s1a","s1b",
+"comparison","classical","quantum",
+"s2","g1","g2","gExample",
+"experiment","experimentDesc","gNote",
+"s3","shor1","simple","factor",
+"shor2","shorNote","s4",
+"health","healthText","materials","materialsText",
+"security","securityText","ai","aiText",
+"quiz","q0","q0a","q0b","q0c",
+"q2heading","q1","q1a","q1b","q1c",
+"q3heading","q2","q2a","q2b","q2c",
+"check","retry","finalTitle","finalText",
+"nextText","continue","locked","footer"
+];
+
+let currentLanguage = "en";
+
+function applyLanguage(language) {
+    if (!translations[language]) language = "en";
+
+    currentLanguage = language;
+
+    const t = translations[language];
+
+    document.documentElement.lang = language;
+
+    textIds.forEach((id,index) => {
+        const element = document.getElementById(id);
+        if (!element) return;
+
+        const key = translationKeys[index];
+
+        if (key) {
+            element.textContent = t[key];
+        }
+    });
+
+    // Preserve the styled heading.
+    document.getElementById("mainHeading").innerHTML = t.heading;
+
+    document.getElementById("progressText").textContent =
+        t.progress + (readProgress().completedModules.includes(4) ? "100%" : "0%");
+
+    document.getElementById("completion").textContent = t.completed;
+
+    document.getElementById("languageSelect").value = language;
+
+    localStorage.setItem(LANGUAGE_KEY, language);
+
+    updateProgress();
+
+    // Refresh the visible result text when changing languages.
+    if (document.getElementById("groverResult").style.display === "block") {
+        const result = document.getElementById("groverResult");
+        const savedData = result.dataset.result;
+
+        if (savedData) {
+            try {
+                renderGroverResult(JSON.parse(savedData));
+            } catch (error) {}
+        }
+    }
+
+    const button = document.getElementById("groverButton");
+    if (!button.disabled) {
+        button.textContent = t.run;
+    }
+}
+
+document.getElementById("languageSelect").addEventListener("change", function() {
+    applyLanguage(this.value);
+});
+
+// ==================================
+// SHARED PROGRESS SYSTEM
+// ==================================
+
 const PROGRESS_KEY = "qubitquestProgress";
 
-function readProgress(){
-    try{
-        const saved=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"{}");
+function readProgress() {
+    try {
+        const saved = JSON.parse(
+            localStorage.getItem(PROGRESS_KEY) || "{}"
+        );
+
         return {
-            completedModules:Array.isArray(saved.completedModules)?saved.completedModules:[],
-            quizScores:saved.quizScores&&typeof saved.quizScores==="object"?saved.quizScores:{}
+            ...saved,
+
+            completedModules: Array.isArray(saved.completedModules)
+                ? [...new Set(
+                    saved.completedModules
+                    .map(Number)
+                    .filter(Number.isFinite)
+                )]
+                : [],
+
+            quizScores: saved.quizScores &&
+                typeof saved.quizScores === "object" &&
+                !Array.isArray(saved.quizScores)
+                ? { ...saved.quizScores }
+                : {}
         };
-    }catch(e){
-        return {completedModules:[],quizScores:{}};
+
+    } catch (error) {
+        return {
+            completedModules: [],
+            quizScores: {}
+        };
     }
 }
 
-function updateProgress(){
-    const progress=readProgress();
-    const completed=progress.completedModules.includes(4);
-    const percent=completed?100:0;
-    document.getElementById("progressFill").style.width=percent+"%";
-    document.getElementById("progressText").textContent="Module 4 completion: "+percent+"%";
-    document.getElementById("completion").style.display=completed?"block":"none";
+function writeProgress(progress) {
+    localStorage.setItem(
+        PROGRESS_KEY,
+        JSON.stringify(progress)
+    );
 }
 
-function saveCompletion(finalScore){
-    const progress=readProgress();
-    if(finalScore===3&&!progress.completedModules.includes(4)){
+function updateProgress() {
+    const progress = readProgress();
+
+    const completed = progress.completedModules.includes(4);
+    const percent = completed ? 100 : 0;
+
+    document.getElementById("progressFill").style.width =
+        percent + "%";
+
+    document.getElementById("progressText").textContent =
+        translations[currentLanguage].progress + percent + "%";
+
+    document.getElementById("completion").style.display =
+        completed ? "block" : "none";
+
+    document.getElementById("nextModule").style.display =
+        completed ? "inline-block" : "none";
+
+    document.getElementById("lockedMessage").style.display =
+        completed ? "none" : "block";
+}
+
+function saveCompletion(finalScore) {
+    const progress = readProgress();
+
+    const previousBest = Number(progress.quizScores[4]) || 0;
+
+    progress.quizScores[4] = Math.max(
+        previousBest,
+        finalScore
+    );
+
+    if (finalScore === 3 &&
+        !progress.completedModules.includes(4)) {
         progress.completedModules.push(4);
     }
-    progress.quizScores[4]=finalScore;
-    localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+
+    writeProgress(progress);
     updateProgress();
 }
 
-async function runGrover(){
-    const button=document.getElementById("groverButton");
-    const result=document.getElementById("groverResult");
-    button.disabled=true;
-    button.textContent="Running Grover experiment...";
-    result.style.display="block";
-    result.textContent="Connecting to Qiskit Aer simulator...";
+window.addEventListener("storage", function(event) {
+    if (event.key === PROGRESS_KEY) {
+        updateProgress();
+    }
+});
 
-    try{
-        const response=await fetch("/api/run-grover",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({shots:1024})
-        });
-        const data=await response.json();
-        if(!response.ok) throw new Error(data.error||"Grover simulation failed.");
+// ==================================
+// VISUALIZATION DISPLAY
+// ==================================
 
-        const counts=data.counts||{};
-        const total=Number(data.shots||1024);
-        const marked=String(data.marked_state||"11");
-        let rows="";
+function addVisualizationImages(container, data) {
+    const t = translations[currentLanguage];
 
-        Object.entries(counts).forEach(([state,count])=>{
-            const percent=Number(count)/total*100;
-            rows+=`<p><strong>Outcome ${state}:</strong> ${count} (${percent.toFixed(1)}%)</p>
-            <div class="progress"><div class="progress-fill" style="width:${percent}%"></div></div>`;
-        });
+    const panel = document.createElement("div");
+    panel.className = "visualization-panel";
 
-        result.innerHTML=`
-            <h3>Grover experiment completed! ✨</h3>
-            <p>Total measurements: ${total}</p>
-            <p>Marked answer: <strong>|${marked}⟩</strong></p>
-            ${rows}
-            <p>${data.explanation||"The Grover circuit marks the target state and applies a diffusion operation to amplify its probability."}</p>
-            <h3>Qiskit circuit</h3>
-            <pre id="groverCircuit"></pre>
-        `;
-        document.getElementById("groverCircuit").textContent=data.circuit||"Circuit diagram not provided by the backend.";
-    }catch(error){
-        result.textContent="Error: "+error.message+". Check that your Flask backend is running.";
-    }finally{
-        button.disabled=false;
-        button.textContent="Run Grover Experiment →";
+    const circuitTitle = document.createElement("h3");
+    circuitTitle.textContent = t.circuitImage;
+    panel.appendChild(circuitTitle);
+
+    const circuitCaption = document.createElement("p");
+    circuitCaption.className = "visualization-caption";
+    circuitCaption.textContent = t.circuitCaption;
+    panel.appendChild(circuitCaption);
+
+    if (data.circuit_image) {
+        const circuitImage = document.createElement("img");
+
+        circuitImage.className = "visualization-image";
+        circuitImage.alt = t.circuitImage;
+        circuitImage.src = data.circuit_image;
+
+        panel.appendChild(circuitImage);
+    } else {
+        const missingCircuit = document.createElement("p");
+        missingCircuit.className = "visualization-missing";
+        missingCircuit.textContent = t.missingCircuit;
+        panel.appendChild(missingCircuit);
+    }
+
+    const histogramTitle = document.createElement("h3");
+    histogramTitle.textContent = t.histogramTitle;
+    panel.appendChild(histogramTitle);
+
+    const histogramCaption = document.createElement("p");
+    histogramCaption.className = "visualization-caption";
+    histogramCaption.textContent = t.histogramCaption;
+    panel.appendChild(histogramCaption);
+
+    if (data.histogram_image) {
+        const histogramImage = document.createElement("img");
+
+        histogramImage.className = "visualization-image";
+        histogramImage.alt = t.histogramTitle;
+        histogramImage.src = data.histogram_image;
+
+        panel.appendChild(histogramImage);
+    } else {
+        const missingHistogram = document.createElement("p");
+        missingHistogram.className = "visualization-missing";
+        missingHistogram.textContent = t.missingHistogram;
+        panel.appendChild(missingHistogram);
+    }
+
+    container.appendChild(panel);
+}
+
+// ==================================
+// GROVER RESULT RENDERING
+// ==================================
+
+function renderGroverResult(data) {
+    const t = translations[currentLanguage];
+    const result = document.getElementById("groverResult");
+
+    result.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent = t.resultTitle;
+    result.appendChild(heading);
+
+    const total = Number(data.shots) || 1024;
+    const marked = String(data.marked_state || "11");
+    const counts = data.counts || {};
+
+    const totalText = document.createElement("p");
+    totalText.textContent = t.total + total;
+    result.appendChild(totalText);
+
+    const markedText = document.createElement("p");
+    markedText.textContent = t.marked + "|" + marked + "⟩";
+    result.appendChild(markedText);
+
+    const countsTitle = document.createElement("h3");
+    countsTitle.textContent = t.measurement;
+    result.appendChild(countsTitle);
+
+    Object.entries(counts).forEach(([state, count]) => {
+        const percentage = Number(count) / total * 100;
+
+        const line = document.createElement("p");
+        line.textContent =
+            t.outcome + "|" + state + "⟩: " + count +
+            t.measurements + percentage.toFixed(2) + "%)";
+
+        result.appendChild(line);
+
+        const bar = document.createElement("div");
+        bar.className = "progress";
+
+        const fill = document.createElement("div");
+        fill.className = "progress-fill";
+        fill.style.width = percentage + "%";
+
+        bar.appendChild(fill);
+        result.appendChild(bar);
+    });
+
+    const explanation = document.createElement("p");
+    explanation.textContent = t.explanation;
+    result.appendChild(explanation);
+
+    const circuitTitle = document.createElement("h3");
+    circuitTitle.textContent = t.circuitTitle;
+    result.appendChild(circuitTitle);
+
+    const circuit = document.createElement("pre");
+    circuit.textContent =
+        data.circuit || t.circuitMissing;
+
+    result.appendChild(circuit);
+
+    addVisualizationImages(result, data);
+}
+
+// ==================================
+// GROVER EXPERIMENT
+// ==================================
+
+async function runGrover() {
+    const button = document.getElementById("groverButton");
+    const result = document.getElementById("groverResult");
+
+    const t = translations[currentLanguage];
+
+    button.disabled = true;
+    button.textContent = t.running;
+
+    result.style.display = "block";
+    result.textContent = t.connecting;
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/run-grover",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    shots: 1024
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Grover simulation failed."
+            );
+        }
+
+        result.dataset.result = JSON.stringify(data);
+        renderGroverResult(data);
+
+    } catch (error) {
+        result.textContent =
+            "Error: " + error.message +
+            ". " + translations[currentLanguage].error;
+
+    } finally {
+        button.disabled = false;
+        button.textContent = translations[currentLanguage].run;
     }
 }
 
-const correctAnswers=[0,1,2];
-const explanations=[
-    "Grover's algorithm is designed for searching an unstructured collection.",
-    "Shor's algorithm is known for integer factorization.",
-    "Quantum computers may offer advantages for particular problems, not every task."
-];
-let score=0;
-let answered=[false,false,false];
+// ==================================
+// QUIZ SYSTEM
+// ==================================
 
-function answer(question,choice){
-    if(answered[question])return;
-    answered[question]=true;
-    const buttons=document.querySelectorAll(".quiz-option");
-    for(let i=question*3;i<question*3+3;i++)buttons[i].disabled=true;
-    const feedback=document.getElementById("feedback"+question);
-    feedback.style.display="block";
-    if(choice===correctAnswers[question]){
+const correctAnswers = [0, 1, 2];
+
+let score = 0;
+let answered = [false, false, false];
+
+function answer(question, choice) {
+    if (answered[question]) return;
+
+    answered[question] = true;
+
+    const buttons = document.querySelectorAll(".quiz-option");
+
+    for (
+        let i = question * 3;
+        i < question * 3 + 3;
+        i++
+    ) {
+        buttons[i].disabled = true;
+    }
+
+    const feedback = document.getElementById(
+        "feedback" + question
+    );
+
+    feedback.style.display = "block";
+
+    const t = translations[currentLanguage];
+
+    const explanations = [
+        t.explain0,
+        t.explain1,
+        t.explain2
+    ];
+
+    if (choice === correctAnswers[question]) {
         score++;
-        feedback.textContent="✓ Correct! "+explanations[question];
-    }else{
-        feedback.textContent="Not quite! "+explanations[question];
+
+        feedback.textContent =
+            t.correct + explanations[question];
+
+    } else {
+        feedback.textContent =
+            t.incorrect + explanations[question];
     }
 }
 
-function showScore(){
-    const result=document.getElementById("score");
-    result.style.display="block";
-    if(answered.some(value=>!value)){
-        result.textContent="Please answer all three questions first.";
+function showScore() {
+    const result = document.getElementById("score");
+    const t = translations[currentLanguage];
+
+    result.style.display = "block";
+
+    if (answered.some(value => !value)) {
+        result.textContent = t.answerAll;
         return;
     }
-    result.textContent="You scored "+score+" out of 3! "+
-        (score===3?"Excellent work! Module 4 completed. 🌟":"Good effort! You need 3/3 to complete this module.");
+
+    result.textContent =
+        t.score + score + t.outOf +
+        (score === 3 ? t.excellent : t.effort);
+
     saveCompletion(score);
 }
 
-function retryQuiz(){
-    score=0;
-    answered=[false,false,false];
-    document.querySelectorAll(".quiz-option").forEach(button=>button.disabled=false);
-    for(let i=0;i<3;i++){
-        const feedback=document.getElementById("feedback"+i);
-        feedback.textContent="";
-        feedback.style.display="none";
+function retryQuiz() {
+    score = 0;
+    answered = [false, false, false];
+
+    document.querySelectorAll(".quiz-option").forEach(button => {
+        button.disabled = false;
+    });
+
+    for (let i = 0; i < 3; i++) {
+        const feedback = document.getElementById("feedback" + i);
+
+        feedback.textContent = "";
+        feedback.style.display = "none";
     }
-    const result=document.getElementById("score");
-    result.textContent="";
-    result.style.display="none";
+
+    const result = document.getElementById("score");
+
+    result.textContent = "";
+    result.style.display = "none";
 }
 
+// ==================================
+// INITIALIZE
+// ==================================
+
+const savedLanguage = localStorage.getItem(LANGUAGE_KEY) || "en";
+
+applyLanguage(savedLanguage);
 updateProgress();
+
 </script>
+
 </body>
 </html>
