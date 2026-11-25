@@ -4,7 +4,20 @@
 
 Q-Spark is a planned tabletop-style learning game for students and first-time quantum learners. Players flip coins, link a pair of magic dice, and search four treasure boxes. Every move in the quantum levels runs a real Qiskit circuit and updates a measurement histogram. The guided game and quizzes are planned in English and Kannada.
 
-This repository currently contains the project proposal. The runnable game, setup verification, benchmark results, and learner feedback are pending.
+## Run the landing page
+
+Clone the repo or download and extract its ZIP from GitHub. Open [web/index.html](web/index.html) in any modern browser. The landing page runs offline with the included stylesheet. There is no build or package install.
+
+To serve the page from a terminal, run one command from the repository root with Python 3 installed.
+
+| Platform | Command |
+| --- | --- |
+| macOS or Linux | `python3 -m http.server 8000 --bind 127.0.0.1 --directory web` |
+| Windows | `py -3 -m http.server 8000 --bind 127.0.0.1 --directory web` |
+
+Open http://127.0.0.1:8000. Press Ctrl+C in the terminal to stop the server.
+
+The landing page and project proposal are available. The playable lessons, Qiskit integration, benchmark results, and learner feedback are pending.
 
 ## The pitch — Quantum computing as a board game
 
@@ -27,7 +40,7 @@ Three guided lessons, each with a prediction, a learner-controlled move, a histo
 
 Players use a single local Flask page with plain HTML, CSS, and JavaScript. One Python circuit module serves both the game and a terminal runner. The runner and game return the same lesson ID, selected moves, source, shot count, and outcome counts. Use Qiskit Aer for the default execution path. Defer a free-form circuit editor, Q-Sphere, and cloud hosting until the guided demo is complete. [IBM guide to Qiskit Aer](https://quantum.cloud.ibm.com/docs/guides/simulate-with-qiskit-aer)
 
-### Terminal baseline for macOS and Windows
+### Planned game commands for macOS and Windows
 
 These are the planned commands for the implementation. Pin the dependencies after a clean install on both platforms and replace this section with verified commands before submission. The local path should need no Node.js or IBM login and should work offline after installation.
 
@@ -82,3 +95,7 @@ Assign owners for **Qiskit and hardware**, **terminal and classical benchmark**,
 - [ ] Repo and three-minute video links submitted with team name, team members, and Education track.
 
 F1Qubit and LGSquash served as references for concise local setup instructions and documenting what has been verified. Write the Q-Spark implementation during the hackathon and credit external libraries in line with the playbook.
+
+## License
+
+Q-Spark is available under the [MIT License](LICENSE).
