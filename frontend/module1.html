@@ -7,264 +7,537 @@
 <title>Module 1 | QubitQuest</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+    --bg:#080d1c;
+    --panel:#111a31;
+    --panel2:#151f3b;
+    --purple:#a99bff;
+    --violet:#8774ef;
+    --cyan:#46d9dc;
+    --text:#f5f5ff;
+    --muted:#aeb6cf;
+    --border:#293657;
+    --success:#8ef0df;
+    --danger:#ff9eae;
 }
 
-body {
-    font-family: "Segoe UI", sans-serif;
-    background: #080d1c;
-    color: #f5f5ff;
-    line-height: 1.7;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.navbar {
-    padding: 22px 9%;
-    background: #0b1225;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+html{
+    scroll-behavior:smooth;
 }
 
-.logo {
-    color: #a99bff;
-    font-size: 23px;
-    font-weight: bold;
+body{
+    font-family:"Segoe UI",sans-serif;
+    background:
+        radial-gradient(circle at 15% 5%,rgba(135,116,239,.15),transparent 30%),
+        radial-gradient(circle at 90% 35%,rgba(70,217,220,.09),transparent 28%),
+        var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    min-height:100vh;
 }
 
-.navbar a {
-    color: #dce0f4;
-    text-decoration: none;
+button,select{
+    font:inherit;
 }
 
-.container {
-    max-width: 950px;
-    margin: auto;
-    padding: 55px 22px;
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,13,28,.92);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
 }
 
-.tag {
-    color: #a99bff;
-    letter-spacing: 2px;
-    font-size: 12px;
-    font-weight: bold;
+.nav-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:15px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
 }
 
-h1 {
-    font-size: clamp(34px, 6vw, 52px);
-    line-height: 1.2;
-    margin: 18px 0;
+.logo{
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:.4px;
+    color:var(--text);
 }
 
-h1 span {
-    color: #a99bff;
+.logo span{
+    color:var(--purple);
 }
 
-.intro {
-    color: #aeb6cf;
-    font-size: 18px;
-    margin-bottom: 35px;
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.lesson-card {
-    background: #111a31;
-    border: 1px solid #273252;
-    border-radius: 15px;
-    padding: 28px;
-    margin: 25px 0;
+select{
+    background:var(--panel);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:9px 12px;
+    cursor:pointer;
+    outline:none;
 }
 
-.lesson-card h2 {
-    color: #a99bff;
-    margin-bottom: 15px;
+.home-link{
+    color:var(--cyan);
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
 }
 
-.lesson-card p {
-    color: #c4cbe0;
-    margin: 12px 0;
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:35px 22px 70px;
 }
 
-.visual {
-    background: #080d1c;
-    padding: 25px;
-    border-radius: 12px;
-    margin: 20px 0;
-    text-align: center;
+.hero{
+    text-align:center;
+    padding:45px 10px 35px;
 }
 
-.computer {
-    font-size: 65px;
-    margin: 10px;
+.tag{
+    display:inline-block;
+    color:var(--cyan);
+    background:rgba(70,217,220,.09);
+    border:1px solid rgba(70,217,220,.25);
+    border-radius:30px;
+    padding:7px 17px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.5px;
 }
 
-.bit-display {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin: 20px 0;
+.hero h1{
+    font-size:clamp(32px,5vw,48px);
+    line-height:1.2;
+    margin:20px 0 15px;
 }
 
-.bit {
-    width: 95px;
-    height: 95px;
-    display: grid;
-    place-items: center;
-    background: #8774ef;
-    border-radius: 15px;
-    font-size: 42px;
-    font-weight: bold;
-    box-shadow: 0 0 25px #8774ef55;
+.hero h1 span{
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
-.example {
-    color: #46d9dc;
-    font-weight: bold;
+.hero p{
+    color:var(--muted);
+    max-width:720px;
+    margin:auto;
+    font-size:16px;
 }
 
-.quiz-option {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 12px 0;
-    text-align: left;
-    border: 1px solid #465174;
-    border-radius: 8px;
-    background: #080d1c;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:13px;
+    flex-wrap:wrap;
+    margin-top:27px;
 }
 
-.quiz-option:hover {
-    border-color: #a99bff;
-    background: #19213b;
+.stat{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px 20px;
+    color:var(--muted);
+    font-size:13px;
 }
 
-.quiz-option:disabled {
-    cursor: default;
-    opacity: .8;
+.progress-card{
+    background:linear-gradient(135deg,#151f3b,#111a31);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:35px;
 }
 
-.quiz-option.selected-correct {
-    border-color: #46d9a0;
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:13px;
 }
 
-.quiz-option.selected-wrong {
-    border-color: #f87171;
+.progress-top h3{
+    font-size:17px;
 }
 
-button.primary {
-    background: #8774ef;
-    border: none;
-    padding: 14px 25px;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 15px 8px 0 0;
+.progress-percent{
+    color:var(--cyan);
+    font-weight:800;
 }
 
-button.primary:hover {
-    opacity: .9;
+.progress-track{
+    height:10px;
+    border-radius:20px;
+    background:#26314e;
+    overflow:hidden;
 }
 
-.feedback {
-    margin-top: 18px;
-    padding: 15px;
-    border-radius: 8px;
-    background: #19213b;
-    color: #46d9dc;
-    display: none;
+.progress-fill{
+    height:100%;
+    width:0;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--violet),var(--cyan));
+    transition:width .6s ease;
 }
 
-.progress {
-    height: 8px;
-    background: #273252;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 15px 0 12px;
+.progress-text{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:12px;
 }
 
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #8774ef, #46d9dc);
-    transition: width .4s ease;
+.completion-status{
+    display:none;
+    color:var(--success);
+    font-weight:700;
+    margin-top:12px;
 }
 
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    color: #aeb6cf;
-    font-size: 13px;
+.lesson-card{
+    background:linear-gradient(145deg,rgba(21,31,59,.96),rgba(17,26,49,.96));
+    border:1px solid var(--border);
+    border-radius:19px;
+    padding:28px;
+    margin-bottom:25px;
+    transition:transform .25s,border-color .25s;
 }
 
-.status-message {
-    display: none;
-    padding: 14px;
-    border-radius: 9px;
-    margin: 15px 0;
-    background: #12352e;
-    border: 1px solid #27785e;
-    color: #86efac;
+.lesson-card:hover{
+    transform:translateY(-3px);
+    border-color:#655fa7;
 }
 
-.quiz-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+.section-label{
+    color:var(--cyan);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:8px;
 }
 
-button.secondary {
-    background: transparent;
-    border: 1px solid #465174;
-    padding: 14px 25px;
-    color: #dce0f4;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
+.lesson-card h2{
+    font-size:25px;
+    margin-bottom:15px;
 }
 
-button.secondary:hover {
-    background: #19213b;
+.lesson-card h3{
+    font-size:17px;
+    margin-bottom:9px;
 }
 
-.next-link {
-    display: inline-block;
-    background: #8774ef;
-    color: white;
-    text-decoration: none;
-    padding: 12px 22px;
-    border-radius: 8px;
-    margin-top: 15px;
-    font-weight: bold;
+.lesson-card p{
+    color:var(--muted);
+    margin-bottom:13px;
 }
 
-.next-link:hover {
-    opacity: .9;
+.visual-box{
+    background:#0a1125;
+    border:1px solid #344263;
+    border-radius:16px;
+    padding:25px;
+    margin:20px 0;
+    text-align:center;
 }
 
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #aeb6cf;
+.visual-box h3{
+    color:var(--purple);
 }
 
-@media(max-width: 600px) {
-    .navbar {
-        padding: 18px;
+.bit-row{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin:20px 0;
+}
+
+.bit{
+    width:95px;
+    height:95px;
+    border-radius:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(145deg,#222d52,#151f3b);
+    border:1px solid #58638e;
+    box-shadow:0 0 20px rgba(135,116,239,.12);
+}
+
+.bit strong{
+    font-size:34px;
+    color:var(--cyan);
+}
+
+.bit small{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.demo-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
+}
+
+.primary-button{
+    border:none;
+    border-radius:11px;
+    padding:12px 21px;
+    color:#080d1c;
+    background:linear-gradient(100deg,var(--purple),var(--cyan));
+    font-weight:800;
+    cursor:pointer;
+    transition:transform .2s,opacity .2s;
+}
+
+.primary-button:hover{
+    transform:translateY(-2px);
+}
+
+.primary-button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.secondary-button{
+    border:1px solid var(--border);
+    background:#182440;
+    color:var(--text);
+    border-radius:11px;
+    padding:11px 19px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.secondary-button:hover{
+    border-color:var(--purple);
+}
+
+.demo-result{
+    color:var(--success);
+    font-weight:700;
+    margin-top:15px;
+    min-height:26px;
+}
+
+.qubit{
+    width:125px;
+    height:125px;
+    margin:20px auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    font-weight:800;
+    color:white;
+    background:radial-gradient(circle at 35% 30%,#c5baff,#7562e7 55%,#29205e);
+    box-shadow:0 0 30px rgba(169,155,255,.55),0 0 65px rgba(70,217,220,.18);
+    animation:pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);box-shadow:0 0 25px rgba(169,155,255,.45)}
+    50%{transform:scale(1.07);box-shadow:0 0 45px rgba(70,217,220,.55)}
+}
+
+.state-label{
+    color:var(--cyan);
+    font-size:17px;
+    font-weight:700;
+}
+
+.compare-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:20px;
+}
+
+.compare-box{
+    background:#0c142a;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.compare-box h3{
+    color:var(--purple);
+}
+
+.compare-box p{
+    font-size:14px;
+    margin-bottom:0;
+}
+
+.quiz-card{
+    background:linear-gradient(145deg,#151f3b,#10182e);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:23px;
+    margin:17px 0;
+}
+
+.quiz-card h3{
+    font-size:17px;
+    margin-bottom:15px;
+}
+
+.quiz-option{
+    display:block;
+    width:100%;
+    text-align:left;
+    color:var(--text);
+    background:#0b1429;
+    border:1px solid #344263;
+    border-radius:10px;
+    padding:12px 15px;
+    margin:9px 0;
+    cursor:pointer;
+    transition:border-color .2s,background .2s;
+}
+
+.quiz-option:hover:not(:disabled){
+    border-color:var(--purple);
+    background:#192440;
+}
+
+.quiz-option:disabled{
+    cursor:default;
+    opacity:.9;
+}
+
+.feedback{
+    display:none;
+    font-size:14px;
+    font-weight:700;
+    margin-top:12px;
+}
+
+.quiz-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:22px;
+}
+
+.score-box{
+    display:none;
+    margin-top:22px;
+    padding:20px;
+    border-radius:14px;
+    background:#0b1829;
+    border:1px solid var(--border);
+}
+
+.score-box strong{
+    color:var(--cyan);
+    font-size:20px;
+}
+
+.score-box p{
+    margin-top:9px;
+}
+
+.next-module{
+    display:none;
+    text-align:center;
+    padding:30px;
+    border-radius:18px;
+    margin-top:30px;
+    background:linear-gradient(135deg,rgba(135,116,239,.17),rgba(70,217,220,.10));
+    border:1px solid rgba(70,217,220,.4);
+}
+
+.next-module h2{
+    color:var(--success);
+    margin-bottom:10px;
+}
+
+.next-module p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+footer{
+    border-top:1px solid var(--border);
+    text-align:center;
+    padding:25px 15px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+@media(max-width:650px){
+    .nav-inner{
+        padding:13px 15px;
     }
 
-    .lesson-card {
-        padding: 20px;
+    .logo{
+        font-size:18px;
     }
 
-    .bit {
-        width: 75px;
-        height: 75px;
+    .nav-actions{
+        gap:8px;
+    }
+
+    select{
+        max-width:125px;
+        padding:8px;
+        font-size:12px;
+    }
+
+    .home-link{
+        font-size:12px;
+    }
+
+    .container{
+        padding:20px 14px 50px;
+    }
+
+    .hero{
+        padding:35px 5px 28px;
+    }
+
+    .lesson-card{
+        padding:21px 17px;
+    }
+
+    .lesson-card h2{
+        font-size:21px;
+    }
+
+    .compare-grid{
+        grid-template-columns:1fr;
+    }
+
+    .progress-card{
+        padding:18px;
+    }
+
+    .quiz-card{
+        padding:18px;
     }
 }
 </style>
@@ -273,481 +546,1099 @@ footer {
 <body>
 
 <nav class="navbar">
-    <div class="logo">✦ QubitQuest</div>
-    <a href="index.html">← Home</a>
+    <div class="nav-inner">
+        <div class="logo">⚛ Qubit<span>Quest</span></div>
+        <div class="nav-actions">
+            <select id="languageSelect" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="hi">हिन्दी</option>
+                <option value="te">తెలుగు</option>
+            </select>
+            <a href="index.html" class="home-link" id="homeLink">← Home</a>
+        </div>
+    </div>
 </nav>
 
 <main class="container">
 
-    <span class="tag">MODULE 01 · BEGINNER LEVEL</span>
+    <header class="hero">
+        <div class="tag" id="moduleTag">MODULE 01 · BEGINNER</div>
+        <h1 id="heroTitle">Your Journey into <span>Quantum Computing.</span></h1>
+        <p id="heroIntro">Start your quantum journey from absolute zero. Discover computers, classical bits, quantum computers and the fascinating world of qubits.</p>
 
-    <h1>
-        Let's start from <span>zero.</span>
-    </h1>
+        <div class="stats">
+            <div class="stat" id="statLessons">📘 4 Learning Concepts</div>
+            <div class="stat" id="statActivities">⚡ 3 Interactive Activities</div>
+            <div class="stat" id="statQuestions">📝 3 Quiz Questions</div>
+        </div>
+    </header>
 
-    <p class="intro">
-        No technical knowledge? No problem.
-        Let's understand the world of computers before
-        exploring quantum computing.
-    </p>
-
-    <p>YOUR LEARNING PROGRESS</p>
-
-    <div class="progress">
-        <div class="progress-fill" id="moduleProgress"></div>
-    </div>
-
-    <div class="progress-info">
-        <span id="progressLabel">Module 1 assessment pending</span>
-        <span id="progressPercentage">0%</span>
-    </div>
-
-    <div id="completionStatus" class="status-message">
-        ✓ Module 1 completed! Your achievement has been saved.
-    </div>
-
-    <section class="lesson-card">
-
-        <h2>01. What is a computer?</h2>
-
-        <div class="visual">
-            <div class="computer">💻</div>
-            <h3>A computer is a machine that processes information.</h3>
+    <section class="progress-card">
+        <div class="progress-top">
+            <h3 id="progressHeading">Your Learning Progress</h3>
+            <span class="progress-percent" id="progressPercent">0%</span>
         </div>
 
-        <p>
-            Think about your mobile phone or laptop.
-            You use it to watch videos, send messages,
-            play games and search for information.
-        </p>
+        <div class="progress-track" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-fill" id="moduleProgressFill"></div>
+        </div>
 
-        <p>
-            A computer receives information, processes it
-            according to instructions and gives you a result.
-        </p>
-
-        <p class="example">
-            Example: You type 5 + 5 into a calculator.
-            It processes your input and displays 10.
-        </p>
-
+        <p class="progress-text" id="moduleProgressText">Answer all 3 quiz questions correctly to complete this module.</p>
+        <p class="completion-status" id="completionStatus"></p>
     </section>
 
+    <!-- LESSON 1 -->
+
     <section class="lesson-card">
+        <div class="section-label" id="section1">01 · THE BASICS</div>
+        <h2 id="lesson1Title">What is a Computer?</h2>
 
-        <h2>02. What is a bit?</h2>
+        <p id="lesson1Text">A computer is an electronic machine that receives information, processes it according to instructions, and produces a result.</p>
 
-        <p>
-            Computers represent information using tiny units
-            called <strong>bits</strong>.
-        </p>
+        <div class="visual-box">
+            <h3 id="computerVisualTitle">How a Computer Works</h3>
 
-        <p>
-            A bit is the smallest unit of information in
-            classical computing. It can have one of two values:
-            0 or 1.
-        </p>
-
-        <div class="visual">
-
-            <h3>Meet the two possible bit values</h3>
-
-            <div class="bit-display">
-                <div class="bit">0</div>
-                <div class="bit">1</div>
+            <div class="bit-row">
+                <div class="bit">
+                    <strong>↓</strong>
+                    <small id="inputLabel">INPUT</small>
+                </div>
+                <div class="bit">
+                    <strong>⚙</strong>
+                    <small id="processLabel">PROCESS</small>
+                </div>
+                <div class="bit">
+                    <strong>✓</strong>
+                    <small id="outputLabel">OUTPUT</small>
+                </div>
             </div>
 
-            <p>0 = OFF</p>
-            <p>1 = ON</p>
-
+            <p id="computerVisualText">Input → Processing → Output</p>
         </div>
 
-        <p>
-            Imagine a simple light switch. It can be OFF or ON.
-            This is a useful way to imagine a classical bit.
-        </p>
-
+        <p id="lesson1Extra">For example, when you use a calculator, you enter numbers, the computer processes them, and displays the answer.</p>
     </section>
 
-    <section class="lesson-card">
-
-        <h2>03. What is a quantum computer?</h2>
-
-        <div class="visual">
-            <div class="computer">⚛️</div>
-            <h3>A different way of processing information.</h3>
-        </div>
-
-        <p>
-            A quantum computer is a type of computer that
-            uses principles of quantum physics to process
-            information.
-        </p>
-
-        <p>
-            Ordinary computers use bits.
-            Quantum computers use quantum bits, called
-            <strong>qubits</strong>.
-        </p>
-
-        <p>
-            Qubits can show quantum behaviours such as
-            superposition and entanglement.
-        </p>
-
-    </section>
+    <!-- LESSON 2 -->
 
     <section class="lesson-card">
+        <div class="section-label" id="section2">02 · CLASSICAL COMPUTING</div>
+        <h2 id="lesson2Title">Classical Computers and Bits</h2>
 
-        <h2>04. Meet the qubit</h2>
+        <p id="lesson2Text">Traditional computers use tiny units of information called bits. Each bit can hold one of two possible values: 0 or 1.</p>
 
-        <div class="visual">
-            <div class="bit" style="margin:auto;background:linear-gradient(135deg,#8774ef,#46d9dc)">
-                Q
-            </div>
-        </div>
-
-        <p>
-            A qubit is the basic unit of quantum information.
-        </p>
-
-        <p>
-            Unlike a classical bit, a qubit can be prepared
-            in a superposition of 0 and 1.
-        </p>
-
-        <p>
-            When we measure a qubit, we get a classical result:
-            either 0 or 1.
-        </p>
-
-        <p class="example">
-            Don't worry if superposition sounds complicated.
-            We'll explore it visually in Module 2!
-        </p>
-
-    </section>
-
-    <section class="lesson-card">
-
-        <h2>05. Test what you learned!</h2>
-
-        <p>
-            Let's see how much you understood.
-            Choose the correct answer for each question.
-            You need 3/3 to complete this module.
-        </p>
-
-        <div id="quiz">
-
-            <h3>Question 1</h3>
-            <p>What is the smallest unit of classical information?</p>
-
-            <button class="quiz-option" onclick="answer(0,0)">
-                A. Byte
-            </button>
-
-            <button class="quiz-option" onclick="answer(0,1)">
-                B. Bit
-            </button>
-
-            <button class="quiz-option" onclick="answer(0,2)">
-                C. Qubit
-            </button>
-
-            <div id="feedback0" class="feedback"></div>
-
-            <h3 style="margin-top:30px">Question 2</h3>
-            <p>Which values can a classical bit have?</p>
-
-            <button class="quiz-option" onclick="answer(1,0)">
-                A. 0 and 1
-            </button>
-
-            <button class="quiz-option" onclick="answer(1,1)">
-                B. 2 and 3
-            </button>
-
-            <button class="quiz-option" onclick="answer(1,2)">
-                C. Only 1
-            </button>
-
-            <div id="feedback1" class="feedback"></div>
-
-            <h3 style="margin-top:30px">Question 3</h3>
-            <p>What is the basic unit of quantum information?</p>
-
-            <button class="quiz-option" onclick="answer(2,0)">
-                A. Pixel
-            </button>
-
-            <button class="quiz-option" onclick="answer(2,1)">
-                B. Byte
-            </button>
-
-            <button class="quiz-option" onclick="answer(2,2)">
-                C. Qubit
-            </button>
-
-            <div id="feedback2" class="feedback"></div>
-
-            <div class="quiz-actions">
-                <button class="primary" onclick="showScore()">
-                    Check My Score →
-                </button>
-
-                <button class="secondary" onclick="resetQuiz()">
-                    Retry Quiz
-                </button>
+        <div class="visual-box">
+            <h3 id="bitVisualTitle">Explore Classical Bits</h3>
+            <div class="bit-row">
+                <div class="bit">
+                    <strong id="bitOne">0</strong>
+                    <small id="bitOneLabel">BIT 1</small>
+                </div>
+                <div class="bit">
+                    <strong id="bitTwo">1</strong>
+                    <small id="bitTwoLabel">BIT 2</small>
+                </div>
             </div>
 
-            <div id="score" class="feedback"></div>
+            <p id="bitVisualText">A classical bit is either 0 or 1.</p>
 
+            <div class="demo-buttons">
+                <button class="secondary-button" onclick="changeBit(0)" id="zeroButton">Set to 0</button>
+                <button class="secondary-button" onclick="changeBit(1)" id="oneButton">Set to 1</button>
+            </div>
+
+            <p class="demo-result" id="bitResult"></p>
         </div>
 
+        <p id="lesson2Extra">Bits are the basic building blocks of traditional computers. Photos, videos, messages and games are all represented using combinations of bits.</p>
     </section>
 
-    <section class="lesson-card" style="text-align:center">
+    <!-- LESSON 3 -->
 
-        <h2>Congratulations! 🎉</h2>
+    <section class="lesson-card">
+        <div class="section-label" id="section3">03 · THE QUANTUM WORLD</div>
+        <h2 id="lesson3Title">What is Quantum Computing?</h2>
 
-        <p>
-            You've taken your first step into quantum computing.
-            You're now ready to explore how qubits behave.
-        </p>
+        <p id="lesson3Text">Quantum computing is a new way of processing information using the principles of quantum physics.</p>
 
-        <p class="example">
-            Next up: Superposition, entanglement and quantum gates.
-        </p>
+        <p id="lesson3Extra">Unlike classical computers, quantum computers use quantum bits, called qubits. These can behave in ways that ordinary bits cannot.</p>
 
-        <a class="next-link" href="module2.html">
-            Module 2 — Continue Learning →
-        </a>
+        <div class="compare-grid">
+            <div class="compare-box">
+                <h3 id="classicalTitle">Classical Computer</h3>
+                <p id="classicalDescription">Uses bits that are either 0 or 1.</p>
+            </div>
 
+            <div class="compare-box">
+                <h3 id="quantumTitle">Quantum Computer</h3>
+                <p id="quantumDescription">Uses qubits that can experience superposition and entanglement.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LESSON 4 -->
+
+    <section class="lesson-card">
+        <div class="section-label" id="section4">04 · MEET THE QUBIT</div>
+        <h2 id="lesson4Title">What is a Qubit?</h2>
+
+        <p id="lesson4Text">A qubit, or quantum bit, is the basic unit of information in a quantum computer.</p>
+
+        <p id="lesson4Extra">A qubit can exist in a quantum superposition of the states |0⟩ and |1⟩. When measured, it produces a definite result of 0 or 1.</p>
+
+        <div class="visual-box">
+            <h3 id="qubitVisualTitle">Meet Your First Qubit</h3>
+
+            <div class="qubit" id="qubitVisual">Q</div>
+
+            <div class="state-label" id="qubitStateLabel">Quantum State</div>
+
+            <p id="qubitVisualText">A qubit can be prepared in a superposition of |0⟩ and |1⟩.</p>
+
+            <div class="demo-buttons">
+                <button class="secondary-button" onclick="showQubitState(0)" id="showZeroButton">Show |0⟩</button>
+                <button class="secondary-button" onclick="showQubitState(1)" id="showOneButton">Show |1⟩</button>
+                <button class="primary-button" onclick="showQubitState(2)" id="superpositionButton">Explore Superposition ✨</button>
+            </div>
+
+            <p class="demo-result" id="qubitResult"></p>
+        </div>
+
+        <p id="lesson4Note">Remember: Superposition does not mean that a qubit is simply a hidden ordinary bit. It is a genuine quantum state.</p>
+    </section>
+
+    <!-- QUICK COMPARISON -->
+
+    <section class="lesson-card">
+        <div class="section-label" id="section5">05 · QUICK RECAP</div>
+        <h2 id="recapTitle">What Have You Learned?</h2>
+
+        <div class="compare-grid">
+            <div class="compare-box">
+                <h3 id="recapBitTitle">Bit</h3>
+                <p id="recapBitText">A classical unit of information that is either 0 or 1.</p>
+            </div>
+
+            <div class="compare-box">
+                <h3 id="recapQubitTitle">Qubit</h3>
+                <p id="recapQubitText">A quantum unit of information that can exist in superposition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ -->
+
+    <section class="lesson-card">
+        <div class="section-label" id="section6">06 · KNOWLEDGE CHECK</div>
+        <h2 id="quizTitle">Test Your Knowledge!</h2>
+
+        <p id="quizIntro">Answer all three questions correctly to complete Module 1 and unlock Module 2.</p>
+
+        <div class="quiz-card">
+            <h3 id="question1Title">Question 1: What does a computer do?</h3>
+
+            <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. Receives and processes information</button>
+            <button class="quiz-option" onclick="answer(0,1)" id="q0b">B. Only displays pictures</button>
+            <button class="quiz-option" onclick="answer(0,2)" id="q0c">C. Only stores electricity</button>
+
+            <div class="feedback" id="feedback0"></div>
+        </div>
+
+        <div class="quiz-card">
+            <h3 id="question2Title">Question 2: What values can a classical bit hold?</h3>
+
+            <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. 2 and 3</button>
+            <button class="quiz-option" onclick="answer(1,1)" id="q1b">B. 0 and 1</button>
+            <button class="quiz-option" onclick="answer(1,2)" id="q1c">C. 5 and 6</button>
+
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="quiz-card">
+            <h3 id="question3Title">Question 3: What is a qubit?</h3>
+
+            <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. A computer screen</button>
+            <button class="quiz-option" onclick="answer(2,1)" id="q2b">B. A traditional computer keyboard</button>
+            <button class="quiz-option" onclick="answer(2,2)" id="q2c">C. The basic unit of quantum information</button>
+
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <div class="quiz-actions">
+            <button class="primary-button" id="checkScoreButton" onclick="showScore()">Check My Score →</button>
+            <button class="secondary-button" id="retryButton" onclick="retryQuiz()">Try Again ↻</button>
+        </div>
+
+        <div class="score-box" id="score"></div>
+    </section>
+
+    <!-- NEXT MODULE -->
+
+    <section class="next-module" id="nextModule">
+        <h2 id="completedTitle">🎉 Module 1 Completed!</h2>
+        <p id="completedText">You have successfully learned the fundamentals of quantum computing.</p>
+        <p id="nextModuleText">Next: Discover superposition and entanglement in Module 2.</p>
+        <a href="module2.html" class="primary-button" id="continueButton">Continue to Module 2 →</a>
     </section>
 
 </main>
 
-<footer>
-    ✦ QubitQuest — Quantum learning for everyone.
-</footer>
+<footer id="footerText">✦ QubitQuest — Quantum Learning for Everyone.</footer>
 
 <script>
 
-const correctAnswers = [1, 0, 2];
+// ==========================================
+// CONFIGURATION
+// ==========================================
 
-const explanations = [
-    "Correct! A bit is the smallest unit of classical information.",
-    "Correct! A classical bit can have the value 0 or 1.",
-    "Correct! A qubit is the basic unit of quantum information."
-];
+const PROGRESS_KEY = "qubitquestProgress";
+const LANGUAGE_KEY = "qubitquestLanguage";
+
+
+// ==========================================
+// TRANSLATIONS
+// ==========================================
+
+const translations = {
+
+en:{
+home:"← Home",
+tag:"MODULE 01 · BEGINNER",
+heroStart:"Your Journey into ",
+heroHighlight:"Quantum Computing.",
+intro:"Start your quantum journey from absolute zero. Discover computers, classical bits, quantum computers and the fascinating world of qubits.",
+lessons:"📘 4 Learning Concepts",
+activities:"⚡ 3 Interactive Activities",
+questions:"📝 3 Quiz Questions",
+progressHeading:"Your Learning Progress",
+progressIncomplete:"Answer all 3 quiz questions correctly to complete this module.",
+progressComplete:"Module 1 successfully completed!",
+completion:"✓ Module 1 completed! Your progress has been saved on this device.",
+section1:"01 · THE BASICS",
+lesson1Title:"What is a Computer?",
+lesson1Text:"A computer is an electronic machine that receives information, processes it according to instructions, and produces a result.",
+computerVisualTitle:"How a Computer Works",
+input:"INPUT",
+process:"PROCESS",
+output:"OUTPUT",
+computerVisualText:"Input → Processing → Output",
+lesson1Extra:"For example, when you use a calculator, you enter numbers, the computer processes them, and displays the answer.",
+section2:"02 · CLASSICAL COMPUTING",
+lesson2Title:"Classical Computers and Bits",
+lesson2Text:"Traditional computers use tiny units of information called bits. Each bit can hold one of two possible values: 0 or 1.",
+bitVisualTitle:"Explore Classical Bits",
+bit1:"BIT 1",
+bit2:"BIT 2",
+bitVisualText:"A classical bit is either 0 or 1.",
+setZero:"Set to 0",
+setOne:"Set to 1",
+bitChanged:"Your bit is now ",
+lesson2Extra:"Bits are the basic building blocks of traditional computers. Photos, videos, messages and games are all represented using combinations of bits.",
+section3:"03 · THE QUANTUM WORLD",
+lesson3Title:"What is Quantum Computing?",
+lesson3Text:"Quantum computing is a new way of processing information using the principles of quantum physics.",
+lesson3Extra:"Unlike classical computers, quantum computers use quantum bits, called qubits. These can behave in ways that ordinary bits cannot.",
+classicalTitle:"Classical Computer",
+classicalDescription:"Uses bits that are either 0 or 1.",
+quantumTitle:"Quantum Computer",
+quantumDescription:"Uses qubits that can experience superposition and entanglement.",
+section4:"04 · MEET THE QUBIT",
+lesson4Title:"What is a Qubit?",
+lesson4Text:"A qubit, or quantum bit, is the basic unit of information in a quantum computer.",
+lesson4Extra:"A qubit can exist in a quantum superposition of the states |0⟩ and |1⟩. When measured, it produces a definite result of 0 or 1.",
+qubitVisualTitle:"Meet Your First Qubit",
+qubitState:"Quantum State",
+qubitVisualText:"A qubit can be prepared in a superposition of |0⟩ and |1⟩.",
+showZero:"Show |0⟩",
+showOne:"Show |1⟩",
+superposition:"Explore Superposition ✨",
+zeroState:"The qubit is showing state |0⟩.",
+oneState:"The qubit is showing state |1⟩.",
+superState:"Superposition: a quantum combination of |0⟩ and |1⟩!",
+lesson4Note:"Remember: Superposition does not mean that a qubit is simply a hidden ordinary bit. It is a genuine quantum state.",
+section5:"05 · QUICK RECAP",
+recapTitle:"What Have You Learned?",
+recapBitTitle:"Bit",
+recapBitText:"A classical unit of information that is either 0 or 1.",
+recapQubitTitle:"Qubit",
+recapQubitText:"A quantum unit of information that can exist in superposition.",
+section6:"06 · KNOWLEDGE CHECK",
+quizTitle:"Test Your Knowledge!",
+quizIntro:"Answer all three questions correctly to complete Module 1 and unlock Module 2.",
+question:"Question",
+question1:"What does a computer do?",
+q0a:"A. Receives and processes information",
+q0b:"B. Only displays pictures",
+q0c:"C. Only stores electricity",
+question2:"What values can a classical bit hold?",
+q1a:"A. 2 and 3",
+q1b:"B. 0 and 1",
+q1c:"C. 5 and 6",
+question3:"What is a qubit?",
+q2a:"A. A computer screen",
+q2b:"B. A traditional computer keyboard",
+q2c:"C. The basic unit of quantum information",
+checkScore:"Check My Score →",
+retry:"Try Again ↻",
+answerAll:"Please answer all three questions before checking your score.",
+correct:"✓ Correct! ",
+incorrect:"Not quite! ",
+explanations:[
+"A computer receives and processes information to produce results.",
+"A classical bit can hold either 0 or 1.",
+"A qubit is the basic unit of information in a quantum computer."
+],
+excellent:"Excellent! 🌟 You passed Module 1!",
+tryAgain:"Good effort! 💙 You need 3 out of 3 correct answers to complete this module. Try again!",
+scoreOutOf:" / 3 correct answers",
+completedTitle:"🎉 Module 1 Completed!",
+completedText:"You have successfully learned the fundamentals of quantum computing. Your progress has been saved.",
+nextText:"Next: Discover superposition and entanglement in Module 2.",
+continue:"Continue to Module 2 →",
+footer:"✦ QubitQuest — Quantum Learning for Everyone.",
+moduleSavedError:"Your browser could not save your progress. Please check your browser storage settings."
+},
+
+kn:{
+home:"← ಮುಖಪುಟ",
+tag:"ಮಾಡ್ಯೂಲ್ 01 · ಆರಂಭಿಕ ಹಂತ",
+heroStart:"ನಿಮ್ಮ ಪ್ರಯಾಣ ",
+heroHighlight:"ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್ ಕಡೆಗೆ.",
+intro:"ಶೂನ್ಯದಿಂದ ನಿಮ್ಮ ಕ್ವಾಂಟಂ ಪ್ರಯಾಣವನ್ನು ಪ್ರಾರಂಭಿಸಿ. ಕಂಪ್ಯೂಟರ್‌ಗಳು, ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್‌ಗಳು, ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಮತ್ತು ಕ್ಯೂಬಿಟ್‌ಗಳ ಜಗತ್ತನ್ನು ತಿಳಿಯಿರಿ.",
+lessons:"📘 4 ಕಲಿಕೆಯ ವಿಷಯಗಳು",
+activities:"⚡ 3 ಸಂವಾದಾತ್ಮಕ ಚಟುವಟಿಕೆಗಳು",
+questions:"📝 3 ಪ್ರಶ್ನೆಗಳು",
+progressHeading:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",
+progressIncomplete:"ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು ಎಲ್ಲಾ 3 ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+progressComplete:"ಮಾಡ್ಯೂಲ್ 1 ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!",
+completion:"✓ ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
+section1:"01 · ಮೂಲಭೂತ ವಿಷಯಗಳು",
+lesson1Title:"ಕಂಪ್ಯೂಟರ್ ಎಂದರೇನು?",
+lesson1Text:"ಕಂಪ್ಯೂಟರ್ ಒಂದು ಎಲೆಕ್ಟ್ರಾನಿಕ್ ಯಂತ್ರ. ಇದು ಮಾಹಿತಿಯನ್ನು ಸ್ವೀಕರಿಸಿ, ಸೂಚನೆಗಳ ಪ್ರಕಾರ ಸಂಸ್ಕರಿಸಿ, ಫಲಿತಾಂಶವನ್ನು ನೀಡುತ್ತದೆ.",
+computerVisualTitle:"ಕಂಪ್ಯೂಟರ್ ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ?",
+input:"ಇನ್‌ಪುಟ್",
+process:"ಸಂಸ್ಕರಣೆ",
+output:"ಔಟ್‌ಪುಟ್",
+computerVisualText:"ಇನ್‌ಪುಟ್ → ಸಂಸ್ಕರಣೆ → ಔಟ್‌ಪುಟ್",
+lesson1Extra:"ಉದಾಹರಣೆಗೆ, ಕ್ಯಾಲ್ಕುಲೇಟರ್‌ನಲ್ಲಿ ಸಂಖ್ಯೆಗಳನ್ನು ನಮೂದಿಸಿದಾಗ ಕಂಪ್ಯೂಟರ್ ಅವುಗಳನ್ನು ಸಂಸ್ಕರಿಸಿ ಉತ್ತರವನ್ನು ತೋರಿಸುತ್ತದೆ.",
+section2:"02 · ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟಿಂಗ್",
+lesson2Title:"ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಮತ್ತು ಬಿಟ್‌ಗಳು",
+lesson2Text:"ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಬಿಟ್‌ಗಳೆಂಬ ಸಣ್ಣ ಮಾಹಿತಿ ಘಟಕಗಳನ್ನು ಬಳಸುತ್ತವೆ. ಪ್ರತಿಯೊಂದು ಬಿಟ್ 0 ಅಥವಾ 1 ಎಂಬ ಎರಡು ಮೌಲ್ಯಗಳಲ್ಲಿ ಒಂದನ್ನು ಹೊಂದಿರುತ್ತದೆ.",
+bitVisualTitle:"ಬಿಟ್‌ಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
+bit1:"ಬಿಟ್ 1",
+bit2:"ಬಿಟ್ 2",
+bitVisualText:"ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್ 0 ಅಥವಾ 1 ಆಗಿರುತ್ತದೆ.",
+setZero:"0 ಆಗಿ ಹೊಂದಿಸಿ",
+setOne:"1 ಆಗಿ ಹೊಂದಿಸಿ",
+bitChanged:"ನಿಮ್ಮ ಬಿಟ್ ಈಗ ",
+lesson2Extra:"ಬಿಟ್‌ಗಳು ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್‌ಗಳ ಮೂಲ ಘಟಕಗಳಾಗಿವೆ. ಫೋಟೋಗಳು, ವೀಡಿಯೊಗಳು ಮತ್ತು ಸಂದೇಶಗಳನ್ನು ಬಿಟ್‌ಗಳ ಸಂಯೋಜನೆಯಿಂದ ಪ್ರತಿನಿಧಿಸಲಾಗುತ್ತದೆ.",
+section3:"03 · ಕ್ವಾಂಟಂ ಜಗತ್ತು",
+lesson3Title:"ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್ ಎಂದರೇನು?",
+lesson3Text:"ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್ ಎನ್ನುವುದು ಕ್ವಾಂಟಂ ಭೌತಶಾಸ್ತ್ರದ ತತ್ವಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಮಾಹಿತಿಯನ್ನು ಸಂಸ್ಕರಿಸುವ ಹೊಸ ವಿಧಾನವಾಗಿದೆ.",
+lesson3Extra:"ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್‌ಗಳಿಗಿಂತ ಭಿನ್ನವಾಗಿ, ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಕ್ಯೂಬಿಟ್‌ಗಳನ್ನು ಬಳಸುತ್ತವೆ. ಇವು ಸಾಮಾನ್ಯ ಬಿಟ್‌ಗಳಿಗಿಂತ ವಿಭಿನ್ನವಾಗಿ ವರ್ತಿಸಬಲ್ಲವು.",
+classicalTitle:"ಸಾಂಪ್ರದಾಯಿಕ ಕಂಪ್ಯೂಟರ್",
+classicalDescription:"0 ಅಥವಾ 1 ಮೌಲ್ಯ ಹೊಂದಿರುವ ಬಿಟ್‌ಗಳನ್ನು ಬಳಸುತ್ತದೆ.",
+quantumTitle:"ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್",
+quantumDescription:"ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟಾಂಗಲ್‌ಮೆಂಟ್ ಅನುಭವಿಸಬಲ್ಲ ಕ್ಯೂಬಿಟ್‌ಗಳನ್ನು ಬಳಸುತ್ತದೆ.",
+section4:"04 · ಕ್ಯೂಬಿಟ್ ಪರಿಚಯ",
+lesson4Title:"ಕ್ಯೂಬಿಟ್ ಎಂದರೇನು?",
+lesson4Text:"ಕ್ಯೂಬಿಟ್ ಅಥವಾ ಕ್ವಾಂಟಂ ಬಿಟ್ ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್‌ನ ಮೂಲ ಮಾಹಿತಿ ಘಟಕವಾಗಿದೆ.",
+lesson4Extra:"ಕ್ಯೂಬಿಟ್ |0⟩ ಮತ್ತು |1⟩ ಸ್ಥಿತಿಗಳ ಸೂಪರ್‌ಪೊಸಿಷನ್‌ನಲ್ಲಿ ಇರಬಹುದು. ಅಳೆಯುವಾಗ 0 ಅಥವಾ 1 ಫಲಿತಾಂಶವನ್ನು ನೀಡುತ್ತದೆ.",
+qubitVisualTitle:"ನಿಮ್ಮ ಮೊದಲ ಕ್ಯೂಬಿಟ್",
+qubitState:"ಕ್ವಾಂಟಂ ಸ್ಥಿತಿ",
+qubitVisualText:"ಕ್ಯೂಬಿಟ್ ಅನ್ನು |0⟩ ಮತ್ತು |1⟩ ಸೂಪರ್‌ಪೊಸಿಷನ್‌ನಲ್ಲಿ ಸಿದ್ಧಪಡಿಸಬಹುದು.",
+showZero:"|0⟩ ತೋರಿಸಿ",
+showOne:"|1⟩ ತೋರಿಸಿ",
+superposition:"ಸೂಪರ್‌ಪೊಸಿಷನ್ ಅನ್ವೇಷಿಸಿ ✨",
+zeroState:"ಕ್ಯೂಬಿಟ್ ಈಗ |0⟩ ಸ್ಥಿತಿಯಲ್ಲಿದೆ.",
+oneState:"ಕ್ಯೂಬಿಟ್ ಈಗ |1⟩ ಸ್ಥಿತಿಯಲ್ಲಿದೆ.",
+superState:"ಸೂಪರ್‌ಪೊಸಿಷನ್: |0⟩ ಮತ್ತು |1⟩ ಗಳ ಕ್ವಾಂಟಂ ಸಂಯೋಜನೆ!",
+lesson4Note:"ನೆನಪಿಡಿ: ಸೂಪರ್‌ಪೊಸಿಷನ್ ಎಂದರೆ ಎರಡು ಮೌಲ್ಯಗಳನ್ನು ಮರೆಮಾಡಿರುವ ಸಾಮಾನ್ಯ ಬಿಟ್ ಅಲ್ಲ. ಇದು ನಿಜವಾದ ಕ್ವಾಂಟಂ ಸ್ಥಿತಿಯಾಗಿದೆ.",
+section5:"05 · ತ್ವರಿತ ಪುನರವಲೋಕನ",
+recapTitle:"ನೀವು ಏನು ಕಲಿತಿದ್ದೀರಿ?",
+recapBitTitle:"ಬಿಟ್",
+recapBitText:"0 ಅಥವಾ 1 ಆಗಿರುವ ಸಾಂಪ್ರದಾಯಿಕ ಮಾಹಿತಿ ಘಟಕ.",
+recapQubitTitle:"ಕ್ಯೂಬಿಟ್",
+recapQubitText:"ಸೂಪರ್‌ಪೊಸಿಷನ್‌ನಲ್ಲಿ ಇರಬಲ್ಲ ಕ್ವಾಂಟಂ ಮಾಹಿತಿ ಘಟಕ.",
+section6:"06 · ಜ್ಞಾನ ಪರೀಕ್ಷೆ",
+quizTitle:"ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿ!",
+quizIntro:"ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಳಿಸಿ ಮಾಡ್ಯೂಲ್ 2 ತೆರೆಯಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+question:"ಪ್ರಶ್ನೆ",
+question1:"ಕಂಪ್ಯೂಟರ್ ಏನು ಮಾಡುತ್ತದೆ?",
+q0a:"A. ಮಾಹಿತಿಯನ್ನು ಸ್ವೀಕರಿಸಿ ಸಂಸ್ಕರಿಸುತ್ತದೆ",
+q0b:"B. ಚಿತ್ರಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸುತ್ತದೆ",
+q0c:"C. ವಿದ್ಯುತ್ ಮಾತ್ರ ಸಂಗ್ರಹಿಸುತ್ತದೆ",
+question2:"ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್ ಯಾವ ಮೌಲ್ಯಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ?",
+q1a:"A. 2 ಮತ್ತು 3",
+q1b:"B. 0 ಮತ್ತು 1",
+q1c:"C. 5 ಮತ್ತು 6",
+question3:"ಕ್ಯೂಬಿಟ್ ಎಂದರೇನು?",
+q2a:"A. ಕಂಪ್ಯೂಟರ್ ಪರದೆ",
+q2b:"B. ಸಾಂಪ್ರದಾಯಿಕ ಕೀಬೋರ್ಡ್",
+q2c:"C. ಕ್ವಾಂಟಂ ಮಾಹಿತಿಯ ಮೂಲ ಘಟಕ",
+checkScore:"ನನ್ನ ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸಿ →",
+retry:"ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ↻",
+answerAll:"ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸುವ ಮೊದಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+correct:"✓ ಸರಿಯಾದ ಉತ್ತರ! ",
+incorrect:"ಸರಿಯಾದ ಉತ್ತರವಲ್ಲ! ",
+explanations:[
+"ಕಂಪ್ಯೂಟರ್ ಮಾಹಿತಿಯನ್ನು ಸ್ವೀಕರಿಸಿ ಸಂಸ್ಕರಿಸಿ ಫಲಿತಾಂಶ ನೀಡುತ್ತದೆ.",
+"ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್ 0 ಅಥವಾ 1 ಆಗಿರುತ್ತದೆ.",
+"ಕ್ಯೂಬಿಟ್ ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್‌ನ ಮೂಲ ಮಾಹಿತಿ ಘಟಕವಾಗಿದೆ."
+],
+excellent:"ಅದ್ಭುತ! 🌟 ನೀವು ಮಾಡ್ಯೂಲ್ 1ರಲ್ಲಿ ಉತ್ತೀರ್ಣರಾಗಿದ್ದೀರಿ!",
+tryAgain:"ಒಳ್ಳೆಯ ಪ್ರಯತ್ನ! 💙 ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3ರಲ್ಲಿ 3 ಸರಿಯಾದ ಉತ್ತರಗಳು ಬೇಕು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ!",
+scoreOutOf:" / 3 ಸರಿಯಾದ ಉತ್ತರಗಳು",
+completedTitle:"🎉 ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಂಡಿದೆ!",
+completedText:"ನೀವು ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್‌ನ ಮೂಲಭೂತ ವಿಷಯಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಲಿತಿದ್ದೀರಿ. ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
+nextText:"ಮುಂದೆ: ಮಾಡ್ಯೂಲ್ 2ರಲ್ಲಿ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟಾಂಗಲ್‌ಮೆಂಟ್ ಕಲಿಯಿರಿ.",
+continue:"ಮಾಡ್ಯೂಲ್ 2ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",
+footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಂ ಕಲಿಕೆ.",
+moduleSavedError:"ನಿಮ್ಮ ಬ್ರೌಸರ್ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಸ್ಟೋರೇಜ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ."
+},
+
+hi:{
+home:"← होम",
+tag:"मॉड्यूल 01 · शुरुआती स्तर",
+heroStart:"आपकी यात्रा ",
+heroHighlight:"क्वांटम कंप्यूटिंग की ओर।",
+intro:"शुरुआत से अपनी क्वांटम यात्रा शुरू करें। कंप्यूटर, पारंपरिक बिट्स, क्वांटम कंप्यूटर और क्यूबिट की दुनिया को जानें।",
+lessons:"📘 4 सीखने के विषय",
+activities:"⚡ 3 इंटरैक्टिव गतिविधियाँ",
+questions:"📝 3 प्रश्न",
+progressHeading:"आपकी सीखने की प्रगति",
+progressIncomplete:"इस मॉड्यूल को पूरा करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+progressComplete:"मॉड्यूल 1 सफलतापूर्वक पूरा हुआ!",
+completion:"✓ मॉड्यूल 1 पूरा हुआ! आपकी प्रगति इस डिवाइस पर सेव हो गई है।",
+section1:"01 · बुनियादी बातें",
+lesson1Title:"कंप्यूटर क्या है?",
+lesson1Text:"कंप्यूटर एक इलेक्ट्रॉनिक मशीन है जो जानकारी प्राप्त करता है, निर्देशों के अनुसार उसे प्रोसेस करता है और परिणाम देता है।",
+computerVisualTitle:"कंप्यूटर कैसे काम करता है?",
+input:"इनपुट",
+process:"प्रोसेस",
+output:"आउटपुट",
+computerVisualText:"इनपुट → प्रोसेसिंग → आउटपुट",
+lesson1Extra:"उदाहरण के लिए, जब आप कैलकुलेटर में नंबर डालते हैं, तो कंप्यूटर उन्हें प्रोसेस करके उत्तर दिखाता है।",
+section2:"02 · पारंपरिक कंप्यूटिंग",
+lesson2Title:"पारंपरिक कंप्यूटर और बिट्स",
+lesson2Text:"पारंपरिक कंप्यूटर बिट्स नामक छोटी सूचना इकाइयों का उपयोग करते हैं। प्रत्येक बिट का मान 0 या 1 होता है।",
+bitVisualTitle:"बिट्स को समझें",
+bit1:"बिट 1",
+bit2:"बिट 2",
+bitVisualText:"एक पारंपरिक बिट या तो 0 या 1 होता है।",
+setZero:"0 सेट करें",
+setOne:"1 सेट करें",
+bitChanged:"आपका बिट अब ",
+lesson2Extra:"बिट्स पारंपरिक कंप्यूटरों के मूल आधार हैं। तस्वीरें, वीडियो और संदेश बिट्स के संयोजन से दर्शाए जाते हैं।",
+section3:"03 · क्वांटम दुनिया",
+lesson3Title:"क्वांटम कंप्यूटिंग क्या है?",
+lesson3Text:"क्वांटम कंप्यूटिंग, क्वांटम भौतिकी के सिद्धांतों का उपयोग करके जानकारी प्रोसेस करने का एक नया तरीका है।",
+lesson3Extra:"पारंपरिक कंप्यूटरों से अलग, क्वांटम कंप्यूटर क्यूबिट का उपयोग करते हैं। ये सामान्य बिट्स से अलग व्यवहार कर सकते हैं।",
+classicalTitle:"पारंपरिक कंप्यूटर",
+classicalDescription:"0 या 1 वाले बिट्स का उपयोग करता है।",
+quantumTitle:"क्वांटम कंप्यूटर",
+quantumDescription:"सुपरपोजिशन और एंटैंगलमेंट का अनुभव करने वाले क्यूबिट का उपयोग करता है।",
+section4:"04 · क्यूबिट से मिलें",
+lesson4Title:"क्यूबिट क्या है?",
+lesson4Text:"क्यूबिट या क्वांटम बिट, क्वांटम कंप्यूटर में जानकारी की मूल इकाई है।",
+lesson4Extra:"क्यूबिट |0⟩ और |1⟩ अवस्थाओं के क्वांटम सुपरपोजिशन में हो सकता है। मापने पर यह 0 या 1 का निश्चित परिणाम देता है।",
+qubitVisualTitle:"अपने पहले क्यूबिट से मिलें",
+qubitState:"क्वांटम अवस्था",
+qubitVisualText:"क्यूबिट को |0⟩ और |1⟩ के सुपरपोजिशन में तैयार किया जा सकता है।",
+showZero:"|0⟩ दिखाएँ",
+showOne:"|1⟩ दिखाएँ",
+superposition:"सुपरपोजिशन देखें ✨",
+zeroState:"क्यूबिट अब |0⟩ अवस्था में है।",
+oneState:"क्यूबिट अब |1⟩ अवस्था में है।",
+superState:"सुपरपोजिशन: |0⟩ और |1⟩ का क्वांटम संयोजन!",
+lesson4Note:"याद रखें: सुपरपोजिशन का अर्थ छिपा हुआ सामान्य बिट नहीं है। यह एक वास्तविक क्वांटम अवस्था है।",
+section5:"05 · त्वरित दोहराव",
+recapTitle:"आपने क्या सीखा?",
+recapBitTitle:"बिट",
+recapBitText:"जानकारी की पारंपरिक इकाई जिसका मान 0 या 1 होता है।",
+recapQubitTitle:"क्यूबिट",
+recapQubitText:"जानकारी की क्वांटम इकाई जो सुपरपोजिशन में हो सकती है।",
+section6:"06 · ज्ञान परीक्षा",
+quizTitle:"अपना ज्ञान जाँचें!",
+quizIntro:"मॉड्यूल 1 पूरा करने और मॉड्यूल 2 खोलने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+question:"प्रश्न",
+question1:"कंप्यूटर क्या करता है?",
+q0a:"A. जानकारी प्राप्त और प्रोसेस करता है",
+q0b:"B. केवल तस्वीरें दिखाता है",
+q0c:"C. केवल बिजली स्टोर करता है",
+question2:"एक पारंपरिक बिट में कौन से मान हो सकते हैं?",
+q1a:"A. 2 और 3",
+q1b:"B. 0 और 1",
+q1c:"C. 5 और 6",
+question3:"क्यूबिट क्या है?",
+q2a:"A. कंप्यूटर स्क्रीन",
+q2b:"B. पारंपरिक कीबोर्ड",
+q2c:"C. क्वांटम जानकारी की मूल इकाई",
+checkScore:"मेरा स्कोर जाँचें →",
+retry:"फिर से प्रयास करें ↻",
+answerAll:"स्कोर जाँचने से पहले तीनों प्रश्नों के उत्तर दें।",
+correct:"✓ सही उत्तर! ",
+incorrect:"यह सही नहीं है! ",
+explanations:[
+"कंप्यूटर जानकारी प्राप्त और प्रोसेस करके परिणाम देता है।",
+"पारंपरिक बिट का मान 0 या 1 होता है।",
+"क्यूबिट क्वांटम कंप्यूटर की मूल सूचना इकाई है।"
+],
+excellent:"शानदार! 🌟 आपने मॉड्यूल 1 पास कर लिया!",
+tryAgain:"अच्छी कोशिश! 💙 इस मॉड्यूल को पूरा करने के लिए 3 में से 3 सही उत्तर चाहिए। फिर कोशिश करें!",
+scoreOutOf:" / 3 सही उत्तर",
+completedTitle:"🎉 मॉड्यूल 1 पूरा हुआ!",
+completedText:"आपने क्वांटम कंप्यूटिंग की बुनियादी बातें सफलतापूर्वक सीख ली हैं। आपकी प्रगति सेव हो गई है।",
+nextText:"अगला: मॉड्यूल 2 में सुपरपोजिशन और एंटैंगलमेंट सीखें।",
+continue:"मॉड्यूल 2 पर जाएँ →",
+footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+moduleSavedError:"आपका ब्राउज़र प्रगति सेव नहीं कर पाया। स्टोरेज सेटिंग्स जाँचें।"
+},
+
+te:{
+home:"← హోమ్",
+tag:"మాడ్యూల్ 01 · ప్రారంభ స్థాయి",
+heroStart:"మీ ప్రయాణం ",
+heroHighlight:"క్వాంటం కంప్యూటింగ్ వైపు.",
+intro:"సున్నా నుండి మీ క్వాంటం ప్రయాణాన్ని ప్రారంభించండి. కంప్యూటర్లు, సాంప్రదాయ బిట్లు, క్వాంటం కంప్యూటర్లు మరియు క్యూబిట్‌ల ప్రపంచాన్ని తెలుసుకోండి.",
+lessons:"📘 4 అభ్యాస అంశాలు",
+activities:"⚡ 3 ఇంటరాక్టివ్ కార్యకలాపాలు",
+questions:"📝 3 క్విజ్ ప్రశ్నలు",
+progressHeading:"మీ అభ్యాస పురోగతి",
+progressIncomplete:"ఈ మాడ్యూల్ పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
+progressComplete:"మాడ్యూల్ 1 విజయవంతంగా పూర్తయింది!",
+completion:"✓ మాడ్యూల్ 1 పూర్తయింది! మీ పురోగతి ఈ పరికరంలో సేవ్ చేయబడింది.",
+section1:"01 · ప్రాథమిక అంశాలు",
+lesson1Title:"కంప్యూటర్ అంటే ఏమిటి?",
+lesson1Text:"కంప్యూటర్ అనేది సమాచారాన్ని స్వీకరించి, సూచనల ప్రకారం ప్రాసెస్ చేసి, ఫలితాన్ని అందించే ఎలక్ట్రానిక్ యంత్రం.",
+computerVisualTitle:"కంప్యూటర్ ఎలా పనిచేస్తుంది?",
+input:"ఇన్‌పుట్",
+process:"ప్రాసెసింగ్",
+output:"అవుట్‌పుట్",
+computerVisualText:"ఇన్‌పుట్ → ప్రాసెసింగ్ → అవుట్‌పుట్",
+lesson1Extra:"ఉదాహరణకు, మీరు కాలిక్యులేటర్‌లో సంఖ్యలను నమోదు చేసినప్పుడు కంప్యూటర్ వాటిని ప్రాసెస్ చేసి సమాధానాన్ని చూపిస్తుంది.",
+section2:"02 · సాంప్రదాయ కంప్యూటింగ్",
+lesson2Title:"సాంప్రదాయ కంప్యూటర్లు మరియు బిట్లు",
+lesson2Text:"సాంప్రదాయ కంప్యూటర్లు బిట్లు అనే చిన్న సమాచార యూనిట్లను ఉపయోగిస్తాయి. ప్రతి బిట్ 0 లేదా 1 అనే రెండు విలువల్లో ఒకదాన్ని కలిగి ఉంటుంది.",
+bitVisualTitle:"బిట్లను అన్వేషించండి",
+bit1:"బిట్ 1",
+bit2:"బిట్ 2",
+bitVisualText:"సాంప్రదాయ బిట్ 0 లేదా 1 మాత్రమే ఉంటుంది.",
+setZero:"0గా సెట్ చేయండి",
+setOne:"1గా సెట్ చేయండి",
+bitChanged:"మీ బిట్ ఇప్పుడు ",
+lesson2Extra:"బిట్లు సాంప్రదాయ కంప్యూటర్ల ప్రాథమిక నిర్మాణ భాగాలు. ఫోటోలు, వీడియోలు మరియు సందేశాలు బిట్ల కలయికల ద్వారా సూచించబడతాయి.",
+section3:"03 · క్వాంటం ప్రపంచం",
+lesson3Title:"క్వాంటం కంప్యూటింగ్ అంటే ఏమిటి?",
+lesson3Text:"క్వాంటం కంప్యూటింగ్ అనేది క్వాంటం భౌతిక శాస్త్ర సూత్రాలను ఉపయోగించి సమాచారాన్ని ప్రాసెస్ చేసే కొత్త విధానం.",
+lesson3Extra:"సాంప్రదాయ కంప్యూటర్లకు భిన్నంగా, క్వాంటం కంప్యూటర్లు క్యూబిట్లను ఉపయోగిస్తాయి. ఇవి సాధారణ బిట్ల కంటే భిన్నంగా ప్రవర్తించగలవు.",
+classicalTitle:"సాంప్రదాయ కంప్యూటర్",
+classicalDescription:"0 లేదా 1 విలువలున్న బిట్లను ఉపయోగిస్తుంది.",
+quantumTitle:"క్వాంటం కంప్యూటర్",
+quantumDescription:"సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ కలిగిన క్యూబిట్లను ఉపయోగిస్తుంది.",
+section4:"04 · క్యూబిట్ పరిచయం",
+lesson4Title:"క్యూబిట్ అంటే ఏమిటి?",
+lesson4Text:"క్యూబిట్ లేదా క్వాంటం బిట్ అనేది క్వాంటం కంప్యూటర్‌లో సమాచారానికి ప్రాథమిక యూనిట్.",
+lesson4Extra:"క్యూబిట్ |0⟩ మరియు |1⟩ స్థితుల క్వాంటం సూపర్‌పొజిషన్‌లో ఉండగలదు. కొలిచినప్పుడు 0 లేదా 1 ఫలితాన్ని ఇస్తుంది.",
+qubitVisualTitle:"మీ మొదటి క్యూబిట్‌ను కలవండి",
+qubitState:"క్వాంటం స్థితి",
+qubitVisualText:"క్యూబిట్‌ను |0⟩ మరియు |1⟩ సూపర్‌పొజిషన్‌లో సిద్ధం చేయవచ్చు.",
+showZero:"|0⟩ చూపించండి",
+showOne:"|1⟩ చూపించండి",
+superposition:"సూపర్‌పొజిషన్‌ను అన్వేషించండి ✨",
+zeroState:"క్యూబిట్ ఇప్పుడు |0⟩ స్థితిలో ఉంది.",
+oneState:"క్యూబిట్ ఇప్పుడు |1⟩ స్థితిలో ఉంది.",
+superState:"సూపర్‌పొజిషన్: |0⟩ మరియు |1⟩ యొక్క క్వాంటం కలయిక!",
+lesson4Note:"గుర్తుంచుకోండి: సూపర్‌పొజిషన్ అనేది దాచిన సాధారణ బిట్ కాదు. ఇది నిజమైన క్వాంటం స్థితి.",
+section5:"05 · త్వరిత పునశ్చరణ",
+recapTitle:"మీరు ఏమి నేర్చుకున్నారు?",
+recapBitTitle:"బిట్",
+recapBitText:"0 లేదా 1 విలువ కలిగిన సాంప్రదాయ సమాచార యూనిట్.",
+recapQubitTitle:"క్యూబిట్",
+recapQubitText:"సూపర్‌పొజిషన్‌లో ఉండగల క్వాంటం సమాచార యూనిట్.",
+section6:"06 · జ్ఞాన పరీక్ష",
+quizTitle:"మీ జ్ఞానాన్ని పరీక్షించుకోండి!",
+quizIntro:"మాడ్యూల్ 1 పూర్తి చేసి మాడ్యూల్ 2ను తెరవడానికి మూడు ప్రశ్నలకూ సరిగ్గా సమాధానం ఇవ్వండి.",
+question:"ప్రశ్న",
+question1:"కంప్యూటర్ ఏమి చేస్తుంది?",
+q0a:"A. సమాచారాన్ని స్వీకరించి ప్రాసెస్ చేస్తుంది",
+q0b:"B. చిత్రాలను మాత్రమే చూపిస్తుంది",
+q0c:"C. విద్యుత్తును మాత్రమే నిల్వ చేస్తుంది",
+question2:"సాంప్రదాయ బిట్ ఏ విలువలను కలిగి ఉంటుంది?",
+q1a:"A. 2 మరియు 3",
+q1b:"B. 0 మరియు 1",
+q1c:"C. 5 మరియు 6",
+question3:"క్యూబిట్ అంటే ఏమిటి?",
+q2a:"A. కంప్యూటర్ స్క్రీన్",
+q2b:"B. సాంప్రదాయ కీబోర్డ్",
+q2c:"C. క్వాంటం సమాచారానికి ప్రాథమిక యూనిట్",
+checkScore:"నా స్కోర్‌ను తనిఖీ చేయండి →",
+retry:"మళ్లీ ప్రయత్నించండి ↻",
+answerAll:"స్కోర్ తనిఖీ చేయడానికి ముందు మూడు ప్రశ్నలకూ సమాధానం ఇవ్వండి.",
+correct:"✓ సరైన సమాధానం! ",
+incorrect:"అది సరైనది కాదు! ",
+explanations:[
+"కంప్యూటర్ సమాచారాన్ని స్వీకరించి ప్రాసెస్ చేసి ఫలితాన్ని అందిస్తుంది.",
+"సాంప్రదాయ బిట్ 0 లేదా 1 విలువను కలిగి ఉంటుంది.",
+"క్యూబిట్ అనేది క్వాంటం కంప్యూటర్‌లో ప్రాథమిక సమాచార యూనిట్."
+],
+excellent:"అద్భుతం! 🌟 మీరు మాడ్యూల్ 1లో ఉత్తీర్ణులయ్యారు!",
+tryAgain:"మంచి ప్రయత్నం! 💙 ఈ మాడ్యూల్ పూర్తి చేయడానికి 3లో 3 సరైన సమాధానాలు అవసరం. మళ్లీ ప్రయత్నించండి!",
+scoreOutOf:" / 3 సరైన సమాధానాలు",
+completedTitle:"🎉 మాడ్యూల్ 1 పూర్తయింది!",
+completedText:"మీరు క్వాంటం కంప్యూటింగ్ ప్రాథమిక అంశాలను విజయవంతంగా నేర్చుకున్నారు. మీ పురోగతి సేవ్ చేయబడింది.",
+nextText:"తదుపరి: మాడ్యూల్ 2లో సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ నేర్చుకోండి.",
+continue:"మాడ్యూల్ 2కి కొనసాగండి →",
+footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+moduleSavedError:"మీ బ్రౌజర్ పురోగతిని సేవ్ చేయలేకపోయింది. స్టోరేజ్ సెట్టింగ్‌లను తనిఖీ చేయండి."
+}
+
+};
+
+
+// ==========================================
+// LANGUAGE HANDLING
+// ==========================================
+
+const translationIds = {
+homeLink:"home",
+moduleTag:"tag",
+heroIntro:"intro",
+statLessons:"lessons",
+statActivities:"activities",
+statQuestions:"questions",
+progressHeading:"progressHeading",
+section1:"section1",
+lesson1Title:"lesson1Title",
+lesson1Text:"lesson1Text",
+computerVisualTitle:"computerVisualTitle",
+inputLabel:"input",
+processLabel:"process",
+outputLabel:"output",
+computerVisualText:"computerVisualText",
+lesson1Extra:"lesson1Extra",
+section2:"section2",
+lesson2Title:"lesson2Title",
+lesson2Text:"lesson2Text",
+bitVisualTitle:"bitVisualTitle",
+bitOneLabel:"bit1",
+bitTwoLabel:"bit2",
+bitVisualText:"bitVisualText",
+zeroButton:"setZero",
+oneButton:"setOne",
+lesson2Extra:"lesson2Extra",
+section3:"section3",
+lesson3Title:"lesson3Title",
+lesson3Text:"lesson3Text",
+lesson3Extra:"lesson3Extra",
+classicalTitle:"classicalTitle",
+classicalDescription:"classicalDescription",
+quantumTitle:"quantumTitle",
+quantumDescription:"quantumDescription",
+section4:"section4",
+lesson4Title:"lesson4Title",
+lesson4Text:"lesson4Text",
+lesson4Extra:"lesson4Extra",
+qubitVisualTitle:"qubitVisualTitle",
+qubitStateLabel:"qubitState",
+qubitVisualText:"qubitVisualText",
+showZeroButton:"showZero",
+showOneButton:"showOne",
+superpositionButton:"superposition",
+lesson4Note:"lesson4Note",
+section5:"section5",
+recapTitle:"recapTitle",
+recapBitTitle:"recapBitTitle",
+recapBitText:"recapBitText",
+recapQubitTitle:"recapQubitTitle",
+recapQubitText:"recapQubitText",
+section6:"section6",
+quizTitle:"quizTitle",
+quizIntro:"quizIntro",
+question1Title:"question1",
+q0a:"q0a",
+q0b:"q0b",
+q0c:"q0c",
+question2Title:"question2",
+q1a:"q1a",
+q1b:"q1b",
+q1c:"q1c",
+question3Title:"question3",
+q2a:"q2a",
+q2b:"q2b",
+q2c:"q2c",
+checkScoreButton:"checkScore",
+retryButton:"retry",
+completedTitle:"completedTitle",
+completedText:"completedText",
+nextModuleText:"nextText",
+continueButton:"continue",
+footerText:"footer"
+};
+
+let currentLanguage = "en";
+
+function t(key){
+    return translations[currentLanguage]?.[key] ??
+           translations.en[key] ?? key;
+}
+
+function applyLanguage(language){
+    if(!translations[language]) language = "en";
+
+    currentLanguage = language;
+
+    document.documentElement.lang = language;
+
+    document.getElementById("languageSelect").value = language;
+
+    Object.entries(translationIds).forEach(([elementId,key])=>{
+        const element = document.getElementById(elementId);
+
+        if(element){
+            element.textContent = t(key);
+        }
+    });
+
+    document.getElementById("heroTitle").innerHTML =
+        `${t("heroStart")}<span>${t("heroHighlight")}</span>`;
+
+    [1,2,3].forEach(number=>{
+        document.getElementById("question"+number+"Title").textContent =
+            `${t("question")} ${number}: ` + t("question"+number);
+    });
+
+    localStorage.setItem(LANGUAGE_KEY,language);
+
+    updateModuleProgress();
+    refreshQuizFeedback();
+}
+
+document.getElementById("languageSelect").addEventListener("change",event=>{
+    applyLanguage(event.target.value);
+});
+
+
+// ==========================================
+// INTERACTIVE BIT DEMONSTRATION
+// ==========================================
+
+let currentBit = 0;
+
+function changeBit(value){
+    currentBit = value;
+
+    document.getElementById("bitOne").textContent = value;
+
+    document.getElementById("bitResult").textContent =
+        t("bitChanged") + value + ".";
+}
+
+
+// ==========================================
+// INTERACTIVE QUBIT DEMONSTRATION
+// ==========================================
+
+function showQubitState(state){
+    const visual = document.getElementById("qubitVisual");
+    const result = document.getElementById("qubitResult");
+
+    if(state === 0){
+        visual.textContent = "0";
+        visual.style.animation = "none";
+        visual.style.background = "radial-gradient(circle at 35% 30%,#9ce8ff,#3474b9 65%,#182b5c)";
+        result.textContent = t("zeroState");
+    }
+
+    else if(state === 1){
+        visual.textContent = "1";
+        visual.style.animation = "none";
+        visual.style.background = "radial-gradient(circle at 35% 30%,#ffe0a1,#d17a42 65%,#602d40)";
+        result.textContent = t("oneState");
+    }
+
+    else{
+        visual.textContent = "Q";
+        visual.style.animation = "pulse 2.5s infinite ease-in-out";
+        visual.style.background = "radial-gradient(circle at 35% 30%,#c5baff,#7562e7 55%,#29205e)";
+        result.textContent = t("superState");
+    }
+}
+
+
+// ==========================================
+// SHARED PROGRESS TRACKING
+// ==========================================
+
+function readProgress(){
+    try{
+        const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
+
+        return {
+            ...saved,
+            completedModules:Array.isArray(saved.completedModules)
+                ? [...new Set(saved.completedModules.map(Number).filter(Number.isFinite))]
+                : [],
+            quizScores:saved.quizScores &&
+                typeof saved.quizScores === "object" &&
+                !Array.isArray(saved.quizScores)
+                ? {...saved.quizScores}
+                : {}
+        };
+
+    }catch(error){
+        console.error("Could not read saved progress:",error);
+
+        return {
+            completedModules:[],
+            quizScores:{}
+        };
+    }
+}
+
+function writeProgress(progress){
+    try{
+        localStorage.setItem(PROGRESS_KEY,JSON.stringify(progress));
+        return true;
+    }catch(error){
+        console.error("Could not save progress:",error);
+        return false;
+    }
+}
+
+function updateModuleProgress(){
+    const completed = readProgress().completedModules.includes(1);
+
+    const percentage = completed ? 100 : 0;
+
+    document.getElementById("moduleProgressFill").style.width =
+        percentage + "%";
+
+    document.getElementById("progressPercent").textContent =
+        percentage + "%";
+
+    document.getElementById("moduleProgressText").textContent =
+        completed ? t("progressComplete") : t("progressIncomplete");
+
+    document.getElementById("progressBar").setAttribute(
+        "aria-valuenow",String(percentage)
+    );
+
+    document.getElementById("completionStatus").textContent =
+        t("completion");
+
+    document.getElementById("completionStatus").style.display =
+        completed ? "block" : "none";
+
+    document.getElementById("nextModule").style.display =
+        completed ? "block" : "none";
+}
+
+function saveModuleCompletion(finalScore){
+    const progress = readProgress();
+
+    progress.quizScores[1] = Math.max(
+        Number(progress.quizScores[1] || 0),
+        finalScore
+    );
+
+    if(finalScore === 3 &&
+       !progress.completedModules.includes(1)){
+        progress.completedModules.push(1);
+    }
+
+    const saved = writeProgress(progress);
+
+    updateModuleProgress();
+
+    if(!saved){
+        alert(t("moduleSavedError"));
+    }
+}
+
+window.addEventListener("storage",event=>{
+    if(event.key === PROGRESS_KEY){
+        updateModuleProgress();
+    }
+});
+
+
+// ==========================================
+// KNOWLEDGE QUIZ
+// ==========================================
+
+const correctAnswers = [0,1,2];
 
 let score = 0;
-let answered = [false, false, false];
 
-const MODULE_NUMBER = 1;
-const STORAGE_KEY = "qubitquestProgress";
+let answered = [false,false,false];
 
-function getProgress() {
+let selectedAnswers = [null,null,null];
 
-    try {
+function answer(question,choice){
 
-        const saved = localStorage.getItem(STORAGE_KEY);
-
-        if (!saved) {
-            return {
-                completedModules: [],
-                quizScores: {}
-            };
-        }
-
-        const data = JSON.parse(saved);
-
-        return {
-            completedModules: Array.isArray(data.completedModules)
-                ? data.completedModules : [],
-            quizScores: data.quizScores || {}
-        };
-
-    } catch (error) {
-
-        console.error("Could not read saved progress:", error);
-
-        return {
-            completedModules: [],
-            quizScores: {}
-        };
-
-    }
-
-}
-
-function saveProgress(data) {
-
-    try {
-
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(data)
-        );
-
-        return true;
-
-    } catch (error) {
-
-        console.error("Could not save progress:", error);
-
-        return false;
-
-    }
-
-}
-
-function updateProgressDisplay() {
-
-    const data = getProgress();
-
-    const completed = data.completedModules.includes(MODULE_NUMBER);
-
-    const progress = document.getElementById("moduleProgress");
-    const label = document.getElementById("progressLabel");
-    const percentage = document.getElementById("progressPercentage");
-    const status = document.getElementById("completionStatus");
-
-    if (completed) {
-
-        progress.style.width = "100%";
-        label.textContent = "Module 1 successfully completed";
-        percentage.textContent = "100%";
-        status.style.display = "block";
-
-    } else {
-
-        progress.style.width = "0%";
-        label.textContent = "Module 1 assessment pending";
-        percentage.textContent = "0%";
-        status.style.display = "none";
-
-    }
-
-}
-
-function answer(question, choice) {
-
-    if (answered[question]) return;
+    if(answered[question]) return;
 
     answered[question] = true;
 
-    const feedback = document.getElementById(
-        "feedback" + question
-    );
+    selectedAnswers[question] = choice;
+
+    if(choice === correctAnswers[question]){
+        score++;
+    }
+
+    updateQuestionFeedback(question);
+}
+
+function updateQuestionFeedback(question){
+
+    const feedback = document.getElementById("feedback"+question);
+
+    const buttons = document.querySelectorAll(".quiz-card")[question]
+        .querySelectorAll(".quiz-option");
+
+    if(!answered[question]){
+
+        feedback.style.display = "none";
+
+        buttons.forEach(button=>{
+            button.disabled = false;
+            button.style.borderColor = "";
+        });
+
+        return;
+    }
+
+    const choice = selectedAnswers[question];
+
+    const isCorrect = choice === correctAnswers[question];
+
+    buttons.forEach((button,index)=>{
+
+        button.disabled = true;
+
+        button.style.borderColor =
+            index === correctAnswers[question]
+            ? "#46d9dc"
+            : index === choice
+            ? "#ff9eae"
+            : "#465174";
+    });
 
     feedback.style.display = "block";
 
-    const questionButtons = document.querySelectorAll(
-        'button[onclick^="answer(' + question + ',"]'
-    );
+    feedback.style.color =
+        isCorrect ? "#8ef0df" : "#ffb2bd";
 
-    questionButtons.forEach(button => {
-        button.disabled = true;
-    });
-
-    const selectedButton = questionButtons[choice];
-
-    if (choice === correctAnswers[question]) {
-
-        score++;
-
-        selectedButton.classList.add("selected-correct");
-
-        feedback.textContent =
-            "✓ " + explanations[question];
-
-    } else {
-
-        selectedButton.classList.add("selected-wrong");
-
-        feedback.textContent =
-            "Not quite! " + explanations[question];
-
-        questionButtons[correctAnswers[question]]
-            .classList.add("selected-correct");
-
-    }
-
+    feedback.textContent =
+        (isCorrect ? t("correct") : t("incorrect")) +
+        t("explanations")[question];
 }
 
-function showScore() {
+function refreshQuizFeedback(){
+
+    for(let i=0;i<3;i++){
+        updateQuestionFeedback(i);
+    }
+
+    const result = document.getElementById("score");
+
+    if(result.style.display === "block" && answered.every(Boolean)){
+        showScore();
+    }
+}
+
+function showScore(){
 
     const result = document.getElementById("score");
 
     result.style.display = "block";
 
-    if (answered.some(value => !value)) {
+    if(answered.some(value=>!value)){
 
-        result.textContent =
-            "Please answer all three questions first.";
+        result.innerHTML =
+            `<strong>${t("answerAll")}</strong>`;
 
         return;
-
     }
 
-    const data = getProgress();
+    const passed = score === 3;
 
-    data.quizScores[MODULE_NUMBER] = score;
+    result.innerHTML = `
+        <strong>${score}${t("scoreOutOf")}</strong>
+        <p>${passed ? t("excellent") : t("tryAgain")}</p>
+    `;
 
-    if (score === 3) {
+    if(passed){
 
-        if (!data.completedModules.includes(MODULE_NUMBER)) {
-            data.completedModules.push(MODULE_NUMBER);
-        }
+        saveModuleCompletion(score);
 
-        const saved = saveProgress(data);
+    }else{
 
-        result.textContent = saved
-            ? "🌟 Excellent! 3/3! Module 1 completed and your progress has been saved!"
-            : "Excellent! 3/3! Your quiz is complete, but browser storage could not save your progress.";
+        const progress = readProgress();
 
-        updateProgressDisplay();
+        progress.quizScores[1] = Math.max(
+            Number(progress.quizScores[1] || 0),
+            score
+        );
 
-    } else {
+        writeProgress(progress);
 
-        saveProgress(data);
-
-        result.textContent =
-            "You scored " + score +
-            " out of 3. You need 3/3 to complete this module. Try again! 💙";
-
+        updateModuleProgress();
     }
-
 }
 
-function resetQuiz() {
+function retryQuiz(){
 
     score = 0;
-    answered = [false, false, false];
 
-    for (let i = 0; i < 3; i++) {
+    answered = [false,false,false];
 
-        document.getElementById("feedback" + i).style.display = "none";
+    selectedAnswers = [null,null,null];
 
+    for(let i=0;i<3;i++){
+
+        const feedback = document.getElementById("feedback"+i);
+
+        feedback.textContent = "";
+
+        feedback.style.display = "none";
+
+        document.querySelectorAll(".quiz-card")[i]
+            .querySelectorAll(".quiz-option")
+            .forEach(button=>{
+                button.disabled = false;
+                button.style.borderColor = "";
+            });
     }
-
-    document.querySelectorAll(".quiz-option").forEach(button => {
-
-        button.disabled = false;
-        button.classList.remove("selected-correct", "selected-wrong");
-
-    });
 
     const result = document.getElementById("score");
 
-    result.style.display = "none";
     result.textContent = "";
 
+    result.style.display = "none";
 }
 
-updateProgressDisplay();
+
+// ==========================================
+// INITIALIZE MODULE
+// ==========================================
+
+try{
+    const savedLanguage =
+        localStorage.getItem(LANGUAGE_KEY) || "en";
+
+    applyLanguage(savedLanguage);
+
+}catch(error){
+
+    console.error("Module initialization error:",error);
+
+    applyLanguage("en");
+}
+
+updateModuleProgress();
 
 </script>
 
