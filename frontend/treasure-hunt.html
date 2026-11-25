@@ -1,0 +1,1349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Treasure Hunt | QubitQuest</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --purple: #a78bfa;
+    --bright-purple: #8b5cf6;
+    --cyan: #67e8f9;
+    --navy: #070b19;
+    --panel: #11172d;
+    --muted: #9da9c8;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #f5f3ff;
+    font-family: "Segoe UI", sans-serif;
+    background:
+        radial-gradient(ellipse at 50% 0%, #25204b 0%, transparent 42%),
+        radial-gradient(ellipse at 90% 50%, rgba(20,95,119,.12), transparent 35%),
+        #070b19;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .22;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, white 100%, transparent),
+        radial-gradient(2px 2px at 70% 15%, #b9a4ff 100%, transparent),
+        radial-gradient(1px 1px at 80% 75%, #6ee7f9 100%, transparent),
+        radial-gradient(2px 2px at 30% 80%, white 100%, transparent);
+    background-size: 170px 170px, 230px 230px, 190px 190px, 260px 260px;
+    z-index: -1;
+}
+
+header {
+    height: 76px;
+    padding: 0 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(7,11,25,.85);
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -.5px;
+    color: #c4b5fd;
+}
+
+.back {
+    color: #c4b5fd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back:hover {
+    color: white;
+}
+
+.container {
+    width: min(1180px, 92%);
+    margin: auto;
+    padding: 42px 0 75px;
+}
+
+.tag {
+    color: #b9a4ff;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: clamp(35px, 5vw, 55px);
+    margin: 13px 0;
+    line-height: 1.12;
+}
+
+.gradient-text {
+    background: linear-gradient(100deg, #c4b5fd, #8bdeff, #d8b4fe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.intro {
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 700px;
+    font-size: 14px;
+}
+
+.game-layout {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.panel {
+    background: linear-gradient(145deg, rgba(22,29,55,.96), rgba(13,20,40,.96));
+    border: 1px solid rgba(167,139,250,.2);
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 20px 55px rgba(0,0,0,.2);
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    font-size: 17px;
+}
+
+.live-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #67e8b5;
+    border: 1px solid rgba(103,232,181,.3);
+    border-radius: 30px;
+    padding: 6px 10px;
+}
+
+/* =====================================
+   TREASURE CHEST
+===================================== */
+
+.treasure-scene {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 17px;
+    background:
+        radial-gradient(ellipse at 50% 65%, rgba(139,92,246,.23), transparent 55%),
+        linear-gradient(180deg, #10162d, #090e20);
+    border: 1px solid rgba(167,139,250,.12);
+    perspective: 900px;
+}
+
+.scene-grid {
+    position: absolute;
+    bottom: -75px;
+    width: 150%;
+    height: 190px;
+    transform: rotateX(64deg);
+    background-image:
+        linear-gradient(rgba(139,92,246,.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(103,232,249,.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(transparent, black 35%, transparent);
+}
+
+.orbit {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    border: 1px solid rgba(167,139,250,.2);
+    border-radius: 50%;
+    transform: rotateX(70deg);
+    box-shadow: 0 0 25px rgba(139,92,246,.1);
+}
+
+.orbit.two {
+    width: 195px;
+    height: 195px;
+    border-color: rgba(103,232,249,.2);
+    transform: rotateY(65deg) rotateX(65deg);
+}
+
+.scene-glow {
+    position: absolute;
+    width: 210px;
+    height: 100px;
+    bottom: 30px;
+    border-radius: 50%;
+    background: #8954ff;
+    filter: blur(65px);
+    opacity: .24;
+}
+
+.chest-wrap {
+    position: relative;
+    z-index: 2;
+    width: 220px;
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatChest 4s ease-in-out infinite;
+}
+
+@keyframes floatChest {
+    0%, 100% { transform: translateY(0) rotateY(-5deg); }
+    50% { transform: translateY(-12px) rotateY(5deg); }
+}
+
+.chest {
+    position: relative;
+    width: 150px;
+    height: 125px;
+    filter: drop-shadow(0 15px 20px rgba(0,0,0,.4));
+    transform-style: preserve-3d;
+}
+
+.chest-lid {
+    position: absolute;
+    width: 150px;
+    height: 54px;
+    top: 8px;
+    left: 0;
+    z-index: 3;
+    border: 2px solid #f8c66c;
+    border-radius: 55px 55px 8px 8px;
+    background: linear-gradient(145deg, #a66a25, #603619 70%, #c18b40);
+    transform-origin: bottom center;
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+    box-shadow: inset 0 5px 9px rgba(255,225,158,.35);
+}
+
+.chest-lid::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    right: 12px;
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255,220,144,.35);
+}
+
+.chest-base {
+    position: absolute;
+    width: 150px;
+    height: 75px;
+    top: 52px;
+    left: 0;
+    z-index: 2;
+    border: 2px solid #f0bd5e;
+    border-radius: 5px 5px 15px 15px;
+    background: linear-gradient(100deg, #613919, #a96927 45%, #573319);
+    box-shadow:
+        inset 0 7px 10px rgba(255,220,140,.15),
+        inset 0 -9px 10px rgba(0,0,0,.25);
+}
+
+.chest-base::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px;
+    width: 7px;
+    background: rgba(255,215,125,.55);
+    box-shadow: 107px 0 rgba(255,215,125,.55);
+}
+
+.chest-band {
+    position: absolute;
+    z-index: 4;
+    left: 66px;
+    top: 48px;
+    width: 18px;
+    height: 80px;
+    background: linear-gradient(90deg, #f9d77c, #ad732e, #f9d77c);
+    border: 1px solid #ffe5a3;
+}
+
+.chest-lock {
+    position: absolute;
+    z-index: 5;
+    left: 62px;
+    top: 64px;
+    width: 27px;
+    height: 32px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #ffe7a0, #b87b30);
+    border: 2px solid #fff0bd;
+    box-shadow: 0 0 13px rgba(255,209,108,.4);
+}
+
+.chest-lock::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 9px;
+    left: 9px;
+    top: 9px;
+    border-radius: 5px;
+    background: #633c1e;
+}
+
+.treasure-light {
+    position: absolute;
+    top: 25px;
+    width: 115px;
+    height: 85px;
+    border-radius: 50%;
+    background: #ffd86f;
+    filter: blur(40px);
+    opacity: 0;
+    transition: opacity .8s;
+    z-index: 1;
+}
+
+.chest.open .chest-lid {
+    transform: rotateX(115deg) translateY(-9px);
+}
+
+.chest.open .treasure-light {
+    opacity: .85;
+    animation: treasurePulse 1.5s infinite alternate;
+}
+
+@keyframes treasurePulse {
+    from { opacity: .45; }
+    to { opacity: .95; }
+}
+
+.scene-particle {
+    position: absolute;
+    color: #c4b5fd;
+    font-size: 18px;
+    animation: particleFloat 4s ease-in-out infinite;
+    opacity: .8;
+}
+
+.scene-particle.p1 { left: 15%; top: 25%; }
+.scene-particle.p2 { right: 18%; top: 22%; animation-delay: 1s; }
+.scene-particle.p3 { left: 23%; bottom: 25%; animation-delay: 2s; }
+.scene-particle.p4 { right: 25%; bottom: 30%; animation-delay: .5s; }
+
+@keyframes particleFloat {
+    0%, 100% { transform: translateY(0); opacity: .3; }
+    50% { transform: translateY(-20px); opacity: 1; }
+}
+
+.chest-caption {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 11px;
+    color: #a9b5d1;
+    letter-spacing: 2px;
+}
+
+/* =====================================
+   TREASURE MAP
+===================================== */
+
+.map-panel {
+    margin-top: 22px;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+}
+
+.location {
+    position: relative;
+    min-height: 112px;
+    border-radius: 15px;
+    border: 1px solid rgba(167,139,250,.23);
+    background: linear-gradient(145deg, #1c2545, #131c35);
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+    overflow: hidden;
+    padding: 14px;
+    text-align: left;
+}
+
+.location:hover:not(:disabled) {
+    transform: translateY(-4px);
+    border-color: #b6a3ff;
+    box-shadow: 0 0 22px rgba(167,139,250,.2);
+}
+
+.location .loc-icon {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 9px;
+}
+
+.location .loc-name {
+    font-size: 12px;
+    font-weight: 800;
+    display: block;
+}
+
+.location .loc-hint {
+    color: #93a0bf;
+    font-size: 10px;
+    display: block;
+    margin-top: 4px;
+}
+
+.location.selected {
+    border-color: #b6a3ff;
+    background: linear-gradient(145deg, #49347c, #241c50);
+    box-shadow: 0 0 20px rgba(167,139,250,.18);
+}
+
+.location.searching {
+    animation: searchPulse .7s infinite alternate;
+    border-color: var(--cyan);
+}
+
+@keyframes searchPulse {
+    from { box-shadow: 0 0 5px rgba(103,232,249,.2); }
+    to { box-shadow: 0 0 25px rgba(103,232,249,.65); }
+}
+
+.location.found {
+    border-color: #f6ce70;
+    background: linear-gradient(145deg, #594222, #342719);
+    box-shadow: 0 0 25px rgba(246,206,112,.25);
+}
+
+.location.missed {
+    opacity: .48;
+}
+
+.location:disabled {
+    cursor: default;
+}
+
+.location .status-icon {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    font-size: 13px;
+}
+
+/* =====================================
+   GAME CONTROLS
+===================================== */
+
+.controls {
+    margin-top: 22px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.shots-group label {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+select {
+    background: #1a2442;
+    border: 1px solid #4a5279;
+    color: white;
+    border-radius: 10px;
+    padding: 12px;
+    min-width: 170px;
+}
+
+.primary-button {
+    border: 0;
+    border-radius: 12px;
+    padding: 15px 25px;
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    background: linear-gradient(110deg, #7552d8, #a58bff);
+    box-shadow: 0 8px 25px rgba(139,92,246,.25);
+    transition: .25s;
+}
+
+.primary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(139,92,246,.4);
+}
+
+.primary-button:disabled {
+    opacity: .55;
+    cursor: wait;
+    transform: none;
+}
+
+.status {
+    margin-top: 17px;
+    color: #9ba8c6;
+    font-size: 12px;
+    line-height: 1.7;
+    min-height: 22px;
+}
+
+.status.success { color: #78edba; }
+.status.error { color: #ff8d9d; }
+
+/* =====================================
+   SEARCH STATISTICS
+===================================== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.stat {
+    border: 1px solid rgba(167,139,250,.14);
+    background: #10172d;
+    border-radius: 14px;
+    padding: 17px;
+}
+
+.stat small {
+    display: block;
+    color: #929fbd;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.stat strong {
+    font-size: 25px;
+    color: #c4b5fd;
+}
+
+.stat:nth-child(2) strong { color: #67e8f9; }
+.stat:nth-child(3) strong { color: #f7d58c; }
+
+.stat p {
+    font-size: 10px;
+    color: #7f8aa7;
+    margin-top: 5px;
+}
+
+/* =====================================
+   LOWER SECTIONS
+===================================== */
+
+.section {
+    margin-top: 22px;
+    background: linear-gradient(145deg, #131b34, #0f172d);
+    border: 1px solid rgba(167,139,250,.15);
+    border-radius: 19px;
+    padding: 24px;
+}
+
+.section h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.section > p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.circuit {
+    margin-top: 15px;
+    min-height: 100px;
+    padding: 18px;
+    background: #070d1b;
+    color: #79e6dc;
+    border-radius: 12px;
+    border: 1px solid rgba(103,232,249,.1);
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.results-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.result-item {
+    background: #1a2541;
+    padding: 13px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-item small {
+    display: block;
+    color: #9da9c8;
+    font-size: 10px;
+}
+
+.result-item strong {
+    display: block;
+    margin-top: 8px;
+    color: #c4b5fd;
+    font-size: 18px;
+}
+
+.learn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    margin-top: 18px;
+}
+
+.learn-card {
+    background: #1a2541;
+    padding: 18px;
+    border-radius: 13px;
+}
+
+.learn-card h3 {
+    font-size: 14px;
+    color: #c4b5fd;
+    margin-bottom: 8px;
+}
+
+.learn-card p {
+    color: #a5b0ca;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #727f9f;
+    font-size: 12px;
+}
+
+@media(max-width: 850px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+    header { padding: 0 5%; }
+    .container { padding-top: 30px; }
+    .panel { padding: 17px; }
+    .stats { grid-template-columns: 1fr; }
+    .results-list { grid-template-columns: repeat(2, 1fr); }
+    .learn-grid { grid-template-columns: 1fr; }
+    .controls { align-items: stretch; }
+    .primary-button { width: 100%; }
+    select { width: 100%; }
+    .shots-group { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✦ QubitQuest</div>
+    <a href="index.html" class="back">← Back to Home</a>
+</header>
+
+<main class="container">
+
+    <div class="tag">QUANTUM ARCADE · GAME 03</div>
+
+    <h1>
+        Quantum <span class="gradient-text">Treasure Hunt</span>
+    </h1>
+
+    <p class="intro">
+        A hidden treasure. Four mysterious locations. One quantum
+        algorithm. Explore the power of Grover's Search and discover
+        how quantum computing can find a marked answer.
+    </p>
+
+    <div class="game-layout">
+
+        <!-- LEFT: TREASURE SCENE -->
+
+        <section class="panel">
+
+            <div class="panel-heading">
+                <h2>✨ The Lost Treasure</h2>
+                <span class="live-label">● QUANTUM WORLD</span>
+            </div>
+
+            <div class="treasure-scene">
+
+                <div class="scene-grid"></div>
+                <div class="orbit"></div>
+                <div class="orbit two"></div>
+                <div class="scene-glow"></div>
+
+                <span class="scene-particle p1">✦</span>
+                <span class="scene-particle p2">✧</span>
+                <span class="scene-particle p3">✦</span>
+                <span class="scene-particle p4">✧</span>
+
+                <div class="chest-wrap">
+
+                    <div class="treasure-light"></div>
+
+                    <div class="chest" id="chest">
+                        <div class="chest-lid"></div>
+                        <div class="chest-base"></div>
+                        <div class="chest-band"></div>
+                        <div class="chest-lock"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="chest-caption" id="chestCaption">
+                AN ANCIENT TREASURE AWAITS
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <small>SEARCH SPACE</small>
+                    <strong>4</strong>
+                    <p>Possible locations</p>
+                </div>
+
+                <div class="stat">
+                    <small>QUBITS</small>
+                    <strong>2</strong>
+                    <p>Quantum search</p>
+                </div>
+
+                <div class="stat">
+                    <small>ALGORITHM</small>
+                    <strong>GROVER</strong>
+                    <p>Search algorithm</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT: TREASURE MAP -->
+
+        <section class="panel map-panel">
+
+            <div class="panel-heading">
+                <h2>🗺️ Treasure Map</h2>
+                <span class="live-label">4 LOCATIONS</span>
+            </div>
+
+            <p style="color:#9da9c8;font-size:12px;line-height:1.7;margin-bottom:18px;">
+                Choose a location to hide the treasure. Then use
+                quantum search to discover it.
+            </p>
+
+            <div class="map-grid">
+
+                <button class="location" data-state="00"
+                    onclick="selectLocation('00')">
+
+                    <span class="status-icon">?</span>
+                    <span class="loc-icon">🌌</span>
+                    <span class="loc-name">Cosmic Ruins</span>
+                    <span class="loc-hint">Location 00</span>
+
+                </button>
+
+                <button class="location" data-state="01"
+                    onclick="selectLocation('01')">
+
+                    <span class="status-icon">?</span>
+                    <span class="loc-icon">🔮</span>
+                    <span class="loc-name">Crystal Valley</span>
+                    <span class="loc-hint">Location 01</span>
+
+                </button>
+
+                <button class="location" data-state="10"
+                    onclick="selectLocation('10')">
+
+                    <span class="status-icon">?</span>
+                    <span class="loc-icon">🌠</span>
+                    <span class="loc-name">Starlight Cave</span>
+                    <span class="loc-hint">Location 10</span>
+
+                </button>
+
+                <button class="location" data-state="11"
+                    onclick="selectLocation('11')">
+
+                    <span class="status-icon">?</span>
+                    <span class="loc-icon">🏛️</span>
+                    <span class="loc-name">Ancient Temple</span>
+                    <span class="loc-hint">Location 11</span>
+
+                </button>
+
+            </div>
+
+            <div class="controls">
+
+                <div class="shots-group">
+                    <label for="shots">Quantum measurements</label>
+                    <select id="shots">
+                        <option value="256">256 shots</option>
+                        <option value="512">512 shots</option>
+                        <option value="1024" selected>1024 shots</option>
+                        <option value="2048">2048 shots</option>
+                        <option value="4096">4096 shots</option>
+                    </select>
+                </div>
+
+                <button class="primary-button" id="searchButton"
+                    onclick="startSearch()">
+                    ⚡ SEARCH WITH QUANTUM POWER
+                </button>
+
+            </div>
+
+            <div class="status" id="status">
+                Select a treasure location and start your quantum search!
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <section class="section">
+
+        <h2>📡 Quantum Search Results</h2>
+
+        <p>
+            Once Grover's algorithm finishes, the measurement
+            distribution and treasure discovery results will appear here.
+        </p>
+
+        <div class="results-list">
+
+            <div class="result-item">
+                <small>TREASURE LOCATION</small>
+                <strong id="foundLocation">—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>SUCCESSFUL SHOTS</small>
+                <strong id="successCount">—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>SUCCESS RATE</small>
+                <strong id="successRate">—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>TOTAL SHOTS</small>
+                <strong id="totalShots">—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MEASUREMENT DISTRIBUTION -->
+
+    <section class="section">
+
+        <h2>📊 Measurement Distribution</h2>
+
+        <p>
+            Each binary result represents one of the four possible
+            treasure locations. Grover's algorithm amplifies the
+            probability of the marked location.
+        </p>
+
+        <div id="measurementBars" class="results-list">
+
+            <div class="result-item">
+                <small>00 · COSMIC RUINS</small>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>01 · CRYSTAL VALLEY</small>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>10 · STARLIGHT CAVE</small>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-item">
+                <small>11 · ANCIENT TEMPLE</small>
+                <strong>—</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CIRCUIT -->
+
+    <section class="section">
+
+        <h2>⚛️ Your Quantum Circuit</h2>
+
+        <p>
+            This is the actual Qiskit circuit used to search for the
+            hidden treasure.
+        </p>
+
+        <div class="circuit" id="circuit">
+Your Grover quantum circuit will appear here after the search.
+        </div>
+
+    </section>
+
+
+    <!-- LEARNING -->
+
+    <section class="section">
+
+        <h2>🧠 How Did You Find the Treasure?</h2>
+
+        <div class="learn-grid">
+
+            <div class="learn-card">
+                <h3>01 · Superposition</h3>
+                <p>
+                    Hadamard gates put both qubits into an equal
+                    superposition of four possible locations.
+                </p>
+            </div>
+
+            <div class="learn-card">
+                <h3>02 · Oracle</h3>
+                <p>
+                    The oracle marks the chosen treasure state by
+                    changing its quantum phase.
+                </p>
+            </div>
+
+            <div class="learn-card">
+                <h3>03 · Diffusion</h3>
+                <p>
+                    The diffusion operator amplifies the marked
+                    state's probability through quantum interference.
+                </p>
+            </div>
+
+            <div class="learn-card">
+                <h3>04 · Measurement</h3>
+                <p>
+                    The simulator measures the qubits and returns
+                    the search results. In this ideal four-state
+                    example, one iteration finds the marked state.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="footer">
+        QubitQuest · Explore. Experiment. Understand.
+    </div>
+
+</main>
+
+
+<script>
+/* =====================================
+   GAME SETTINGS
+===================================== */
+
+let selectedLocation = null;
+let isSearching = false;
+
+const locations = {
+    "00": "Cosmic Ruins",
+    "01": "Crystal Valley",
+    "10": "Starlight Cave",
+    "11": "Ancient Temple"
+};
+
+const locationIcons = {
+    "00": "🌌",
+    "01": "🔮",
+    "10": "🌠",
+    "11": "🏛️"
+};
+
+
+/* =====================================
+   LOCATION SELECTION
+===================================== */
+
+function selectLocation(state) {
+
+    if (isSearching) return;
+
+    selectedLocation = state;
+
+    document.querySelectorAll(".location").forEach(button => {
+
+        button.classList.remove("selected", "found", "missed");
+
+        const icon = button.querySelector(".status-icon");
+        icon.textContent = "?";
+
+    });
+
+    const selectedButton = document.querySelector(
+        `.location[data-state="${state}"]`
+    );
+
+    selectedButton.classList.add("selected");
+
+    document.getElementById("chest").classList.remove("open");
+
+    document.getElementById("chestCaption").textContent =
+        "TREASURE LOCATION SELECTED";
+
+    document.getElementById("status").className = "status";
+
+    document.getElementById("status").textContent =
+        locations[state] + " selected. Start the quantum search!";
+
+    resetResults();
+}
+
+
+/* =====================================
+   RESET RESULTS
+===================================== */
+
+function resetResults() {
+
+    document.getElementById("foundLocation").textContent = "—";
+    document.getElementById("successCount").textContent = "—";
+    document.getElementById("successRate").textContent = "—";
+    document.getElementById("totalShots").textContent = "—";
+
+    document.getElementById("circuit").textContent =
+        "Your Grover quantum circuit will appear here after the search.";
+
+    document.getElementById("measurementBars").innerHTML = `
+        <div class="result-item"><small>00 · COSMIC RUINS</small><strong>—</strong></div>
+        <div class="result-item"><small>01 · CRYSTAL VALLEY</small><strong>—</strong></div>
+        <div class="result-item"><small>10 · STARLIGHT CAVE</small><strong>—</strong></div>
+        <div class="result-item"><small>11 · ANCIENT TEMPLE</small><strong>—</strong></div>
+    `;
+}
+
+
+/* =====================================
+   SEARCH ANIMATION
+===================================== */
+
+function animateSearch() {
+
+    const buttons = Array.from(
+        document.querySelectorAll(".location")
+    );
+
+    let index = 0;
+
+    return new Promise(resolve => {
+
+        const interval = setInterval(() => {
+
+            buttons.forEach(button => {
+                button.classList.remove("searching");
+            });
+
+            buttons[index].classList.add("searching");
+
+            index++;
+
+            if (index >= buttons.length) {
+                clearInterval(interval);
+                resolve();
+            }
+
+        }, 300);
+
+    });
+}
+
+
+/* =====================================
+   MEASUREMENT DISTRIBUTION
+===================================== */
+
+function displayMeasurements(counts, markedState) {
+
+    const container = document.getElementById("measurementBars");
+
+    container.innerHTML = "";
+
+    const names = {
+        "00": "COSMIC RUINS",
+        "01": "CRYSTAL VALLEY",
+        "10": "STARLIGHT CAVE",
+        "11": "ANCIENT TEMPLE"
+    };
+
+    const states = ["00", "01", "10", "11"];
+
+    states.forEach(state => {
+
+        const count = Number(counts[state] || 0);
+
+        const item = document.createElement("div");
+        item.className = "result-item";
+
+        const label = document.createElement("small");
+        label.textContent = state + " · " + names[state];
+
+        const value = document.createElement("strong");
+        value.textContent = count.toLocaleString();
+
+        if (state === markedState) {
+            value.style.color = "#f7d58c";
+        }
+
+        item.append(label, value);
+        container.appendChild(item);
+
+    });
+}
+
+
+/* =====================================
+   REVEAL TREASURE
+===================================== */
+
+function revealTreasure(state) {
+
+    document.querySelectorAll(".location").forEach(button => {
+
+        button.classList.remove("searching", "selected", "missed");
+
+        const buttonState = button.dataset.state;
+        const icon = button.querySelector(".status-icon");
+
+        if (buttonState === state) {
+
+            button.classList.add("found");
+            icon.textContent = "✦";
+
+        } else {
+
+            button.classList.add("missed");
+            icon.textContent = "·";
+
+        }
+
+        button.disabled = true;
+
+    });
+
+    document.getElementById("chest").classList.add("open");
+
+    document.getElementById("chestCaption").textContent =
+        "✦ TREASURE DISCOVERED ✦";
+
+}
+
+
+/* =====================================
+   QUANTUM TREASURE SEARCH
+===================================== */
+
+async function startSearch() {
+
+    if (isSearching) return;
+
+    if (!selectedLocation) {
+
+        document.getElementById("status").className = "status error";
+
+        document.getElementById("status").textContent =
+            "Please select one of the four treasure locations first!";
+
+        return;
+    }
+
+    isSearching = true;
+
+    const button = document.getElementById("searchButton");
+    const status = document.getElementById("status");
+
+    const shots = Number(document.getElementById("shots").value);
+
+    button.disabled = true;
+    button.textContent = "⏳ SEARCHING THE QUANTUM WORLD...";
+
+    document.querySelectorAll(".location").forEach(location => {
+        location.disabled = true;
+    });
+
+    document.getElementById("chest").classList.remove("open");
+
+    document.getElementById("chestCaption").textContent =
+        "QUANTUM SEARCH IN PROGRESS";
+
+    status.className = "status";
+    status.textContent =
+        "Preparing superposition and activating the quantum oracle...";
+
+    try {
+
+        // Animate the map while Qiskit runs.
+        const animationPromise = animateSearch();
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/run-treasure-hunt",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    shots: shots,
+                    marked_state: selectedLocation
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Quantum search failed."
+            );
+        }
+
+        await animationPromise;
+
+        // Check that the backend returned the selected treasure.
+        if (data.marked_state !== selectedLocation) {
+            throw new Error("The returned treasure location did not match your selection.");
+        }
+
+        status.textContent =
+            "Oracle activated! Amplifying the hidden treasure state...";
+
+        await new Promise(resolve => setTimeout(resolve, 650));
+
+        displayMeasurements(data.counts, data.marked_state);
+
+        document.getElementById("foundLocation").textContent =
+            data.treasure_location;
+
+        document.getElementById("successCount").textContent =
+            Number(data.success_count).toLocaleString();
+
+        document.getElementById("successRate").textContent =
+            data.success_percentage + "%";
+
+        document.getElementById("totalShots").textContent =
+            Number(data.shots).toLocaleString();
+
+        document.getElementById("circuit").textContent =
+            data.circuit;
+
+        revealTreasure(data.marked_state);
+
+        status.className = "status success";
+
+        status.textContent =
+            "✦ TREASURE FOUND! Grover's algorithm discovered " +
+            data.treasure_location +
+            " with a " + data.success_percentage +
+            "% success rate across " + data.shots + " measurements.";
+
+    } catch (error) {
+
+        status.className = "status error";
+
+        status.textContent =
+            "Search error: " + error.message +
+            ". Please check that your Flask backend is running.";
+
+        document.querySelectorAll(".location").forEach(location => {
+            location.disabled = false;
+            location.classList.remove("searching");
+        });
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent = "⚡ SEARCH WITH QUANTUM POWER";
+
+        isSearching = false;
+
+    }
+
+}
+
+
+/* =====================================
+   INITIAL PAGE STATE
+===================================== */
+
+document.getElementById("status").textContent =
+    "Welcome, explorer! Select a location and search for the hidden treasure.";
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linked Dice | QubitQuest Arcade</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --purple: #a58bff;
+    --cyan: #55e5ed;
+    --navy: #080d1c;
+    --panel: #111a31;
+    --muted: #a5aec8;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 50% 15%, #202044 0%, transparent 48%),
+        #080d1c;
+    color: #f5f5ff;
+    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    padding: 21px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(8,13,28,.8);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 800;
+    color: #b6a5ff;
+}
+
+.back {
+    color: #c7bdff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: auto;
+    padding: 43px 0 70px;
+}
+
+.tag {
+    color: #b39cff;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(34px, 5vw, 52px);
+    margin: 12px 0;
+}
+
+.subtitle {
+    color: var(--muted);
+    max-width: 690px;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.game-panel {
+    margin-top: 34px;
+    padding: 30px;
+    background: linear-gradient(145deg, #141d38, #10162b);
+    border: 1px solid rgba(165,139,255,.2);
+    border-radius: 23px;
+    box-shadow: 0 20px 65px rgba(0,0,0,.25);
+}
+
+.mode-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.mode-button {
+    flex: 1;
+    min-width: 180px;
+    padding: 15px;
+    background: #1c2745;
+    color: #bfc8e4;
+    border: 1px solid #344263;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: .25s;
+}
+
+.mode-button.active {
+    color: white;
+    background: linear-gradient(110deg, #7156d9, #977cf2);
+    border-color: #b39cff;
+    box-shadow: 0 0 25px rgba(143,113,244,.25);
+}
+
+.mode-button:hover {
+    transform: translateY(-2px);
+}
+
+/* =====================================
+   3D DICE STAGE
+===================================== */
+
+.game-stage {
+    position: relative;
+    min-height: 390px;
+    margin: 25px 0;
+    padding: 35px 10px 65px;
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse at center, rgba(99,84,190,.2), transparent 65%),
+        #0b1226;
+    border: 1px solid rgba(255,255,255,.06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(65px, 15vw, 175px);
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.game-stage::before {
+    content: "";
+    position: absolute;
+    width: 75%;
+    height: 1px;
+    left: 12.5%;
+    bottom: 65px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(165,139,255,.3),
+        rgba(85,229,237,.3),
+        transparent
+    );
+    box-shadow: 0 0 25px rgba(165,139,255,.25);
+}
+
+.dice-side {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dice-label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 35px;
+}
+
+.dice-label.purple {
+    color: #b39cff;
+}
+
+.dice-label.cyan {
+    color: #63e7ef;
+}
+
+.dice-space {
+    width: 132px;
+    height: 132px;
+    position: relative;
+    perspective: 700px;
+    transform-style: preserve-3d;
+}
+
+.die-cube {
+    width: 112px;
+    height: 112px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform-style: preserve-3d;
+    transform: rotateX(-15deg) rotateY(-25deg);
+    transition: transform .75s cubic-bezier(.2,.8,.2,1);
+}
+
+.die-face {
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    border-radius: 19px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 16px;
+    gap: 5px;
+    backface-visibility: hidden;
+    border: 2px solid rgba(190,174,255,.95);
+    background:
+        linear-gradient(145deg, #40316d, #211b45 65%, #33265e);
+    box-shadow:
+        inset 0 0 20px rgba(185,158,255,.2),
+        inset 0 0 4px rgba(255,255,255,.5),
+        0 0 13px rgba(165,139,255,.45);
+}
+
+.cyan-cube .die-face {
+    border-color: rgba(105,245,255,.95);
+    background:
+        linear-gradient(145deg, #1b5367, #123346 65%, #1a465b);
+    box-shadow:
+        inset 0 0 20px rgba(85,229,237,.2),
+        inset 0 0 4px rgba(255,255,255,.5),
+        0 0 13px rgba(85,229,237,.45);
+}
+
+.die-face.front {
+    transform: translateZ(56px);
+}
+
+.die-face.back {
+    transform: rotateY(180deg) translateZ(56px);
+}
+
+.die-face.right {
+    transform: rotateY(90deg) translateZ(56px);
+}
+
+.die-face.left {
+    transform: rotateY(-90deg) translateZ(56px);
+}
+
+.die-face.top {
+    transform: rotateX(90deg) translateZ(56px);
+}
+
+.die-face.bottom {
+    transform: rotateX(-90deg) translateZ(56px);
+}
+
+/* DICE DOTS */
+
+.pip {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #e5dcff;
+    opacity: 0;
+    align-self: center;
+    justify-self: center;
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.7),
+        0 0 8px rgba(221,211,255,.5);
+}
+
+.cyan-cube .pip {
+    background: #b7fcff;
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.7),
+        0 0 8px rgba(125,247,255,.6);
+}
+
+.pip:nth-child(1) { grid-area: 1 / 1; }
+.pip:nth-child(2) { grid-area: 1 / 2; }
+.pip:nth-child(3) { grid-area: 1 / 3; }
+.pip:nth-child(4) { grid-area: 2 / 1; }
+.pip:nth-child(5) { grid-area: 2 / 2; }
+.pip:nth-child(6) { grid-area: 2 / 3; }
+.pip:nth-child(7) { grid-area: 3 / 1; }
+.pip:nth-child(8) { grid-area: 3 / 2; }
+.pip:nth-child(9) { grid-area: 3 / 3; }
+
+/* Face 1 */
+.die-face.face-1 .pip:nth-child(5) {
+    opacity: 1;
+}
+
+/* Face 2 */
+.die-face.face-2 .pip:nth-child(3),
+.die-face.face-2 .pip:nth-child(7) {
+    opacity: 1;
+}
+
+/* Face 3 */
+.die-face.face-3 .pip:nth-child(1),
+.die-face.face-3 .pip:nth-child(5),
+.die-face.face-3 .pip:nth-child(9) {
+    opacity: 1;
+}
+
+/* Face 4 */
+.die-face.face-4 .pip:nth-child(1),
+.die-face.face-4 .pip:nth-child(3),
+.die-face.face-4 .pip:nth-child(7),
+.die-face.face-4 .pip:nth-child(9) {
+    opacity: 1;
+}
+
+/* Face 5 */
+.die-face.face-5 .pip:nth-child(1),
+.die-face.face-5 .pip:nth-child(3),
+.die-face.face-5 .pip:nth-child(5),
+.die-face.face-5 .pip:nth-child(7),
+.die-face.face-5 .pip:nth-child(9) {
+    opacity: 1;
+}
+
+/* Face 6 */
+.die-face.face-6 .pip:nth-child(1),
+.die-face.face-6 .pip:nth-child(3),
+.die-face.face-6 .pip:nth-child(4),
+.die-face.face-6 .pip:nth-child(6),
+.die-face.face-6 .pip:nth-child(7),
+.die-face.face-6 .pip:nth-child(9) {
+    opacity: 1;
+}
+
+.die-cube.rolling {
+    animation: tumble 1.05s cubic-bezier(.25,.8,.3,1);
+}
+
+@keyframes tumble {
+    0% {
+        transform: rotateX(-15deg) rotateY(-25deg) scale(1);
+    }
+    25% {
+        transform: rotateX(160deg) rotateY(150deg) scale(1.18);
+    }
+    50% {
+        transform: rotateX(340deg) rotateY(300deg) scale(.9);
+    }
+    75% {
+        transform: rotateX(510deg) rotateY(510deg) scale(1.12);
+    }
+    100% {
+        transform: rotateX(700deg) rotateY(690deg) scale(1);
+    }
+}
+
+.dice-shadow {
+    position: absolute;
+    width: 105px;
+    height: 20px;
+    left: 13px;
+    bottom: -15px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.6);
+    filter: blur(12px);
+}
+
+.cube-glow {
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    left: -12px;
+    top: -12px;
+    border-radius: 50%;
+    background: rgba(155,127,255,.12);
+    filter: blur(30px);
+    z-index: -1;
+}
+
+.cyan-cube .cube-glow {
+    background: rgba(85,229,237,.13);
+}
+
+.dice-number {
+    font-size: 14px;
+    margin-top: 38px;
+    color: #dce1ff;
+    font-weight: 700;
+}
+
+.energy {
+    position: absolute;
+    left: 29%;
+    right: 29%;
+    top: 48%;
+    height: 3px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, #a18aff, #fff, #55e5ed);
+    box-shadow: 0 0 12px #a18aff, 0 0 28px #55e5ed;
+    opacity: .12;
+    transition: .5s;
+}
+
+.energy::after {
+    content: "";
+    position: absolute;
+    inset: -7px 0;
+    background: inherit;
+    filter: blur(9px);
+}
+
+.energy.active {
+    opacity: 1;
+    animation: pulse 1.4s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: .55; }
+    to { opacity: 1; }
+}
+
+.connection-label {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #b7a9ff;
+}
+
+/* =====================================
+   CONTROLS AND RESULTS
+===================================== */
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 15px;
+    align-items: end;
+}
+
+.shots-control label {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 9px;
+}
+
+select {
+    width: 100%;
+    max-width: 240px;
+    padding: 13px;
+    color: white;
+    background: #202b48;
+    border: 1px solid #465477;
+    border-radius: 10px;
+}
+
+.roll-button {
+    padding: 15px 35px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    background: linear-gradient(110deg, #7657e4, #ad8bff);
+    box-shadow: 0 8px 25px rgba(130,101,240,.22);
+    transition: .25s;
+}
+
+.roll-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(130,101,240,.35);
+}
+
+.roll-button:disabled {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+}
+
+.status {
+    margin-top: 19px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.status.success {
+    color: #72edbb;
+}
+
+.status.error {
+    color: #ff8c9b;
+}
+
+.results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.result-card {
+    background: #111a31;
+    border: 1px solid rgba(165,139,255,.13);
+    border-radius: 16px;
+    padding: 21px;
+}
+
+.result-card small {
+    display: block;
+    color: #9ca9c8;
+    font-size: 12px;
+    margin-bottom: 11px;
+}
+
+.result-card strong {
+    color: #c5b5ff;
+    font-size: 28px;
+}
+
+.result-card p {
+    color: #8f9bb8;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.section {
+    margin-top: 25px;
+    background: #111a31;
+    border: 1px solid rgba(165,139,255,.13);
+    border-radius: 17px;
+    padding: 25px;
+}
+
+.section h2 {
+    font-size: 19px;
+    margin-bottom: 13px;
+}
+
+.section p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.distribution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.distribution h3 {
+    color: #c2b4ff;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.distribution.cyan-title h3 {
+    color: #72eaf0;
+}
+
+.die-row {
+    display: grid;
+    grid-template-columns: 20px 1fr 35px;
+    gap: 9px;
+    align-items: center;
+    margin: 9px 0;
+    font-size: 12px;
+    color: #aab5d0;
+}
+
+.mini-bar {
+    height: 8px;
+    border-radius: 10px;
+    background: #26314d;
+    overflow: hidden;
+}
+
+.mini-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #785be2, #b49cff);
+    transition: width .5s;
+}
+
+.mini-fill.cyan-fill {
+    background: linear-gradient(90deg, #299cae, #68eaf1);
+}
+
+.circuit {
+    margin-top: 15px;
+    background: #080d1c;
+    color: #8ee9e2;
+    border-radius: 12px;
+    padding: 17px;
+    overflow-x: auto;
+    white-space: pre;
+    font: 12px Consolas, monospace;
+    min-height: 70px;
+}
+
+.learn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 18px;
+}
+
+.learn-card {
+    padding: 18px;
+    border-radius: 13px;
+    background: #1a2541;
+}
+
+.learn-card h3 {
+    color: #b8a6ff;
+    font-size: 15px;
+    margin-bottom: 9px;
+}
+
+.learn-card p {
+    font-size: 13px;
+}
+
+.footer {
+    text-align: center;
+    color: #75809e;
+    font-size: 12px;
+    margin-top: 40px;
+}
+
+@media(max-width: 700px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    .container {
+        padding-top: 30px;
+    }
+
+    .game-panel {
+        padding: 18px;
+    }
+
+    .game-stage {
+        min-height: 330px;
+        gap: 25px;
+        padding-top: 35px;
+    }
+
+    .dice-space {
+        width: 100px;
+        height: 100px;
+        transform: scale(.78);
+        transform-origin: top center;
+        margin-bottom: -25px;
+    }
+
+    .dice-label {
+        margin-bottom: 22px;
+    }
+
+    .dice-number {
+        margin-top: 25px;
+    }
+
+    .die-face {
+        border-radius: 16px;
+    }
+
+    .pip {
+        width: 14px;
+        height: 14px;
+    }
+
+    .results {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .roll-button {
+        width: 100%;
+    }
+
+    .distribution, .learn-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .energy {
+        left: 25%;
+        right: 25%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✦ QubitQuest</div>
+    <a href="index.html" class="back">← Back to Home</a>
+</header>
+
+<main class="container">
+
+    <div class="tag">QubitQuest Arcade · Game 02</div>
+    <h1>🎲 Linked Dice</h1>
+
+    <p class="subtitle">
+        Two dice. Two quantum experiments. One fascinating discovery.
+        Roll independently or connect the dice through quantum
+        entanglement and explore how their outcomes are related.
+    </p>
+
+    <section class="game-panel">
+
+        <div class="mode-row">
+            <button class="mode-button active"
+                id="independentMode"
+                onclick="setMode('independent')">
+                🎲 Independent Dice
+            </button>
+
+            <button class="mode-button"
+                id="entangledMode"
+                onclick="setMode('entangled')">
+                ⚡ Entangled Dice
+            </button>
+        </div>
+
+        <div class="game-stage">
+
+            <div class="energy" id="energy"></div>
+
+            <div class="dice-side">
+                <div class="dice-label purple">DICE 01</div>
+
+                <div class="dice-space">
+                    <div class="cube-glow"></div>
+                    <div class="dice-shadow"></div>
+
+                    <div class="die-cube" id="dieOne">
+                        <div class="die-face front face-1"></div>
+                        <div class="die-face back face-6"></div>
+                        <div class="die-face right face-3"></div>
+                        <div class="die-face left face-4"></div>
+                        <div class="die-face top face-2"></div>
+                        <div class="die-face bottom face-5"></div>
+                    </div>
+                </div>
+
+                <div class="dice-number" id="numberOne">READY</div>
+            </div>
+
+            <div class="dice-side">
+                <div class="dice-label cyan">DICE 02</div>
+
+                <div class="dice-space">
+                    <div class="cube-glow"></div>
+                    <div class="dice-shadow"></div>
+
+                    <div class="die-cube cyan-cube" id="dieTwo">
+                        <div class="die-face front face-1"></div>
+                        <div class="die-face back face-6"></div>
+                        <div class="die-face right face-3"></div>
+                        <div class="die-face left face-4"></div>
+                        <div class="die-face top face-2"></div>
+                        <div class="die-face bottom face-5"></div>
+                    </div>
+                </div>
+
+                <div class="dice-number" id="numberTwo">READY</div>
+            </div>
+
+            <div class="connection-label" id="connectionLabel">
+                TWO INDEPENDENT QUANTUM DICE
+            </div>
+
+        </div>
+
+        <div class="controls">
+
+            <div class="shots-control">
+                <label for="shots">Number of quantum measurements</label>
+                <select id="shots">
+                    <option value="256">256 measurements</option>
+                    <option value="512">512 measurements</option>
+                    <option value="1024" selected>1024 measurements</option>
+                    <option value="2048">2048 measurements</option>
+                    <option value="4096">4096 measurements</option>
+                </select>
+            </div>
+
+            <button class="roll-button" id="rollButton"
+                onclick="rollDice()">
+                ✨ Roll Quantum Dice
+            </button>
+
+        </div>
+
+        <div class="status" id="status">
+            Choose a game mode and roll your dice to begin!
+        </div>
+
+    </section>
+
+    <section class="results">
+
+        <div class="result-card">
+            <small>MEASUREMENTS</small>
+            <strong id="totalShots">—</strong>
+            <p>Accepted valid rolls</p>
+        </div>
+
+        <div class="result-card">
+            <small>MATCHING ROLLS</small>
+            <strong id="matchingRolls">—</strong>
+            <p>Both dice show the same number</p>
+        </div>
+
+        <div class="result-card">
+            <small>CORRELATION</small>
+            <strong id="matchingPercent">—</strong>
+            <p>Percentage of matching outcomes</p>
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <h2>📊 Dice Measurement Distribution</h2>
+
+        <p>
+            Explore how frequently each face appeared in the quantum
+            measurements. The results come directly from your Qiskit
+            simulator.
+        </p>
+
+        <div class="distribution">
+
+            <div>
+                <h3>FIRST DICE</h3>
+                <div id="firstDistribution"></div>
+            </div>
+
+            <div class="cyan-title">
+                <h3>SECOND DICE</h3>
+                <div id="secondDistribution"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <h2>⚛️ Quantum Circuit</h2>
+
+        <p>
+            The circuit below shows the actual quantum operations
+            used for your experiment.
+        </p>
+
+        <div class="circuit" id="circuit">
+            Your Qiskit circuit will appear here after your first roll.
+        </div>
+
+    </section>
+
+    <section class="section">
+
+        <h2>🧠 Discover the Quantum Secret</h2>
+
+        <div class="learn-grid">
+
+            <div class="learn-card">
+                <h3>🎲 Independent Dice</h3>
+                <p>
+                    Each die uses its own three qubits. The outcomes
+                    are independent. Matching numbers can happen,
+                    but only by chance.
+                </p>
+            </div>
+
+            <div class="learn-card">
+                <h3>⚡ Entangled Dice</h3>
+                <p>
+                    Three Bell pairs connect the corresponding
+                    qubits of the two dice. Their measurement
+                    outcomes are correlated, so the dice match.
+                </p>
+            </div>
+
+        </div>
+
+        <p id="learningExplanation" style="margin-top:20px;">
+            Start with Independent Dice, then switch to Entangled
+            Dice and compare the results.
+        </p>
+
+    </section>
+
+    <div class="footer">
+        QubitQuest · Explore. Experiment. Understand.
+    </div>
+
+</main>
+
+<script>
+let currentMode = "independent";
+let isRolling = false;
+
+/* =====================================
+   FIX: CREATE DOTS ON ALL SIX FACES
+===================================== */
+
+function buildDiceFaces() {
+    document.querySelectorAll(".die-face").forEach(face => {
+        face.innerHTML = "";
+
+        for (let i = 0; i < 9; i++) {
+            const dot = document.createElement("span");
+            dot.className = "pip";
+            face.appendChild(dot);
+        }
+    });
+}
+
+buildDiceFaces();
+
+/*
+   Face orientation:
+   1 = front
+   2 = top
+   3 = right
+   4 = left
+   5 = bottom
+   6 = back
+*/
+
+const faceRotations = {
+    1: "rotateX(0deg) rotateY(0deg)",
+    2: "rotateX(-90deg) rotateY(0deg)",
+    3: "rotateX(0deg) rotateY(-90deg)",
+    4: "rotateX(0deg) rotateY(90deg)",
+    5: "rotateX(90deg) rotateY(0deg)",
+    6: "rotateX(0deg) rotateY(180deg)"
+};
+
+function setCubeFace(elementId, face) {
+    const cube = document.getElementById(elementId);
+
+    cube.classList.remove("rolling");
+    cube.style.transform = faceRotations[face];
+}
+
+function setMode(mode) {
+    if (isRolling) return;
+
+    currentMode = mode;
+
+    document.getElementById("independentMode")
+        .classList.toggle("active", mode === "independent");
+
+    document.getElementById("entangledMode")
+        .classList.toggle("active", mode === "entangled");
+
+    const energy = document.getElementById("energy");
+    const label = document.getElementById("connectionLabel");
+
+    if (mode === "entangled") {
+        energy.classList.add("active");
+        label.textContent = "QUANTUM ENTANGLEMENT ESTABLISHED";
+
+        document.getElementById("learningExplanation").textContent =
+            "Three pairs of qubits are connected using CNOT gates. " +
+            "Their measurement outcomes are correlated, so both dice " +
+            "show the same valid face.";
+
+    } else {
+        energy.classList.remove("active");
+        label.textContent = "TWO INDEPENDENT QUANTUM DICE";
+
+        document.getElementById("learningExplanation").textContent =
+            "The dice use independent qubits. Each has six equally " +
+            "likely outcomes. Matching numbers can happen by chance.";
+    }
+
+    document.getElementById("status").className = "status";
+
+    document.getElementById("status").textContent =
+        mode === "entangled"
+            ? "Entangled mode selected. Ready to connect your dice!"
+            : "Independent mode selected. Ready for two separate rolls!";
+}
+
+function createDistribution(elementId, counts, colorClass) {
+    const container = document.getElementById(elementId);
+    container.innerHTML = "";
+
+    const values = Object.values(counts).map(Number);
+    const maxValue = Math.max(...values, 1);
+
+    for (let face = 1; face <= 6; face++) {
+        const count = Number(counts[String(face)] || 0);
+        const width = (count / maxValue) * 100;
+
+        const row = document.createElement("div");
+        row.className = "die-row";
+
+        const faceLabel = document.createElement("span");
+        faceLabel.textContent = face;
+
+        const bar = document.createElement("div");
+        bar.className = "mini-bar";
+
+        const fill = document.createElement("div");
+        fill.className = "mini-fill " + colorClass;
+        fill.style.width = width + "%";
+
+        bar.appendChild(fill);
+
+        const countLabel = document.createElement("span");
+        countLabel.textContent = count;
+
+        row.append(faceLabel, bar, countLabel);
+        container.appendChild(row);
+    }
+}
+
+function animateDice() {
+    const dieOne = document.getElementById("dieOne");
+    const dieTwo = document.getElementById("dieTwo");
+
+    dieOne.classList.remove("rolling");
+    dieTwo.classList.remove("rolling");
+
+    void dieOne.offsetWidth;
+
+    dieOne.classList.add("rolling");
+    dieTwo.classList.add("rolling");
+}
+
+async function rollDice() {
+    if (isRolling) return;
+
+    isRolling = true;
+
+    const button = document.getElementById("rollButton");
+    const status = document.getElementById("status");
+
+    const shots = Number(document.getElementById("shots").value);
+
+    button.disabled = true;
+    button.textContent = "⏳ Rolling Quantum Dice...";
+
+    status.className = "status";
+    status.textContent = "Building your quantum circuit and running Qiskit...";
+
+    animateDice();
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/run-linked-dice",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    mode: currentMode,
+                    shots: shots
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Quantum experiment failed.");
+        }
+
+        const pairEntries = Object.entries(data.pair_counts || {});
+
+        if (pairEntries.length === 0) {
+            throw new Error("No valid dice outcomes were returned.");
+        }
+
+        // Select a pair actually measured by Qiskit.
+        const selectedPair = pairEntries[
+            Math.floor(Math.random() * pairEntries.length)
+        ][0];
+
+        const [first, second] = selectedPair.split("-").map(Number);
+
+        if (
+            !Number.isInteger(first) ||
+            !Number.isInteger(second) ||
+            first < 1 || first > 6 ||
+            second < 1 || second > 6
+        ) {
+            throw new Error("The simulator returned an invalid dice result.");
+        }
+
+        // Allow the 3D tumbling animation to finish.
+        await new Promise(resolve => setTimeout(resolve, 1100));
+
+        setCubeFace("dieOne", first);
+        setCubeFace("dieTwo", second);
+
+        document.getElementById("numberOne").textContent =
+            "RESULT: " + first;
+
+        document.getElementById("numberTwo").textContent =
+            "RESULT: " + second;
+
+        document.getElementById("totalShots").textContent =
+            Number(data.accepted_shots).toLocaleString();
+
+        document.getElementById("matchingRolls").textContent =
+            Number(data.matching_rolls).toLocaleString();
+
+        document.getElementById("matchingPercent").textContent =
+            data.matching_percentage + "%";
+
+        createDistribution(
+            "firstDistribution",
+            data.dice.die_one,
+            ""
+        );
+
+        createDistribution(
+            "secondDistribution",
+            data.dice.die_two,
+            "cyan-fill"
+        );
+
+        document.getElementById("circuit").textContent =
+            data.circuit;
+
+        if (currentMode === "entangled") {
+            status.className = "status success";
+
+            status.textContent =
+                "✓ Quantum entanglement experiment completed! " +
+                "Your dice show " + first + " and " + second +
+                ". All accepted rolls were matching.";
+
+        } else {
+            status.className = "status success";
+
+            status.textContent =
+                "✓ Independent quantum experiment completed! " +
+                "Your dice show " + first + " and " + second +
+                ". Matching results occur by chance.";
+        }
+
+    } catch (error) {
+        status.className = "status error";
+
+        status.textContent =
+            "Experiment error: " + error.message +
+            ". Please check that your Flask backend is running.";
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "✨ Roll Quantum Dice";
+        isRolling = false;
+    }
+}
+</script>
+
+</body>
+</html>
