@@ -2,22 +2,39 @@
 
 **IBM Qiskit Fall Fest 2026 · Quantum for Humanity · Education track**
 
-Q-Spark is a planned tabletop-style learning game for students and first-time quantum learners. Players flip coins, link a pair of magic dice, and search four treasure boxes. Every move in the quantum levels runs a real Qiskit circuit and updates a measurement histogram. The guided game and quizzes are planned in English and Kannada.
+Q-Spark is a tabletop-style learning project for students and first-time quantum learners. Players flip coins, link a pair of magic dice, and search four treasure boxes. The interactive circuit modules run real Qiskit circuits and show the measurement results. The guided game and quizzes are planned in English and Kannada.
 
-## Run the landing page
+## Run the app locally
 
-Clone the repo or download and extract its ZIP from GitHub. Open [docs/index.html](docs/index.html) in any modern browser. The landing page runs offline with the included stylesheet. There is no build or package install.
+Clone the repository and run the commands below from its root. Use Python 3.14 and a platform with a Qiskit Aer wheel. Setup was verified on Apple Silicon macOS. Windows and Linux commands are provided below.
 
-To serve the page from a terminal, run one command from the repository root with Python 3 installed.
+**macOS or Linux**
 
-| Platform | Command |
-| --- | --- |
-| macOS or Linux | `python3 -m http.server 8000 --bind 127.0.0.1 --directory docs` |
-| Windows | `py -3 -m http.server 8000 --bind 127.0.0.1 --directory docs` |
+```sh
+python3.14 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m waitress --listen=127.0.0.1:8056 --threads=2 backend.app:app
+```
 
-Open http://127.0.0.1:8000. Press Ctrl+C in the terminal to stop the server.
+**Windows PowerShell**
 
-The landing page and project proposal are available. The playable lessons, Qiskit integration, benchmark results, and learner feedback are pending.
+```powershell
+py -3.14 -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+& .\.venv\Scripts\python.exe -m waitress --listen=127.0.0.1:8056 --threads=2 backend.app:app
+```
+
+Open http://127.0.0.1:8056. The same server delivers all five modules and their simulator APIs. The static project landing page remains available at [docs/index.html](docs/index.html).
+
+## Share a temporary demo
+
+Start the local app first. [Install cloudflared](https://developers.cloudflare.com/tunnel/downloads/) and run this in a second terminal.
+
+```sh
+cloudflared tunnel --url http://127.0.0.1:8056
+```
+
+Share the HTTPS URL printed by the command. Anyone with the link can use the simulator while your computer, the app, and the tunnel are running. Press Ctrl+C in the tunnel terminal to stop sharing. Quick Tunnels require no Cloudflare account or domain, generate a new URL on restart, cap simultaneous in-flight requests at 200, and carry no uptime guarantee. [Cloudflare Quick Tunnels](https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/)
 
 ## The pitch — Quantum computing as a board game
 
@@ -39,19 +56,6 @@ Three guided lessons, each with a prediction, a learner-controlled move, a histo
 | 3. Treasure Hunt | Compare a blind guess, Scanner alone, and Scanner plus Nudge | Two-qubit uniform state, one marked-state phase oracle, and one Grover diffusion step |
 
 Players use a single local Flask page with plain HTML, CSS, and JavaScript. One Python circuit module serves both the game and a terminal runner. The runner and game return the same lesson ID, selected moves, source, shot count, and outcome counts. Use Qiskit Aer for the default execution path. Defer a free-form circuit editor, Q-Sphere, and cloud hosting until the guided demo is complete. [IBM guide to Qiskit Aer](https://quantum.cloud.ibm.com/docs/guides/simulate-with-qiskit-aer)
-
-### Planned game commands for macOS and Windows
-
-These are the planned commands for the implementation. Pin the dependencies after a clean install on both platforms and replace this section with verified commands before submission. The local path should need no Node.js or IBM login and should work offline after installation.
-
-| Step | macOS Terminal | Windows PowerShell |
-| --- | --- | --- |
-| Create a Python 3.12 environment | `python3.12 -m venv .venv` | `py -3.12 -m venv .venv` |
-| Install pinned dependencies | `.venv/bin/python -m pip install -r requirements.txt` | `& .\.venv\Scripts\python.exe -m pip install -r requirements.txt` |
-| Run the treasure hunt | `.venv/bin/python -m qspark run treasure --shots 1024` | `& .\.venv\Scripts\python.exe -m qspark run treasure --shots 1024` |
-| Start the local game | `.venv/bin/python -m qspark serve` | `& .\.venv\Scripts\python.exe -m qspark serve` |
-
-Open `http://127.0.0.1:5000` after starting the game.
 
 ### Benchmark and hardware plan
 

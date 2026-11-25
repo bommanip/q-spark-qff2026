@@ -1,4 +1,6 @@
 
+from pathlib import Path
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -6,7 +8,9 @@ from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
 
 
-app = Flask(__name__)
+frontend = Path(__file__).resolve().parents[1] / "frontend"
+app = Flask(__name__, static_folder=frontend, static_url_path="")
+app.config["MAX_CONTENT_LENGTH"] = 4096
 CORS(app)
 
 simulator = AerSimulator()
@@ -16,8 +20,13 @@ simulator = AerSimulator()
 # HOME
 # ==========================================
 
-@app.route("/")
-def home():
+@app.get("/")
+def index():
+    return app.send_static_file("index.html")
+
+
+@app.get("/health")
+def health():
     return jsonify({
         "message": "Welcome to QubitQuest!",
         "status": "Quantum simulator is ready."
@@ -28,6 +37,7 @@ def home():
 # MODULE 2: H GATE
 # ==========================================
 
+@app.post("/api/run-circuit")
 @app.route("/run-circuit", methods=["POST"])
 def run_circuit():
 
@@ -85,6 +95,7 @@ def run_circuit():
 # MODULE 2: BELL STATE ENTANGLEMENT
 # ==========================================
 
+@app.post("/api/run-entanglement")
 @app.route("/run-entanglement", methods=["POST"])
 def run_entanglement():
 
@@ -139,6 +150,7 @@ def run_entanglement():
 # MODULE 3: QUANTUM GATES
 # ==========================================
 
+@app.post("/api/run-module3")
 @app.route("/run-module3", methods=["POST"])
 def run_module3():
 
@@ -253,6 +265,7 @@ def run_module3():
 # MODULE 4: GROVER'S SEARCH ALGORITHM
 # ==========================================
 
+@app.post("/api/run-grover")
 @app.route("/run-grover", methods=["POST"])
 def run_grover():
 
