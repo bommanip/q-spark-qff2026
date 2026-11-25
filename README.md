@@ -6,14 +6,14 @@ Q-Spark is a planned tabletop-style learning game for students and first-time qu
 
 ## Run the landing page
 
-Clone the repo or download and extract its ZIP from GitHub. Open [web/index.html](web/index.html) in any modern browser. The landing page runs offline with the included stylesheet. There is no build or package install.
+Clone the repo or download and extract its ZIP from GitHub. Open [docs/index.html](docs/index.html) in any modern browser. The landing page runs offline with the included stylesheet. There is no build or package install.
 
 To serve the page from a terminal, run one command from the repository root with Python 3 installed.
 
 | Platform | Command |
 | --- | --- |
-| macOS or Linux | `python3 -m http.server 8000 --bind 127.0.0.1 --directory web` |
-| Windows | `py -3 -m http.server 8000 --bind 127.0.0.1 --directory web` |
+| macOS or Linux | `python3 -m http.server 8000 --bind 127.0.0.1 --directory docs` |
+| Windows | `py -3 -m http.server 8000 --bind 127.0.0.1 --directory docs` |
 
 Open http://127.0.0.1:8000. Press Ctrl+C in the terminal to stop the server.
 
