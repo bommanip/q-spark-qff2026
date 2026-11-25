@@ -7,272 +7,56 @@
 <title>Module 3 | QubitQuest</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: "Segoe UI", sans-serif;
-    background: #080d1c;
-    color: #f5f5ff;
-    line-height: 1.7;
-}
-
-.navbar {
-    padding: 22px 9%;
-    background: #0b1225;
-    display: flex;
-    justify-content: space-between;
-}
-
-.logo {
-    color: #a99bff;
-    font-size: 23px;
-    font-weight: bold;
-}
-
-.navbar a {
-    color: #dce0f4;
-    text-decoration: none;
-}
-
-.container {
-    max-width: 950px;
-    margin: auto;
-    padding: 55px 22px;
-}
-
-.tag {
-    color: #a99bff;
-    letter-spacing: 2px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-h1 {
-    font-size: clamp(34px, 6vw, 52px);
-    margin: 18px 0;
-    line-height: 1.2;
-}
-
-h1 span {
-    color: #a99bff;
-}
-
-.intro {
-    color: #aeb6cf;
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.progress {
-    height: 8px;
-    background: #273252;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 15px 0;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #8774ef, #46d9dc);
-    transition: width .4s ease;
-}
-
-.progress-status {
-    color: #aeb6cf;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.completion {
-    display: none;
-    padding: 15px;
-    margin: 18px 0;
-    border: 1px solid #46d9dc;
-    border-radius: 10px;
-    background: #102b35;
-    color: #8ef0df;
-}
-
-.lesson-card {
-    background: #111a31;
-    border: 1px solid #273252;
-    border-radius: 15px;
-    padding: 28px;
-    margin: 25px 0;
-}
-
-.lesson-card h2 {
-    color: #a99bff;
-    margin-bottom: 15px;
-}
-
-.lesson-card p {
-    color: #c4cbe0;
-    margin: 12px 0;
-}
-
-.visual {
-    background: #080d1c;
-    padding: 25px;
-    border-radius: 12px;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.gate-box {
-    width: 90px;
-    height: 90px;
-    display: grid;
-    place-items: center;
-    margin: 20px auto;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #8774ef, #46d9dc);
-    color: #080d1c;
-    font-size: 35px;
-    font-weight: bold;
-    box-shadow: 0 0 30px #8774ef55;
-}
-
-.primary {
-    background: #8774ef;
-    border: none;
-    padding: 14px 23px;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.primary:hover {
-    background: #705ce0;
-}
-
-.primary:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-.retry {
-    background: transparent;
-    border: 1px solid #8774ef;
-    padding: 13px 20px;
-    color: #dcd5ff;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 15px 0 0 10px;
-}
-
-.result {
-    margin-top: 20px;
-    padding: 18px;
-    background: #080d1c;
-    border-radius: 9px;
-    color: #46d9dc;
-    display: none;
-    text-align: left;
-    overflow-wrap: anywhere;
-}
-
-.result p {
-    color: #c4cbe0;
-}
-
-.result h3 {
-    color: #a99bff;
-    margin: 12px 0;
-}
-
-.result strong {
-    color: #46d9dc;
-}
-
-.result ul {
-    list-style: none;
-    margin: 12px 0;
-}
-
-.result li {
-    padding: 5px 0;
-    color: #c4cbe0;
-}
-
-.example {
-    color: #46d9dc !important;
-    font-weight: bold;
-}
-
-.note {
-    color: #aeb6cf;
-    font-size: 13px;
-    border-left: 3px solid #46d9dc;
-    padding-left: 13px;
-    margin-top: 18px;
-}
-
-.quiz-option {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 12px 0;
-    text-align: left;
-    border: 1px solid #465174;
-    border-radius: 8px;
-    background: #080d1c;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.quiz-option:hover {
-    border-color: #a99bff;
-}
-
-.quiz-option:disabled {
-    cursor: default;
-    opacity: .75;
-}
-
-.feedback {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    background: #19213b;
-    color: #46d9dc;
-    display: none;
-}
-
-.circuit-output {
-    white-space: pre-wrap;
-    font-family: Consolas, monospace;
-    font-size: 13px;
-    color: #46d9dc;
-    background: #111a31;
-    padding: 15px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin-top: 12px;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #aeb6cf;
-}
-
-@media(max-width: 600px) {
-    .navbar {
-        padding: 18px;
-    }
-
-    .lesson-card {
-        padding: 20px;
-    }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI",sans-serif;background:#080d1c;color:#f5f5ff;line-height:1.7}
+.navbar{padding:18px 9%;background:#0b1225;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.logo{color:#a99bff;font-size:23px;font-weight:bold}
+.nav-right{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.navbar a{color:#dce0f4;text-decoration:none}
+.language-select{background:#111a31;color:#fff;border:1px solid #465174;padding:9px 12px;border-radius:8px;outline:none}
+.container{max-width:950px;margin:auto;padding:55px 22px}
+.tag{color:#a99bff;letter-spacing:2px;font-size:12px;font-weight:bold}
+h1{font-size:clamp(34px,6vw,52px);margin:18px 0;line-height:1.2}
+h1 span{color:#a99bff}
+.intro{color:#aeb6cf;font-size:18px;margin-bottom:30px}
+.progress{height:8px;background:#273252;border-radius:20px;overflow:hidden;margin:15px 0}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#8774ef,#46d9dc);transition:width .4s ease}
+.progress-status{color:#aeb6cf;font-size:14px;margin-bottom:20px}
+.completion{display:none;padding:15px;margin:18px 0;border:1px solid #46d9dc;border-radius:10px;background:#102b35;color:#8ef0df}
+.lesson-card{background:#111a31;border:1px solid #273252;border-radius:15px;padding:28px;margin:25px 0}
+.lesson-card h2{color:#a99bff;margin-bottom:15px}
+.lesson-card p{color:#c4cbe0;margin:12px 0}
+.visual{background:#080d1c;padding:25px;border-radius:12px;margin:20px 0;text-align:center}
+.gate-box{width:90px;height:90px;display:grid;place-items:center;margin:20px auto;border-radius:15px;background:linear-gradient(135deg,#8774ef,#46d9dc);color:#080d1c;font-size:35px;font-weight:bold;box-shadow:0 0 30px #8774ef55}
+.primary{display:inline-block;background:#8774ef;border:none;padding:14px 23px;color:white;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:15px;text-decoration:none}
+.primary:hover{background:#705ce0}
+.primary:disabled{opacity:.6;cursor:wait}
+.retry{background:transparent;border:1px solid #8774ef;padding:13px 20px;color:#dcd5ff;border-radius:8px;cursor:pointer;margin:15px 0 0 10px}
+.result{margin-top:20px;padding:18px;background:#080d1c;border-radius:9px;color:#46d9dc;display:none;text-align:left;overflow-wrap:anywhere}
+.result p{color:#c4cbe0}
+.result h3{color:#a99bff;margin:12px 0}
+.result strong{color:#46d9dc}
+.result ul{list-style:none;margin:12px 0}
+.result li{padding:5px 0;color:#c4cbe0}
+.example{color:#46d9dc!important;font-weight:bold}
+.note{color:#aeb6cf;font-size:13px;border-left:3px solid #46d9dc;padding-left:13px;margin-top:18px}
+.quiz-option{display:block;width:100%;padding:15px;margin:12px 0;text-align:left;border:1px solid #465174;border-radius:8px;background:#080d1c;color:white;cursor:pointer;font-size:15px}
+.quiz-option:hover{border-color:#a99bff}
+.quiz-option:disabled{cursor:default;opacity:.75}
+.feedback{margin-top:15px;padding:15px;border-radius:8px;background:#19213b;color:#46d9dc;display:none}
+.circuit-output{white-space:pre-wrap;font-family:Consolas,monospace;font-size:13px;color:#46d9dc;background:#111a31;padding:15px;border-radius:8px;overflow-x:auto;margin-top:12px}
+.visualization-panel{margin-top:22px;padding:18px;background:#111a31;border:1px solid #273252;border-radius:12px}
+.visualization-panel h3{color:#a99bff;margin:15px 0 10px}
+.visualization-caption{color:#aeb6cf;font-size:13px;margin-bottom:12px}
+.visualization-image{display:block;width:100%;max-width:760px;height:auto;margin:12px auto 22px;background:#fff;border-radius:10px;padding:8px}
+.visualization-missing{color:#aeb6cf;background:#080d1c;padding:12px;border-radius:8px;font-size:13px}
+footer{text-align:center;padding:30px;color:#aeb6cf}
+@media(max-width:600px){
+.navbar{padding:18px}
+.nav-right{gap:10px}
+.lesson-card{padding:20px}
+.visualization-panel{padding:12px}
+.container{padding:35px 16px}
 }
 </style>
 </head>
@@ -281,311 +65,404 @@ footer {
 
 <nav class="navbar">
     <div class="logo">✦ QubitQuest</div>
-    <a href="index.html">← Home</a>
+    <div class="nav-right">
+        <select class="language-select" id="languageSelect" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="hi">हिन्दी</option>
+            <option value="te">తెలుగు</option>
+        </select>
+        <a href="index.html" data-i18n="home">← Home</a>
+    </div>
 </nav>
 
 <main class="container">
 
-    <span class="tag">MODULE 03 · PRACTICAL LEVEL</span>
+    <span class="tag" data-i18n="tag">MODULE 03 · PRACTICAL LEVEL</span>
 
-    <h1>
-        Meet the <span>quantum gates.</span>
-    </h1>
+    <h1 data-i18n="heading">Meet the <span>quantum gates.</span></h1>
 
-    <p class="intro">
+    <p class="intro" data-i18n="intro">
         You've learned superposition and entanglement.
         Now discover how quantum gates change quantum states
         and how we combine them to build circuits.
     </p>
 
-    <p>YOUR LEARNING PROGRESS</p>
+    <p data-i18n="progressLabel">YOUR LEARNING PROGRESS</p>
 
     <div class="progress">
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
-    <p class="progress-status" id="progressText">
-        Module 3 completion: 0%
-    </p>
+    <p class="progress-status" id="progressText">Module 3 completion: 0%</p>
 
-    <div class="completion" id="completion">
+    <div class="completion" id="completion" data-i18n="completion">
         ✓ Module 3 completed! Your progress has been saved.
     </div>
 
-    <!-- X GATE -->
-
     <section class="lesson-card">
-
-        <h2>01. X Gate — The Bit Flip</h2>
-
-        <p>
-            The X Gate changes |0⟩ into |1⟩
-            and |1⟩ into |0⟩.
-        </p>
-
+        <h2 data-i18n="xTitle">01. X Gate — The Bit Flip</h2>
+        <p data-i18n="xDescription">The X Gate changes |0⟩ into |1⟩ and |1⟩ into |0⟩.</p>
         <div class="visual">
             <div class="gate-box">X</div>
             <h3>|0⟩ → X Gate → |1⟩</h3>
-
-            <p>
-                Think of it like an ON/OFF switch.
-                The X Gate flips the qubit's state.
-            </p>
+            <p data-i18n="xVisual">Think of it like an ON/OFF switch. The X Gate flips the qubit's state.</p>
         </div>
-
-        <p class="example">
-            Expected result: 100% measurement of 1
-            when starting from |0⟩.
-        </p>
-
-        <button class="primary" onclick="runGate('x', this)">
-            Run X Gate Experiment →
-        </button>
-
+        <p class="example" data-i18n="xExpected">Expected result: 100% measurement of 1 when starting from |0⟩.</p>
+        <button class="primary" onclick="runGate('x',this)" data-i18n="runX">Run X Gate Experiment →</button>
         <div class="result" id="result-x"></div>
-
     </section>
 
-    <!-- H GATE -->
-
     <section class="lesson-card">
-
-        <h2>02. H Gate — Superposition</h2>
-
-        <p>
-            The Hadamard Gate transforms |0⟩ into
-            an equal superposition of |0⟩ and |1⟩.
-        </p>
-
+        <h2 data-i18n="hTitle">02. H Gate — Superposition</h2>
+        <p data-i18n="hDescription">The Hadamard Gate transforms |0⟩ into an equal superposition of |0⟩ and |1⟩.</p>
         <div class="visual">
             <div class="gate-box">H</div>
-            <h3>|0⟩ → H Gate → Superposition</h3>
-
-            <p>
-                When measured, the outcomes are
-                approximately 50% zero and 50% one.
-            </p>
+            <h3 data-i18n="hVisualTitle">|0⟩ → H Gate → Superposition</h3>
+            <p data-i18n="hVisual">When measured, the outcomes are approximately 50% zero and 50% one.</p>
         </div>
-
-        <button class="primary" onclick="runGate('h', this)">
-            Run H Gate Experiment →
-        </button>
-
+        <button class="primary" onclick="runGate('h',this)" data-i18n="runH">Run H Gate Experiment →</button>
         <div class="result" id="result-h"></div>
-
     </section>
 
-    <!-- Z GATE -->
-
     <section class="lesson-card">
-
-        <h2>03. Z Gate — The Phase Flip</h2>
-
-        <p>
-            The Z Gate changes the phase of the |1⟩
-            component of a quantum state.
-        </p>
-
+        <h2 data-i18n="zTitle">03. Z Gate — The Phase Flip</h2>
+        <p data-i18n="zDescription">The Z Gate changes the phase of the |1⟩ component of a quantum state.</p>
         <div class="visual">
             <div class="gate-box">Z</div>
             <h3>|0⟩ → Z Gate → |0⟩</h3>
-
-            <p>
-                If the qubit is in |0⟩, applying Z
-                does not change its state.
-            </p>
-
-            <p>
-                If the qubit is in |1⟩, Z changes
-                its phase without changing its measurement value.
-            </p>
+            <p data-i18n="zVisual1">If the qubit is in |0⟩, applying Z does not change its state.</p>
+            <p data-i18n="zVisual2">If the qubit is in |1⟩, Z changes its phase without changing its measurement value.</p>
         </div>
-
-        <p class="example">
-            A phase change becomes observable when
-            we combine gates such as H, Z and H.
-        </p>
-
-        <button class="primary" onclick="runGate('z', this)">
-            Run Z Gate Experiment →
-        </button>
-
+        <p class="example" data-i18n="zExpected">A phase change becomes observable when we combine gates such as H, Z and H.</p>
+        <button class="primary" onclick="runGate('z',this)" data-i18n="runZ">Run Z Gate Experiment →</button>
         <div class="result" id="result-z"></div>
-
     </section>
 
-    <!-- CNOT -->
-
     <section class="lesson-card">
-
-        <h2>04. CNOT Gate — Controlled Operation</h2>
-
-        <p>
-            CNOT is a two-qubit gate.
-            It flips the target qubit only when
-            the control qubit is 1.
-        </p>
-
+        <h2 data-i18n="cnotTitle">04. CNOT Gate — Controlled Operation</h2>
+        <p data-i18n="cnotDescription">CNOT is a two-qubit gate. It flips the target qubit only when the control qubit is 1.</p>
         <div class="visual">
             <div class="gate-box">CX</div>
-
-            <h3>Control Qubit → Target Qubit</h3>
-
-            <p>
-                Control = 0: target remains unchanged.
-            </p>
-
-            <p>
-                Control = 1: target flips.
-            </p>
+            <h3 data-i18n="cnotVisualTitle">Control Qubit → Target Qubit</h3>
+            <p data-i18n="controlZero">Control = 0: target remains unchanged.</p>
+            <p data-i18n="controlOne">Control = 1: target flips.</p>
         </div>
-
-        <p class="example">
-            This gate is essential for creating
-            entanglement in our Bell State experiment.
-        </p>
-
-        <button class="primary" onclick="runCNOT(this)">
-            Run CNOT Experiment →
-        </button>
-
+        <p class="example" data-i18n="cnotExpected">This gate is essential for creating entanglement in our Bell State experiment.</p>
+        <button class="primary" onclick="runCNOT(this)" data-i18n="runCNOT">Run CNOT Experiment →</button>
         <div class="result" id="result-cnot"></div>
-
     </section>
 
-    <!-- CIRCUIT COMPOSITION -->
-
     <section class="lesson-card">
-
-        <h2>05. Combine Gates into a Circuit</h2>
-
-        <p>
-            A quantum circuit is built by applying
-            gates in a particular sequence.
-        </p>
-
+        <h2 data-i18n="combinedTitle">05. Combine Gates into a Circuit</h2>
+        <p data-i18n="combinedDescription">A quantum circuit is built by applying gates in a particular sequence.</p>
         <div class="visual">
             <h3>H → X → H → Measurement</h3>
-
-            <p>
-                First, create superposition using H.
-                Then apply X and another H gate.
-                Finally, measure the qubit.
-            </p>
-
-            <p>
-                This sequence demonstrates how gates
-                combine to transform a quantum state.
-            </p>
+            <p data-i18n="combinedVisual1">First, create superposition using H. Then apply X and another H gate. Finally, measure the qubit.</p>
+            <p data-i18n="combinedVisual2">This sequence demonstrates how gates combine to transform a quantum state.</p>
         </div>
-
-        <button class="primary" onclick="runCombined(this)">
-            Run Combined Circuit →
-        </button>
-
+        <button class="primary" onclick="runCombined(this)" data-i18n="runCombined">Run Combined Circuit →</button>
         <div class="result" id="result-combined"></div>
-
     </section>
 
-    <!-- QUIZ -->
-
     <section class="lesson-card">
+        <h2 data-i18n="quizTitle">06. Test Your Knowledge!</h2>
 
-        <h2>06. Test Your Knowledge!</h2>
-
-        <p>Question 1: What does the X Gate do?</p>
-
-        <button class="quiz-option" onclick="answer(0,0)">
-            A. Flips the qubit state
-        </button>
-
-        <button class="quiz-option" onclick="answer(0,1)">
-            B. Creates entanglement
-        </button>
-
-        <button class="quiz-option" onclick="answer(0,2)">
-            C. Measures a qubit
-        </button>
-
+        <p data-i18n="q1">Question 1: What does the X Gate do?</p>
+        <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">A. Flips the qubit state</button>
+        <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">B. Creates entanglement</button>
+        <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">C. Measures a qubit</button>
         <div id="feedback0" class="feedback"></div>
 
-        <h3>Question 2</h3>
-
-        <p>Which gate creates equal superposition from |0⟩?</p>
-
-        <button class="quiz-option" onclick="answer(1,0)">
-            A. Z Gate
-        </button>
-
-        <button class="quiz-option" onclick="answer(1,1)">
-            B. H Gate
-        </button>
-
-        <button class="quiz-option" onclick="answer(1,2)">
-            C. X Gate
-        </button>
-
+        <h3 data-i18n="question2">Question 2</h3>
+        <p data-i18n="q2">Which gate creates equal superposition from |0⟩?</p>
+        <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">A. Z Gate</button>
+        <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">B. H Gate</button>
+        <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">C. X Gate</button>
         <div id="feedback1" class="feedback"></div>
 
-        <h3>Question 3</h3>
-
-        <p>When does a CNOT gate flip its target?</p>
-
-        <button class="quiz-option" onclick="answer(2,0)">
-            A. When control is 0
-        </button>
-
-        <button class="quiz-option" onclick="answer(2,1)">
-            B. Always
-        </button>
-
-        <button class="quiz-option" onclick="answer(2,2)">
-            C. When control is 1
-        </button>
-
+        <h3 data-i18n="question3">Question 3</h3>
+        <p data-i18n="q3">When does a CNOT gate flip its target?</p>
+        <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">A. When control is 0</button>
+        <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">B. Always</button>
+        <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">C. When control is 1</button>
         <div id="feedback2" class="feedback"></div>
 
-        <button class="primary" onclick="showScore()">
-            Check My Score →
-        </button>
-
-        <button class="retry" onclick="retryQuiz()">
-            Retry Quiz
-        </button>
-
+        <button class="primary" onclick="showScore()" data-i18n="checkScore">Check My Score →</button>
+        <button class="retry" onclick="retryQuiz()" data-i18n="retry">Retry Quiz</button>
         <div id="score" class="feedback"></div>
-
     </section>
 
     <section class="lesson-card" style="text-align:center">
-
-        <h2>You're becoming a circuit builder! 🚀</h2>
-
-        <p>
-            You've explored the X, H, Z and CNOT gates.
-            You've also learned how gates work together.
-        </p>
-
-        <p class="example">
-            Next: Explore quantum algorithms and
-            real-world applications.
-        </p>
-
-        <a class="primary"
-           href="module4.html"
-           style="display:inline-block;text-decoration:none;">
-            Continue to Module 4 →
-        </a>
-
+        <h2 data-i18n="nextTitle">You're becoming a circuit builder! 🚀</h2>
+        <p data-i18n="nextDescription">You've explored the X, H, Z and CNOT gates. You've also learned how gates work together.</p>
+        <p class="example" data-i18n="nextExample">Next: Explore quantum algorithms and real-world applications.</p>
+        <a class="primary" href="module4.html" id="nextModule" style="display:none" data-i18n="continue">Continue to Module 4 →</a>
+        <p id="lockedMessage" class="note" data-i18n="locked">Pass the Module 3 quiz with 3/3 to unlock Module 4.</p>
     </section>
 
 </main>
 
-<footer>
-    ✦ QubitQuest — Quantum learning for everyone.
-</footer>
+<footer data-i18n="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
 
 <script>
+const translations = {
+en: {
+home:"← Home",tag:"MODULE 03 · PRACTICAL LEVEL",
+heading:'Meet the <span>quantum gates.</span>',
+intro:"You've learned superposition and entanglement. Now discover how quantum gates change quantum states and how we combine them to build circuits.",
+progressLabel:"YOUR LEARNING PROGRESS",completion:"✓ Module 3 completed! Your progress has been saved.",
+xTitle:"01. X Gate — The Bit Flip",xDescription:"The X Gate changes |0⟩ into |1⟩ and |1⟩ into |0⟩.",
+xVisual:"Think of it like an ON/OFF switch. The X Gate flips the qubit's state.",
+xExpected:"Expected result: 100% measurement of 1 when starting from |0⟩.",runX:"Run X Gate Experiment →",
+hTitle:"02. H Gate — Superposition",hDescription:"The Hadamard Gate transforms |0⟩ into an equal superposition of |0⟩ and |1⟩.",
+hVisualTitle:"|0⟩ → H Gate → Superposition",hVisual:"When measured, the outcomes are approximately 50% zero and 50% one.",runH:"Run H Gate Experiment →",
+zTitle:"03. Z Gate — The Phase Flip",zDescription:"The Z Gate changes the phase of the |1⟩ component of a quantum state.",
+zVisual1:"If the qubit is in |0⟩, applying Z does not change its state.",
+zVisual2:"If the qubit is in |1⟩, Z changes its phase without changing its measurement value.",
+zExpected:"A phase change becomes observable when we combine gates such as H, Z and H.",runZ:"Run Z Gate Experiment →",
+cnotTitle:"04. CNOT Gate — Controlled Operation",cnotDescription:"CNOT is a two-qubit gate. It flips the target qubit only when the control qubit is 1.",
+cnotVisualTitle:"Control Qubit → Target Qubit",controlZero:"Control = 0: target remains unchanged.",controlOne:"Control = 1: target flips.",
+cnotExpected:"This gate is essential for creating entanglement in our Bell State experiment.",runCNOT:"Run CNOT Experiment →",
+combinedTitle:"05. Combine Gates into a Circuit",combinedDescription:"A quantum circuit is built by applying gates in a particular sequence.",
+combinedVisual1:"First, create superposition using H. Then apply X and another H gate. Finally, measure the qubit.",
+combinedVisual2:"This sequence demonstrates how gates combine to transform a quantum state.",runCombined:"Run Combined Circuit →",
+quizTitle:"06. Test Your Knowledge!",q1:"Question 1: What does the X Gate do?",
+q1a:"A. Flips the qubit state",q1b:"B. Creates entanglement",q1c:"C. Measures a qubit",
+question2:"Question 2",q2:"Which gate creates equal superposition from |0⟩?",
+q2a:"A. Z Gate",q2b:"B. H Gate",q2c:"C. X Gate",
+question3:"Question 3",q3:"When does a CNOT gate flip its target?",
+q3a:"A. When control is 0",q3b:"B. Always",q3c:"C. When control is 1",
+checkScore:"Check My Score →",retry:"Retry Quiz",nextTitle:"You're becoming a circuit builder! 🚀",
+nextDescription:"You've explored the X, H, Z and CNOT gates. You've also learned how gates work together.",
+nextExample:"Next: Explore quantum algorithms and real-world applications.",
+continue:"Continue to Module 4 →",locked:"Pass the Module 3 quiz with 3/3 to unlock Module 4.",
+footer:"✦ QubitQuest — Quantum learning for everyone.",
+progress:"Module 3 completion: ",correct:"✓ Correct! ",wrong:"Not quite! ",
+explanations:[
+"The X Gate flips |0⟩ to |1⟩ and |1⟩ to |0⟩.",
+"The H Gate creates an equal superposition from |0⟩.",
+"CNOT flips its target when the control qubit is 1."
+],
+answerAll:"Please answer all three questions first.",
+scoreText:"You scored ",outOf:" out of 3! ",excellent:"Excellent work! Module 3 completed. 🌟",
+tryAgain:"Great effort! You need 3/3 to complete this module.",
+running:"Running your quantum experiment... Please wait.",
+runningButton:"Running experiment...",success:"✓ Experiment Completed Successfully!",
+experiment:"Experiment: ",defaultExperiment:"Quantum circuit",shots:"Total shots: ",
+measurements:"Measurement Results",whatHappened:"What happened?",circuit:"Text Circuit Output",
+noCircuit:"Text circuit diagram unavailable.",simulationNote:"Simulation performed using Qiskit Aer on the local computer. These are simulated results, not measurements from physical IBM quantum hardware.",
+circuitDiagram:"Real Qiskit Circuit Diagram",circuitCaption:"This diagram is generated from the actual quantum circuit using Qiskit.",
+missingCircuit:"Circuit image was not returned by the backend. The text circuit is shown above.",
+histogram:"Measurement Histogram",histogramCaption:"This histogram visualizes the measurement counts from the Qiskit Aer simulation.",
+missingHistogram:"Histogram image was not returned by the backend.",
+failed:"Experiment failed: ",backendHint:"Please check that your Flask backend is running on port 5000.",
+serverError:"The experiment could not be completed."
+},
+kn: {
+home:"← ಮುಖಪುಟ",tag:"ಮಾಡ್ಯೂಲ್ 03 · ಪ್ರಾಯೋಗಿಕ ಹಂತ",
+heading:'ಕ್ವಾಂಟಮ್ <span>ಗೇಟ್‌ಗಳನ್ನು ತಿಳಿಯಿರಿ.</span>',
+intro:"ನೀವು ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಕಲಿತಿದ್ದೀರಿ. ಈಗ ಕ್ವಾಂಟಮ್ ಗೇಟ್‌ಗಳು ಸ್ಥಿತಿಗಳನ್ನು ಹೇಗೆ ಬದಲಾಯಿಸುತ್ತವೆ ಮತ್ತು ಸರ್ಕ್ಯೂಟ್‌ಗಳನ್ನು ಹೇಗೆ ನಿರ್ಮಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
+progressLabel:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",completion:"✓ ಮಾಡ್ಯೂಲ್ 3 ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
+xTitle:"01. X ಗೇಟ್ — ಬಿಟ್ ಫ್ಲಿಪ್",xDescription:"X ಗೇಟ್ |0⟩ ಅನ್ನು |1⟩ ಆಗಿ ಮತ್ತು |1⟩ ಅನ್ನು |0⟩ ಆಗಿ ಬದಲಾಯಿಸುತ್ತದೆ.",
+xVisual:"ಇದನ್ನು ON/OFF ಸ್ವಿಚ್‌ನಂತೆ ಯೋಚಿಸಿ. X ಗೇಟ್ ಕ್ಯೂಬಿಟ್‌ನ ಸ್ಥಿತಿಯನ್ನು ತಿರುಗಿಸುತ್ತದೆ.",
+xExpected:"ನಿರೀಕ್ಷಿತ ಫಲಿತಾಂಶ: |0⟩ ನಿಂದ ಪ್ರಾರಂಭಿಸಿದಾಗ 100% ಬಾರಿ 1 ಅಳತೆ.",runX:"X ಗೇಟ್ ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ →",
+hTitle:"02. H ಗೇಟ್ — ಸೂಪರ್‌ಪೊಸಿಷನ್",hDescription:"ಹಡಮಾರ್ಡ್ ಗೇಟ್ |0⟩ ಅನ್ನು |0⟩ ಮತ್ತು |1⟩ ಗಳ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಆಗಿ ಪರಿವರ್ತಿಸುತ್ತದೆ.",
+hVisualTitle:"|0⟩ → H ಗೇಟ್ → ಸೂಪರ್‌ಪೊಸಿಷನ್",hVisual:"ಅಳತೆ ಮಾಡಿದಾಗ, ಫಲಿತಾಂಶಗಳು ಸುಮಾರು 50% ಸೊನ್ನೆ ಮತ್ತು 50% ಒಂದು ಆಗಿರುತ್ತವೆ.",runH:"H ಗೇಟ್ ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ →",
+zTitle:"03. Z ಗೇಟ್ — ಫೇಸ್ ಫ್ಲಿಪ್",zDescription:"Z ಗೇಟ್ ಕ್ವಾಂಟಮ್ ಸ್ಥಿತಿಯ |1⟩ ಘಟಕದ ಹಂತವನ್ನು ಬದಲಾಯಿಸುತ್ತದೆ.",
+zVisual1:"ಕ್ಯೂಬಿಟ್ |0⟩ ಸ್ಥಿತಿಯಲ್ಲಿದ್ದರೆ, Z ಅನ್ವಯಿಸಿದಾಗ ಅದರ ಸ್ಥಿತಿ ಬದಲಾಗುವುದಿಲ್ಲ.",
+zVisual2:"ಕ್ಯೂಬಿಟ್ |1⟩ ಸ್ಥಿತಿಯಲ್ಲಿದ್ದರೆ, Z ಅದರ ಅಳತೆ ಮೌಲ್ಯವನ್ನು ಬದಲಾಯಿಸದೆ ಹಂತವನ್ನು ಬದಲಾಯಿಸುತ್ತದೆ.",
+zExpected:"H, Z ಮತ್ತು H ನಂತಹ ಗೇಟ್‌ಗಳನ್ನು ಸಂಯೋಜಿಸಿದಾಗ ಹಂತದ ಬದಲಾವಣೆ ಗೋಚರಿಸುತ್ತದೆ.",runZ:"Z ಗೇಟ್ ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ →",
+cnotTitle:"04. CNOT ಗೇಟ್ — ನಿಯಂತ್ರಿತ ಕಾರ್ಯಾಚರಣೆ",cnotDescription:"CNOT ಎರಡು ಕ್ಯೂಬಿಟ್‌ಗಳ ಗೇಟ್ ಆಗಿದೆ. ನಿಯಂತ್ರಣ ಕ್ಯೂಬಿಟ್ 1 ಆಗಿದ್ದಾಗ ಮಾತ್ರ ಇದು ಗುರಿ ಕ್ಯೂಬಿಟ್ ಅನ್ನು ತಿರುಗಿಸುತ್ತದೆ.",
+cnotVisualTitle:"ನಿಯಂತ್ರಣ ಕ್ಯೂಬಿಟ್ → ಗುರಿ ಕ್ಯೂಬಿಟ್",controlZero:"ನಿಯಂತ್ರಣ = 0: ಗುರಿ ಬದಲಾಗುವುದಿಲ್ಲ.",controlOne:"ನಿಯಂತ್ರಣ = 1: ಗುರಿ ಬದಲಾಗುತ್ತದೆ.",
+cnotExpected:"ನಮ್ಮ ಬೆಲ್ ಸ್ಟೇಟ್ ಪ್ರಯೋಗದಲ್ಲಿ ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ರಚಿಸಲು ಈ ಗೇಟ್ ಮುಖ್ಯವಾಗಿದೆ.",runCNOT:"CNOT ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ →",
+combinedTitle:"05. ಗೇಟ್‌ಗಳನ್ನು ಸೇರಿಸಿ ಸರ್ಕ್ಯೂಟ್ ನಿರ್ಮಿಸಿ",combinedDescription:"ನಿರ್ದಿಷ್ಟ ಕ್ರಮದಲ್ಲಿ ಗೇಟ್‌ಗಳನ್ನು ಅನ್ವಯಿಸುವ ಮೂಲಕ ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್ ನಿರ್ಮಿಸಲಾಗುತ್ತದೆ.",
+combinedVisual1:"ಮೊದಲು H ಬಳಸಿ ಸೂಪರ್‌ಪೊಸಿಷನ್ ರಚಿಸಿ. ನಂತರ X ಮತ್ತು ಮತ್ತೊಂದು H ಗೇಟ್ ಅನ್ವಯಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಕ್ಯೂಬಿಟ್ ಅಳೆಯಿರಿ.",
+combinedVisual2:"ಈ ಕ್ರಮವು ಗೇಟ್‌ಗಳು ಸೇರಿ ಕ್ವಾಂಟಮ್ ಸ್ಥಿತಿಯನ್ನು ಹೇಗೆ ಬದಲಾಯಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ತೋರಿಸುತ್ತದೆ.",runCombined:"ಸಂಯೋಜಿತ ಸರ್ಕ್ಯೂಟ್ ನಡೆಸಿ →",
+quizTitle:"06. ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿ!",q1:"ಪ್ರಶ್ನೆ 1: X ಗೇಟ್ ಏನು ಮಾಡುತ್ತದೆ?",
+q1a:"A. ಕ್ಯೂಬಿಟ್ ಸ್ಥಿತಿಯನ್ನು ತಿರುಗಿಸುತ್ತದೆ",q1b:"B. ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ರಚಿಸುತ್ತದೆ",q1c:"C. ಕ್ಯೂಬಿಟ್ ಅನ್ನು ಅಳೆಯುತ್ತದೆ",
+question2:"ಪ್ರಶ್ನೆ 2",q2:"|0⟩ ನಿಂದ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ರಚಿಸುವ ಗೇಟ್ ಯಾವುದು?",
+q2a:"A. Z ಗೇಟ್",q2b:"B. H ಗೇಟ್",q2c:"C. X ಗೇಟ್",
+question3:"ಪ್ರಶ್ನೆ 3",q3:"CNOT ಗೇಟ್ ಯಾವಾಗ ತನ್ನ ಗುರಿಯನ್ನು ತಿರುಗಿಸುತ್ತದೆ?",
+q3a:"A. ನಿಯಂತ್ರಣ 0 ಆಗಿದ್ದಾಗ",q3b:"B. ಯಾವಾಗಲೂ",q3c:"C. ನಿಯಂತ್ರಣ 1 ಆಗಿದ್ದಾಗ",
+checkScore:"ನನ್ನ ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸಿ →",retry:"ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",nextTitle:"ನೀವು ಸರ್ಕ್ಯೂಟ್ ನಿರ್ಮಾತೃ ಆಗುತ್ತಿದ್ದೀರಿ! 🚀",
+nextDescription:"ನೀವು X, H, Z ಮತ್ತು CNOT ಗೇಟ್‌ಗಳನ್ನು ಕಲಿತಿದ್ದೀರಿ. ಗೇಟ್‌ಗಳು ಒಟ್ಟಿಗೆ ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತವೆ ಎಂಬುದನ್ನೂ ತಿಳಿದಿದ್ದೀರಿ.",
+nextExample:"ಮುಂದೆ: ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಮತ್ತು ನೈಜ ಜಗತ್ತಿನ ಅನ್ವಯಿಕೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.",
+continue:"ಮಾಡ್ಯೂಲ್ 4ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",locked:"ಮಾಡ್ಯೂಲ್ 4 ತೆರೆಯಲು ಮಾಡ್ಯೂಲ್ 3 ರ ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಅಂಕ ಪಡೆಯಿರಿ.",
+footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+progress:"ಮಾಡ್ಯೂಲ್ 3 ಪೂರ್ಣತೆ: ",correct:"✓ ಸರಿಯಾಗಿದೆ! ",wrong:"ಸರಿಯಾದ ಉತ್ತರ ಅಲ್ಲ! ",
+explanations:["X ಗೇಟ್ |0⟩ ಅನ್ನು |1⟩ ಆಗಿ ಮತ್ತು |1⟩ ಅನ್ನು |0⟩ ಆಗಿ ಬದಲಾಯಿಸುತ್ತದೆ.","H ಗೇಟ್ |0⟩ ನಿಂದ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ರಚಿಸುತ್ತದೆ.","ನಿಯಂತ್ರಣ ಕ್ಯೂಬಿಟ್ 1 ಆಗಿದ್ದಾಗ CNOT ಗುರಿಯನ್ನು ತಿರುಗಿಸುತ್ತದೆ."],
+answerAll:"ದಯವಿಟ್ಟು ಮೊದಲು ಎಲ್ಲಾ ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
+scoreText:"ನಿಮ್ಮ ಅಂಕಗಳು ",outOf:" / 3! ",excellent:"ಅದ್ಭುತ! ಮಾಡ್ಯೂಲ್ 3 ಪೂರ್ಣಗೊಂಡಿದೆ. 🌟",
+tryAgain:"ಚೆನ್ನಾಗಿ ಪ್ರಯತ್ನಿಸಿದ್ದೀರಿ! ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3/3 ಅಂಕ ಅಗತ್ಯ.",
+running:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗ ನಡೆಯುತ್ತಿದೆ... ದಯವಿಟ್ಟು ಕಾಯಿರಿ.",
+runningButton:"ಪ್ರಯೋಗ ನಡೆಯುತ್ತಿದೆ...",success:"✓ ಪ್ರಯೋಗ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!",
+experiment:"ಪ್ರಯೋಗ: ",defaultExperiment:"ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್",shots:"ಒಟ್ಟು ಶಾಟ್‌ಗಳು: ",
+measurements:"ಅಳತೆಯ ಫಲಿತಾಂಶಗಳು",whatHappened:"ಏನಾಯಿತು?",circuit:"ಟೆಕ್ಸ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ಫಲಿತಾಂಶ",
+noCircuit:"ಟೆಕ್ಸ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ ಲಭ್ಯವಿಲ್ಲ.",simulationNote:"ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನಲ್ಲಿ Qiskit Aer ಬಳಸಿ ಸಿಮ್ಯುಲೇಶನ್ ನಡೆಸಲಾಗಿದೆ. ಇವು ಸಿಮ್ಯುಲೇಟೆಡ್ ಫಲಿತಾಂಶಗಳು; ನೈಜ IBM ಕ್ವಾಂಟಮ್ ಹಾರ್ಡ್‌ವೇರ್‌ನ ಅಳತೆಗಳಲ್ಲ.",
+circuitDiagram:"ನೈಜ Qiskit ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ",circuitCaption:"ಈ ಚಿತ್ರವನ್ನು ನೈಜ ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ನಿಂದ Qiskit ಬಳಸಿ ರಚಿಸಲಾಗಿದೆ.",
+missingCircuit:"ಬ್ಯಾಕೆಂಡ್‌ನಿಂದ ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ ಬಂದಿಲ್ಲ. ಮೇಲಿನ ಟೆಕ್ಸ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ನೋಡಿ.",
+histogram:"ಅಳತೆಯ ಹಿಸ್ಟೋಗ್ರಾಮ್",histogramCaption:"ಈ ಹಿಸ್ಟೋಗ್ರಾಮ್ Qiskit Aer ಸಿಮ್ಯುಲೇಶನ್‌ನ ಅಳತೆ ಎಣಿಕೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.",
+missingHistogram:"ಬ್ಯಾಕೆಂಡ್‌ನಿಂದ ಹಿಸ್ಟೋಗ್ರಾಮ್ ಚಿತ್ರ ಬಂದಿಲ್ಲ.",
+failed:"ಪ್ರಯೋಗ ವಿಫಲವಾಗಿದೆ: ",backendHint:"ನಿಮ್ಮ Flask ಬ್ಯಾಕೆಂಡ್ ಪೋರ್ಟ್ 5000 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
+serverError:"ಪ್ರಯೋಗವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಲಿಲ್ಲ."
+},
+hi: {
+home:"← होम",tag:"मॉड्यूल 03 · प्रायोगिक स्तर",
+heading:'क्वांटम <span>गेट्स को जानें।</span>',
+intro:"आपने सुपरपोज़िशन और एंटैंगलमेंट सीखा है। अब जानें कि क्वांटम गेट्स क्वांटम अवस्थाओं को कैसे बदलते हैं और सर्किट बनाने के लिए उन्हें कैसे जोड़ा जाता है।",
+progressLabel:"आपकी सीखने की प्रगति",completion:"✓ मॉड्यूल 3 पूरा हुआ! आपकी प्रगति सेव कर दी गई है।",
+xTitle:"01. X गेट — बिट फ्लिप",xDescription:"X गेट |0⟩ को |1⟩ और |1⟩ को |0⟩ में बदलता है।",
+xVisual:"इसे ON/OFF स्विच की तरह समझें। X गेट क्यूबिट की अवस्था को पलट देता है।",
+xExpected:"अपेक्षित परिणाम: |0⟩ से शुरू करने पर 100% माप में 1 प्राप्त होगा।",runX:"X गेट प्रयोग चलाएँ →",
+hTitle:"02. H गेट — सुपरपोज़िशन",hDescription:"हैडामार्ड गेट |0⟩ को |0⟩ और |1⟩ के समान सुपरपोज़िशन में बदलता है।",
+hVisualTitle:"|0⟩ → H गेट → सुपरपोज़िशन",hVisual:"मापने पर परिणाम लगभग 50% शून्य और 50% एक होते हैं।",runH:"H गेट प्रयोग चलाएँ →",
+zTitle:"03. Z गेट — फेज़ फ्लिप",zDescription:"Z गेट क्वांटम अवस्था के |1⟩ घटक का फेज़ बदलता है।",
+zVisual1:"यदि क्यूबिट |0⟩ अवस्था में है, तो Z लगाने से उसकी अवस्था नहीं बदलती।",
+zVisual2:"यदि क्यूबिट |1⟩ अवस्था में है, तो Z उसके माप के मान को बदले बिना उसका फेज़ बदलता है।",
+zExpected:"H, Z और H जैसे गेट्स को जोड़ने पर फेज़ में बदलाव देखा जा सकता है।",runZ:"Z गेट प्रयोग चलाएँ →",
+cnotTitle:"04. CNOT गेट — नियंत्रित संचालन",cnotDescription:"CNOT दो-क्यूबिट गेट है। यह लक्ष्य क्यूबिट को तभी पलटता है जब नियंत्रण क्यूबिट 1 हो।",
+cnotVisualTitle:"नियंत्रण क्यूबिट → लक्ष्य क्यूबिट",controlZero:"नियंत्रण = 0: लक्ष्य में बदलाव नहीं होता।",controlOne:"नियंत्रण = 1: लक्ष्य पलट जाता है।",
+cnotExpected:"हमारे बेल स्टेट प्रयोग में एंटैंगलमेंट बनाने के लिए यह गेट आवश्यक है।",runCNOT:"CNOT प्रयोग चलाएँ →",
+combinedTitle:"05. गेट्स को जोड़कर सर्किट बनाएँ",combinedDescription:"एक क्वांटम सर्किट में गेट्स को एक विशेष क्रम में लागू किया जाता है।",
+combinedVisual1:"पहले H का उपयोग करके सुपरपोज़िशन बनाएँ। फिर X और एक अन्य H गेट लगाएँ। अंत में क्यूबिट को मापें।",
+combinedVisual2:"यह क्रम दिखाता है कि गेट्स मिलकर क्वांटम अवस्था को कैसे बदलते हैं।",runCombined:"संयुक्त सर्किट चलाएँ →",
+quizTitle:"06. अपने ज्ञान की जाँच करें!",q1:"प्रश्न 1: X गेट क्या करता है?",
+q1a:"A. क्यूबिट की अवस्था पलटता है",q1b:"B. एंटैंगलमेंट बनाता है",q1c:"C. क्यूबिट को मापता है",
+question2:"प्रश्न 2",q2:"कौन-सा गेट |0⟩ से समान सुपरपोज़िशन बनाता है?",
+q2a:"A. Z गेट",q2b:"B. H गेट",q2c:"C. X गेट",
+question3:"प्रश्न 3",q3:"CNOT गेट अपने लक्ष्य को कब पलटता है?",
+q3a:"A. जब नियंत्रण 0 हो",q3b:"B. हमेशा",q3c:"C. जब नियंत्रण 1 हो",
+checkScore:"मेरा स्कोर जाँचें →",retry:"क्विज़ दोबारा करें",nextTitle:"आप सर्किट बनाने में माहिर हो रहे हैं! 🚀",
+nextDescription:"आपने X, H, Z और CNOT गेट्स सीखे हैं। आपने यह भी जाना कि गेट्स एक साथ कैसे काम करते हैं।",
+nextExample:"आगे: क्वांटम एल्गोरिदम और वास्तविक दुनिया में उनके उपयोग जानें।",
+continue:"मॉड्यूल 4 पर जाएँ →",locked:"मॉड्यूल 4 अनलॉक करने के लिए मॉड्यूल 3 क्विज़ में 3/3 अंक प्राप्त करें।",
+footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+progress:"मॉड्यूल 3 की पूर्णता: ",correct:"✓ सही! ",wrong:"सही नहीं! ",
+explanations:["X गेट |0⟩ को |1⟩ और |1⟩ को |0⟩ में बदलता है।","H गेट |0⟩ से समान सुपरपोज़िशन बनाता है।","नियंत्रण क्यूबिट 1 होने पर CNOT लक्ष्य को पलटता है।"],
+answerAll:"कृपया पहले तीनों प्रश्नों के उत्तर दें।",
+scoreText:"आपका स्कोर ",outOf:" / 3! ",excellent:"बहुत बढ़िया! मॉड्यूल 3 पूरा हुआ। 🌟",
+tryAgain:"अच्छा प्रयास! इस मॉड्यूल को पूरा करने के लिए 3/3 अंक चाहिए।",
+running:"आपका क्वांटम प्रयोग चल रहा है... कृपया प्रतीक्षा करें।",
+runningButton:"प्रयोग चल रहा है...",success:"✓ प्रयोग सफलतापूर्वक पूरा हुआ!",
+experiment:"प्रयोग: ",defaultExperiment:"क्वांटम सर्किट",shots:"कुल शॉट्स: ",
+measurements:"मापन के परिणाम",whatHappened:"क्या हुआ?",circuit:"टेक्स्ट सर्किट आउटपुट",
+noCircuit:"टेक्स्ट सर्किट उपलब्ध नहीं है।",simulationNote:"आपके कंप्यूटर पर Qiskit Aer का उपयोग करके सिमुलेशन किया गया। ये सिमुलेशन परिणाम हैं, वास्तविक IBM क्वांटम हार्डवेयर के मापन नहीं।",
+circuitDiagram:"वास्तविक Qiskit सर्किट चित्र",circuitCaption:"यह चित्र Qiskit का उपयोग करके वास्तविक क्वांटम सर्किट से बनाया गया है।",
+missingCircuit:"बैकएंड से सर्किट चित्र प्राप्त नहीं हुआ। ऊपर टेक्स्ट सर्किट दिखाया गया है।",
+histogram:"मापन हिस्टोग्राम",histogramCaption:"यह हिस्टोग्राम Qiskit Aer सिमुलेशन के मापन परिणाम दिखाता है।",
+missingHistogram:"बैकएंड से हिस्टोग्राम चित्र प्राप्त नहीं हुआ।",
+failed:"प्रयोग विफल हुआ: ",backendHint:"जाँचें कि आपका Flask बैकएंड पोर्ट 5000 पर चल रहा है।",
+serverError:"प्रयोग पूरा नहीं किया जा सका।"
+},
+te: {
+home:"← హోమ్",tag:"మాడ్యూల్ 03 · ప్రాక్టికల్ స్థాయి",
+heading:'క్వాంటమ్ <span>గేట్లను తెలుసుకోండి.</span>',
+intro:"మీరు సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ నేర్చుకున్నారు. ఇప్పుడు క్వాంటమ్ గేట్లు క్వాంటమ్ స్థితులను ఎలా మారుస్తాయో, వాటిని కలిపి సర్క్యూట్‌లను ఎలా నిర్మించాలో తెలుసుకోండి.",
+progressLabel:"మీ అభ్యాస పురోగతి",completion:"✓ మాడ్యూల్ 3 పూర్తయింది! మీ పురోగతి సేవ్ చేయబడింది.",
+xTitle:"01. X గేట్ — బిట్ ఫ్లిప్",xDescription:"X గేట్ |0⟩ ను |1⟩ గా మరియు |1⟩ ను |0⟩ గా మారుస్తుంది.",
+xVisual:"దీనిని ON/OFF స్విచ్‌లా ఊహించండి. X గేట్ క్యూబిట్ స్థితిని తిప్పుతుంది.",
+xExpected:"ఆశించిన ఫలితం: |0⟩ తో ప్రారంభించినప్పుడు 100% కొలతల్లో 1 వస్తుంది.",runX:"X గేట్ ప్రయోగాన్ని ప్రారంభించండి →",
+hTitle:"02. H గేట్ — సూపర్‌పొజిషన్",hDescription:"హడమార్డ్ గేట్ |0⟩ ను |0⟩ మరియు |1⟩ ల సమాన సూపర్‌పొజిషన్‌గా మారుస్తుంది.",
+hVisualTitle:"|0⟩ → H గేట్ → సూపర్‌పొజిషన్",hVisual:"కొలిచినప్పుడు ఫలితాలు సుమారు 50% సున్నా మరియు 50% ఒకటి ఉంటాయి.",runH:"H గేట్ ప్రయోగాన్ని ప్రారంభించండి →",
+zTitle:"03. Z గేట్ — ఫేజ్ ఫ్లిప్",zDescription:"Z గేట్ క్వాంటమ్ స్థితిలోని |1⟩ భాగం యొక్క ఫేజ్‌ను మారుస్తుంది.",
+zVisual1:"క్యూబిట్ |0⟩ స్థితిలో ఉంటే, Z వర్తింపజేసినప్పుడు దాని స్థితి మారదు.",
+zVisual2:"క్యూబిట్ |1⟩ స్థితిలో ఉంటే, Z దాని కొలత విలువను మార్చకుండా ఫేజ్‌ను మారుస్తుంది.",
+zExpected:"H, Z మరియు H వంటి గేట్లను కలిపినప్పుడు ఫేజ్ మార్పు కనిపిస్తుంది.",runZ:"Z గేట్ ప్రయోగాన్ని ప్రారంభించండి →",
+cnotTitle:"04. CNOT గేట్ — నియంత్రిత చర్య",cnotDescription:"CNOT అనేది రెండు క్యూబిట్‌ల గేట్. నియంత్రణ క్యూబిట్ 1 అయినప్పుడు మాత్రమే ఇది లక్ష్య క్యూబిట్‌ను తిప్పుతుంది.",
+cnotVisualTitle:"నియంత్రణ క్యూబిట్ → లక్ష్య క్యూబిట్",controlZero:"నియంత్రణ = 0: లక్ష్యం మారదు.",controlOne:"నియంత్రణ = 1: లక్ష్యం మారుతుంది.",
+cnotExpected:"మన బెల్ స్టేట్ ప్రయోగంలో ఎంటాంగిల్‌మెంట్ సృష్టించడానికి ఈ గేట్ అవసరం.",runCNOT:"CNOT ప్రయోగాన్ని ప్రారంభించండి →",
+combinedTitle:"05. గేట్లను కలిపి సర్క్యూట్ నిర్మించండి",combinedDescription:"ఒక నిర్దిష్ట క్రమంలో గేట్లను వర్తింపజేయడం ద్వారా క్వాంటమ్ సర్క్యూట్ నిర్మించబడుతుంది.",
+combinedVisual1:"మొదట H ఉపయోగించి సూపర్‌పొజిషన్ సృష్టించండి. తరువాత X మరియు మరో H గేట్‌ను వర్తింపజేయండి. చివరగా క్యూబిట్‌ను కొలవండి.",
+combinedVisual2:"గేట్లు కలిసి క్వాంటమ్ స్థితిని ఎలా మారుస్తాయో ఈ క్రమం చూపిస్తుంది.",runCombined:"కలిపిన సర్క్యూట్‌ను ప్రారంభించండి →",
+quizTitle:"06. మీ జ్ఞానాన్ని పరీక్షించుకోండి!",q1:"ప్రశ్న 1: X గేట్ ఏమి చేస్తుంది?",
+q1a:"A. క్యూబిట్ స్థితిని తిప్పుతుంది",q1b:"B. ఎంటాంగిల్‌మెంట్ సృష్టిస్తుంది",q1c:"C. క్యూబిట్‌ను కొలుస్తుంది",
+question2:"ప్రశ్న 2",q2:"|0⟩ నుండి సమాన సూపర్‌పొజిషన్‌ను ఏ గేట్ సృష్టిస్తుంది?",
+q2a:"A. Z గేట్",q2b:"B. H గేట్",q2c:"C. X గేట్",
+question3:"ప్రశ్న 3",q3:"CNOT గేట్ తన లక్ష్యాన్ని ఎప్పుడు తిప్పుతుంది?",
+q3a:"A. నియంత్రణ 0 అయినప్పుడు",q3b:"B. ఎల్లప్పుడూ",q3c:"C. నియంత్రణ 1 అయినప్పుడు",
+checkScore:"నా స్కోర్‌ను తనిఖీ చేయండి →",retry:"క్విజ్‌ను మళ్లీ ప్రయత్నించండి",nextTitle:"మీరు సర్క్యూట్ నిర్మాణంలో నైపుణ్యం సాధిస్తున్నారు! 🚀",
+nextDescription:"మీరు X, H, Z మరియు CNOT గేట్లను తెలుసుకున్నారు. గేట్లు కలిసి ఎలా పనిచేస్తాయో కూడా నేర్చుకున్నారు.",
+nextExample:"తదుపరి: క్వాంటమ్ అల్గారిథమ్‌లు మరియు వాస్తవ ప్రపంచ అనువర్తనాలను అన్వేషించండి.",
+continue:"మాడ్యూల్ 4కి కొనసాగండి →",locked:"మాడ్యూల్ 4ను అన్‌లాక్ చేయడానికి మాడ్యూల్ 3 క్విజ్‌లో 3/3 స్కోర్ సాధించండి.",
+footer:"✦ QubitQuest — అందరికీ క్వాంటమ్ అభ్యాసం.",
+progress:"మాడ్యూల్ 3 పూర్తి: ",correct:"✓ సరైనది! ",wrong:"సరైన సమాధానం కాదు! ",
+explanations:["X గేట్ |0⟩ ను |1⟩ గా మరియు |1⟩ ను |0⟩ గా మారుస్తుంది.","H గేట్ |0⟩ నుండి సమాన సూపర్‌పొజిషన్‌ను సృష్టిస్తుంది.","నియంత్రణ క్యూబిట్ 1 అయినప్పుడు CNOT లక్ష్యాన్ని తిప్పుతుంది."],
+answerAll:"దయచేసి ముందుగా మూడు ప్రశ్నలకు సమాధానాలు ఇవ్వండి.",
+scoreText:"మీ స్కోర్ ",outOf:" / 3! ",excellent:"అద్భుతం! మాడ్యూల్ 3 పూర్తయింది. 🌟",
+tryAgain:"మంచి ప్రయత్నం! ఈ మాడ్యూల్ పూర్తి చేయడానికి 3/3 స్కోర్ అవసరం.",
+running:"మీ క్వాంటమ్ ప్రయోగం జరుగుతోంది... దయచేసి వేచి ఉండండి.",
+runningButton:"ప్రయోగం జరుగుతోంది...",success:"✓ ప్రయోగం విజయవంతంగా పూర్తయింది!",
+experiment:"ప్రయోగం: ",defaultExperiment:"క్వాంటమ్ సర్క్యూట్",shots:"మొత్తం షాట్‌లు: ",
+measurements:"కొలత ఫలితాలు",whatHappened:"ఏమి జరిగింది?",circuit:"టెక్స్ట్ సర్క్యూట్ అవుట్‌పుట్",
+noCircuit:"టెక్స్ట్ సర్క్యూట్ అందుబాటులో లేదు.",simulationNote:"మీ కంప్యూటర్‌లో Qiskit Aer ఉపయోగించి సిమ్యులేషన్ నిర్వహించబడింది. ఇవి సిమ్యులేషన్ ఫలితాలు మాత్రమే; నిజమైన IBM క్వాంటమ్ హార్డ్‌వేర్ కొలతలు కావు.",
+circuitDiagram:"నిజమైన Qiskit సర్క్యూట్ చిత్రం",circuitCaption:"ఈ చిత్రం Qiskit ఉపయోగించి నిజమైన క్వాంటమ్ సర్క్యూట్ నుండి రూపొందించబడింది.",
+missingCircuit:"బ్యాకెండ్ నుండి సర్క్యూట్ చిత్రం రాలేదు. పైన టెక్స్ట్ సర్క్యూట్ చూపబడింది.",
+histogram:"కొలతల హిస్టోగ్రామ్",histogramCaption:"ఈ హిస్టోగ్రామ్ Qiskit Aer సిమ్యులేషన్ కొలతల సంఖ్యను చూపిస్తుంది.",
+missingHistogram:"బ్యాకెండ్ నుండి హిస్టోగ్రామ్ చిత్రం రాలేదు.",
+failed:"ప్రయోగం విఫలమైంది: ",backendHint:"మీ Flask బ్యాకెండ్ పోర్ట్ 5000లో నడుస్తోందో లేదో తనిఖీ చేయండి.",
+serverError:"ప్రయోగాన్ని పూర్తి చేయలేకపోయాము."
+}
+};
+
+let currentLanguage = "en";
+
+function t(key) {
+    return translations[currentLanguage]?.[key] ?? translations.en[key] ?? key;
+}
+
+function applyLanguage(language) {
+    if (!translations[language]) language = "en";
+
+    currentLanguage = language;
+    localStorage.setItem("qubitquestLanguage", language);
+
+    document.documentElement.lang = language;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.dataset.i18n;
+        const value = t(key);
+
+        if (key === "heading") {
+            element.innerHTML = value;
+        } else {
+            element.textContent = value;
+        }
+    });
+
+    document.getElementById("languageSelect").value = language;
+
+    updateModuleProgress();
+
+    // Refresh any visible quiz feedback in the selected language.
+    for (let i = 0; i < 3; i++) {
+        const feedback = document.getElementById("feedback" + i);
+        if (answered[i] && feedback.style.display === "block") {
+            const correct = selectedAnswers[i] === correctAnswers[i];
+            feedback.textContent =
+                (correct ? t("correct") : t("wrong")) +
+                t("explanations")[i];
+        }
+    }
+
+    if (document.getElementById("score").style.display === "block") {
+        showScore();
+    }
+
+    // Refresh experiment result labels while retaining backend data.
+    Object.entries(lastExperimentResults).forEach(([id, data]) => {
+        displayResults(data, document.getElementById(id));
+    });
+
+    // Refresh loading and error messages when language changes.
+    document.querySelectorAll(".result[data-state='loading']").forEach(box => {
+        box.textContent = t("running");
+    });
+}
+
+document.getElementById("languageSelect").addEventListener("change", function() {
+    applyLanguage(this.value);
+});
 
 // ==================================
 // SHARED PROGRESS SYSTEM
@@ -594,431 +471,349 @@ footer {
 const PROGRESS_KEY = "qubitquestProgress";
 
 function readProgress() {
-
     try {
-
-        const saved = JSON.parse(
-            localStorage.getItem(PROGRESS_KEY) || "{}"
-        );
+        const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "{}");
 
         return {
+            ...saved,
             completedModules: Array.isArray(saved.completedModules)
-                ? saved.completedModules : [],
-
+                ? [...new Set(saved.completedModules.map(Number).filter(Number.isFinite))]
+                : [],
             quizScores: saved.quizScores &&
-                typeof saved.quizScores === "object"
-                ? saved.quizScores : {}
+                typeof saved.quizScores === "object" &&
+                !Array.isArray(saved.quizScores)
+                ? {...saved.quizScores}
+                : {}
         };
-
     } catch (error) {
-
-        return {
-            completedModules: [],
-            quizScores: {}
-        };
+        return {completedModules: [], quizScores: {}};
     }
 }
 
-
-function updateModuleProgress() {
-
-    const progress = readProgress();
-
-    const completed =
-        progress.completedModules.includes(3);
-
-    const percentage = completed ? 100 : 0;
-
-    document.getElementById("progressFill").style.width =
-        percentage + "%";
-
-    document.getElementById("progressText").textContent =
-        "Module 3 completion: " + percentage + "%";
-
-    document.getElementById("completion").style.display =
-        completed ? "block" : "none";
+function writeProgress(progress) {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
 }
 
+function updateModuleProgress() {
+    const progress = readProgress();
+    const completed = progress.completedModules.includes(3);
+    const percentage = completed ? 100 : 0;
+
+    document.getElementById("progressFill").style.width = percentage + "%";
+    document.getElementById("progressText").textContent = t("progress") + percentage + "%";
+    document.getElementById("completion").style.display = completed ? "block" : "none";
+    document.getElementById("nextModule").style.display = completed ? "inline-block" : "none";
+    document.getElementById("lockedMessage").style.display = completed ? "none" : "block";
+}
 
 function saveModuleCompletion(finalScore) {
-
     const progress = readProgress();
+    const previousBest = Number(progress.quizScores[3]) || 0;
 
-    if (finalScore === 3 &&
-        !progress.completedModules.includes(3)) {
+    progress.quizScores[3] = Math.max(previousBest, finalScore);
 
+    if (finalScore === 3 && !progress.completedModules.includes(3)) {
         progress.completedModules.push(3);
     }
 
-    progress.quizScores[3] = finalScore;
-
-    localStorage.setItem(
-        PROGRESS_KEY,
-        JSON.stringify(progress)
-    );
-
+    writeProgress(progress);
     updateModuleProgress();
 }
 
+window.addEventListener("storage", function(event) {
+    if (event.key === PROGRESS_KEY) updateModuleProgress();
+});
 
 // ==================================
 // QUIZ SYSTEM
 // ==================================
 
 const correctAnswers = [0, 1, 2];
-
-const explanations = [
-    "The X Gate flips |0⟩ to |1⟩ and |1⟩ to |0⟩.",
-    "The H Gate creates an equal superposition from |0⟩.",
-    "CNOT flips its target when the control qubit is 1."
-];
-
 let score = 0;
-
 let answered = [false, false, false];
-
+let selectedAnswers = [null, null, null];
 
 function answer(question, choice) {
-
     if (answered[question]) return;
 
     answered[question] = true;
+    selectedAnswers[question] = choice;
 
-    const feedback = document.getElementById(
-        "feedback" + question
-    );
-
+    const feedback = document.getElementById("feedback" + question);
     feedback.style.display = "block";
 
     const buttons = document.querySelectorAll(".quiz-option");
 
-    for (
-        let i = question * 3;
-        i < question * 3 + 3;
-        i++
-    ) {
+    for (let i = question * 3; i < question * 3 + 3; i++) {
         buttons[i].disabled = true;
     }
 
     if (choice === correctAnswers[question]) {
-
         score++;
-
-        feedback.textContent =
-            "✓ Correct! " + explanations[question];
-
+        feedback.textContent = t("correct") + t("explanations")[question];
     } else {
-
-        feedback.textContent =
-            "Not quite! " + explanations[question];
+        feedback.textContent = t("wrong") + t("explanations")[question];
     }
 }
 
-
 function showScore() {
-
     const result = document.getElementById("score");
-
     result.style.display = "block";
 
     if (answered.some(value => !value)) {
-
-        result.textContent =
-            "Please answer all three questions first.";
-
+        result.textContent = t("answerAll");
         return;
     }
 
-    result.textContent =
-        "You scored " + score + " out of 3! " +
-        (score === 3
-            ? "Excellent work! Module 3 completed. 🌟"
-            : "Great effort! You need 3/3 to complete this module.");
+    result.textContent = t("scoreText") + score + t("outOf") +
+        (score === 3 ? t("excellent") : t("tryAgain"));
 
+    // Only a perfect score completes the module.
+    // A failed retry never removes an existing completion.
     saveModuleCompletion(score);
 }
 
-
 function retryQuiz() {
-
     score = 0;
-
     answered = [false, false, false];
+    selectedAnswers = [null, null, null];
 
     document.querySelectorAll(".quiz-option").forEach(button => {
         button.disabled = false;
     });
 
     for (let i = 0; i < 3; i++) {
-
         const feedback = document.getElementById("feedback" + i);
-
         feedback.textContent = "";
-
         feedback.style.display = "none";
     }
 
     const result = document.getElementById("score");
-
     result.textContent = "";
-
     result.style.display = "none";
 }
 
+// ==================================
+// QISKIT VISUALIZATION SYSTEM
+// ==================================
+
+const BACKEND_URL = "http://127.0.0.1:5000";
+const lastExperimentResults = {};
+
+function addVisualizationImages(container, data) {
+    const panel = document.createElement("div");
+    panel.className = "visualization-panel";
+
+    const circuitTitle = document.createElement("h3");
+    circuitTitle.textContent = t("circuitDiagram");
+    panel.appendChild(circuitTitle);
+
+    const circuitCaption = document.createElement("p");
+    circuitCaption.className = "visualization-caption";
+    circuitCaption.textContent = t("circuitCaption");
+    panel.appendChild(circuitCaption);
+
+    if (data.circuit_image) {
+        const circuitImage = document.createElement("img");
+        circuitImage.className = "visualization-image";
+        circuitImage.alt = t("circuitDiagram");
+        circuitImage.src = data.circuit_image;
+        panel.appendChild(circuitImage);
+    } else {
+        const missing = document.createElement("p");
+        missing.className = "visualization-missing";
+        missing.textContent = t("missingCircuit");
+        panel.appendChild(missing);
+    }
+
+    const histogramTitle = document.createElement("h3");
+    histogramTitle.textContent = t("histogram");
+    panel.appendChild(histogramTitle);
+
+    const histogramCaption = document.createElement("p");
+    histogramCaption.className = "visualization-caption";
+    histogramCaption.textContent = t("histogramCaption");
+    panel.appendChild(histogramCaption);
+
+    if (data.histogram_image) {
+        const histogramImage = document.createElement("img");
+        histogramImage.className = "visualization-image";
+        histogramImage.alt = t("histogram");
+        histogramImage.src = data.histogram_image;
+        panel.appendChild(histogramImage);
+    } else {
+        const missing = document.createElement("p");
+        missing.className = "visualization-missing";
+        missing.textContent = t("missingHistogram");
+        panel.appendChild(missing);
+    }
+
+    container.appendChild(panel);
+}
 
 // ==================================
-// QISKIT EXPERIMENT SYSTEM
+// DISPLAY EXPERIMENT RESULTS
 // ==================================
-
-const BACKEND_URL = "/api";
-
-
-// Display results from the Qiskit backend
 
 function displayResults(result, resultBox) {
-
     resultBox.innerHTML = "";
 
     const title = document.createElement("h3");
-
-    title.textContent =
-        "✓ Experiment Completed Successfully!";
-
+    title.textContent = t("success");
     resultBox.appendChild(title);
 
-
     const experiment = document.createElement("p");
-
-    experiment.textContent =
-        "Experiment: " + (result.experiment || result.gate);
-
+    experiment.textContent = t("experiment") +
+        (result.experiment || result.gate || t("defaultExperiment"));
     resultBox.appendChild(experiment);
 
-
     const shots = document.createElement("p");
-
-    shots.textContent =
-        "Total shots: " + result.shots;
-
+    shots.textContent = t("shots") + result.shots;
     resultBox.appendChild(shots);
 
-
     const countsTitle = document.createElement("h3");
-
-    countsTitle.textContent = "Measurement Results";
-
+    countsTitle.textContent = t("measurements");
     resultBox.appendChild(countsTitle);
 
-
     const countList = document.createElement("ul");
-
     const counts = result.counts || {};
-
     const totalShots = Number(result.shots) || 1024;
 
-
     Object.entries(counts).forEach(([state, count]) => {
-
         const percentage = (Number(count) / totalShots) * 100;
-
         const item = document.createElement("li");
-
-        item.textContent =
-            "|" + state + "⟩ : " +
-            count + " measurements (" +
-            percentage.toFixed(2) + "%)";
-
+        item.textContent = "|" + state + "⟩ : " + count +
+            " measurements (" + percentage.toFixed(2) + "%)";
         countList.appendChild(item);
     });
 
     resultBox.appendChild(countList);
 
-
     if (result.explanation) {
-
         const explanationTitle = document.createElement("h3");
-
-        explanationTitle.textContent = "What happened?";
-
+        explanationTitle.textContent = t("whatHappened");
         resultBox.appendChild(explanationTitle);
 
-
         const explanation = document.createElement("p");
-
         explanation.textContent = result.explanation;
-
         resultBox.appendChild(explanation);
     }
 
-
     const circuitTitle = document.createElement("h3");
-
-    circuitTitle.textContent = "Qiskit Circuit Diagram";
-
+    circuitTitle.textContent = t("circuit");
     resultBox.appendChild(circuitTitle);
 
-
     const circuit = document.createElement("pre");
-
     circuit.className = "circuit-output";
-
-    circuit.textContent =
-        result.circuit || "Circuit diagram unavailable.";
-
+    circuit.textContent = result.circuit || t("noCircuit");
     resultBox.appendChild(circuit);
 
+    addVisualizationImages(resultBox, result);
 
     const note = document.createElement("p");
-
     note.className = "note";
-
-    note.textContent =
-        "Simulation performed using Qiskit Aer on the local computer. " +
-        "These are simulated results, not measurements from physical IBM quantum hardware.";
-
+    note.textContent = t("simulationNote");
     resultBox.appendChild(note);
 }
 
+// ==================================
+// RUN EXPERIMENT
+// ==================================
 
-// Send experiment requests to Flask backend
-
-async function executeExperiment(
-    endpoint,
-    payload,
-    resultId,
-    button
-) {
-
+async function executeExperiment(endpoint, payload, resultId, button) {
     const resultBox = document.getElementById(resultId);
 
     resultBox.style.display = "block";
-
-    resultBox.textContent =
-        "Running your quantum experiment... Please wait.";
+    resultBox.dataset.state = "loading";
+    resultBox.textContent = t("running");
 
     const originalText = button.textContent;
-
     button.disabled = true;
-
-    button.textContent = "Running experiment...";
+    button.textContent = t("runningButton");
 
     try {
-
-        const response = await fetch(
-            BACKEND_URL + endpoint,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(payload)
-            }
-        );
+        const response = await fetch(BACKEND_URL + endpoint, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+        });
 
         const data = await response.json();
 
         if (!response.ok) {
-
-            throw new Error(
-                data.error || "The experiment could not be completed."
-            );
+            throw new Error(data.error || t("serverError"));
         }
 
+        resultBox.dataset.state = "success";
+        lastExperimentResults[resultId] = data;
         displayResults(data, resultBox);
 
     } catch (error) {
-
-        resultBox.textContent =
-            "Experiment failed: " + error.message +
-            "\n\nPlease check that your Flask backend is running on port 5000.";
-
+        resultBox.dataset.state = "error";
+        resultBox.textContent = t("failed") + error.message +
+            "\n\n" + t("backendHint");
     } finally {
-
         button.disabled = false;
-
         button.textContent = originalText;
     }
 }
-
 
 // ==================================
 // INDIVIDUAL GATE EXPERIMENTS
 // ==================================
 
 function runGate(gate, button) {
-
     if (gate === "h") {
-
         executeExperiment(
             "/run-circuit",
-            {
-                gate: "h",
-                shots: 1024
-            },
+            {gate: "h", shots: 1024},
             "result-h",
             button
         );
-
     } else {
-
         executeExperiment(
             "/run-module3",
-            {
-                experiment: gate,
-                shots: 1024
-            },
+            {experiment: gate, shots: 1024},
             "result-" + gate,
             button
         );
     }
 }
 
-
 // ==================================
 // CNOT EXPERIMENT
 // ==================================
 
 function runCNOT(button) {
-
     executeExperiment(
         "/run-module3",
-        {
-            experiment: "cnot",
-            shots: 1024
-        },
+        {experiment: "cnot", shots: 1024},
         "result-cnot",
         button
     );
 }
-
 
 // ==================================
 // COMBINED GATE EXPERIMENT
 // ==================================
 
 function runCombined(button) {
-
     executeExperiment(
         "/run-module3",
-        {
-            experiment: "combined",
-            shots: 1024
-        },
+        {experiment: "combined", shots: 1024},
         "result-combined",
         button
     );
 }
 
-
 // ==================================
-// INITIALIZE SAVED PROGRESS
+// INITIALIZE LANGUAGE AND PROGRESS
 // ==================================
 
+const savedLanguage = localStorage.getItem("qubitquestLanguage") || "en";
+applyLanguage(savedLanguage);
 updateModuleProgress();
 
 </script>
-
 </body>
 </html>
