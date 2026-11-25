@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coin Lab | QubitQuest Arcade</title>
+<title>Coin Lab | Q-Spark Arcade</title>
 
 <style>
 * {
@@ -308,14 +308,17 @@ button:disabled {
     }
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
 
     <div class="header-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect"
                 aria-label="Choose language">
             <option value="en">🇬🇧 English</option>
@@ -324,15 +327,13 @@ button:disabled {
             <option value="te">🇮🇳 తెలుగు</option>
         </select>
 
-        <a class="back" href="index.html" data-i18n="back">
-            ← Back to Home
-        </a>
+        <a class="back" href="index.html#arcade" data-i18n="back" data-course-back>← Quantum Arcade</a>
     </div>
 </header>
 
 <main class="container">
 
-    <div class="tag" data-i18n="tag">QubitQuest Arcade · Game 01</div>
+    <div class="tag" data-i18n="tag">Q-Spark Arcade · Game 01</div>
 
     <h1 data-i18n="title">🪙 Coin Lab</h1>
 
@@ -496,7 +497,7 @@ button:disabled {
     </section>
 
     <div class="footer" data-i18n="footer">
-        QubitQuest · Explore. Experiment. Understand.
+        Q-Spark · Explore. Experiment. Understand.
     </div>
 
 </main>
@@ -512,7 +513,7 @@ const translations = {
 
 en: {
     back: "← Back to Home",
-    tag: "QubitQuest Arcade · Game 01",
+    tag: "Q-Spark Arcade · Game 01",
     title: "🪙 Coin Lab",
     subtitle: "Tilt the quantum coin, explore probability, and discover how a qubit can exist in a superposition of states before measurement.",
     yourCoin: "Your Quantum Coin",
@@ -537,18 +538,18 @@ en: {
     learnParagraph2: "The RY gate rotates the qubit. Changing the angle changes the probability of measuring each outcome. When we measure the qubit, we get one result: Heads or Tails.",
     important: "Important:",
     learnParagraph3: "The coin is a visual metaphor, not a physical quantum coin. The quantum experiment is performed by Qiskit on a simulator.",
-    footer: "QubitQuest · Explore. Experiment. Understand.",
+    footer: "Q-Spark · Explore. Experiment. Understand.",
     zeroCounts: "0 counts",
     counts: "counts",
     statusSuccess: "✓ Experiment completed successfully! {shots} measurements performed using Qiskit Aer.",
-    statusError: "Could not run the experiment: {error}. Check that your Flask backend is running on port 5000.",
+    statusError: "Could not run the experiment: {error}. Check that your Flask backend is running on port 8056.",
     explanation: "At {angle}°, the theoretical probability is {heads}% Heads and {tails}% Tails. Run the experiment to compare these probabilities with actual Qiskit measurements.",
     resultExplanation: "At {angle}°, the theoretical probability is {theoreticalHeads}% Heads and {theoreticalTails}% Tails. Out of {shots} measurements, Qiskit observed {heads} Heads and {tails} Tails."
 },
 
 kn: {
     back: "← ಮುಖ್ಯ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
-    tag: "QubitQuest ಆರ್ಕೇಡ್ · ಆಟ 01",
+    tag: "Q-Spark ಆರ್ಕೇಡ್ · ಆಟ 01",
     title: "🪙 ನಾಣ್ಯ ಪ್ರಯೋಗಾಲಯ",
     subtitle: "ಕ್ವಾಂಟಮ್ ನಾಣ್ಯವನ್ನು ತಿರುಗಿಸಿ, ಸಂಭವನೀಯತೆಯನ್ನು ಅನ್ವೇಷಿಸಿ ಮತ್ತು ಮಾಪನಕ್ಕೂ ಮೊದಲು Qubit ಹೇಗೆ Superposition ಸ್ಥಿತಿಯಲ್ಲಿರಬಹುದು ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
     yourCoin: "ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ನಾಣ್ಯ",
@@ -573,18 +574,18 @@ kn: {
     learnParagraph2: "RY ಗೇಟ್ Qubit ಅನ್ನು ತಿರುಗಿಸುತ್ತದೆ. ಕೋನವನ್ನು ಬದಲಾಯಿಸಿದಾಗ ಪ್ರತಿಯೊಂದು ಫಲಿತಾಂಶದ ಸಂಭವನೀಯತೆಯೂ ಬದಲಾಗುತ್ತದೆ. Qubit ಅನ್ನು ಮಾಪನ ಮಾಡಿದಾಗ ಒಂದು ಫಲಿತಾಂಶ ಸಿಗುತ್ತದೆ: Head ಅಥವಾ Tail.",
     important: "ಮುಖ್ಯ ಸೂಚನೆ:",
     learnParagraph3: "ಈ ನಾಣ್ಯವು ಕೇವಲ ದೃಶ್ಯ ರೂಪಕವಾಗಿದೆ; ಇದು ನಿಜವಾದ ಭೌತಿಕ ಕ್ವಾಂಟಮ್ ನಾಣ್ಯವಲ್ಲ. Qiskit ಸಿಮ್ಯುಲೇಟರ್ ಮೂಲಕ ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗವನ್ನು ನಡೆಸಲಾಗುತ್ತದೆ.",
-    footer: "QubitQuest · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
+    footer: "Q-Spark · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
     zeroCounts: "0 ಎಣಿಕೆಗಳು",
     counts: "ಎಣಿಕೆಗಳು",
     statusSuccess: "✓ ಪ್ರಯೋಗ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ! Qiskit Aer ಬಳಸಿ {shots} ಮಾಪನಗಳನ್ನು ನಡೆಸಲಾಗಿದೆ.",
-    statusError: "ಪ್ರಯೋಗವನ್ನು ನಡೆಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: {error}. Flask backend ಪೋರ್ಟ್ 5000 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
+    statusError: "ಪ್ರಯೋಗವನ್ನು ನಡೆಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ: {error}. Flask backend ಪೋರ್ಟ್ 8056 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
     explanation: "{angle}° ನಲ್ಲಿ ಸೈದ್ಧಾಂತಿಕ ಸಂಭವನೀಯತೆ Head {heads}% ಮತ್ತು Tail {tails}%. ನೈಜ Qiskit ಮಾಪನಗಳೊಂದಿಗೆ ಹೋಲಿಸಲು ಪ್ರಯೋಗವನ್ನು ನಡೆಸಿ.",
     resultExplanation: "{angle}° ನಲ್ಲಿ ಸೈದ್ಧಾಂತಿಕ ಸಂಭವನೀಯತೆ Head {theoreticalHeads}% ಮತ್ತು Tail {theoreticalTails}%. ಒಟ್ಟು {shots} ಮಾಪನಗಳಲ್ಲಿ Qiskit {heads} Head ಮತ್ತು {tails} Tail ಫಲಿತಾಂಶಗಳನ್ನು ನೀಡಿದೆ."
 },
 
 hi: {
     back: "← होम पेज पर वापस जाएँ",
-    tag: "QubitQuest आर्केड · गेम 01",
+    tag: "Q-Spark आर्केड · गेम 01",
     title: "🪙 कॉइन लैब",
     subtitle: "क्वांटम सिक्के को झुकाएँ, प्रायिकता को समझें और जानें कि मापन से पहले एक Qubit Superposition अवस्था में कैसे रह सकता है।",
     yourCoin: "आपका क्वांटम सिक्का",
@@ -609,18 +610,18 @@ hi: {
     learnParagraph2: "RY गेट Qubit को घुमाता है। कोण बदलने से प्रत्येक परिणाम की प्रायिकता बदलती है। Qubit का मापन करने पर हमें एक परिणाम मिलता है: Heads या Tails।",
     important: "महत्वपूर्ण:",
     learnParagraph3: "यह सिक्का केवल एक दृश्य उदाहरण है, वास्तविक भौतिक क्वांटम सिक्का नहीं। क्वांटम प्रयोग Qiskit सिम्युलेटर पर किया जाता है।",
-    footer: "QubitQuest · खोजें। प्रयोग करें। समझें।",
+    footer: "Q-Spark · खोजें। प्रयोग करें। समझें।",
     zeroCounts: "0 गणनाएँ",
     counts: "गणनाएँ",
     statusSuccess: "✓ प्रयोग सफलतापूर्वक पूरा हुआ! Qiskit Aer का उपयोग करके {shots} मापन किए गए।",
-    statusError: "प्रयोग नहीं चल सका: {error}। जाँचें कि Flask backend पोर्ट 5000 पर चल रहा है या नहीं।",
+    statusError: "प्रयोग नहीं चल सका: {error}। जाँचें कि Flask backend पोर्ट 8056 पर चल रहा है या नहीं।",
     explanation: "{angle}° पर सैद्धांतिक प्रायिकता Heads {heads}% और Tails {tails}% है। वास्तविक Qiskit मापन से तुलना करने के लिए प्रयोग चलाएँ।",
     resultExplanation: "{angle}° पर सैद्धांतिक प्रायिकता Heads {theoreticalHeads}% और Tails {theoreticalTails}% है। {shots} मापनों में Qiskit ने {heads} Heads और {tails} Tails प्राप्त किए।"
 },
 
 te: {
     back: "← హోమ్ పేజీకి తిరిగి వెళ్ళండి",
-    tag: "QubitQuest ఆర్కేడ్ · గేమ్ 01",
+    tag: "Q-Spark ఆర్కేడ్ · గేమ్ 01",
     title: "🪙 కాయిన్ ల్యాబ్",
     subtitle: "క్వాంటమ్ నాణెం కోణాన్ని మార్చండి, సంభావ్యతను అన్వేషించండి మరియు కొలతకు ముందు Qubit Superposition స్థితిలో ఎలా ఉండగలదో తెలుసుకోండి.",
     yourCoin: "మీ క్వాంటమ్ నాణెం",
@@ -645,11 +646,11 @@ te: {
     learnParagraph2: "RY గేట్ Qubit ను తిప్పుతుంది. కోణాన్ని మార్చినప్పుడు ప్రతి ఫలితం యొక్క సంభావ్యత మారుతుంది. Qubit ను కొలిచినప్పుడు ఒక ఫలితం వస్తుంది: Heads లేదా Tails.",
     important: "ముఖ్యమైన విషయం:",
     learnParagraph3: "ఈ నాణెం కేవలం దృశ్య రూపకం మాత్రమే; ఇది నిజమైన భౌతిక క్వాంటమ్ నాణెం కాదు. Qiskit సిమ్యులేటర్ ద్వారా క్వాంటమ్ ప్రయోగం నిర్వహించబడుతుంది.",
-    footer: "QubitQuest · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి.",
+    footer: "Q-Spark · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి.",
     zeroCounts: "0 లెక్కలు",
     counts: "లెక్కలు",
     statusSuccess: "✓ ప్రయోగం విజయవంతంగా పూర్తయింది! Qiskit Aer ఉపయోగించి {shots} కొలతలు నిర్వహించబడ్డాయి.",
-    statusError: "ప్రయోగాన్ని నిర్వహించలేకపోయాము: {error}. Flask backend పోర్ట్ 5000 పై నడుస్తోందో లేదో తనిఖీ చేయండి.",
+    statusError: "ప్రయోగాన్ని నిర్వహించలేకపోయాము: {error}. Flask backend పోర్ట్ 8056 పై నడుస్తోందో లేదో తనిఖీ చేయండి.",
     explanation: "{angle}° వద్ద సైద్ధాంతిక సంభావ్యత Heads {heads}% మరియు Tails {tails}%. నిజమైన Qiskit కొలతలతో పోల్చడానికి ప్రయోగాన్ని ప్రారంభించండి.",
     resultExplanation: "{angle}° వద్ద సైద్ధాంతిక సంభావ్యత Heads {theoreticalHeads}% మరియు Tails {theoreticalTails}%. {shots} కొలతలలో Qiskit {heads} Heads మరియు {tails} Tails ఫలితాలను పొందింది."
 }
@@ -893,7 +894,7 @@ async function runCoinLab() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/run-coin-lab",
+            "/run-coin-lab",
             {
                 method: "POST",
                 headers: {
@@ -963,5 +964,6 @@ updateLiveProbability();
 
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

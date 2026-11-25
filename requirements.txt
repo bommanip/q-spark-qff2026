@@ -3,3 +3,5 @@ flask-cors==6.0.5
 qiskit==2.6.2
 qiskit-aer==0.18.4
 waitress==3.0.2
+matplotlib==3.11.2
+pylatexenc==2.11

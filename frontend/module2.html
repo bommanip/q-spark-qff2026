@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 2 | QubitQuest</title>
+<title>Module 2 | Q-Spark</title>
 
 <style>
 :root {
@@ -110,24 +110,28 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 .progress-heading{align-items:flex-start}.visualization-image{padding:5px}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
-<body>
+<body data-module="2">
 
 <nav class="navbar">
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
     <div class="nav-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect" aria-label="Choose language">
             <option value="en">🇬🇧 English</option>
             <option value="kn">ಕನ್ನಡ</option>
             <option value="hi">हिन्दी</option>
             <option value="te">తెలుగు</option>
         </select>
-        <a href="index.html" id="homeLink">← Home</a>
+        <a href="index.html#modules" id="homeLink" data-course-back>← Learning Journey</a>
     </div>
 </nav>
 
 <main class="container">
+    <nav class="module-jump" aria-label="Modules"></nav>
 
 <header class="hero">
     <span class="tag" id="moduleTag">MODULE 02 · BEGINNER LEVEL</span>
@@ -223,7 +227,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card" id="quiz">
     <span class="section-number" id="section6">06 · KNOWLEDGE CHECK</span>
     <h2 id="quizTitle">Test your knowledge!</h2>
-    <p id="quizIntro">Answer all three questions correctly to complete Module 2 and unlock the next module.</p>
+    <p id="quizIntro">Answer all three questions correctly to complete Module 2.</p>
 
     <div class="quiz-question">
         <h3 id="question1Title">Question 1</h3>
@@ -266,12 +270,13 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <a class="primary" href="module3.html" id="continueButton">Continue to Module 3 →</a>
 </section>
 
+    <nav class="module-pager" aria-label="Modules"></nav>
 </main>
 
-<footer id="footerText">✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer id="footerText">✦ Q-Spark — Quantum learning for everyone.</footer>
 
 <script>
-const API_BASE_URL = "http://127.0.0.1:5000";
+const API_BASE_URL = "";
 const PROGRESS_KEY = "qubitquestProgress";
 const LANGUAGE_KEY = "qubitquestLanguage";
 
@@ -310,7 +315,7 @@ section5:"05 · QUICK COMPARISON",comparisonTitle:"Superposition vs Entanglement
 superLabel:"Superposition",superCompare:"A single qubit can exist in a combination of basis states.",
 entLabel:"Entanglement",entCompare:"Multiple qubits share a joint quantum state that cannot be described as independent states of each qubit.",
 section6:"06 · KNOWLEDGE CHECK",quizTitle:"Test your knowledge!",
-quizIntro:"Answer all three questions correctly to complete Module 2 and unlock the next module.",
+quizIntro:"Answer all three questions correctly to complete Module 2.",
 question:"Question",question1:"What is superposition?",q0a:"A. A combination of quantum basis states",q0b:"B. A normal computer switch",q0c:"C. A type of computer screen",
 question2:"Which gate creates an equal superposition from |0⟩?",q1a:"A. X Gate",q1b:"B. H Gate",q1c:"C. Measurement",
 question3:"What does entanglement describe?",q2a:"A. A computer running slowly",q2b:"B. Two unrelated classical bits",q2c:"C. A shared quantum state between qubits",
@@ -318,7 +323,7 @@ checkScore:"Check My Score →",retry:"Retry Quiz ↻",answerAll:"Please answer 
 excellent:"Excellent work! 🌟 You passed Module 2.",tryAgain:"Good effort! 💙 You need 3/3 correct answers to complete this module. Try again!",
 completedTitle:"🎉 Module 2 completed!",completedText:"You have successfully explored superposition and entanglement. Your progress is saved.",
 nextText:"Next: Discover how quantum gates transform qubits and how quantum circuits are built.",
-continue:"Continue to Module 3 →",footer:"✦ QubitQuest — Quantum learning for everyone.",
+continue:"Continue to Module 3 →",footer:"✦ Q-Spark — Quantum learning for everyone.",
 correct:"✓ Correct! ",incorrect:"Not quite! ",explanations:[
 "Superposition is a quantum combination of basis states.",
 "The H Gate creates an equal superposition from |0⟩.",
@@ -374,7 +379,7 @@ section5:"05 · ತ್ವರಿತ ಹೋಲಿಕೆ",comparisonTitle:"ಸೂ�
 superLabel:"ಸೂಪರ್‌ಪೊಸಿಷನ್",superCompare:"ಒಂದು ಕ್ಯೂಬಿಟ್ ಮೂಲ ಸ್ಥಿತಿಗಳ ಸಂಯೋಜನೆಯಲ್ಲಿ ಇರಬಹುದು.",
 entLabel:"ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್",entCompare:"ಹಲವು ಕ್ಯೂಬಿಟ್‌ಗಳು ಸಂಯುಕ್ತ ಕ್ವಾಂಟಮ್ ಸ್ಥಿತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳುತ್ತವೆ; ಅದನ್ನು ಪ್ರತ್ಯೇಕ ಸ್ವತಂತ್ರ ಸ್ಥಿತಿಗಳಾಗಿ ವಿವರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.",
 section6:"06 · ಜ್ಞಾನ ಪರೀಕ್ಷೆ",quizTitle:"ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿ!",
-quizIntro:"ಮಾಡ್ಯೂಲ್ 2 ಪೂರ್ಣಗೊಳಿಸಿ ಮುಂದಿನ ಮಾಡ್ಯೂಲ್ ತೆರೆಯಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+quizIntro:"ಮಾಡ್ಯೂಲ್ 2 ಪೂರ್ಣಗೊಳಿಸಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
 question:"ಪ್ರಶ್ನೆ",question1:"ಸೂಪರ್‌ಪೊಸಿಷನ್ ಎಂದರೇನು?",q0a:"A. ಕ್ವಾಂಟಮ್ ಮೂಲ ಸ್ಥಿತಿಗಳ ಸಂಯೋಜನೆ",q0b:"B. ಸಾಮಾನ್ಯ ಕಂಪ್ಯೂಟರ್ ಸ್ವಿಚ್",q0c:"C. ಕಂಪ್ಯೂಟರ್ ಪರದೆಯ ವಿಧ",
 question2:"|0⟩ ನಿಂದ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಸೃಷ್ಟಿಸುವ ಗೇಟ್ ಯಾವುದು?",q1a:"A. X ಗೇಟ್",q1b:"B. H ಗೇಟ್",q1c:"C. ಅಳತೆ",
 question3:"ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಏನನ್ನು ವಿವರಿಸುತ್ತದೆ?",q2a:"A. ನಿಧಾನವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಕಂಪ್ಯೂಟರ್",q2b:"B. ಸಂಬಂಧವಿಲ್ಲದ ಎರಡು ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್‌ಗಳು",q2c:"C. ಕ್ಯೂಬಿಟ್‌ಗಳ ನಡುವಿನ ಹಂಚಿಕೊಂಡ ಕ್ವಾಂಟಮ್ ಸ್ಥಿತಿ",
@@ -382,7 +387,7 @@ checkScore:"ನನ್ನ ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 excellent:"ಅದ್ಭುತ! 🌟 ನೀವು ಮಾಡ್ಯೂಲ್ 2ರಲ್ಲಿ ಉತ್ತೀರ್ಣರಾಗಿದ್ದೀರಿ.",tryAgain:"ಚೆನ್ನಾಗಿ ಪ್ರಯತ್ನಿಸಿದ್ದೀರಿ! 💙 ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3ರಲ್ಲಿ 3 ಸರಿಯಾದ ಉತ್ತರಗಳು ಬೇಕು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ!",
 completedTitle:"🎉 ಮಾಡ್ಯೂಲ್ 2 ಪೂರ್ಣಗೊಂಡಿದೆ!",completedText:"ನೀವು ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಕಲಿತಿದ್ದೀರಿ. ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
 nextText:"ಮುಂದೆ: ಕ್ವಾಂಟಮ್ ಗೇಟ್‌ಗಳು ಕ್ಯೂಬಿಟ್‌ಗಳನ್ನು ಹೇಗೆ ಬದಲಾಯಿಸುತ್ತವೆ ಮತ್ತು ಸರ್ಕ್ಯೂಟ್‌ಗಳನ್ನು ಹೇಗೆ ನಿರ್ಮಿಸುತ್ತಾರೆ ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
-continue:"ಮಾಡ್ಯೂಲ್ 3ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+continue:"ಮಾಡ್ಯೂಲ್ 3ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",footer:"✦ Q-Spark — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
 correct:"✓ ಸರಿಯಾಗಿದೆ! ",incorrect:"ಸರಿಯಲ್ಲ! ",explanations:[
 "ಸೂಪರ್‌ಪೊಸಿಷನ್ ಎಂದರೆ ಕ್ವಾಂಟಮ್ ಮೂಲ ಸ್ಥಿತಿಗಳ ಸಂಯೋಜನೆ.",
 "H ಗೇಟ್ |0⟩ ನಿಂದ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಸೃಷ್ಟಿಸುತ್ತದೆ.",
@@ -438,7 +443,7 @@ section5:"05 · त्वरित तुलना",comparisonTitle:"सुप�
 superLabel:"सुपरपोज़िशन",superCompare:"एक क्यूबिट आधार अवस्थाओं के संयोजन में हो सकता है।",
 entLabel:"एंटैंगलमेंट",entCompare:"कई क्यूबिट एक संयुक्त क्वांटम अवस्था साझा करते हैं जिसे स्वतंत्र अवस्थाओं के रूप में वर्णित नहीं किया जा सकता।",
 section6:"06 · ज्ञान परीक्षण",quizTitle:"अपने ज्ञान की जाँच करें!",
-quizIntro:"मॉड्यूल 2 पूरा करने और अगला मॉड्यूल खोलने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+quizIntro:"मॉड्यूल 2 पूरा करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
 question:"प्रश्न",question1:"सुपरपोज़िशन क्या है?",q0a:"A. क्वांटम आधार अवस्थाओं का संयोजन",q0b:"B. एक सामान्य कंप्यूटर स्विच",q0c:"C. कंप्यूटर स्क्रीन का प्रकार",
 question2:"|0⟩ से समान सुपरपोज़िशन कौन-सा गेट बनाता है?",q1a:"A. X गेट",q1b:"B. H गेट",q1c:"C. मापन",
 question3:"एंटैंगलमेंट क्या बताता है?",q2a:"A. धीमा चलता कंप्यूटर",q2b:"B. दो असंबंधित सामान्य बिट",q2c:"C. क्यूबिट के बीच साझा क्वांटम अवस्था",
@@ -446,7 +451,7 @@ checkScore:"मेरा स्कोर जाँचें →",retry:"फि�
 excellent:"बहुत बढ़िया! 🌟 आपने मॉड्यूल 2 पास कर लिया।",tryAgain:"अच्छा प्रयास! 💙 मॉड्यूल पूरा करने के लिए 3 में से 3 सही उत्तर चाहिए। फिर प्रयास करें!",
 completedTitle:"🎉 मॉड्यूल 2 पूरा हुआ!",completedText:"आपने सुपरपोज़िशन और एंटैंगलमेंट सीख लिया है। आपकी प्रगति सहेज ली गई है।",
 nextText:"अगला: जानें कि क्वांटम गेट क्यूबिट को कैसे बदलते हैं और क्वांटम सर्किट कैसे बनते हैं।",
-continue:"मॉड्यूल 3 पर जाएँ →",footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+continue:"मॉड्यूल 3 पर जाएँ →",footer:"✦ Q-Spark — सभी के लिए क्वांटम शिक्षा।",
 correct:"✓ सही! ",incorrect:"पूरी तरह सही नहीं! ",explanations:[
 "सुपरपोज़िशन क्वांटम आधार अवस्थाओं का संयोजन है।",
 "H गेट |0⟩ से समान सुपरपोज़िशन बनाता है।",
@@ -502,7 +507,7 @@ section5:"05 · త్వరిత పోలిక",comparisonTitle:"సూప�
 superLabel:"సూపర్‌పొజిషన్",superCompare:"ఒక క్యూబిట్ ప్రాథమిక స్థితుల కలయికలో ఉండగలదు.",
 entLabel:"ఎంటాంగిల్‌మెంట్",entCompare:"అనేక క్యూబిట్‌లు ఉమ్మడి క్వాంటం స్థితిని పంచుకుంటాయి; వాటిని స్వతంత్ర స్థితులుగా వివరించలేము.",
 section6:"06 · జ్ఞాన పరీక్ష",quizTitle:"మీ జ్ఞానాన్ని పరీక్షించుకోండి!",
-quizIntro:"మాడ్యూల్ 2 పూర్తి చేసి తదుపరి మాడ్యూల్‌ను తెరవడానికి మూడు ప్రశ్నలకూ సరిగ్గా సమాధానం ఇవ్వండి.",
+quizIntro:"మాడ్యూల్ 2 పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరిగ్గా సమాధానం ఇవ్వండి.",
 question:"ప్రశ్న",question1:"సూపర్‌పొజిషన్ అంటే ఏమిటి?",q0a:"A. క్వాంటం ప్రాథమిక స్థితుల కలయిక",q0b:"B. సాధారణ కంప్యూటర్ స్విచ్",q0c:"C. కంప్యూటర్ స్క్రీన్ రకం",
 question2:"|0⟩ నుండి సమాన సూపర్‌పొజిషన్‌ను ఏ గేట్ సృష్టిస్తుంది?",q1a:"A. X గేట్",q1b:"B. H గేట్",q1c:"C. కొలత",
 question3:"ఎంటాంగిల్‌మెంట్ దేనిని వివరిస్తుంది?",q2a:"A. నెమ్మదిగా పనిచేసే కంప్యూటర్",q2b:"B. సంబంధం లేని రెండు సాధారణ బిట్‌లు",q2c:"C. క్యూబిట్‌ల మధ్య ఉమ్మడి క్వాంటం స్థితి",
@@ -510,7 +515,7 @@ checkScore:"నా స్కోర్‌ను తనిఖీ చేయండ�
 excellent:"అద్భుతం! 🌟 మీరు మాడ్యూల్ 2లో ఉత్తీర్ణులయ్యారు.",tryAgain:"మంచి ప్రయత్నం! 💙 ఈ మాడ్యూల్ పూర్తి చేయడానికి 3లో 3 సరైన సమాధానాలు అవసరం. మళ్లీ ప్రయత్నించండి!",
 completedTitle:"🎉 మాడ్యూల్ 2 పూర్తయింది!",completedText:"మీరు సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్‌ను విజయవంతంగా నేర్చుకున్నారు. మీ పురోగతి సేవ్ చేయబడింది.",
 nextText:"తదుపరి: క్వాంటం గేట్లు క్యూబిట్‌లను ఎలా మారుస్తాయి మరియు క్వాంటం సర్క్యూట్‌లను ఎలా నిర్మిస్తారో తెలుసుకోండి.",
-continue:"మాడ్యూల్ 3కి కొనసాగండి →",footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+continue:"మాడ్యూల్ 3కి కొనసాగండి →",footer:"✦ Q-Spark — అందరికీ క్వాంటం అభ్యాసం.",
 correct:"✓ సరైన సమాధానం! ",incorrect:"అది సరైనది కాదు! ",explanations:[
 "సూపర్‌పొజిషన్ అనేది క్వాంటం ప్రాథమిక స్థితుల కలయిక.",
 "H గేట్ |0⟩ నుండి సమాన సూపర్‌పొజిషన్‌ను సృష్టిస్తుంది.",
@@ -985,5 +990,6 @@ applyLanguage(savedLanguage);
 updateModuleProgress();
 
 </script>
+<script src="lesson-nav.js"></script>
 </body>
 </html>

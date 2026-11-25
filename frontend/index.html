@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QubitQuest | Explore Quantum Computing</title>
+<title>Q-Spark | Explore Quantum Computing</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -96,21 +96,132 @@ footer{text-align:center;padding:25px;color:#64748b;border-top:1px solid #293653
 @media(max-width:900px){.arcade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){header{padding:20px 5%}.hero{padding:65px 6%}.container{width:90%}nav{gap:14px}.arcade-section{padding:22px}}
 @media(max-width:520px){.arcade-grid{grid-template-columns:1fr}.game-art{height:175px}.arcade-section{padding:18px}}
+/* Decorative motion sits behind the hero content. */
+#home {
+    --orbit-line: #b3a6ff57;
+    --orbit-light: #b8fff2;
+    --glass: #121a35a8;
+    --glass-edge: #cdc5ff35;
+    --glass-shadow: #02081660;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 77% 48%, #322c76, transparent 48%), #080d1c;
+}
+
+html[data-theme="light"] #home {
+    --orbit-line: #5047ad70;
+    --orbit-light: #266b9c;
+    --glass: #ffffffae;
+    --glass-edge: #ffffffd9;
+    --glass-shadow: #47408024;
+    background: radial-gradient(ellipse at 77% 48%, #c4c9f4, transparent 57%), #eef4fb;
+}
+
+#home .hero-content {
+    position: relative;
+    max-width: 660px;
+    padding: clamp(20px, 4vw, 40px);
+    border: 1px solid var(--glass-edge);
+    border-radius: 26px;
+    background: var(--glass);
+    box-shadow: 0 18px 52px var(--glass-shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.hero-orbits {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 75%;
+    width: clamp(270px, 52vw, 740px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hero-orbit {
+    --tilt: -33deg;
+    --phase: 15deg;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: 100%;
+    border: 1px solid var(--orbit-line);
+    border-radius: 50%;
+    transform: rotate(var(--tilt)) scaleY(.35);
+}
+
+.hero-orbit:nth-child(2) {
+    --tilt: 28deg;
+    --phase: 146deg;
+    width: 87%;
+    height: 87%;
+}
+
+.hero-orbit:nth-child(3) {
+    --tilt: 83deg;
+    --phase: 248deg;
+    width: 74%;
+    height: 74%;
+}
+
+.hero-orbit::before {
+    position: absolute;
+    inset: -1px;
+    transform: rotate(calc(var(--phase) + 125deg));
+    animation: hero-orbit-drift 22s linear infinite;
+    background: radial-gradient(circle at 50% 0%, var(--orbit-light) 0 3px, transparent 12px);
+    content: "";
+}
+
+.hero-core {
+    position: absolute;
+    inset: 44%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--orbit-light), transparent 69%);
+    opacity: .43;
+}
+
+@keyframes hero-orbit-drift {
+    from { transform: rotate(var(--phase)); }
+    to { transform: rotate(calc(var(--phase) + 360deg)); }
+}
+
+@media (max-width: 900px) {
+    #home { padding-top: 128px; }
+    .hero-orbits {
+        top: 105px;
+        left: 73%;
+        width: clamp(265px, 55vw, 440px);
+    }
+    #home .hero-content { border-radius: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-orbit::before { animation: none; }
+}
 </style>
+<link rel="stylesheet" href="fundamentals/lesson.css">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="home.css">
+<script src="theme.js"></script>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
     <div class="header-right">
-        <nav>
+        <nav class="home-nav" aria-label="Site navigation">
             <a href="#home" data-i18n="navHome">Home</a>
             <a href="#modules" data-i18n="navModules">Learning Modules</a>
             <a href="#arcade" data-i18n="navArcade">Quantum Arcade</a>
             <a href="#features" data-i18n="navFeatures">Features</a>
         </nav>
 
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect" aria-label="Choose language">
             <option value="en">🇬🇧 English</option>
             <option value="kn">🇮🇳 ಕನ್ನಡ</option>
@@ -121,39 +232,199 @@ footer{text-align:center;padding:25px;color:#64748b;border-top:1px solid #293653
 </header>
 
 <section class="hero" id="home">
+    <div class="hero-orbits" aria-hidden="true">
+        <span class="hero-orbit"></span>
+        <span class="hero-orbit"></span>
+        <span class="hero-orbit"></span>
+        <span class="hero-core"></span>
+    </div>
     <div class="hero-content">
         <span class="tag" data-i18n="heroTag">Your Quantum Learning Journey Starts Here</span>
         <h1>
             <span data-i18n="heroTitle">Discover the Future of</span>
             <span class="gradient" data-i18n="heroGradient">Quantum Computing</span>
         </h1>
-        <p data-i18n="heroDescription">Never heard of a qubit? No problem. QubitQuest takes you from your very first quantum concept to hands-on circuit experiments through simple explanations, visual learning and guided practice.</p>
+        <p data-i18n="heroDescription">Never heard of a qubit? No problem. Q-Spark takes you from your very first quantum concept to hands-on circuit experiments through simple explanations, visual learning and guided practice.</p>
         <a href="#modules" class="primary-button" data-i18n="startLearning">Start Learning →</a>
     </div>
 </section>
 
 <main class="container">
 
-<section class="stats">
-    <div class="stat-card"><h3>05</h3><p data-i18n="totalModules">Total Learning Modules</p></div>
-    <div class="stat-card"><h3 id="completedCount">0 / 5</h3><p data-i18n="completedModules">Completed Modules</p></div>
-    <div class="stat-card"><h3 id="overallPercentage">0%</h3><p data-i18n="overallCourseProgress">Overall Course Progress</p></div>
-    <div class="stat-card"><h3 id="nextModuleStat">Module 1</h3><p data-i18n="nextLearningStep">Next Learning Step</p></div>
-</section>
+<div id="learn-tabs" class="home-tabs" role="tablist" aria-label="Explore Q-Spark">
+    <button type="button" role="tab" id="home-tab-coin" aria-controls="coin" aria-selected="true" data-home-label="coin">Quantum Coin Trail</button>
+    <button type="button" role="tab" id="home-tab-modules" aria-controls="modules" aria-selected="false" tabindex="-1" data-home-label="journey">Learning Journey</button>
+    <button type="button" role="tab" id="home-tab-arcade" aria-controls="arcade" aria-selected="false" tabindex="-1" data-home-label="arcade">Quantum Arcade</button>
+</div>
 
-<section class="overall-progress">
-    <div class="overall-heading">
-        <h3 data-i18n="learningJourney">Your Learning Journey</h3>
-        <span id="overallProgressLabel">0% Complete</span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="overallProgressFill"></div></div>
-    <p class="progress-message" id="progressMessage" data-i18n="initialProgress">Your quantum journey is ready. Complete your first module to begin tracking your progress!</p>
-</section>
+<div id="coin" class="home-panel" role="tabpanel" aria-labelledby="home-tab-coin">
+    <section class="coin-lesson" aria-labelledby="coin-lesson-title">
+        <h2 id="coin-lesson-title" data-coin-copy="title">Quantum Coin Trail</h2>
+        <p data-coin-copy="intro"></p>
+        <div class="coin-tabs" role="tablist" aria-labelledby="coin-lesson-title">
+            <button type="button" role="tab" id="coin-tab-bit" aria-controls="coin-panel-bit" aria-selected="true" data-coin-copy="classical">Classical bit</button>
+            <button type="button" role="tab" id="coin-tab-qubit" aria-controls="coin-panel-qubit" aria-selected="false" tabindex="-1" data-coin-copy="quantum">Qubit</button>
+            <button type="button" role="tab" id="coin-tab-phase" aria-controls="coin-panel-phase" aria-selected="false" tabindex="-1" data-coin-copy="phase">Interference</button>
+            <button type="button" role="tab" id="coin-tab-experiment" aria-controls="coin-panel-experiment" aria-selected="false" tabindex="-1" data-coin-copy="experiment">Tilt experiment</button>
+            <button type="button" role="tab" id="coin-tab-pair" aria-controls="coin-panel-pair" aria-selected="false" tabindex="-1" data-coin-copy="pair">Two qubits</button>
+        </div>
+        <audio preload="none"></audio>
+        <div class="coin-labs">
+            <section class="coin-lab" role="tabpanel" id="coin-panel-bit" aria-labelledby="coin-tab-bit">
+                <div class="coin-step">
+                    <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-flip"><line class="vector" x1="52" y1="52" x2="52" y2="16"/>
+                            <circle class="point" cx="52" cy="16" r="3"/></g>
+                        </svg>
+                        <span class="coin-disc coin-flip"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                    <p class="coin-caption"></p>
+                    <button type="button" class="coin-play"></button>
+                    <span class="coin-audio-status" role="status"></span>
+                </div>
+                <button type="button" class="coin-action" data-coin-copy="flip" id="classical-flip">Flip the bit</button>
+                <output id="classical-outcome" class="coin-outcome" aria-live="polite"></output>
+            </section>
+            <section class="coin-lab" role="tabpanel" id="coin-panel-qubit" aria-labelledby="coin-tab-qubit" hidden>
+                <div class="coin-step">
+                    <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-spin"><line class="vector" x1="52" y1="52" x2="88" y2="52"/>
+                            <path class="point" d="M88 52l-7-4v8z"/></g>
+                        </svg>
+                        <span class="coin-disc coin-spin"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                    <p class="coin-caption"></p>
+                    <button type="button" class="coin-play"></button>
+                    <span class="coin-audio-status" role="status"></span>
+                </div>
+                <div class="coin-controls">
+                    <button type="button" class="coin-action" data-coin-copy="measure" id="qubit-measure">Measure once</button>
+                    <button type="button" class="coin-action" data-coin-copy="reset" id="qubit-reset" disabled>Prepare again</button>
+                </div>
+                <p class="coin-odds">0: 50% · 1: 50%</p>
+                <output id="qubit-outcome" class="coin-outcome" aria-live="polite"></output>
+            </section>
+            <section class="coin-lab" role="tabpanel" id="coin-panel-phase" aria-labelledby="coin-tab-phase" hidden>
+                <div class="coin-step">
+                    <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-spin"><line class="vector" x1="52" y1="52" x2="88" y2="52"/>
+                            <path class="point" d="M88 52l-7-4v8z"/></g>
+                        </svg>
+                        <span class="coin-disc coin-spin"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                    <p class="coin-caption"></p>
+                    <button type="button" class="coin-play"></button>
+                    <span class="coin-audio-status" role="status"></span>
+                </div>
+                <div class="coin-controls">
+                    <button type="button" class="coin-action" data-phase="HXH" data-coin-copy="keepPhase">Keep phase</button>
+                    <button type="button" class="coin-action" data-phase="Z" data-coin-copy="flipPhase">Flip phase</button>
+                </div>
+                <p class="coin-odds" data-coin-copy="phaseHint"></p>
+                <output id="phase-outcome" class="coin-outcome" aria-live="polite"></output>
+            </section>
+            <section class="coin-lab" role="tabpanel" id="coin-panel-experiment" aria-labelledby="coin-tab-experiment" hidden>
+                <div class="coin-step">
+                    <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-tilt"><line class="vector" x1="52" y1="52" x2="88" y2="52"/>
+                            <circle class="point" cx="88" cy="52" r="3"/></g>
+                        </svg>
+                        <span class="coin-disc coin-spin"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                    <p class="coin-caption"></p>
+                    <button type="button" class="coin-play"></button>
+                    <span class="coin-audio-status" role="status"></span>
+                </div>
+                <div class="coin-experiment">
+                    <label for="coin-preparation" data-coin-copy="prepare">Set the tilt</label>
+                    <input id="coin-preparation" type="range" min="0" max="180" step="5" value="90">
+                    <p id="coin-odds" class="coin-odds" aria-live="polite"></p>
+                    <p class="coin-odds" data-coin-copy="faces"></p>
+                    <div class="coin-controls">
+                        <button type="button" class="coin-action" data-coin-copy="measure" id="coin-measure-once">Measure once</button>
+                        <button type="button" class="coin-action" data-coin-copy="sample" id="coin-sample">Run 100 measurements</button>
+                    </div>
+                    <output id="quantum-outcome" class="coin-outcome" aria-live="polite"></output>
+                </div>
+            </section>
+            <section class="coin-lab" role="tabpanel" id="coin-panel-pair" aria-labelledby="coin-tab-pair" hidden>
+                <div class="coin-step">
+                    <div class="coin-pair" aria-hidden="true">
+                        <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-spin"><line class="vector" x1="52" y1="52" x2="88" y2="52"/>
+                            <path class="point" d="M88 52l-7-4v8z"/></g>
+                        </svg>
+                        <span class="coin-disc coin-spin"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                        <span class="coin-art" aria-hidden="true">
+                        <svg class="coin-sphere" viewBox="0 0 104 104">
+                            <circle class="grid" cx="52" cy="52" r="36"/>
+                            <ellipse class="grid" cx="52" cy="52" rx="36" ry="13"/>
+                            <path class="grid" d="M52 12v80 M12 52h80"/>
+                            <text x="58" y="13">|0⟩</text>
+                            <text x="58" y="99">|1⟩</text>
+                            <g class="coin-state coin-state-spin"><line class="vector" x1="52" y1="52" x2="88" y2="52"/>
+                            <path class="point" d="M88 52l-7-4v8z"/></g>
+                        </svg>
+                        <span class="coin-disc coin-spin"><span class="coin-face coin-heads"></span><span class="coin-face coin-tails"></span></span>
+                    </span>
+                    </div>
+                    <p class="coin-caption"></p>
+                    <button type="button" class="coin-play"></button>
+                    <span class="coin-audio-status" role="status"></span>
+                </div>
+                <div class="coin-controls">
+                    <button type="button" class="coin-action" data-coin-copy="pairOnce" id="coin-pair-once">Measure one pair</button>
+                    <button type="button" class="coin-action" data-coin-copy="pairRun" id="coin-pair-run">Measure 100 pairs</button>
+                    <a class="coin-action" href="linked-dice.html" data-coin-copy="dice">Try Linked Dice</a>
+                </div>
+                <output id="pair-outcome" class="coin-outcome" aria-live="polite"></output>
+            </section>
+        </div>
+        <p data-coin-copy="note"></p>
+        <p class="coin-credit">Coin photos: <a href="fundamentals/coin-credits.html">Supplied reference image</a>.</p>
+    </section>
+</div>
 
-<section id="modules">
+<section id="modules" class="home-panel" role="tabpanel" aria-labelledby="home-tab-modules" hidden>
     <div class="section-heading">
         <h2 data-i18n="exploreJourney">Explore Your Learning Journey</h2>
         <p data-i18n="fiveModules">Five carefully structured modules. One step at a time.</p>
+    </div>
+
+    <div class="journey-progress">
+        <p id="progressMessage"></p>
+        <a href="module1.html" class="primary-button" id="continueButton">Start learning →</a>
     </div>
 
     <div class="module-grid">
@@ -219,13 +490,7 @@ footer{text-align:center;padding:25px;color:#64748b;border-top:1px solid #293653
     </div>
 </section>
 
-<section class="next-step">
-    <h2 id="nextStepTitle">Ready to begin your quantum journey? 🚀</h2>
-    <p id="nextStepDescription">Start with Module 1 and discover the fascinating world of quantum computing.</p>
-    <a href="module1.html" class="primary-button" id="continueButton">Begin Module 1 →</a>
-</section>
-
-<section class="arcade-section" id="arcade">
+<section class="arcade-section home-panel" id="arcade" role="tabpanel" aria-labelledby="home-tab-arcade" hidden>
     <div class="arcade-top">
         <span class="arcade-label" data-i18n="arcadeLabel">✦ INTERACTIVE QUANTUM ZONE</span>
         <span class="arcade-live" data-i18n="arcadeLive">● 3 EXPERIMENTS AVAILABLE</span>
@@ -281,7 +546,7 @@ footer{text-align:center;padding:25px;color:#64748b;border-top:1px solid #293653
 
 <section class="feature-section" id="features">
     <div class="section-heading">
-        <h2 data-i18n="differentTitle">What Makes QubitQuest Different?</h2>
+        <h2 data-i18n="differentTitle">What Makes Q-Spark Different?</h2>
         <p data-i18n="differentDesc">Designed for curious minds, especially those starting with absolutely no quantum background.</p>
     </div>
     <div class="feature-grid">
@@ -312,7 +577,7 @@ footer{text-align:center;padding:25px;color:#64748b;border-top:1px solid #293653
 
 </main>
 
-<footer data-i18n="footer">QubitQuest | Making Quantum Computing Accessible to Everyone</footer>
+<footer data-i18n="footer">Q-Spark | Making Quantum Computing Accessible to Everyone</footer>
 
 <script>
 const PROGRESS_KEY = "qubitquestProgress";
@@ -322,7 +587,7 @@ const translations = {
 en: {
 navHome:"Home",navModules:"Learning Modules",navArcade:"Quantum Arcade",navFeatures:"Features",
 heroTag:"Your Quantum Learning Journey Starts Here",heroTitle:"Discover the Future of",heroGradient:"Quantum Computing",
-heroDescription:"Never heard of a qubit? No problem. QubitQuest takes you from your very first quantum concept to hands-on circuit experiments through simple explanations, visual learning and guided practice.",
+heroDescription:"Never heard of a qubit? No problem. Q-Spark takes you from your very first quantum concept to hands-on circuit experiments through simple explanations, visual learning and guided practice.",
 startLearning:"Start Learning →",totalModules:"Total Learning Modules",completedModules:"Completed Modules",overallCourseProgress:"Overall Course Progress",nextLearningStep:"Next Learning Step",
 learningJourney:"Your Learning Journey",initialProgress:"Your quantum journey is ready. Complete your first module to begin tracking your progress!",
 exploreJourney:"Explore Your Learning Journey",fiveModules:"Five carefully structured modules. One step at a time.",moduleProgress:"Module Progress",
@@ -333,7 +598,7 @@ module4Title:"Quantum Algorithms",module4Desc:"Discover Grover's and Shor's algo
 module5Title:"Quantum for Humanity",module5Desc:"Explore healthcare, sustainability, ethical innovation and responsible technology.",
 notCompleted:"Not completed",completed:"✓ Successfully completed",exploreModule:"Explore Module →",reviewModule:"✓ Review Module →",
 readyTitle:"Ready to begin your quantum journey? 🚀",readyDesc:"Start with Module 1 and discover the fascinating world of quantum computing.",
-continueTitle:"Continue Your Quantum Journey! 🚀",allDoneTitle:"Congratulations! You've Completed QubitQuest! 🎉",
+continueTitle:"Continue learning →",allDoneTitle:"Congratulations! You've Completed Q-Spark! 🎉",
 arcadeLabel:"✦ INTERACTIVE QUANTUM ZONE",arcadeLive:"● 3 EXPERIMENTS AVAILABLE",welcomeArcade:"Welcome to the",quantumArcade:"Quantum Arcade",
 arcadeDescription:"Learning quantum computing doesn't have to stop at theory. Enter the arcade, experiment with real quantum circuits, and discover the fascinating behaviour of qubits through interactive games powered by Qiskit.",
 experiment1:"EXPERIMENT 01",experiment2:"EXPERIMENT 02",experiment3:"EXPERIMENT 03",
@@ -344,16 +609,16 @@ entanglement:"QUANTUM ENTANGLEMENT",rollDice:"ROLL THE DICE →",
 treasureHunt:"Quantum Treasure Hunt",treasureDesc:"Four mysterious locations. One hidden treasure. Use Grover's quantum search algorithm to find the marked location and reveal the treasure.",
 groverSearch:"GROVER'S SEARCH",findTreasure:"FIND THE TREASURE →",
 poweredBy:"Powered by",learnExperiment:"Learn quantum concepts by experimenting.",
-differentTitle:"What Makes QubitQuest Different?",differentDesc:"Designed for curious minds, especially those starting with absolutely no quantum background.",
+differentTitle:"What Makes Q-Spark Different?",differentDesc:"Designed for curious minds, especially those starting with absolutely no quantum background.",
 beginnerFirst:"🎓 Beginner First",beginnerDesc:"Concepts explained in simple language before introducing technical terms.",
 handsOn:"⚛️ Hands-on Learning",handsOnDesc:"Run quantum circuits and explore measurement results using Qiskit.",
 knowledgeChecks:"🧠 Knowledge Checks",knowledgeDesc:"Test your understanding through short quizzes throughout the journey.",
 realWorld:"🌍 Real-world Thinking",realWorldDesc:"Discover how quantum research may contribute to future human challenges.",
 finalTitle:"Your Quantum Journey Begins With One Qubit.",finalDesc:"Explore. Experiment. Understand. Innovate.",beginJourney:"Begin Your Journey →",
-footer:"QubitQuest | Making Quantum Computing Accessible to Everyone",
+footer:"Q-Spark | Making Quantum Computing Accessible to Everyone",
 progressLabel:"% Complete",initialStep:"Module",beginModule:"Begin Module",continueModule:"Continue to Module",reviewFinal:"Review Final Module →",
 progressFirst:"Your quantum journey is ready. Complete your first module to begin tracking your progress!",
-progressSome:"Amazing progress! You have completed {done} out of {total} modules. Keep going!",
+progressSome:"{done} of {total} lessons complete",
 progressAll:"Incredible achievement! All five learning modules are completed. Your quantum learning journey is complete!",
 allModulesDesc:"You've successfully completed all five learning modules. Keep exploring, experimenting and learning quantum computing."
 },
@@ -361,7 +626,7 @@ allModulesDesc:"You've successfully completed all five learning modules. Keep ex
 kn: {
 navHome:"ಮುಖಪುಟ",navModules:"ಕಲಿಕಾ ಘಟಕಗಳು",navArcade:"ಕ್ವಾಂಟಮ್ ಆಟದ ವಲಯ",navFeatures:"ವೈಶಿಷ್ಟ್ಯಗಳು",
 heroTag:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆಯ ಪ್ರಯಾಣ ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ",heroTitle:"ಭವಿಷ್ಯವನ್ನು ಅನ್ವೇಷಿಸಿ",heroGradient:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್",
-heroDescription:"ಕ್ಯೂಬಿಟ್ ಬಗ್ಗೆ ಕೇಳಿಲ್ಲವೇ? ಚಿಂತಿಸಬೇಡಿ. ಸರಳ ವಿವರಣೆಗಳು, ದೃಶ್ಯ ಕಲಿಕೆ ಮತ್ತು ಮಾರ್ಗದರ್ಶಿತ ಅಭ್ಯಾಸದ ಮೂಲಕ QubitQuest ನಿಮ್ಮನ್ನು ಮೊದಲ ಕ್ವಾಂಟಮ್ ಪರಿಕಲ್ಪನೆಯಿಂದ ಪ್ರಾಯೋಗಿಕ ಸರ್ಕ್ಯೂಟ್ ಪ್ರಯೋಗಗಳವರೆಗೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
+heroDescription:"ಕ್ಯೂಬಿಟ್ ಬಗ್ಗೆ ಕೇಳಿಲ್ಲವೇ? ಚಿಂತಿಸಬೇಡಿ. ಸರಳ ವಿವರಣೆಗಳು, ದೃಶ್ಯ ಕಲಿಕೆ ಮತ್ತು ಮಾರ್ಗದರ್ಶಿತ ಅಭ್ಯಾಸದ ಮೂಲಕ Q-Spark ನಿಮ್ಮನ್ನು ಮೊದಲ ಕ್ವಾಂಟಮ್ ಪರಿಕಲ್ಪನೆಯಿಂದ ಪ್ರಾಯೋಗಿಕ ಸರ್ಕ್ಯೂಟ್ ಪ್ರಯೋಗಗಳವರೆಗೆ ಕರೆದೊಯ್ಯುತ್ತದೆ.",
 startLearning:"ಕಲಿಕೆ ಪ್ರಾರಂಭಿಸಿ →",totalModules:"ಒಟ್ಟು ಕಲಿಕಾ ಘಟಕಗಳು",completedModules:"ಪೂರ್ಣಗೊಳಿಸಿದ ಘಟಕಗಳು",overallCourseProgress:"ಒಟ್ಟು ಕೋರ್ಸ್ ಪ್ರಗತಿ",nextLearningStep:"ಮುಂದಿನ ಕಲಿಕಾ ಹಂತ",
 learningJourney:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಯಾಣ",initialProgress:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯಾಣ ಸಿದ್ಧವಾಗಿದೆ. ಪ್ರಗತಿಯನ್ನು ದಾಖಲಿಸಲು ಮೊದಲ ಘಟಕವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ!",
 exploreJourney:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಯಾಣವನ್ನು ಅನ್ವೇಷಿಸಿ",fiveModules:"ಐದು ಕ್ರಮಬದ್ಧ ಕಲಿಕಾ ಘಟಕಗಳು. ಒಂದೊಂದೇ ಹೆಜ್ಜೆಯಾಗಿ.",moduleProgress:"ಘಟಕದ ಪ್ರಗತಿ",
@@ -372,7 +637,7 @@ module4Title:"ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳ�
 module5Title:"ಮಾನವಕುಲಕ್ಕಾಗಿ ಕ್ವಾಂಟಮ್ ತಂತ್ರಜ್ಞಾನ",module5Desc:"ಆರೋಗ್ಯ ರಕ್ಷಣೆ, ಸುಸ್ಥಿರತೆ, ನೈತಿಕ ನಾವೀನ್ಯತೆ ಮತ್ತು ಜವಾಬ್ದಾರಿಯುತ ತಂತ್ರಜ್ಞಾನವನ್ನು ಅನ್ವೇಷಿಸಿ.",
 notCompleted:"ಇನ್ನೂ ಪೂರ್ಣಗೊಂಡಿಲ್ಲ",completed:"✓ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ",exploreModule:"ಘಟಕವನ್ನು ಅನ್ವೇಷಿಸಿ →",reviewModule:"✓ ಘಟಕವನ್ನು ಮತ್ತೆ ನೋಡಿ →",
 readyTitle:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯಾಣ ಪ್ರಾರಂಭಿಸಲು ಸಿದ್ಧರಿದ್ದೀರಾ? 🚀",readyDesc:"ಘಟಕ 1 ರಿಂದ ಪ್ರಾರಂಭಿಸಿ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್‌ನ ಅದ್ಭುತ ಜಗತ್ತನ್ನು ತಿಳಿಯಿರಿ.",
-continueTitle:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯಾಣವನ್ನು ಮುಂದುವರಿಸಿ! 🚀",allDoneTitle:"ಅಭಿನಂದನೆಗಳು! ನೀವು QubitQuest ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ! 🎉",
+continueTitle:"ಕಲಿಕೆಯನ್ನು ಮುಂದುವರಿಸಿ →",allDoneTitle:"ಅಭಿನಂದನೆಗಳು! ನೀವು Q-Spark ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ! 🎉",
 arcadeLabel:"✦ ಸಂವಾದಾತ್ಮಕ ಕ್ವಾಂಟಮ್ ವಲಯ",arcadeLive:"● 3 ಪ್ರಯೋಗಗಳು ಲಭ್ಯವಿವೆ",welcomeArcade:"ಇದಕ್ಕೆ ಸ್ವಾಗತ",quantumArcade:"ಕ್ವಾಂಟಮ್ ಆಟದ ವಲಯ",
 arcadeDescription:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಕಲಿಕೆ ಕೇವಲ ಸಿದ್ಧಾಂತಕ್ಕೆ ಸೀಮಿತವಾಗಿರಬೇಕಿಲ್ಲ. ಆಟದ ವಲಯಕ್ಕೆ ಪ್ರವೇಶಿಸಿ, ನೈಜ ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ಗಳೊಂದಿಗೆ ಪ್ರಯೋಗ ಮಾಡಿ ಮತ್ತು Qiskit ಆಧಾರಿತ ಸಂವಾದಾತ್ಮಕ ಆಟಗಳ ಮೂಲಕ ಕ್ಯೂಬಿಟ್‌ಗಳ ಅದ್ಭುತ ವರ್ತನೆಯನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ.",
 experiment1:"ಪ್ರಯೋಗ 01",experiment2:"ಪ್ರಯೋಗ 02",experiment3:"ಪ್ರಯೋಗ 03",
@@ -383,16 +648,16 @@ entanglement:"ಕ್ವಾಂಟಮ್ ಎಂಟ್ಯಾಂಗಲ್‌ಮೆ�
 treasureHunt:"ಕ್ವಾಂಟಮ್ ನಿಧಿ ಹುಡುಕಾಟ",treasureDesc:"ನಾಲ್ಕು ರಹಸ್ಯ ಸ್ಥಳಗಳು. ಒಂದು ಗುಪ್ತ ನಿಧಿ. ಗುರುತಿಸಲಾದ ಸ್ಥಳವನ್ನು ಕಂಡುಹಿಡಿಯಲು Grover ನ ಕ್ವಾಂಟಮ್ ಹುಡುಕಾಟ ಅಲ್ಗಾರಿದಮ್ ಬಳಸಿ.",
 groverSearch:"GROVER ಹುಡುಕಾಟ",findTreasure:"ನಿಧಿಯನ್ನು ಹುಡುಕಿ →",
 poweredBy:"ತಂತ್ರಜ್ಞಾನ:",learnExperiment:"ಪ್ರಯೋಗಗಳ ಮೂಲಕ ಕ್ವಾಂಟಮ್ ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಕಲಿಯಿರಿ.",
-differentTitle:"QubitQuest ಅನ್ನು ವಿಭಿನ್ನವಾಗಿಸುವುದು ಏನು?",differentDesc:"ವಿಶೇಷವಾಗಿ ಕ್ವಾಂಟಮ್ ಹಿನ್ನೆಲೆ ಇಲ್ಲದ ಕುತೂಹಲಭರಿತ ಕಲಿಕಾರ್ಥಿಗಳಿಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
+differentTitle:"Q-Spark ಅನ್ನು ವಿಭಿನ್ನವಾಗಿಸುವುದು ಏನು?",differentDesc:"ವಿಶೇಷವಾಗಿ ಕ್ವಾಂಟಮ್ ಹಿನ್ನೆಲೆ ಇಲ್ಲದ ಕುತೂಹಲಭರಿತ ಕಲಿಕಾರ್ಥಿಗಳಿಗಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
 beginnerFirst:"🎓 ಆರಂಭಿಕರಿಗೆ ಆದ್ಯತೆ",beginnerDesc:"ತಾಂತ್ರಿಕ ಪದಗಳನ್ನು ಪರಿಚಯಿಸುವ ಮೊದಲು ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸಲಾಗಿದೆ.",
 handsOn:"⚛️ ಪ್ರಾಯೋಗಿಕ ಕಲಿಕೆ",handsOnDesc:"ಕ್ವಾಂಟಮ್ ಸರ್ಕ್ಯೂಟ್‌ಗಳನ್ನು ಚಲಾಯಿಸಿ ಮತ್ತು Qiskit ಬಳಸಿ ಅಳತೆಯ ಫಲಿತಾಂಶಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.",
 knowledgeChecks:"🧠 ಜ್ಞಾನ ಪರೀಕ್ಷೆಗಳು",knowledgeDesc:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಯಾಣದ ವಿವಿಧ ಹಂತಗಳಲ್ಲಿ ಸಣ್ಣ ರಸಪ್ರಶ್ನೆಗಳ ಮೂಲಕ ತಿಳುವಳಿಕೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ.",
 realWorld:"🌍 ನೈಜ ಜಗತ್ತಿನ ಅನ್ವಯಗಳು",realWorldDesc:"ಭವಿಷ್ಯದ ಮಾನವ ಸವಾಲುಗಳಿಗೆ ಕ್ವಾಂಟಮ್ ಸಂಶೋಧನೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು ಎಂದು ತಿಳಿಯಿರಿ.",
 finalTitle:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯಾಣ ಒಂದು ಕ್ಯೂಬಿಟ್‌ನಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ.",finalDesc:"ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ. ನಾವೀನ್ಯತೆ ತಂದುಕೊಡಿ.",beginJourney:"ನಿಮ್ಮ ಪ್ರಯಾಣ ಪ್ರಾರಂಭಿಸಿ →",
-footer:"QubitQuest | ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಅನ್ನು ಎಲ್ಲರಿಗೂ ಸುಲಭಗೊಳಿಸುವುದು",
+footer:"Q-Spark | ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಅನ್ನು ಎಲ್ಲರಿಗೂ ಸುಲಭಗೊಳಿಸುವುದು",
 progressLabel:"% ಪೂರ್ಣ",initialStep:"ಘಟಕ",beginModule:"ಘಟಕ ಪ್ರಾರಂಭಿಸಿ",continueModule:"ಘಟಕಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ",reviewFinal:"ಕೊನೆಯ ಘಟಕವನ್ನು ಮತ್ತೆ ನೋಡಿ →",
 progressFirst:"ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಪ್ರಯಾಣ ಸಿದ್ಧವಾಗಿದೆ. ಪ್ರಗತಿಯನ್ನು ದಾಖಲಿಸಲು ಮೊದಲ ಘಟಕವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ!",
-progressSome:"ಅದ್ಭುತ ಪ್ರಗತಿ! ನೀವು {total} ಘಟಕಗಳಲ್ಲಿ {done} ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ. ಮುಂದುವರಿಯಿರಿ!",
+progressSome:"{total} ಪಾಠಗಳಲ್ಲಿ {done} ಪೂರ್ಣಗೊಂಡಿವೆ",
 progressAll:"ಅದ್ಭುತ ಸಾಧನೆ! ಎಲ್ಲಾ ಐದು ಕಲಿಕಾ ಘಟಕಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ. ನಿಮ್ಮ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆಯ ಪ್ರಯಾಣ ಸಂಪೂರ್ಣವಾಗಿದೆ!",
 allModulesDesc:"ನೀವು ಎಲ್ಲಾ ಐದು ಕಲಿಕಾ ಘಟಕಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ. ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಅನ್ನು ಅನ್ವೇಷಿಸಿ, ಪ್ರಯೋಗಿಸಿ ಮತ್ತು ಕಲಿಯುತ್ತಿರಿ."
 },
@@ -400,7 +665,7 @@ allModulesDesc:"ನೀವು ಎಲ್ಲಾ ಐದು ಕಲಿಕಾ ಘಟಕ
 hi: {
 navHome:"होम",navModules:"शिक्षण मॉड्यूल",navArcade:"क्वांटम आर्केड",navFeatures:"विशेषताएँ",
 heroTag:"आपकी क्वांटम सीखने की यात्रा यहाँ से शुरू होती है",heroTitle:"भविष्य की खोज करें",heroGradient:"क्वांटम कंप्यूटिंग",
-heroDescription:"क्या आपने कभी Qubit के बारे में नहीं सुना? कोई बात नहीं। QubitQuest आपको सरल व्याख्याओं, दृश्य शिक्षण और निर्देशित अभ्यास के माध्यम से पहली क्वांटम अवधारणा से लेकर व्यावहारिक सर्किट प्रयोगों तक ले जाता है।",
+heroDescription:"क्या आपने कभी Qubit के बारे में नहीं सुना? कोई बात नहीं। Q-Spark आपको सरल व्याख्याओं, दृश्य शिक्षण और निर्देशित अभ्यास के माध्यम से पहली क्वांटम अवधारणा से लेकर व्यावहारिक सर्किट प्रयोगों तक ले जाता है।",
 startLearning:"सीखना शुरू करें →",totalModules:"कुल शिक्षण मॉड्यूल",completedModules:"पूरे किए गए मॉड्यूल",overallCourseProgress:"कुल पाठ्यक्रम प्रगति",nextLearningStep:"अगला सीखने का चरण",
 learningJourney:"आपकी सीखने की यात्रा",initialProgress:"आपकी क्वांटम यात्रा तैयार है। अपनी प्रगति दर्ज करना शुरू करने के लिए पहला मॉड्यूल पूरा करें!",
 exploreJourney:"अपनी सीखने की यात्रा देखें",fiveModules:"पाँच सुव्यवस्थित मॉड्यूल। एक समय में एक कदम।",moduleProgress:"मॉड्यूल की प्रगति",
@@ -411,7 +676,7 @@ module4Title:"क्वांटम एल्गोरिदम",module4Desc:"Gr
 module5Title:"मानवता के लिए क्वांटम तकनीक",module5Desc:"स्वास्थ्य सेवा, स्थिरता, नैतिक नवाचार और जिम्मेदार तकनीक के बारे में जानें।",
 notCompleted:"अभी पूरा नहीं हुआ",completed:"✓ सफलतापूर्वक पूरा हुआ",exploreModule:"मॉड्यूल देखें →",reviewModule:"✓ मॉड्यूल दोबारा देखें →",
 readyTitle:"अपनी क्वांटम यात्रा शुरू करने के लिए तैयार हैं? 🚀",readyDesc:"मॉड्यूल 1 से शुरुआत करें और क्वांटम कंप्यूटिंग की अद्भुत दुनिया को जानें।",
-continueTitle:"अपनी क्वांटम यात्रा जारी रखें! 🚀",allDoneTitle:"बधाई हो! आपने QubitQuest पूरा कर लिया! 🎉",
+continueTitle:"सीखना जारी रखें →",allDoneTitle:"बधाई हो! आपने Q-Spark पूरा कर लिया! 🎉",
 arcadeLabel:"✦ इंटरैक्टिव क्वांटम ज़ोन",arcadeLive:"● 3 प्रयोग उपलब्ध हैं",welcomeArcade:"स्वागत है",quantumArcade:"क्वांटम आर्केड",
 arcadeDescription:"क्वांटम कंप्यूटिंग सीखना केवल सिद्धांत तक सीमित नहीं है। आर्केड में आएँ, वास्तविक क्वांटम सर्किट के साथ प्रयोग करें और Qiskit से चलने वाले इंटरैक्टिव खेलों के माध्यम से Qubits के रोचक व्यवहार को समझें।",
 experiment1:"प्रयोग 01",experiment2:"प्रयोग 02",experiment3:"प्रयोग 03",
@@ -422,16 +687,16 @@ entanglement:"क्वांटम एंटैंगलमेंट",rollDice:
 treasureHunt:"क्वांटम खजाने की खोज",treasureDesc:"चार रहस्यमय स्थान। एक छिपा हुआ खजाना। छिपे स्थान को खोजने के लिए Grover के क्वांटम सर्च एल्गोरिदम का उपयोग करें।",
 groverSearch:"GROVER सर्च",findTreasure:"खजाना खोजें →",
 poweredBy:"द्वारा संचालित",learnExperiment:"प्रयोग करके क्वांटम अवधारणाएँ सीखें।",
-differentTitle:"QubitQuest को अलग क्या बनाता है?",differentDesc:"जिज्ञासु लोगों के लिए बनाया गया है, विशेषकर उन लोगों के लिए जिन्हें क्वांटम की कोई पूर्व जानकारी नहीं है।",
+differentTitle:"Q-Spark को अलग क्या बनाता है?",differentDesc:"जिज्ञासु लोगों के लिए बनाया गया है, विशेषकर उन लोगों के लिए जिन्हें क्वांटम की कोई पूर्व जानकारी नहीं है।",
 beginnerFirst:"🎓 शुरुआती लोगों के लिए",beginnerDesc:"तकनीकी शब्दों से पहले अवधारणाओं को सरल भाषा में समझाया जाता है।",
 handsOn:"⚛️ व्यावहारिक सीखना",handsOnDesc:"Qiskit का उपयोग करके क्वांटम सर्किट चलाएँ और मापन के परिणाम देखें।",
 knowledgeChecks:"🧠 ज्ञान की जाँच",knowledgeDesc:"अपनी सीखने की यात्रा के दौरान छोटे क्विज़ से अपनी समझ जाँचें।",
 realWorld:"🌍 वास्तविक दुनिया के उपयोग",realWorldDesc:"जानें कि क्वांटम अनुसंधान भविष्य की मानवीय चुनौतियों में कैसे मदद कर सकता है।",
 finalTitle:"आपकी क्वांटम यात्रा एक Qubit से शुरू होती है।",finalDesc:"खोजें। प्रयोग करें। समझें। नया बनाएँ।",beginJourney:"अपनी यात्रा शुरू करें →",
-footer:"QubitQuest | क्वांटम कंप्यूटिंग को सभी के लिए सुलभ बनाना",
+footer:"Q-Spark | क्वांटम कंप्यूटिंग को सभी के लिए सुलभ बनाना",
 progressLabel:"% पूरा",initialStep:"मॉड्यूल",beginModule:"मॉड्यूल शुरू करें",continueModule:"मॉड्यूल जारी रखें",reviewFinal:"अंतिम मॉड्यूल दोबारा देखें →",
 progressFirst:"आपकी क्वांटम यात्रा तैयार है। प्रगति दर्ज करने के लिए पहला मॉड्यूल पूरा करें!",
-progressSome:"शानदार प्रगति! आपने {total} में से {done} मॉड्यूल पूरे कर लिए हैं। आगे बढ़ते रहें!",
+progressSome:"{total} में से {done} पाठ पूरे",
 progressAll:"अविश्वसनीय उपलब्धि! सभी पाँच शिक्षण मॉड्यूल पूरे हो गए हैं। आपकी क्वांटम सीखने की यात्रा पूरी हुई!",
 allModulesDesc:"आपने सभी पाँच शिक्षण मॉड्यूल सफलतापूर्वक पूरे कर लिए हैं। क्वांटम कंप्यूटिंग को खोजते रहें, प्रयोग करते रहें और सीखते रहें।"
 },
@@ -439,7 +704,7 @@ allModulesDesc:"आपने सभी पाँच शिक्षण मॉड
 te: {
 navHome:"హోమ్",navModules:"అభ్యాస మాడ్యూల్స్",navArcade:"క్వాంటం ఆర్కేడ్",navFeatures:"ప్రత్యేకతలు",
 heroTag:"మీ క్వాంటం అభ్యాస ప్రయాణం ఇక్కడ ప్రారంభమవుతుంది",heroTitle:"భవిష్యత్తును అన్వేషించండి",heroGradient:"క్వాంటం కంప్యూటింగ్",
-heroDescription:"Qubit గురించి ఎప్పుడూ వినలేదా? పర్వాలేదు. సరళమైన వివరణలు, దృశ్య అభ్యాసం మరియు మార్గదర్శక సాధన ద్వారా QubitQuest మిమ్మల్ని మొదటి క్వాంటం భావన నుంచి ప్రాక్టికల్ సర్క్యూట్ ప్రయోగాల వరకు తీసుకెళ్తుంది.",
+heroDescription:"Qubit గురించి ఎప్పుడూ వినలేదా? పర్వాలేదు. సరళమైన వివరణలు, దృశ్య అభ్యాసం మరియు మార్గదర్శక సాధన ద్వారా Q-Spark మిమ్మల్ని మొదటి క్వాంటం భావన నుంచి ప్రాక్టికల్ సర్క్యూట్ ప్రయోగాల వరకు తీసుకెళ్తుంది.",
 startLearning:"అభ్యాసం ప్రారంభించండి →",totalModules:"మొత్తం అభ్యాస మాడ్యూల్స్",completedModules:"పూర్తి చేసిన మాడ్యూల్స్",overallCourseProgress:"మొత్తం కోర్సు పురోగతి",nextLearningStep:"తదుపరి అభ్యాస దశ",
 learningJourney:"మీ అభ్యాస ప్రయాణం",initialProgress:"మీ క్వాంటం ప్రయాణం సిద్ధంగా ఉంది. మీ పురోగతిని నమోదు చేయడం ప్రారంభించడానికి మొదటి మాడ్యూల్‌ను పూర్తి చేయండి!",
 exploreJourney:"మీ అభ్యాస ప్రయాణాన్ని అన్వేషించండి",fiveModules:"ఐదు క్రమబద్ధమైన మాడ్యూల్స్. ఒక్కో అడుగు చొప్పున.",moduleProgress:"మాడ్యూల్ పురోగతి",
@@ -450,7 +715,7 @@ module4Title:"క్వాంటం అల్గారిథమ్స్",module
 module5Title:"మానవాళి కోసం క్వాంటం",module5Desc:"ఆరోగ్య సంరక్షణ, సుస్థిరత, నైతిక ఆవిష్కరణలు మరియు బాధ్యతాయుత సాంకేతికతను అన్వేషించండి.",
 notCompleted:"ఇంకా పూర్తి కాలేదు",completed:"✓ విజయవంతంగా పూర్తయింది",exploreModule:"మాడ్యూల్‌ను చూడండి →",reviewModule:"✓ మాడ్యూల్‌ను మళ్లీ చూడండి →",
 readyTitle:"మీ క్వాంటం ప్రయాణాన్ని ప్రారంభించడానికి సిద్ధంగా ఉన్నారా? 🚀",readyDesc:"మాడ్యూల్ 1తో ప్రారంభించి క్వాంటం కంప్యూటింగ్ అద్భుత ప్రపంచాన్ని తెలుసుకోండి.",
-continueTitle:"మీ క్వాంటం ప్రయాణాన్ని కొనసాగించండి! 🚀",allDoneTitle:"అభినందనలు! మీరు QubitQuest పూర్తి చేశారు! 🎉",
+continueTitle:"అభ్యాసం కొనసాగించండి →",allDoneTitle:"అభినందనలు! మీరు Q-Spark పూర్తి చేశారు! 🎉",
 arcadeLabel:"✦ ఇంటరాక్టివ్ క్వాంటం జోన్",arcadeLive:"● 3 ప్రయోగాలు అందుబాటులో ఉన్నాయి",welcomeArcade:"స్వాగతం",quantumArcade:"క్వాంటం ఆర్కేడ్",
 arcadeDescription:"క్వాంటం కంప్యూటింగ్ అభ్యాసం సిద్ధాంతంతోనే ఆగిపోవాల్సిన అవసరం లేదు. ఆర్కేడ్‌లోకి ప్రవేశించి నిజమైన క్వాంటం సర్క్యూట్లతో ప్రయోగాలు చేయండి. Qiskit ఆధారిత ఇంటరాక్టివ్ ఆటల ద్వారా Qubits యొక్క ఆసక్తికరమైన ప్రవర్తనను తెలుసుకోండి.",
 experiment1:"ప్రయోగం 01",experiment2:"ప్రయోగం 02",experiment3:"ప్రయోగం 03",
@@ -461,16 +726,16 @@ entanglement:"క్వాంటం ఎంటాంగిల్‌మెంట�
 treasureHunt:"క్వాంటం నిధి అన్వేషణ",treasureDesc:"నాలుగు రహస్య ప్రదేశాలు. ఒక దాచిన నిధి. గుర్తించిన ప్రదేశాన్ని కనుగొనడానికి Grover క్వాంటం సెర్చ్ అల్గారిథమ్‌ను ఉపయోగించండి.",
 groverSearch:"GROVER సెర్చ్",findTreasure:"నిధిని కనుగొనండి →",
 poweredBy:"దీనితో రూపొందించబడింది",learnExperiment:"ప్రయోగాల ద్వారా క్వాంటం భావనలను నేర్చుకోండి.",
-differentTitle:"QubitQuest ప్రత్యేకత ఏమిటి?",differentDesc:"క్వాంటం నేపథ్యం అసలు లేని ఆసక్తిగల అభ్యాసకుల కోసం ప్రత్యేకంగా రూపొందించబడింది.",
+differentTitle:"Q-Spark ప్రత్యేకత ఏమిటి?",differentDesc:"క్వాంటం నేపథ్యం అసలు లేని ఆసక్తిగల అభ్యాసకుల కోసం ప్రత్యేకంగా రూపొందించబడింది.",
 beginnerFirst:"🎓 ప్రారంభకులకు ప్రాధాన్యత",beginnerDesc:"సాంకేతిక పదాలను పరిచయం చేసే ముందు భావనలను సరళమైన భాషలో వివరిస్తాము.",
 handsOn:"⚛️ ప్రాక్టికల్ అభ్యాసం",handsOnDesc:"Qiskit ఉపయోగించి క్వాంటం సర్క్యూట్లను అమలు చేసి కొలత ఫలితాలను అన్వేషించండి.",
 knowledgeChecks:"🧠 జ్ఞాన పరీక్షలు",knowledgeDesc:"మీ అభ్యాస ప్రయాణంలో చిన్న క్విజ్‌ల ద్వారా మీ అవగాహనను పరీక్షించుకోండి.",
 realWorld:"🌍 నిజ జీవిత అనువర్తనాలు",realWorldDesc:"భవిష్యత్తులో మానవ సవాళ్లను ఎదుర్కోవడానికి క్వాంటం పరిశోధన ఎలా సహాయపడుతుందో తెలుసుకోండి.",
 finalTitle:"మీ క్వాంటం ప్రయాణం ఒక Qubitతో ప్రారంభమవుతుంది.",finalDesc:"అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి. ఆవిష్కరించండి.",beginJourney:"మీ ప్రయాణాన్ని ప్రారంభించండి →",
-footer:"QubitQuest | క్వాంటం కంప్యూటింగ్‌ను అందరికీ అందుబాటులోకి తీసుకురావడం",
+footer:"Q-Spark | క్వాంటం కంప్యూటింగ్‌ను అందరికీ అందుబాటులోకి తీసుకురావడం",
 progressLabel:"% పూర్తయింది",initialStep:"మాడ్యూల్",beginModule:"మాడ్యూల్ ప్రారంభించండి",continueModule:"మాడ్యూల్‌కు కొనసాగండి",reviewFinal:"చివరి మాడ్యూల్‌ను మళ్లీ చూడండి →",
 progressFirst:"మీ క్వాంటం ప్రయాణం సిద్ధంగా ఉంది. పురోగతిని నమోదు చేయడానికి మొదటి మాడ్యూల్‌ను పూర్తి చేయండి!",
-progressSome:"అద్భుతమైన పురోగతి! మీరు {total} మాడ్యూల్స్‌లో {done} పూర్తి చేశారు. కొనసాగించండి!",
+progressSome:"{total} పాఠాల్లో {done} పూర్తయ్యాయి",
 progressAll:"అద్భుతమైన విజయం! ఐదు అభ్యాస మాడ్యూల్స్ అన్నీ పూర్తయ్యాయి. మీ క్వాంటం అభ్యాస ప్రయాణం పూర్తయింది!",
 allModulesDesc:"మీరు ఐదు అభ్యాస మాడ్యూల్స్ అన్నింటినీ విజయవంతంగా పూర్తి చేశారు. క్వాంటం కంప్యూటింగ్‌ను అన్వేషిస్తూ, ప్రయోగాలు చేస్తూ, నేర్చుకుంటూ ఉండండి."
 }
@@ -489,10 +754,6 @@ const modules = [
 
 function t(key) {
     return translations[currentLanguage][key] || translations.en[key] || key;
-}
-
-function getTranslatedModuleName(number) {
-    return t("module"+number+"Title");
 }
 
 function applyLanguage() {
@@ -551,81 +812,14 @@ function updateModuleCards(progress) {
 
 function updateDashboard() {
     const progress = getProgress();
-
-    const completedCount = modules.filter(module =>
-        progress.completedModules.includes(module.number)
-    ).length;
-
-    const totalModules = modules.length;
-    const percentage = Math.round((completedCount/totalModules)*100);
-
-    document.getElementById("completedCount").textContent =
-        completedCount+" / "+totalModules;
-
-    document.getElementById("overallPercentage").textContent = percentage+"%";
-    document.getElementById("overallProgressFill").style.width = percentage+"%";
-    document.getElementById("overallProgressLabel").textContent =
-        percentage+" "+t("progressLabel");
-
+    const completed = modules.filter(module => progress.completedModules.includes(module.number)).length;
+    const nextModule = modules.find(module => !progress.completedModules.includes(module.number));
+    const button = document.getElementById("continueButton");
+    document.getElementById("progressMessage").textContent = t("progressSome")
+        .replace("{done}", completed).replace("{total}", modules.length);
+    button.href = nextModule ? nextModule.file : "module5.html";
+    button.textContent = nextModule ? (completed ? t("continueTitle") : t("startLearning")) : t("reviewFinal");
     updateModuleCards(progress);
-
-    const nextModule = modules.find(module =>
-        !progress.completedModules.includes(module.number)
-    );
-
-    if (nextModule) {
-        document.getElementById("nextModuleStat").textContent =
-            t("initialStep")+" "+nextModule.number;
-
-        document.getElementById("nextStepTitle").textContent =
-            completedCount === 0 ? t("readyTitle") : t("continueTitle");
-
-        document.getElementById("nextStepDescription").textContent =
-            completedCount === 0
-            ? t("readyDesc")
-            : getNextStepDescription(nextModule.number);
-
-        const button = document.getElementById("continueButton");
-        button.href = nextModule.file;
-        button.textContent = completedCount === 0
-            ? t("beginModule")+" "+nextModule.number+" →"
-            : t("continueModule")+" "+nextModule.number+" →";
-
-        document.getElementById("progressMessage").textContent =
-            completedCount === 0
-            ? t("progressFirst")
-            : t("progressSome").replace("{done}",completedCount).replace("{total}",totalModules);
-
-    } else {
-        document.getElementById("nextModuleStat").textContent =
-            currentLanguage === "kn" ? "ಪೂರ್ಣಗೊಂಡಿದೆ" :
-            currentLanguage === "hi" ? "पूरा हुआ" :
-            currentLanguage === "te" ? "పూర్తయింది" : "Completed";
-
-        document.getElementById("nextStepTitle").textContent = t("allDoneTitle");
-        document.getElementById("nextStepDescription").textContent = t("allModulesDesc");
-
-        const button = document.getElementById("continueButton");
-        button.href = "module5.html";
-        button.textContent = t("reviewFinal");
-
-        document.getElementById("progressMessage").textContent = t("progressAll");
-    }
-}
-
-function getNextStepDescription(number) {
-    const name = getTranslatedModuleName(number);
-
-    if (currentLanguage === "kn") {
-        return "ನಿಮ್ಮ ಮುಂದಿನ ಹಂತ: ಘಟಕ "+number+" — "+name+".";
-    }
-    if (currentLanguage === "hi") {
-        return "आपका अगला चरण: मॉड्यूल "+number+" — "+name+".";
-    }
-    if (currentLanguage === "te") {
-        return "మీ తదుపరి దశ: మాడ్యూల్ "+number+" — "+name+".";
-    }
-    return "Your next step is Module "+number+": "+name+".";
 }
 
 updateDashboard();
@@ -644,5 +838,8 @@ window.addEventListener("storage",function(event) {
 });
 </script>
 
+<script src="fundamentals/narration.js"></script>
+<script src="fundamentals/lesson.js"></script>
+<script src="home.js"></script>
 </body>
 </html>

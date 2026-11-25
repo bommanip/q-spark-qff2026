@@ -1,0 +1,70 @@
+.home-panel[hidden] { display: none; }
+.home-panel { margin-top: 18px; scroll-margin-top: 100px; }
+.home-panel .coin-lesson { margin-top: 0; }
+.coin-lesson .coin-art { background: none; }
+
+.journey-progress {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+    margin: 14px 0 20px;
+}
+.journey-progress p { margin: 0; }
+.journey-progress .primary-button { padding: 8px 13px; }
+
+.home-nav, .home-tabs {
+    --active-fill: #252f4c;
+    --active-text: #f5f3ff;
+    --active-edge: #8076bf;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+html[data-theme="light"] :is(.home-nav, .home-tabs) {
+    --active-fill: #e8ecfa;
+    --active-text: #3f3186;
+    --active-edge: #9a8ed4;
+}
+
+.home-tabs {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #8794bb55;
+}
+
+.home-nav a, .home-tabs button {
+    padding: .45rem .7rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.home-nav a { font-size: .875rem; }
+
+.home-tabs button {
+    flex: 1 1 auto;
+    padding: .65rem .9rem;
+}
+
+.home-nav a:hover, .home-tabs button:hover {
+    background: var(--active-fill);
+    color: var(--active-text);
+}
+
+:is(.home-nav a[aria-current="location"], .home-tabs button[aria-selected="true"]),
+html[data-theme="light"] :is(.home-nav a[aria-current="location"], .home-tabs button[aria-selected="true"]) {
+    border-color: var(--active-edge);
+    background: var(--active-fill);
+    color: var(--active-text);
+}
+
+.home-nav a:focus-visible, .home-tabs button:focus-visible {
+    outline: 2px solid #6779eb;
+    outline-offset: 3px;
+}

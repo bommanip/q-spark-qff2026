@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linked Dice | QubitQuest Arcade</title>
+<title>Linked Dice | Q-Spark Arcade</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -492,14 +492,17 @@ select:not(.language-select){
     .energy{left:25%;right:25%}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
 
     <div class="header-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect" aria-label="Choose language">
             <option value="en">🇬🇧 English</option>
             <option value="kn">🇮🇳 ಕನ್ನಡ</option>
@@ -507,13 +510,13 @@ select:not(.language-select){
             <option value="te">🇮🇳 తెలుగు</option>
         </select>
 
-        <a href="index.html" class="back" data-i18n="back">← Back to Home</a>
+        <a href="index.html#arcade" class="back" data-i18n="back" data-course-back>← Quantum Arcade</a>
     </div>
 </header>
 
 <main class="container">
 
-    <div class="tag" data-i18n="tag">QubitQuest Arcade · Game 02</div>
+    <div class="tag" data-i18n="tag">Q-Spark Arcade · Game 02</div>
     <h1 data-i18n="title">🎲 Linked Dice</h1>
 
     <p class="subtitle" data-i18n="subtitle">
@@ -710,7 +713,7 @@ select:not(.language-select){
     </section>
 
     <div class="footer" data-i18n="footer">
-        QubitQuest · Explore. Experiment. Understand.
+        Q-Spark · Explore. Experiment. Understand.
     </div>
 
 </main>
@@ -726,7 +729,7 @@ const translations = {
 
 en: {
     back:"← Back to Home",
-    tag:"QubitQuest Arcade · Game 02",
+    tag:"Q-Spark Arcade · Game 02",
     title:"🎲 Linked Dice",
     subtitle:"Two dice. Two quantum experiments. One fascinating discovery. Roll independently or connect the dice through quantum entanglement and explore how their outcomes are related.",
     independentMode:"🎲 Independent Dice",
@@ -777,12 +780,12 @@ en: {
     invalidFace:"The simulator returned an invalid dice result.",
     validRolls:"Accepted valid rolls",
     counts:"counts",
-    footer:"QubitQuest · Explore. Experiment. Understand."
+    footer:"Q-Spark · Explore. Experiment. Understand."
 },
 
 kn: {
     back:"← ಮುಖ್ಯ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
-    tag:"QubitQuest ಆರ್ಕೇಡ್ · ಆಟ 02",
+    tag:"Q-Spark ಆರ್ಕೇಡ್ · ಆಟ 02",
     title:"🎲 ಸಂಪರ್ಕಿತ ದಾಳಗಳು",
     subtitle:"ಎರಡು ದಾಳಗಳು. ಎರಡು ಕ್ವಾಂಟಮ್ ಪ್ರಯೋಗಗಳು. ಒಂದು ಅದ್ಭುತ ಆವಿಷ್ಕಾರ. ಪ್ರತ್ಯೇಕವಾಗಿ ದಾಳಗಳನ್ನು ಉರುಳಿಸಿ ಅಥವಾ Quantum Entanglement ಮೂಲಕ ಅವುಗಳನ್ನು ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ಅವುಗಳ ಫಲಿತಾಂಶಗಳ ಸಂಬಂಧವನ್ನು ಅನ್ವೇಷಿಸಿ.",
     independentMode:"🎲 ಸ್ವತಂತ್ರ ದಾಳಗಳು",
@@ -833,12 +836,12 @@ kn: {
     invalidFace:"ಸಿಮ್ಯುಲೇಟರ್ ಅಮಾನ್ಯ ದಾಳ ಫಲಿತಾಂಶವನ್ನು ನೀಡಿದೆ.",
     validRolls:"ಸ್ವೀಕರಿಸಿದ ಮಾನ್ಯ ಫಲಿತಾಂಶಗಳು",
     counts:"ಎಣಿಕೆಗಳು",
-    footer:"QubitQuest · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ."
+    footer:"Q-Spark · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ."
 },
 
 hi: {
     back:"← होम पेज पर वापस जाएँ",
-    tag:"QubitQuest आर्केड · गेम 02",
+    tag:"Q-Spark आर्केड · गेम 02",
     title:"🎲 लिंक्ड डाइस",
     subtitle:"दो पासे। दो क्वांटम प्रयोग। एक अद्भुत खोज। पासों को स्वतंत्र रूप से फेंकें या Quantum Entanglement के माध्यम से जोड़ें और जानें कि उनके परिणाम आपस में कैसे संबंधित हैं।",
     independentMode:"🎲 स्वतंत्र पासे",
@@ -889,12 +892,12 @@ hi: {
     invalidFace:"सिम्युलेटर ने पासे का अमान्य परिणाम दिया।",
     validRolls:"स्वीकृत वैध परिणाम",
     counts:"गणनाएँ",
-    footer:"QubitQuest · खोजें। प्रयोग करें। समझें।"
+    footer:"Q-Spark · खोजें। प्रयोग करें। समझें।"
 },
 
 te: {
     back:"← హోమ్ పేజీకి తిరిగి వెళ్ళండి",
-    tag:"QubitQuest ఆర్కేడ్ · గేమ్ 02",
+    tag:"Q-Spark ఆర్కేడ్ · గేమ్ 02",
     title:"🎲 లింక్డ్ డైస్",
     subtitle:"రెండు పాచికలు. రెండు క్వాంటమ్ ప్రయోగాలు. ఒక అద్భుతమైన ఆవిష్కరణ. పాచికలను విడివిడిగా వేయండి లేదా Quantum Entanglement ద్వారా అనుసంధానించి వాటి ఫలితాల మధ్య సంబంధాన్ని అన్వేషించండి.",
     independentMode:"🎲 స్వతంత్ర పాచికలు",
@@ -945,7 +948,7 @@ te: {
     invalidFace:"సిమ్యులేటర్ చెల్లని పాచిక ఫలితాన్ని ఇచ్చింది.",
     validRolls:"అంగీకరించిన సరైన ఫలితాలు",
     counts:"లెక్కలు",
-    footer:"QubitQuest · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి."
+    footer:"Q-Spark · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి."
 }
 
 };
@@ -1270,7 +1273,7 @@ async function rollDice() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/run-linked-dice",
+            "/run-linked-dice",
             {
                 method:"POST",
                 headers:{
@@ -1354,5 +1357,6 @@ updateModeDisplay();
 
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

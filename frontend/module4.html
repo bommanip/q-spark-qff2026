@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 4 | QubitQuest</title>
+<title>Module 4 | Q-Spark</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -237,14 +237,17 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     .visualization-panel{padding:12px}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
-<body>
+<body data-module="4">
 
 <nav class="navbar">
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
 
     <div class="nav-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect"
                 aria-label="Select language">
             <option value="en">English</option>
@@ -253,11 +256,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <option value="te">తెలుగు</option>
         </select>
 
-        <a href="index.html" id="homeLink">← Home</a>
+        <a href="index.html#modules" id="homeLink" data-course-back>← Learning Journey</a>
     </div>
 </nav>
 
 <main class="container">
+    <nav class="module-jump" aria-label="Modules"></nav>
 
 <span class="tag" id="moduleTag">MODULE 04 · INTERMEDIATE LEVEL</span>
 
@@ -431,13 +435,14 @@ Module 4 completion: 0%
     </a>
 
     <p class="note" id="lockedMessage">
-    Pass the Module 4 quiz with 3/3 to unlock Module 5.
+    Pass the Module 4 quiz with 3/3 to mark this module complete.
     </p>
 </section>
 
+    <nav class="module-pager" aria-label="Modules"></nav>
 </main>
 
-<footer id="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer id="footer">✦ Q-Spark — Quantum learning for everyone.</footer>
 
 <script>
 
@@ -519,8 +524,8 @@ finalTitle:"Ready for the final module? 🎉",
 finalText:"You've explored quantum algorithms and their possible applications.",
 nextText:"Next: Discover how quantum computing could contribute to humanity.",
 continue:"Continue to Module 5 →",
-locked:"Pass the Module 4 quiz with 3/3 to unlock Module 5.",
-footer:"✦ QubitQuest — Quantum learning for everyone.",
+locked:"Pass the Module 4 quiz with 3/3 to mark this module complete.",
+footer:"✦ Q-Spark — Quantum learning for everyone.",
 resultTitle:"Grover experiment completed! ✨",
 total:"Total measurements: ",
 marked:"Marked answer: ",
@@ -609,8 +614,8 @@ finalTitle:"ಕೊನೆಯ ಮಾಡ್ಯೂಲ್‌ಗೆ ಸಿದ್ಧರ
 finalText:"ನೀವು ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಮತ್ತು ಅವುಗಳ ಬಳಕೆಗಳನ್ನು ಕಲಿತಿದ್ದೀರಿ.",
 nextText:"ಮುಂದೆ: ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಮಾನವಕುಲಕ್ಕೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು ಎಂಬುದನ್ನು ತಿಳಿಯಿರಿ.",
 continue:"ಮಾಡ್ಯೂಲ್ 5ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",
-locked:"ಮಾಡ್ಯೂಲ್ 5 ತೆರೆಯಲು ಮಾಡ್ಯೂಲ್ 4 ರಲ್ಲಿ 3/3 ಅಂಕಗಳನ್ನು ಪಡೆಯಿರಿ.",
-footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+locked:"ಈ ಘಟಕವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಅಂಕ ಪಡೆಯಿರಿ.",
+footer:"✦ Q-Spark — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
 resultTitle:"ಗ್ರೋವರ್ ಪ್ರಯೋಗ ಪೂರ್ಣಗೊಂಡಿದೆ! ✨",
 total:"ಒಟ್ಟು ಅಳತೆಗಳು: ",
 marked:"ಗುರುತಿಸಲಾದ ಉತ್ತರ: ",
@@ -699,8 +704,8 @@ finalTitle:"अंतिम मॉड्यूल के लिए तैया�
 finalText:"आपने क्वांटम एल्गोरिदम और उनके संभावित उपयोगों के बारे में सीखा है।",
 nextText:"अगला: जानें कि क्वांटम कंप्यूटिंग मानवता की कैसे मदद कर सकती है।",
 continue:"मॉड्यूल 5 पर जाएँ →",
-locked:"मॉड्यूल 5 खोलने के लिए मॉड्यूल 4 में 3/3 अंक प्राप्त करें।",
-footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+locked:"इस मॉड्यूल को पूरा करने के लिए क्विज़ में 3/3 अंक प्राप्त करें।",
+footer:"✦ Q-Spark — सभी के लिए क्वांटम शिक्षा।",
 resultTitle:"ग्रोवर प्रयोग पूरा हुआ! ✨",
 total:"कुल मापन: ",
 marked:"चिह्नित उत्तर: ",
@@ -789,8 +794,8 @@ finalTitle:"చివరి మాడ్యూల్‌కు సిద్ధం
 finalText:"మీరు క్వాంటం అల్గారిథమ్‌లు మరియు వాటి ఉపయోగాల గురించి తెలుసుకున్నారు.",
 nextText:"తర్వాత: క్వాంటం కంప్యూటింగ్ మానవాళికి ఎలా సహాయపడగలదో తెలుసుకోండి.",
 continue:"మాడ్యూల్ 5కి కొనసాగండి →",
-locked:"మాడ్యూల్ 5ను తెరవడానికి మాడ్యూల్ 4లో 3/3 స్కోర్ సాధించండి.",
-footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+locked:"ఈ మాడ్యూల్‌ను పూర్తి చేయడానికి క్విజ్‌లో 3/3 స్కోర్ సాధించండి.",
+footer:"✦ Q-Spark — అందరికీ క్వాంటం అభ్యాసం.",
 resultTitle:"గ్రోవర్ ప్రయోగం పూర్తయింది! ✨",
 total:"మొత్తం కొలతలు: ",
 marked:"గుర్తించిన సమాధానం: ",
@@ -1146,7 +1151,7 @@ async function runGrover() {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:5000/run-grover",
+            "/run-grover",
             {
                 method: "POST",
                 headers: {
@@ -1280,5 +1285,6 @@ updateProgress();
 
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

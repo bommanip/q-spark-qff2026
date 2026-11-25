@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 5 | QubitQuest</title>
+<title>Module 5 | Q-Spark</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -446,14 +446,17 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     #certificate .certificate-seal{display:flex!important}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
-<body>
+<body data-module="5">
 
 <nav class="navbar">
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
 
     <div class="nav-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect"
                 aria-label="Choose language">
             <option value="en">English</option>
@@ -462,11 +465,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <option value="te">తెలుగు</option>
         </select>
 
-        <a href="index.html" data-i18n="home">← Home</a>
+        <a href="index.html#modules" data-i18n="home" data-course-back>← Learning Journey</a>
     </div>
 </nav>
 
 <main class="container">
+    <nav class="module-jump" aria-label="Modules"></nav>
 
 <span class="tag" data-i18n="tag">MODULE 05 · FINAL LEVEL</span>
 
@@ -604,7 +608,7 @@ sustainability and responsible innovation.
 
     <p data-i18n="assessmentIntro">
     Answer all three questions correctly to complete
-    your QubitQuest learning journey.
+    your Q-Spark learning journey.
     </p>
 
     <p data-i18n="question1">
@@ -721,7 +725,7 @@ sustainability and responsible innovation.
         </svg>
 
         <div>
-            <div class="brand-name">QUBITQUEST</div>
+            <div class="brand-name">Q-SPARK</div>
             <div class="brand-subtitle" data-i18n="brandSubtitle">
                 QUANTUM LEARNING EXPERIENCE
             </div>
@@ -744,12 +748,12 @@ sustainability and responsible innovation.
         THIS CERTIFICATE IS PROUDLY PRESENTED TO
     </p>
 
-    <div class="certificate-name" id="certificateName">QubitQuest Learner</div>
+    <div class="certificate-name" id="certificateName">Q-Spark Learner</div>
     <div class="name-underline"></div>
 
     <p class="certificate-description" data-i18n="certificateDescription">
         In recognition of successfully completing all five modules
-        of the QubitQuest beginner learning journey in Quantum Computing,
+        of the Q-Spark beginner learning journey in Quantum Computing,
         demonstrating commitment to learning and exploring the principles
         of quantum technology.
     </p>
@@ -765,13 +769,13 @@ sustainability and responsible innovation.
 
     <div class="certificate-seal">
         <strong>✦</strong>
-        <small>QUBITQUEST</small>
+        <small>Q-SPARK</small>
         <small data-i18n="verified">VERIFIED</small>
     </div>
 
     <div class="certificate-bottom">
         <div class="signature-block">
-            <div class="signature-mark">QubitQuest Team</div>
+            <div class="signature-mark">Q-Spark Team</div>
             <div class="signature-line"></div>
             <div class="signature-label" data-i18n="teamLabel">PROJECT TEAM</div>
         </div>
@@ -786,7 +790,7 @@ sustainability and responsible innovation.
     <div class="certificate-line"></div>
 
     <div class="certificate-disclaimer" data-i18n="disclaimer">
-        QUBITQUEST PROJECT COMPLETION ACKNOWLEDGEMENT
+        Q-SPARK PROJECT COMPLETION ACKNOWLEDGEMENT
         · NOT AN ACCREDITED QUALIFICATION
     </div>
 </div>
@@ -798,9 +802,10 @@ sustainability and responsible innovation.
     </button>
 </div>
 
+    <nav class="module-pager" aria-label="Modules"></nav>
 </main>
 
-<footer data-i18n="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer data-i18n="footer">✦ Q-Spark — Quantum learning for everyone.</footer>
 
 <script>
 
@@ -852,7 +857,7 @@ honestyText:"It is important to distinguish current capabilities from future pos
 collaboration:"Collaboration",
 collaborationText:"Responsible progress requires researchers, educators, organisations and communities to work together.",
 section5:"05. Your final assessment! 🏆",
-assessmentIntro:"Answer all three questions correctly to complete your QubitQuest learning journey.",
+assessmentIntro:"Answer all three questions correctly to complete your Q-Spark learning journey.",
 question1:"Question 1: How could quantum computing contribute to healthcare research?",
 q1a:"A. By helping researchers simulate molecular systems",
 q1b:"B. By replacing every doctor",
@@ -881,16 +886,16 @@ certificateKicker:"RECOGNITION OF ACHIEVEMENT",
 certificateTitle:"CERTIFICATE",
 certificateSubtitle:"OF COMPLETION",
 presented:"THIS CERTIFICATE IS PROUDLY PRESENTED TO",
-certificateDescription:"In recognition of successfully completing all five modules of the QubitQuest beginner learning journey in Quantum Computing, demonstrating commitment to learning and exploring the principles of quantum technology.",
+certificateDescription:"In recognition of successfully completing all five modules of the Q-Spark beginner learning journey in Quantum Computing, demonstrating commitment to learning and exploring the principles of quantum technology.",
 programName:"QUANTUM COMPUTING",
 topics1:"QUBITS · SUPERPOSITION · ENTANGLEMENT · QUANTUM GATES",
 topics2:"ALGORITHMS · APPLICATIONS · RESPONSIBLE INNOVATION",
 verified:"VERIFIED",
 teamLabel:"PROJECT TEAM",
 dateLabel:"DATE OF COMPLETION",
-disclaimer:"QUBITQUEST PROJECT COMPLETION ACKNOWLEDGEMENT · NOT AN ACCREDITED QUALIFICATION",
+disclaimer:"Q-SPARK PROJECT COMPLETION ACKNOWLEDGEMENT · NOT AN ACCREDITED QUALIFICATION",
 print:"🖨 Print / Save as PDF",
-footer:"✦ QubitQuest — Quantum learning for everyone.",
+footer:"✦ Q-Spark — Quantum learning for everyone.",
 progressText:"Module 5 completion: {percent}%",
 correct:"✓ Correct! ",
 incorrect:"Not quite! ",
@@ -899,7 +904,7 @@ explanation1:"Post-quantum cryptography aims to protect information against futu
 explanation2:"Responsible innovation includes honest communication and considering societal impact.",
 incomplete:"Please answer all three questions first.",
 score:"Your final score: {score} out of 3! ",
-perfect:"Outstanding! You've completed QubitQuest! 🎉",
+perfect:"Outstanding! You've completed Q-Spark! 🎉",
 tryAgain:"Good effort! You need 3/3 to complete the final module.",
 certificateReady:"Congratulations! All five modules are complete. Your professional certificate is ready! 🎉",
 needModules:"Complete all five modules and achieve 3/3 in the final assessment to unlock your certificate.",
@@ -908,7 +913,7 @@ assessmentComplete:"Congratulations! Your Module 5 assessment is complete.",
 retryCertificate:"Try again to earn your completion certificate.",
 enterName:"Please enter your full name before printing your certificate.",
 completeFirst:"Please complete all five modules and the final assessment first.",
-learner:"QubitQuest Learner"
+learner:"Q-Spark Learner"
 },
 
 kn: {
@@ -953,7 +958,7 @@ honestyText:"ಪ್ರಸ್ತುತ ಸಾಮರ್ಥ್ಯಗಳು ಮತ�
 collaboration:"ಸಹಯೋಗ",
 collaborationText:"ಜವಾಬ್ದಾರಿಯುತ ಪ್ರಗತಿಗಾಗಿ ಸಂಶೋಧಕರು, ಶಿಕ್ಷಕರು, ಸಂಸ್ಥೆಗಳು ಮತ್ತು ಸಮುದಾಯಗಳು ಒಟ್ಟಾಗಿ ಕೆಲಸ ಮಾಡಬೇಕು.",
 section5:"05. ನಿಮ್ಮ ಅಂತಿಮ ಪರೀಕ್ಷೆ! 🏆",
-assessmentIntro:"ನಿಮ್ಮ QubitQuest ಕಲಿಕಾ ಪ್ರಯಾಣವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಮೂರೂ ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+assessmentIntro:"ನಿಮ್ಮ Q-Spark ಕಲಿಕಾ ಪ್ರಯಾಣವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಮೂರೂ ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
 question1:"ಪ್ರಶ್ನೆ 1: ಆರೋಗ್ಯ ಸಂಶೋಧನೆಗೆ ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
 q1a:"A. ಅಣು ವ್ಯವಸ್ಥೆಗಳನ್ನು ಅನುಕರಿಸಲು ಸಂಶೋಧಕರಿಗೆ ಸಹಾಯ ಮಾಡುವ ಮೂಲಕ",
 q1b:"B. ಪ್ರತಿಯೊಬ್ಬ ವೈದ್ಯರನ್ನೂ ಬದಲಿಸುವ ಮೂಲಕ",
@@ -982,16 +987,16 @@ certificateKicker:"ಸಾಧನೆಯ ಗುರುತింపు",
 certificateTitle:"ಪ್ರಮಾಣಪತ್ರ",
 certificateSubtitle:"ಪೂರ್ಣಗೊಳಿಸಿದ ಪ್ರಮಾಣಪತ್ರ",
 presented:"ಈ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಹೆಮ್ಮೆಯಿಂದ ನೀಡಲಾಗುತ್ತದೆ",
-certificateDescription:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್‌ನಲ್ಲಿ QubitQuest ನ ಆರಂಭಿಕ ಕಲಿಕಾ ಪ್ರಯಾಣದ ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿ, ಕಲಿಕೆ ಮತ್ತು ಕ್ವಾಂಟಮ್ ತಂತ್ರಜ್ಞಾನದ ತತ್ವಗಳನ್ನು ಅನ್ವೇಷಿಸುವ ಬದ್ಧತೆಯನ್ನು ತೋರಿಸಿದ್ದಕ್ಕಾಗಿ ಈ ಪ್ರಮಾಣಪತ್ರವನ್ನು ನೀಡಲಾಗಿದೆ.",
+certificateDescription:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್‌ನಲ್ಲಿ Q-Spark ನ ಆರಂಭಿಕ ಕಲಿಕಾ ಪ್ರಯಾಣದ ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿ, ಕಲಿಕೆ ಮತ್ತು ಕ್ವಾಂಟಮ್ ತಂತ್ರಜ್ಞಾನದ ತತ್ವಗಳನ್ನು ಅನ್ವೇಷಿಸುವ ಬದ್ಧತೆಯನ್ನು ತೋರಿಸಿದ್ದಕ್ಕಾಗಿ ಈ ಪ್ರಮಾಣಪತ್ರವನ್ನು ನೀಡಲಾಗಿದೆ.",
 programName:"ಕ್ವಾಂಟಮ್ ಕಂಪ್ಯೂಟಿಂಗ್",
 topics1:"ಕ್ಯೂಬಿಟ್‌ಗಳು · ಸೂಪರ್‌ಪೊಸಿಷನ್ · ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ · ಕ್ವಾಂಟಮ್ ಗೇಟ್‌ಗಳು",
 topics2:"ಅಲ್ಗಾರಿದಮ್‌ಗಳು · ಅನ್ವಯಗಳು · ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆ",
 verified:"ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
 teamLabel:"ಯೋಜನಾ ತಂಡ",
 dateLabel:"ಪೂರ್ಣಗೊಳಿಸಿದ ದಿನಾಂಕ",
-disclaimer:"QUBITQUEST ಯೋಜನೆ ಪೂರ್ಣಗೊಳಿಸಿದ ಗುರುತింపు · ಮಾನ್ಯತೆ ಪಡೆದ ಶೈಕ್ಷಣಿಕ ಅರ್ಹತೆಯಲ್ಲ",
+disclaimer:"Q-SPARK ಯೋಜನೆ ಪೂರ್ಣಗೊಳಿಸಿದ ಗುರುತింపు · ಮಾನ್ಯತೆ ಪಡೆದ ಶೈಕ್ಷಣಿಕ ಅರ್ಹತೆಯಲ್ಲ",
 print:"🖨 ಮುದ್ರಿಸಿ / PDF ಆಗಿ ಉಳಿಸಿ",
-footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+footer:"✦ Q-Spark — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
 progressText:"ಮಾಡ್ಯೂಲ್ 5 ಪೂರ್ಣಗೊಳಿಸುವಿಕೆ: {percent}%",
 correct:"✓ ಸರಿಯಾಗಿದೆ! ",
 incorrect:"ಸರಿಯಾದ ಉತ್ತರ ಅಲ್ಲ! ",
@@ -1000,7 +1005,7 @@ explanation1:"ಪೋಸ್ಟ್-ಕ್ವಾಂಟಮ್ ಕ್ರಿಪ್ಟ�
 explanation2:"ಜವಾಬ್ದಾರಿಯುತ ನಾವೀನ್ಯತೆಯಲ್ಲಿ ಪ್ರಾಮಾಣಿಕ ಸಂವಹನ ಮತ್ತು ಸಾಮಾಜಿಕ ಪರಿಣಾಮಗಳ ಪರಿಗಣನೆ ಸೇರಿವೆ.",
 incomplete:"ದಯವಿಟ್ಟು ಮೂರೂ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
 score:"ನಿಮ್ಮ ಅಂತಿಮ ಅಂಕಗಳು: 3 ರಲ್ಲಿ {score}! ",
-perfect:"ಅದ್ಭುತ! ನೀವು QubitQuest ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ! 🎉",
+perfect:"ಅದ್ಭುತ! ನೀವು Q-Spark ಪೂರ್ಣಗೊಳಿಸಿದ್ದೀರಿ! 🎉",
 tryAgain:"ಉತ್ತಮ ಪ್ರಯತ್ನ! ಅಂತಿಮ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3/3 ಅಗತ್ಯವಿದೆ.",
 certificateReady:"ಅಭಿನಂದನೆಗಳು! ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳು ಪೂರ್ಣಗೊಂಡಿವೆ. ನಿಮ್ಮ ಪ್ರಮಾಣಪತ್ರ ಸಿದ್ಧವಾಗಿದೆ! 🎉",
 needModules:"ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಲು ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ ಮತ್ತು ಅಂತಿಮ ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಪಡೆಯಿರಿ.",
@@ -1009,7 +1014,7 @@ assessmentComplete:"ಅಭಿನಂದನೆಗಳು! ನಿಮ್ಮ ಮಾಡ
 retryCertificate:"ಪೂರ್ಣಗೊಳಿಸುವ ಪ್ರಮಾಣಪತ್ರ ಪಡೆಯಲು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
 enterName:"ಪ್ರಮಾಣಪತ್ರ ಮುದ್ರಿಸುವ ಮೊದಲು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.",
 completeFirst:"ದಯವಿಟ್ಟು ಮೊದಲು ಎಲ್ಲಾ ಐದು ಮಾಡ್ಯೂಲ್‌ಗಳು ಮತ್ತು ಅಂತಿಮ ಪರೀಕ್ಷೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
-learner:"QubitQuest ಕಲಿಯುವವರು"
+learner:"Q-Spark ಕಲಿಯುವವರು"
 },
 
 hi: {
@@ -1054,7 +1059,7 @@ honestyText:"वर्तमान क्षमताओं और भविष�
 collaboration:"सहयोग",
 collaborationText:"जिम्मेदार प्रगति के लिए शोधकर्ताओं, शिक्षकों, संगठनों और समुदायों को मिलकर काम करना होगा।",
 section5:"05. आपकी अंतिम परीक्षा! 🏆",
-assessmentIntro:"अपनी QubitQuest सीखने की यात्रा पूरी करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+assessmentIntro:"अपनी Q-Spark सीखने की यात्रा पूरी करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
 question1:"प्रश्न 1: क्वांटम कंप्यूटिंग स्वास्थ्य अनुसंधान में कैसे योगदान दे सकती है?",
 q1a:"A. शोधकर्ताओं को आणविक प्रणालियों का अनुकरण करने में मदद करके",
 q1b:"B. हर डॉक्टर की जगह लेकर",
@@ -1083,16 +1088,16 @@ certificateKicker:"उपलब्धि की पहचान",
 certificateTitle:"प्रमाणपत्र",
 certificateSubtitle:"पूरा करने का प्रमाणपत्र",
 presented:"यह प्रमाणपत्र गर्वपूर्वक प्रदान किया जाता है",
-certificateDescription:"क्वांटम कंप्यूटिंग में QubitQuest की शुरुआती सीखने की यात्रा के सभी पाँच मॉड्यूल सफलतापूर्वक पूरे करने और क्वांटम तकनीक के सिद्धांतों को सीखने तथा समझने के प्रति समर्पण दिखाने के लिए यह प्रमाणपत्र प्रदान किया जाता है।",
+certificateDescription:"क्वांटम कंप्यूटिंग में Q-Spark की शुरुआती सीखने की यात्रा के सभी पाँच मॉड्यूल सफलतापूर्वक पूरे करने और क्वांटम तकनीक के सिद्धांतों को सीखने तथा समझने के प्रति समर्पण दिखाने के लिए यह प्रमाणपत्र प्रदान किया जाता है।",
 programName:"क्वांटम कंप्यूटिंग",
 topics1:"क्यूबिट · सुपरपोज़िशन · एंटैंगलमेंट · क्वांटम गेट्स",
 topics2:"एल्गोरिदम · अनुप्रयोग · जिम्मेदार नवाचार",
 verified:"सत्यापित",
 teamLabel:"प्रोजेक्ट टीम",
 dateLabel:"पूरा करने की तारीख",
-disclaimer:"QUBITQUEST परियोजना पूर्णता की मान्यता · मान्यता प्राप्त शैक्षणिक योग्यता नहीं",
+disclaimer:"Q-SPARK परियोजना पूर्णता की मान्यता · मान्यता प्राप्त शैक्षणिक योग्यता नहीं",
 print:"🖨 प्रिंट करें / PDF के रूप में सहेजें",
-footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+footer:"✦ Q-Spark — सभी के लिए क्वांटम शिक्षा।",
 progressText:"मॉड्यूल 5 की प्रगति: {percent}%",
 correct:"✓ सही! ",
 incorrect:"सही नहीं है! ",
@@ -1101,7 +1106,7 @@ explanation1:"पोस्ट-क्वांटम क्रिप्टोग�
 explanation2:"जिम्मेदार नवाचार में ईमानदार संवाद और सामाजिक प्रभाव पर विचार करना शामिल है।",
 incomplete:"कृपया पहले तीनों प्रश्नों के उत्तर दें।",
 score:"आपका अंतिम स्कोर: 3 में से {score}! ",
-perfect:"शानदार! आपने QubitQuest पूरा कर लिया! 🎉",
+perfect:"शानदार! आपने Q-Spark पूरा कर लिया! 🎉",
 tryAgain:"अच्छा प्रयास! अंतिम मॉड्यूल पूरा करने के लिए 3/3 अंक चाहिए।",
 certificateReady:"बधाई हो! सभी पाँच मॉड्यूल पूरे हो गए हैं। आपका प्रमाणपत्र तैयार है! 🎉",
 needModules:"प्रमाणपत्र पाने के लिए सभी पाँच मॉड्यूल पूरे करें और अंतिम परीक्षा में 3/3 अंक प्राप्त करें।",
@@ -1110,7 +1115,7 @@ assessmentComplete:"बधाई हो! आपका मॉड्यूल 5 �
 retryCertificate:"अपना प्रमाणपत्र पाने के लिए फिर से प्रयास करें।",
 enterName:"प्रमाणपत्र प्रिंट करने से पहले अपना पूरा नाम लिखें।",
 completeFirst:"कृपया पहले सभी पाँच मॉड्यूल और अंतिम परीक्षा पूरी करें।",
-learner:"QubitQuest विद्यार्थी"
+learner:"Q-Spark विद्यार्थी"
 },
 
 te: {
@@ -1155,7 +1160,7 @@ honestyText:"ప్రస్తుత సామర్థ్యాలు మర�
 collaboration:"సహకారం",
 collaborationText:"బాధ్యతాయుతమైన పురోగతికి పరిశోధకులు, విద్యావేత్తలు, సంస్థలు మరియు సమాజాలు కలిసి పనిచేయాలి.",
 section5:"05. మీ చివరి పరీక్ష! 🏆",
-assessmentIntro:"మీ QubitQuest అభ్యాస ప్రయాణాన్ని పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
+assessmentIntro:"మీ Q-Spark అభ్యాస ప్రయాణాన్ని పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
 question1:"ప్రశ్న 1: ఆరోగ్య పరిశోధనకు క్వాంటం కంప్యూటింగ్ ఎలా సహాయపడగలదు?",
 q1a:"A. అణు వ్యవస్థలను అనుకరించడంలో పరిశోధకులకు సహాయపడటం ద్వారా",
 q1b:"B. ప్రతి వైద్యుడిని భర్తీ చేయడం ద్వారా",
@@ -1184,16 +1189,16 @@ certificateKicker:"సాధనకు గుర్తింపు",
 certificateTitle:"సర్టిఫికెట్",
 certificateSubtitle:"పూర్తి చేసినందుకు",
 presented:"ఈ సర్టిఫికెట్ గర్వంగా అందించబడుతోంది",
-certificateDescription:"క్వాంటం కంప్యూటింగ్‌లో QubitQuest ప్రారంభ అభ్యాస ప్రయాణంలోని ఐదు మాడ్యూళ్లన్నింటినీ విజయవంతంగా పూర్తి చేసి, క్వాంటం సాంకేతికత సూత్రాలను నేర్చుకోవడం మరియు అన్వేషించడంలో నిబద్ధత చూపినందుకు ఈ సర్టిఫికెట్ అందించబడుతోంది.",
+certificateDescription:"క్వాంటం కంప్యూటింగ్‌లో Q-Spark ప్రారంభ అభ్యాస ప్రయాణంలోని ఐదు మాడ్యూళ్లన్నింటినీ విజయవంతంగా పూర్తి చేసి, క్వాంటం సాంకేతికత సూత్రాలను నేర్చుకోవడం మరియు అన్వేషించడంలో నిబద్ధత చూపినందుకు ఈ సర్టిఫికెట్ అందించబడుతోంది.",
 programName:"క్వాంటం కంప్యూటింగ్",
 topics1:"క్యూబిట్లు · సూపర్‌పొజిషన్ · ఎంటాంగిల్‌మెంట్ · క్వాంటం గేట్లు",
 topics2:"అల్గారిథమ్‌లు · అనువర్తనాలు · బాధ్యతాయుతమైన ఆవిష్కరణ",
 verified:"ధృవీకరించబడింది",
 teamLabel:"ప్రాజెక్ట్ బృందం",
 dateLabel:"పూర్తి చేసిన తేదీ",
-disclaimer:"QUBITQUEST ప్రాజెక్ట్ పూర్తి చేసిన గుర్తింపు · గుర్తింపు పొందిన విద్యార్హత కాదు",
+disclaimer:"Q-SPARK ప్రాజెక్ట్ పూర్తి చేసిన గుర్తింపు · గుర్తింపు పొందిన విద్యార్హత కాదు",
 print:"🖨 ప్రింట్ చేయండి / PDFగా సేవ్ చేయండి",
-footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+footer:"✦ Q-Spark — అందరికీ క్వాంటం అభ్యాసం.",
 progressText:"మాడ్యూల్ 5 పూర్తి: {percent}%",
 correct:"✓ సరైన సమాధానం! ",
 incorrect:"సరైన సమాధానం కాదు! ",
@@ -1202,7 +1207,7 @@ explanation1:"పోస్ట్-క్వాంటం క్రిప్టో�
 explanation2:"బాధ్యతాయుతమైన ఆవిష్కరణలో నిజాయితీతో కూడిన సమాచారం మరియు సామాజిక ప్రభావాన్ని పరిగణించడం ఉంటాయి.",
 incomplete:"దయచేసి ముందుగా మూడు ప్రశ్నలకూ సమాధానాలు ఇవ్వండి.",
 score:"మీ చివరి స్కోరు: 3లో {score}! ",
-perfect:"అద్భుతం! మీరు QubitQuest పూర్తి చేశారు! 🎉",
+perfect:"అద్భుతం! మీరు Q-Spark పూర్తి చేశారు! 🎉",
 tryAgain:"మంచి ప్రయత్నం! చివరి మాడ్యూల్ పూర్తి చేయడానికి 3/3 అవసరం.",
 certificateReady:"అభినందనలు! ఐదు మాడ్యూళ్లన్నీ పూర్తయ్యాయి. మీ సర్టిఫికెట్ సిద్ధంగా ఉంది! 🎉",
 needModules:"సర్టిఫికెట్ పొందడానికి ఐదు మాడ్యూళ్లన్నీ పూర్తి చేసి చివరి పరీక్షలో 3/3 సాధించండి.",
@@ -1211,7 +1216,7 @@ assessmentComplete:"అభినందనలు! మీ మాడ్యూల్
 retryCertificate:"మీ పూర్తి చేసిన సర్టిఫికెట్ పొందడానికి మళ్లీ ప్రయత్నించండి.",
 enterName:"సర్టిఫికెట్ ప్రింట్ చేయడానికి ముందు మీ పూర్తి పేరును నమోదు చేయండి.",
 completeFirst:"దయచేసి ముందుగా ఐదు మాడ్యూళ్లన్నీ మరియు చివరి పరీక్షను పూర్తి చేయండి.",
-learner:"QubitQuest అభ్యాసకుడు"
+learner:"Q-Spark అభ్యాసకుడు"
 }
 
 };
@@ -1580,5 +1585,6 @@ applyLanguage(currentLanguage);
 
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

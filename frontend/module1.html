@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 1 | QubitQuest</title>
+<title>Module 1 | Q-Spark</title>
 
 <style>
 :root{
@@ -541,26 +541,30 @@ footer{
     }
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
-<body>
+<body data-module="1">
 
 <nav class="navbar">
     <div class="nav-inner">
-        <div class="logo">⚛ Qubit<span>Quest</span></div>
+        <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
         <div class="nav-actions">
+            <button type="button" class="theme-toggle">Light mode</button>
             <select id="languageSelect" aria-label="Select language">
                 <option value="en">English</option>
                 <option value="kn">ಕನ್ನಡ</option>
                 <option value="hi">हिन्दी</option>
                 <option value="te">తెలుగు</option>
             </select>
-            <a href="index.html" class="home-link" id="homeLink">← Home</a>
+            <a href="index.html#modules" class="home-link" id="homeLink" data-course-back>← Learning Journey</a>
         </div>
     </div>
 </nav>
 
 <main class="container">
+    <nav class="module-jump" aria-label="Modules"></nav>
 
     <header class="hero">
         <div class="tag" id="moduleTag">MODULE 01 · BEGINNER</div>
@@ -733,7 +737,7 @@ footer{
         <div class="section-label" id="section6">06 · KNOWLEDGE CHECK</div>
         <h2 id="quizTitle">Test Your Knowledge!</h2>
 
-        <p id="quizIntro">Answer all three questions correctly to complete Module 1 and unlock Module 2.</p>
+        <p id="quizIntro">Answer all three questions correctly to complete Module 1.</p>
 
         <div class="quiz-card">
             <h3 id="question1Title">Question 1: What does a computer do?</h3>
@@ -782,9 +786,10 @@ footer{
         <a href="module2.html" class="primary-button" id="continueButton">Continue to Module 2 →</a>
     </section>
 
+    <nav class="module-pager" aria-label="Modules"></nav>
 </main>
 
-<footer id="footerText">✦ QubitQuest — Quantum Learning for Everyone.</footer>
+<footer id="footerText">✦ Q-Spark — Quantum Learning for Everyone.</footer>
 
 <script>
 
@@ -865,7 +870,7 @@ recapQubitTitle:"Qubit",
 recapQubitText:"A quantum unit of information that can exist in superposition.",
 section6:"06 · KNOWLEDGE CHECK",
 quizTitle:"Test Your Knowledge!",
-quizIntro:"Answer all three questions correctly to complete Module 1 and unlock Module 2.",
+quizIntro:"Answer all three questions correctly to complete Module 1.",
 question:"Question",
 question1:"What does a computer do?",
 q0a:"A. Receives and processes information",
@@ -896,7 +901,7 @@ completedTitle:"🎉 Module 1 Completed!",
 completedText:"You have successfully learned the fundamentals of quantum computing. Your progress has been saved.",
 nextText:"Next: Discover superposition and entanglement in Module 2.",
 continue:"Continue to Module 2 →",
-footer:"✦ QubitQuest — Quantum Learning for Everyone.",
+footer:"✦ Q-Spark — Quantum Learning for Everyone.",
 moduleSavedError:"Your browser could not save your progress. Please check your browser storage settings."
 },
 
@@ -963,7 +968,7 @@ recapQubitTitle:"ಕ್ಯೂಬಿಟ್",
 recapQubitText:"ಸೂಪರ್‌ಪೊಸಿಷನ್‌ನಲ್ಲಿ ಇರಬಲ್ಲ ಕ್ವಾಂಟಂ ಮಾಹಿತಿ ಘಟಕ.",
 section6:"06 · ಜ್ಞಾನ ಪರೀಕ್ಷೆ",
 quizTitle:"ನಿಮ್ಮ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿ!",
-quizIntro:"ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಳಿಸಿ ಮಾಡ್ಯೂಲ್ 2 ತೆರೆಯಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
+quizIntro:"ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಳಿಸಲು ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
 question:"ಪ್ರಶ್ನೆ",
 question1:"ಕಂಪ್ಯೂಟರ್ ಏನು ಮಾಡುತ್ತದೆ?",
 q0a:"A. ಮಾಹಿತಿಯನ್ನು ಸ್ವೀಕರಿಸಿ ಸಂಸ್ಕರಿಸುತ್ತದೆ",
@@ -994,7 +999,7 @@ completedTitle:"🎉 ಮಾಡ್ಯೂಲ್ 1 ಪೂರ್ಣಗೊಂಡಿ�
 completedText:"ನೀವು ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್‌ನ ಮೂಲಭೂತ ವಿಷಯಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಲಿತಿದ್ದೀರಿ. ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
 nextText:"ಮುಂದೆ: ಮಾಡ್ಯೂಲ್ 2ರಲ್ಲಿ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟಾಂಗಲ್‌ಮೆಂಟ್ ಕಲಿಯಿರಿ.",
 continue:"ಮಾಡ್ಯೂಲ್ 2ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",
-footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಂ ಕಲಿಕೆ.",
+footer:"✦ Q-Spark — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಂ ಕಲಿಕೆ.",
 moduleSavedError:"ನಿಮ್ಮ ಬ್ರೌಸರ್ ಪ್ರಗತಿಯನ್ನು ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಸ್ಟೋರೇಜ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ."
 },
 
@@ -1061,7 +1066,7 @@ recapQubitTitle:"क्यूबिट",
 recapQubitText:"जानकारी की क्वांटम इकाई जो सुपरपोजिशन में हो सकती है।",
 section6:"06 · ज्ञान परीक्षा",
 quizTitle:"अपना ज्ञान जाँचें!",
-quizIntro:"मॉड्यूल 1 पूरा करने और मॉड्यूल 2 खोलने के लिए तीनों प्रश्नों के सही उत्तर दें।",
+quizIntro:"मॉड्यूल 1 पूरा करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
 question:"प्रश्न",
 question1:"कंप्यूटर क्या करता है?",
 q0a:"A. जानकारी प्राप्त और प्रोसेस करता है",
@@ -1092,7 +1097,7 @@ completedTitle:"🎉 मॉड्यूल 1 पूरा हुआ!",
 completedText:"आपने क्वांटम कंप्यूटिंग की बुनियादी बातें सफलतापूर्वक सीख ली हैं। आपकी प्रगति सेव हो गई है।",
 nextText:"अगला: मॉड्यूल 2 में सुपरपोजिशन और एंटैंगलमेंट सीखें।",
 continue:"मॉड्यूल 2 पर जाएँ →",
-footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+footer:"✦ Q-Spark — सभी के लिए क्वांटम शिक्षा।",
 moduleSavedError:"आपका ब्राउज़र प्रगति सेव नहीं कर पाया। स्टोरेज सेटिंग्स जाँचें।"
 },
 
@@ -1159,7 +1164,7 @@ recapQubitTitle:"క్యూబిట్",
 recapQubitText:"సూపర్‌పొజిషన్‌లో ఉండగల క్వాంటం సమాచార యూనిట్.",
 section6:"06 · జ్ఞాన పరీక్ష",
 quizTitle:"మీ జ్ఞానాన్ని పరీక్షించుకోండి!",
-quizIntro:"మాడ్యూల్ 1 పూర్తి చేసి మాడ్యూల్ 2ను తెరవడానికి మూడు ప్రశ్నలకూ సరిగ్గా సమాధానం ఇవ్వండి.",
+quizIntro:"మాడ్యూల్ 1 పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరిగ్గా సమాధానం ఇవ్వండి.",
 question:"ప్రశ్న",
 question1:"కంప్యూటర్ ఏమి చేస్తుంది?",
 q0a:"A. సమాచారాన్ని స్వీకరించి ప్రాసెస్ చేస్తుంది",
@@ -1190,7 +1195,7 @@ completedTitle:"🎉 మాడ్యూల్ 1 పూర్తయింది!"
 completedText:"మీరు క్వాంటం కంప్యూటింగ్ ప్రాథమిక అంశాలను విజయవంతంగా నేర్చుకున్నారు. మీ పురోగతి సేవ్ చేయబడింది.",
 nextText:"తదుపరి: మాడ్యూల్ 2లో సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ నేర్చుకోండి.",
 continue:"మాడ్యూల్ 2కి కొనసాగండి →",
-footer:"✦ QubitQuest — అందరికీ క్వాంటం అభ్యాసం.",
+footer:"✦ Q-Spark — అందరికీ క్వాంటం అభ్యాసం.",
 moduleSavedError:"మీ బ్రౌజర్ పురోగతిని సేవ్ చేయలేకపోయింది. స్టోరేజ్ సెట్టింగ్‌లను తనిఖీ చేయండి."
 }
 
@@ -1642,5 +1647,6 @@ updateModuleProgress();
 
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

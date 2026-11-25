@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 3 | QubitQuest</title>
+<title>Module 3 | Q-Spark</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -59,24 +59,28 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 .container{padding:35px 16px}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
-<body>
+<body data-module="3">
 
 <nav class="navbar">
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
     <div class="nav-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select class="language-select" id="languageSelect" aria-label="Select language">
             <option value="en">English</option>
             <option value="kn">ಕನ್ನಡ</option>
             <option value="hi">हिन्दी</option>
             <option value="te">తెలుగు</option>
         </select>
-        <a href="index.html" data-i18n="home">← Home</a>
+        <a href="index.html#modules" data-i18n="home" data-course-back>← Learning Journey</a>
     </div>
 </nav>
 
 <main class="container">
+    <nav class="module-jump" aria-label="Modules"></nav>
 
     <span class="tag" data-i18n="tag">MODULE 03 · PRACTICAL LEVEL</span>
 
@@ -198,12 +202,13 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
         <p data-i18n="nextDescription">You've explored the X, H, Z and CNOT gates. You've also learned how gates work together.</p>
         <p class="example" data-i18n="nextExample">Next: Explore quantum algorithms and real-world applications.</p>
         <a class="primary" href="module4.html" id="nextModule" style="display:none" data-i18n="continue">Continue to Module 4 →</a>
-        <p id="lockedMessage" class="note" data-i18n="locked">Pass the Module 3 quiz with 3/3 to unlock Module 4.</p>
+        <p id="lockedMessage" class="note" data-i18n="locked">Pass the Module 3 quiz with 3/3 to mark this module complete.</p>
     </section>
 
+    <nav class="module-pager" aria-label="Modules"></nav>
 </main>
 
-<footer data-i18n="footer">✦ QubitQuest — Quantum learning for everyone.</footer>
+<footer data-i18n="footer">✦ Q-Spark — Quantum learning for everyone.</footer>
 
 <script>
 const translations = {
@@ -236,8 +241,8 @@ q3a:"A. When control is 0",q3b:"B. Always",q3c:"C. When control is 1",
 checkScore:"Check My Score →",retry:"Retry Quiz",nextTitle:"You're becoming a circuit builder! 🚀",
 nextDescription:"You've explored the X, H, Z and CNOT gates. You've also learned how gates work together.",
 nextExample:"Next: Explore quantum algorithms and real-world applications.",
-continue:"Continue to Module 4 →",locked:"Pass the Module 3 quiz with 3/3 to unlock Module 4.",
-footer:"✦ QubitQuest — Quantum learning for everyone.",
+continue:"Continue to Module 4 →",locked:"Pass the Module 3 quiz with 3/3 to mark this module complete.",
+footer:"✦ Q-Spark — Quantum learning for everyone.",
 progress:"Module 3 completion: ",correct:"✓ Correct! ",wrong:"Not quite! ",
 explanations:[
 "The X Gate flips |0⟩ to |1⟩ and |1⟩ to |0⟩.",
@@ -256,7 +261,7 @@ circuitDiagram:"Real Qiskit Circuit Diagram",circuitCaption:"This diagram is gen
 missingCircuit:"Circuit image was not returned by the backend. The text circuit is shown above.",
 histogram:"Measurement Histogram",histogramCaption:"This histogram visualizes the measurement counts from the Qiskit Aer simulation.",
 missingHistogram:"Histogram image was not returned by the backend.",
-failed:"Experiment failed: ",backendHint:"Please check that your Flask backend is running on port 5000.",
+failed:"Experiment failed: ",backendHint:"Please check that your Flask backend is running on port 8056.",
 serverError:"The experiment could not be completed."
 },
 kn: {
@@ -288,8 +293,8 @@ q3a:"A. ನಿಯಂತ್ರಣ 0 ಆಗಿದ್ದಾಗ",q3b:"B. ಯಾವ�
 checkScore:"ನನ್ನ ಅಂಕಗಳನ್ನು ಪರಿಶೀಲಿಸಿ →",retry:"ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",nextTitle:"ನೀವು ಸರ್ಕ್ಯೂಟ್ ನಿರ್ಮಾತೃ ಆಗುತ್ತಿದ್ದೀರಿ! 🚀",
 nextDescription:"ನೀವು X, H, Z ಮತ್ತು CNOT ಗೇಟ್‌ಗಳನ್ನು ಕಲಿತಿದ್ದೀರಿ. ಗೇಟ್‌ಗಳು ಒಟ್ಟಿಗೆ ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತವೆ ಎಂಬುದನ್ನೂ ತಿಳಿದಿದ್ದೀರಿ.",
 nextExample:"ಮುಂದೆ: ಕ್ವಾಂಟಮ್ ಅಲ್ಗಾರಿದಮ್‌ಗಳು ಮತ್ತು ನೈಜ ಜಗತ್ತಿನ ಅನ್ವಯಿಕೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.",
-continue:"ಮಾಡ್ಯೂಲ್ 4ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",locked:"ಮಾಡ್ಯೂಲ್ 4 ತೆರೆಯಲು ಮಾಡ್ಯೂಲ್ 3 ರ ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಅಂಕ ಪಡೆಯಿರಿ.",
-footer:"✦ QubitQuest — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
+continue:"ಮಾಡ್ಯೂಲ್ 4ಕ್ಕೆ ಮುಂದುವರಿಯಿರಿ →",locked:"ಈ ಘಟಕವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಪರೀಕ್ಷೆಯಲ್ಲಿ 3/3 ಅಂಕ ಪಡೆಯಿರಿ.",
+footer:"✦ Q-Spark — ಎಲ್ಲರಿಗೂ ಕ್ವಾಂಟಮ್ ಕಲಿಕೆ.",
 progress:"ಮಾಡ್ಯೂಲ್ 3 ಪೂರ್ಣತೆ: ",correct:"✓ ಸರಿಯಾಗಿದೆ! ",wrong:"ಸರಿಯಾದ ಉತ್ತರ ಅಲ್ಲ! ",
 explanations:["X ಗೇಟ್ |0⟩ ಅನ್ನು |1⟩ ಆಗಿ ಮತ್ತು |1⟩ ಅನ್ನು |0⟩ ಆಗಿ ಬದಲಾಯಿಸುತ್ತದೆ.","H ಗೇಟ್ |0⟩ ನಿಂದ ಸಮಾನ ಸೂಪರ್‌ಪೊಸಿಷನ್ ರಚಿಸುತ್ತದೆ.","ನಿಯಂತ್ರಣ ಕ್ಯೂಬಿಟ್ 1 ಆಗಿದ್ದಾಗ CNOT ಗುರಿಯನ್ನು ತಿರುಗಿಸುತ್ತದೆ."],
 answerAll:"ದಯವಿಟ್ಟು ಮೊದಲು ಎಲ್ಲಾ ಮೂರು ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.",
@@ -304,7 +309,7 @@ circuitDiagram:"ನೈಜ Qiskit ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ",ci
 missingCircuit:"ಬ್ಯಾಕೆಂಡ್‌ನಿಂದ ಸರ್ಕ್ಯೂಟ್ ಚಿತ್ರ ಬಂದಿಲ್ಲ. ಮೇಲಿನ ಟೆಕ್ಸ್ಟ್ ಸರ್ಕ್ಯೂಟ್ ನೋಡಿ.",
 histogram:"ಅಳತೆಯ ಹಿಸ್ಟೋಗ್ರಾಮ್",histogramCaption:"ಈ ಹಿಸ್ಟೋಗ್ರಾಮ್ Qiskit Aer ಸಿಮ್ಯುಲೇಶನ್‌ನ ಅಳತೆ ಎಣಿಕೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.",
 missingHistogram:"ಬ್ಯಾಕೆಂಡ್‌ನಿಂದ ಹಿಸ್ಟೋಗ್ರಾಮ್ ಚಿತ್ರ ಬಂದಿಲ್ಲ.",
-failed:"ಪ್ರಯೋಗ ವಿಫಲವಾಗಿದೆ: ",backendHint:"ನಿಮ್ಮ Flask ಬ್ಯಾಕೆಂಡ್ ಪೋರ್ಟ್ 5000 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
+failed:"ಪ್ರಯೋಗ ವಿಫಲವಾಗಿದೆ: ",backendHint:"ನಿಮ್ಮ Flask ಬ್ಯಾಕೆಂಡ್ ಪೋರ್ಟ್ 8056 ನಲ್ಲಿ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.",
 serverError:"ಪ್ರಯೋಗವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಲಿಲ್ಲ."
 },
 hi: {
@@ -336,8 +341,8 @@ q3a:"A. जब नियंत्रण 0 हो",q3b:"B. हमेशा",q3c:"
 checkScore:"मेरा स्कोर जाँचें →",retry:"क्विज़ दोबारा करें",nextTitle:"आप सर्किट बनाने में माहिर हो रहे हैं! 🚀",
 nextDescription:"आपने X, H, Z और CNOT गेट्स सीखे हैं। आपने यह भी जाना कि गेट्स एक साथ कैसे काम करते हैं।",
 nextExample:"आगे: क्वांटम एल्गोरिदम और वास्तविक दुनिया में उनके उपयोग जानें।",
-continue:"मॉड्यूल 4 पर जाएँ →",locked:"मॉड्यूल 4 अनलॉक करने के लिए मॉड्यूल 3 क्विज़ में 3/3 अंक प्राप्त करें।",
-footer:"✦ QubitQuest — सभी के लिए क्वांटम शिक्षा।",
+continue:"मॉड्यूल 4 पर जाएँ →",locked:"इस मॉड्यूल को पूरा करने के लिए क्विज़ में 3/3 अंक प्राप्त करें।",
+footer:"✦ Q-Spark — सभी के लिए क्वांटम शिक्षा।",
 progress:"मॉड्यूल 3 की पूर्णता: ",correct:"✓ सही! ",wrong:"सही नहीं! ",
 explanations:["X गेट |0⟩ को |1⟩ और |1⟩ को |0⟩ में बदलता है।","H गेट |0⟩ से समान सुपरपोज़िशन बनाता है।","नियंत्रण क्यूबिट 1 होने पर CNOT लक्ष्य को पलटता है।"],
 answerAll:"कृपया पहले तीनों प्रश्नों के उत्तर दें।",
@@ -352,7 +357,7 @@ circuitDiagram:"वास्तविक Qiskit सर्किट चित्�
 missingCircuit:"बैकएंड से सर्किट चित्र प्राप्त नहीं हुआ। ऊपर टेक्स्ट सर्किट दिखाया गया है।",
 histogram:"मापन हिस्टोग्राम",histogramCaption:"यह हिस्टोग्राम Qiskit Aer सिमुलेशन के मापन परिणाम दिखाता है।",
 missingHistogram:"बैकएंड से हिस्टोग्राम चित्र प्राप्त नहीं हुआ।",
-failed:"प्रयोग विफल हुआ: ",backendHint:"जाँचें कि आपका Flask बैकएंड पोर्ट 5000 पर चल रहा है।",
+failed:"प्रयोग विफल हुआ: ",backendHint:"जाँचें कि आपका Flask बैकएंड पोर्ट 8056 पर चल रहा है।",
 serverError:"प्रयोग पूरा नहीं किया जा सका।"
 },
 te: {
@@ -384,8 +389,8 @@ q3a:"A. నియంత్రణ 0 అయినప్పుడు",q3b:"B. ఎ�
 checkScore:"నా స్కోర్‌ను తనిఖీ చేయండి →",retry:"క్విజ్‌ను మళ్లీ ప్రయత్నించండి",nextTitle:"మీరు సర్క్యూట్ నిర్మాణంలో నైపుణ్యం సాధిస్తున్నారు! 🚀",
 nextDescription:"మీరు X, H, Z మరియు CNOT గేట్లను తెలుసుకున్నారు. గేట్లు కలిసి ఎలా పనిచేస్తాయో కూడా నేర్చుకున్నారు.",
 nextExample:"తదుపరి: క్వాంటమ్ అల్గారిథమ్‌లు మరియు వాస్తవ ప్రపంచ అనువర్తనాలను అన్వేషించండి.",
-continue:"మాడ్యూల్ 4కి కొనసాగండి →",locked:"మాడ్యూల్ 4ను అన్‌లాక్ చేయడానికి మాడ్యూల్ 3 క్విజ్‌లో 3/3 స్కోర్ సాధించండి.",
-footer:"✦ QubitQuest — అందరికీ క్వాంటమ్ అభ్యాసం.",
+continue:"మాడ్యూల్ 4కి కొనసాగండి →",locked:"ఈ మాడ్యూల్‌ను పూర్తి చేయడానికి క్విజ్‌లో 3/3 స్కోర్ సాధించండి.",
+footer:"✦ Q-Spark — అందరికీ క్వాంటమ్ అభ్యాసం.",
 progress:"మాడ్యూల్ 3 పూర్తి: ",correct:"✓ సరైనది! ",wrong:"సరైన సమాధానం కాదు! ",
 explanations:["X గేట్ |0⟩ ను |1⟩ గా మరియు |1⟩ ను |0⟩ గా మారుస్తుంది.","H గేట్ |0⟩ నుండి సమాన సూపర్‌పొజిషన్‌ను సృష్టిస్తుంది.","నియంత్రణ క్యూబిట్ 1 అయినప్పుడు CNOT లక్ష్యాన్ని తిప్పుతుంది."],
 answerAll:"దయచేసి ముందుగా మూడు ప్రశ్నలకు సమాధానాలు ఇవ్వండి.",
@@ -400,7 +405,7 @@ circuitDiagram:"నిజమైన Qiskit సర్క్యూట్ చిత�
 missingCircuit:"బ్యాకెండ్ నుండి సర్క్యూట్ చిత్రం రాలేదు. పైన టెక్స్ట్ సర్క్యూట్ చూపబడింది.",
 histogram:"కొలతల హిస్టోగ్రామ్",histogramCaption:"ఈ హిస్టోగ్రామ్ Qiskit Aer సిమ్యులేషన్ కొలతల సంఖ్యను చూపిస్తుంది.",
 missingHistogram:"బ్యాకెండ్ నుండి హిస్టోగ్రామ్ చిత్రం రాలేదు.",
-failed:"ప్రయోగం విఫలమైంది: ",backendHint:"మీ Flask బ్యాకెండ్ పోర్ట్ 5000లో నడుస్తోందో లేదో తనిఖీ చేయండి.",
+failed:"ప్రయోగం విఫలమైంది: ",backendHint:"మీ Flask బ్యాకెండ్ పోర్ట్ 8056లో నడుస్తోందో లేదో తనిఖీ చేయండి.",
 serverError:"ప్రయోగాన్ని పూర్తి చేయలేకపోయాము."
 }
 };
@@ -597,7 +602,7 @@ function retryQuiz() {
 // QISKIT VISUALIZATION SYSTEM
 // ==================================
 
-const BACKEND_URL = "http://127.0.0.1:5000";
+const BACKEND_URL = "";
 const lastExperimentResults = {};
 
 function addVisualizationImages(container, data) {
@@ -815,5 +820,6 @@ applyLanguage(savedLanguage);
 updateModuleProgress();
 
 </script>
+<script src="lesson-nav.js"></script>
 </body>
 </html>

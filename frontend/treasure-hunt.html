@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quantum Treasure Hunt | QubitQuest</title>
+<title>Quantum Treasure Hunt | Q-Spark</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -107,19 +107,22 @@ select:not(.language-select){width:100%}
 .shots-group{width:100%}
 }
 </style>
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 </head>
 
 <body>
 <header>
-    <div class="logo">✦ QubitQuest</div>
+    <a class="logo brand-home" href="index.html" aria-label="Q-Spark home">Q-Spark</a>
     <div class="header-right">
+        <button type="button" class="theme-toggle">Light mode</button>
         <select id="languageSelect" class="language-select" aria-label="Choose language">
             <option value="en">🇬🇧 English</option>
             <option value="kn">🇮🇳 ಕನ್ನಡ</option>
             <option value="hi">🇮🇳 हिन्दी</option>
             <option value="te">🇮🇳 తెలుగు</option>
         </select>
-        <a href="index.html" class="back" data-i18n="back">← Back to Home</a>
+        <a href="index.html#arcade" class="back" data-i18n="back" data-course-back>← Quantum Arcade</a>
     </div>
 </header>
 
@@ -278,7 +281,7 @@ select:not(.language-select){width:100%}
         </div>
     </section>
 
-    <div class="footer" data-i18n="footer">QubitQuest · Explore. Experiment. Understand.</div>
+    <div class="footer" data-i18n="footer">Q-Spark · Explore. Experiment. Understand.</div>
 </main>
 
 <script>
@@ -300,7 +303,7 @@ learningTitle:"🧠 How Did You Find the Treasure?",superpositionTitle:"01 · Su
 oracleTitle:"02 · Oracle",oracleText:"The oracle marks the chosen treasure state by changing its quantum phase.",
 diffusionTitle:"03 · Diffusion",diffusionText:"The diffusion operator amplifies the marked state's probability through quantum interference.",
 measurementTitle:"04 · Measurement",measurementText:"The simulator measures the qubits and returns the search results. In this ideal four-state example, one iteration finds the marked state.",
-footer:"QubitQuest · Explore. Experiment. Understand.",
+footer:"Q-Spark · Explore. Experiment. Understand.",
 selected:" selected. Start the quantum search!",selectFirst:"Please select one of the four treasure locations first!",
 chestSelected:"TREASURE LOCATION SELECTED",welcome:"Welcome, explorer! Select a location and search for the hidden treasure.",
 searching:"⏳ SEARCHING THE QUANTUM WORLD...",searchingCaption:"QUANTUM SEARCH IN PROGRESS",
@@ -328,7 +331,7 @@ learningTitle:"🧠 ನೀವು ನಿಧಿಯನ್ನು ಹೇಗೆ ಕಂ
 oracleTitle:"02 · ಒರಾಕಲ್",oracleText:"ಒರಾಕಲ್ ಆಯ್ಕೆಮಾಡಿದ ನಿಧಿಯ ಸ್ಥಿತಿಯ ಕ್ವಾಂಟಮ್ ಹಂತವನ್ನು ಬದಲಾಯಿಸಿ ಅದನ್ನು ಗುರುತಿಸುತ್ತದೆ.",
 diffusionTitle:"03 · ಡಿಫ್ಯೂಷನ್",diffusionText:"ಕ್ವಾಂಟಮ್ ಹಸ್ತಕ್ಷೇಪದ ಮೂಲಕ ಡಿಫ್ಯೂಷನ್ ಆಪರೇಟರ್ ಗುರುತಿಸಲಾದ ಸ್ಥಿತಿಯ ಸಂಭವನೀಯತೆಯನ್ನು ಹೆಚ್ಚಿಸುತ್ತದೆ.",
 measurementTitle:"04 · ಮಾಪನ",measurementText:"ಸಿಮ್ಯುಲೇಟರ್ ಕ್ಯೂಬಿಟ್‌ಗಳನ್ನು ಅಳೆಯುತ್ತದೆ ಮತ್ತು ಹುಡುಕಾಟದ ಫಲಿತಾಂಶಗಳನ್ನು ನೀಡುತ್ತದೆ. ಈ ನಾಲ್ಕು ಸ್ಥಿತಿಗಳ ಉದಾಹರಣೆಯಲ್ಲಿ, ಒಂದು ಪುನರಾವರ್ತನೆಯೇ ಗುರುತಿಸಲಾದ ಸ್ಥಿತಿಯನ್ನು ಕಂಡುಹಿಡಿಯುತ್ತದೆ.",
-footer:"QubitQuest · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
+footer:"Q-Spark · ಅನ್ವೇಷಿಸಿ. ಪ್ರಯೋಗಿಸಿ. ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
 selected:" ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ. ಕ್ವಾಂಟಮ್ ಹುಡುಕಾಟ ಪ್ರಾರಂಭಿಸಿ!",selectFirst:"ಮೊದಲು ನಾಲ್ಕು ನಿಧಿ ಸ್ಥಳಗಳಲ್ಲಿ ಒಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ!",
 chestSelected:"ನಿಧಿಯ ಸ್ಥಳ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",welcome:"ಸ್ವಾಗತ ಅನ್ವೇಷಕರೇ! ಒಂದು ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು ಗುಪ್ತ ನಿಧಿಯನ್ನು ಹುಡುಕಿ.",
 searching:"⏳ ಕ್ವಾಂಟಮ್ ಜಗತ್ತಿನಲ್ಲಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ...",searchingCaption:"ಕ್ವಾಂಟಮ್ ಹುಡುಕಾಟ ನಡೆಯುತ್ತಿದೆ",
@@ -356,7 +359,7 @@ learningTitle:"🧠 आपने खज़ाना कैसे खोजा?",
 oracleTitle:"02 · ओरेकल",oracleText:"ओरेकल चुने गए खज़ाने की क्वांटम फेज़ बदलकर उस स्थिति को चिह्नित करता है।",
 diffusionTitle:"03 · डिफ्यूज़न",diffusionText:"डिफ्यूज़न ऑपरेटर क्वांटम इंटरफेरेंस के माध्यम से चिह्नित स्थिति की संभावना बढ़ाता है।",
 measurementTitle:"04 · मापन",measurementText:"सिम्युलेटर क्यूबिट्स को मापता है और खोज के परिणाम देता है। इस आदर्श चार-स्थिति वाले उदाहरण में, एक पुनरावृत्ति चिह्नित स्थिति खोज लेती है।",
-footer:"QubitQuest · खोजें। प्रयोग करें। समझें।",
+footer:"Q-Spark · खोजें। प्रयोग करें। समझें।",
 selected:" चुना गया है। क्वांटम खोज शुरू करें!",selectFirst:"कृपया पहले चार खज़ाने के स्थानों में से एक चुनें!",
 chestSelected:"खज़ाने का स्थान चुना गया",welcome:"स्वागत है खोजकर्ता! एक स्थान चुनें और छिपे हुए खज़ाने को खोजें।",
 searching:"⏳ क्वांटम दुनिया में खोज जारी है...",searchingCaption:"क्वांटम खोज जारी है",
@@ -384,7 +387,7 @@ learningTitle:"🧠 మీరు నిధిని ఎలా కనుగొన
 oracleTitle:"02 · ఒరాకిల్",oracleText:"ఒరాకిల్ ఎంచుకున్న నిధి స్థితి యొక్క క్వాంటమ్ ఫేజ్‌ను మార్చి దానిని గుర్తిస్తుంది.",
 diffusionTitle:"03 · డిఫ్యూజన్",diffusionText:"క్వాంటమ్ ఇంటర్‌ఫెరెన్స్ ద్వారా డిఫ్యూజన్ ఆపరేటర్ గుర్తించిన స్థితి సంభావ్యతను పెంచుతుంది.",
 measurementTitle:"04 · కొలత",measurementText:"సిమ్యులేటర్ క్యూబిట్‌లను కొలిచి శోధన ఫలితాలను అందిస్తుంది. ఈ ఆదర్శ నాలుగు-స్థితుల ఉదాహరణలో, ఒక పునరావృతం గుర్తించిన స్థితిని కనుగొంటుంది.",
-footer:"QubitQuest · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి.",
+footer:"Q-Spark · అన్వేషించండి. ప్రయోగించండి. అర్థం చేసుకోండి.",
 selected:" ఎంచుకోబడింది. క్వాంటమ్ శోధన ప్రారంభించండి!",selectFirst:"ముందుగా నాలుగు నిధి ప్రదేశాలలో ఒకదాన్ని ఎంచుకోండి!",
 chestSelected:"నిధి ప్రదేశం ఎంచుకోబడింది",welcome:"స్వాగతం అన్వేషకుడా! ఒక ప్రదేశాన్ని ఎంచుకుని దాచిన నిధిని వెతకండి.",
 searching:"⏳ క్వాంటమ్ ప్రపంచంలో శోధిస్తోంది...",searchingCaption:"క్వాంటమ్ శోధన కొనసాగుతోంది",
@@ -636,7 +639,7 @@ async function startSearch() {
         const animationPromise = animateSearch();
 
         const response = await fetch(
-            "http://127.0.0.1:5000/run-treasure-hunt",
+            "/run-treasure-hunt",
             {
                 method: "POST",
                 headers: {
@@ -713,5 +716,6 @@ applyLanguage();
 document.getElementById("status").textContent = t("welcome");
 </script>
 
+<script src="lesson-nav.js"></script>
 </body>
 </html>

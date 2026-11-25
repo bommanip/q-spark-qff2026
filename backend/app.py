@@ -3,6 +3,7 @@ import base64
 import io
 import math
 import threading
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -19,7 +20,9 @@ from qiskit_aer import AerSimulator
 # APP CONFIGURATION
 # ==========================================
 
-app = Flask(__name__)
+frontend = Path(__file__).resolve().parents[1] / "frontend"
+app = Flask(__name__, static_folder=frontend, static_url_path="")
+app.config["MAX_CONTENT_LENGTH"] = 4096
 CORS(app)
 
 simulator = AerSimulator()
@@ -189,11 +192,16 @@ def execute_grover(marked_state, shots=1024):
 # HOME
 # ==========================================
 
-@app.route("/")
+@app.get("/")
+def index():
+    return app.send_static_file("index.html")
+
+
+@app.get("/health")
 def home():
 
     return jsonify({
-        "message": "Welcome to QubitQuest!",
+        "message": "Welcome to Q-Spark!",
         "status": "Quantum simulator is ready."
     })
 
@@ -656,6 +664,5 @@ def run_treasure_hunt():
 if __name__ == "__main__":
 
     app.run(
-        debug=True,
-        port=5000
+        port=8056
     )

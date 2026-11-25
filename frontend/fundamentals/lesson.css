@@ -1,0 +1,262 @@
+.coin-lesson {
+    margin: 28px 0;
+    padding: clamp(20px, 5vw, 48px);
+    color: #1d1d1f;
+    background: #fff;
+    border-radius: 26px;
+    font-family: system-ui, sans-serif;
+    color-scheme: light;
+}
+
+.coin-lesson h2 {
+    margin: 0;
+    font-size: clamp(1.9rem, 5vw, 3.6rem);
+    line-height: 1.13;
+    letter-spacing: -.035em;
+}
+
+.coin-lesson [data-coin-copy="intro"] {
+    margin: .7rem 0 1.1rem;
+    color: #515154;
+}
+
+.coin-lesson button { font: inherit; cursor: pointer; }
+.coin-lesson button:focus-visible { outline: 3px solid #145cb6; outline-offset: 4px; }
+
+.coin-play {
+    padding: .65rem 1.1rem;
+    color: white;
+    background: #0759bb;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 650;
+}
+
+.coin-step {
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 18px;
+    background: #f5f5f7;
+}
+
+.coin-caption { margin: .45rem 0 0; color: #424245; font-size: .95rem; }
+.coin-lesson .coin-art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 174px;
+    margin-bottom: 8px;
+    perspective: 520px;
+}
+
+.coin-sphere {
+    position: relative;
+    z-index: 1;
+    width: 158px;
+    height: 158px;
+    overflow: visible;
+    color: #0759bb;
+    pointer-events: none;
+}
+
+.coin-sphere .grid { fill: none; stroke: #718bad; stroke-opacity: .62; stroke-width: 1; }
+.coin-sphere circle.grid { fill: #c3d9f8; fill-opacity: .15; }
+.coin-sphere .vector { stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.coin-sphere .point { fill: currentColor; }
+.coin-sphere text { fill: #424245; font: 9px system-ui, sans-serif; }
+
+.coin-disc {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 104px;
+    height: 104px;
+    transform-style: preserve-3d;
+}
+
+.coin-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    background: #b9a478 center / cover no-repeat;
+    box-shadow: 0 3px 7px #463b293b;
+}
+
+.coin-heads { background-image: url("coin-heads.jpg"); }
+.coin-tails { background-image: url("coin-tails.jpg"); }
+.coin-disc .coin-tails { transform: rotateY(180deg); }
+
+.coin-flip .coin-face::after, .coin-step[data-result] .coin-face::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 34%, #fffce5c9 48%, transparent 60%);
+    transform: translateX(-100%);
+    animation: coin-glint 3.8s ease-in-out infinite;
+    pointer-events: none;
+    content: "";
+}
+
+.coin-spin { animation: coin-spin 1.5s linear infinite; }
+
+.coin-state { transform-origin: 52px 52px; }
+.coin-state-spin { animation: state-orbit 1.5s linear infinite; }
+
+@keyframes state-orbit {
+    from { transform: scaleY(.36) rotate(0deg); }
+    to { transform: scaleY(.36) rotate(360deg); }
+}
+
+@keyframes coin-glint {
+    0%, 55% { transform: translateX(-95%); }
+    77%, 100% { transform: translateX(95%); }
+}
+@keyframes coin-spin {
+    from { transform: rotateZ(var(--coin-tilt, 0deg)) rotateY(0); }
+    to { transform: rotateZ(var(--coin-tilt, 0deg)) rotateY(360deg); }
+}
+
+.coin-lesson [data-coin-copy="note"], .coin-audio-status { margin: 1rem 0 0; color: #515154; font-size: .9rem; }
+.coin-audio-status:empty { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .coin-spin, .coin-state-spin,
+    .coin-flip .coin-face::after, .coin-step[data-result] .coin-face::after { animation: none; }
+}
+
+.coin-credit { margin: .5rem 0 0; color: #515154; font-size: .76rem; }
+.coin-credit a { color: #0759bb; }
+
+.coin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.coin-tabs button {
+    padding: .55rem .9rem;
+    border: 1px solid #b4c6df;
+    border-radius: 999px;
+    background: #f5f8fc;
+    color: #16375f;
+}
+
+.coin-tabs button[aria-selected="true"] {
+    border-color: #0759bb;
+    background: #0759bb;
+    color: white;
+}
+
+.coin-labs { margin-top: 16px; }
+
+.coin-lab {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #d8dde6;
+    border-radius: 18px;
+}
+
+.coin-lab .coin-step { padding: 10px; }
+.coin-sphere { max-width: 100%; }
+.coin-action {
+    padding: .55rem .75rem;
+    color: #08458d;
+    background: #eef5ff;
+    border: 1px solid #a8c7ef;
+    border-radius: 8px;
+}
+.coin-action:disabled { opacity: .55; cursor: wait; }
+#classical-flip { margin-top: 12px; }
+.coin-experiment { margin-top: 12px; }
+.coin-experiment label { display: block; margin-bottom: 4px; font-weight: 650; }
+.coin-experiment select { max-width: 100%; color: #1d1d1f; background: white; padding: .4rem; border-radius: 8px; }
+.coin-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.coin-outcome { display: block; margin-top: 8px; font-weight: 650; }
+
+.coin-step.is-one .coin-flip { transform: rotateY(180deg); }
+.coin-step.is-one .coin-state-flip { transform: rotate(180deg); }
+.coin-step :is(.coin-flip, .coin-state-flip) { transition: transform .45s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+    .coin-step :is(.coin-flip, .coin-state-flip) { transition: none; }
+}
+
+html:not([data-theme="light"]) .coin-lesson {
+    color-scheme: dark;
+    color: #f1efff;
+    background: #141c33;
+    border: 1px solid #344263;
+}
+
+html:not([data-theme="light"]) .coin-lesson :is(
+    [data-coin-copy="intro"], [data-coin-copy="note"],
+    .coin-caption, .coin-audio-status, .coin-credit
+) {
+    color: #c2cce2;
+}
+
+html:not([data-theme="light"]) .coin-lab { border-color: #394768; }
+html:not([data-theme="light"]) .coin-step { background: #1a2440; }
+html:not([data-theme="light"]) .coin-lesson :is(.coin-tabs button, .coin-action, .coin-experiment select) {
+    border: 1px solid #53678d;
+    color: #e7eeff;
+    background: #263554;
+}
+
+html:not([data-theme="light"]) .coin-lesson :is(.coin-tabs button[aria-selected="true"], .coin-play) {
+    border-color: #8cafff;
+    color: #14203c;
+    background: #a7c0ff;
+}
+
+html:not([data-theme="light"]) .coin-credit a { color: #a7c0ff; }
+html:not([data-theme="light"]) .coin-sphere { color: #92b7ff; }
+html:not([data-theme="light"]) .coin-sphere .grid { stroke: #9fb8df; }
+html:not([data-theme="light"]) .coin-sphere text { fill: #d6e4ff; }
+html:not([data-theme="light"]) .coin-lesson button:focus-visible { outline-color: #a7c0ff; }
+
+.coin-step .coin-play {
+    display: inline-block;
+    margin-top: 12px;
+    padding: .32rem .65rem;
+    font-size: .8rem;
+}
+
+.coin-audio-status { display: block; }
+.coin-odds { margin-top: 8px; font-variant-numeric: tabular-nums; }
+.coin-experiment input[type="range"] { width: min(100%, 26rem); accent-color: #627bd4; }
+.coin-action { display: inline-block; text-decoration: none; }
+.coin-step[data-result] :is(.coin-spin, .coin-state-spin) { animation: none; }
+.coin-step[data-result] .coin-spin {
+    --settled-face: 0deg;
+    transform: rotateY(var(--settled-face));
+}
+
+.coin-step[data-result="1"] .coin-spin { --settled-face: 180deg; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .coin-step[data-result] .coin-spin { animation: coin-collapse .35s ease-out both; }
+}
+
+@keyframes coin-collapse {
+    from { transform: rotateY(90deg); }
+    to { transform: rotateY(var(--settled-face)); }
+}
+.coin-step[data-result="0"] .coin-state-spin { transform: rotate(-90deg); }
+.coin-step[data-result="1"] .coin-state-spin { transform: rotate(90deg); }
+
+.coin-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 355px;
+    margin: 0 auto;
+}
+
+.coin-pair .coin-art { min-width: 0; }
+@media (max-width: 440px) {
+    .coin-pair .coin-art { height: 132px; }
+    .coin-pair .coin-sphere { width: 112px; height: 112px; }
+    .coin-pair .coin-disc { width: 74px; height: 74px; }
+}

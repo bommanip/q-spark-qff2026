@@ -1,9 +1,9 @@
-# QubitQuest 🚀
+# Q-Spark 🚀
 ### Explore the World of Quantum Computing — One Qubit at a Time
 
-**QubitQuest** is an interactive, beginner-friendly quantum computing learning platform designed to make complex quantum concepts easier to understand through visual demonstrations, hands-on experiments, quizzes, and real quantum circuit simulations powered by Qiskit.
+**Q-Spark** is an interactive, beginner-friendly quantum computing learning platform designed to make complex quantum concepts easier to understand through visual demonstrations, hands-on experiments, quizzes, and real quantum circuit simulations powered by Qiskit.
 
-Whether you're completely new to quantum computing or curious about how quantum computers work, QubitQuest takes you on a guided learning journey from classical bits to quantum algorithms.
+Whether you're completely new to quantum computing or curious about how quantum computers work, Q-Spark takes you on a guided learning journey from classical bits to quantum algorithms.
 
 ---
 
@@ -53,7 +53,7 @@ Whether you're completely new to quantum computing or curious about how quantum 
 
 ## 🌍 Language Support
 
-QubitQuest supports four languages:
+Q-Spark supports four languages:
 
 - 🇬🇧 English
 - 🇮🇳 Kannada
@@ -64,63 +64,31 @@ The selected language is saved so learners can continue using their preferred la
 
 ---
 
-## ⚙️ Installation & Setup
+## Run Q-Spark locally
 
-### 1. Clone the Repository
+Clone the [repository](https://github.com/bommanip/q-spark-qff2026) and run these commands from `q-spark-qff2026` with Python 3.14 installed.
 
-```bash
-git clone https://github.com/YOUR-USERNAME/QubitQuest.git
+### macOS or Linux
+
+```sh
+python3.14 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m waitress --listen=127.0.0.1:8056 --threads=2 backend.app:app
 ```
 
-### 2. Navigate to the Project
-
-```bash
-cd Q-spark
-```
-
-### 3. Start the Backend Server
-
-Open PowerShell Terminal 1:
+### Windows PowerShell
 
 ```powershell
-cd D:\Q-spark
-
-$env:PYTHONPATH = "D:\Lib\site-packages"
-
-D:\python.exe backend\app.py
+py -3.14 -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+& .\.venv\Scripts\python.exe -m waitress --listen=127.0.0.1:8056 --threads=2 backend.app:app
 ```
 
-The Flask backend runs at:
-
-```text
-http://127.0.0.1:5000
-```
-
-### 4. Start the Frontend Server
-
-Open a second PowerShell Terminal:
-
-```powershell
-cd D:\Q-spark\frontend
-
-D:\python.exe -m http.server 8000
-```
-
-### 5. Open QubitQuest
-
-Visit the following address in your browser:
-
-```text
-http://127.0.0.1:8000/
-```
-
-**Important:** Keep both terminal windows running while using the application.
-
----
+Open <http://127.0.0.1:8056/>. The same server handles the pages, audio, and simulator. Press Ctrl+C to stop it.
 
 ## 🔬 Quantum Experiments
 
-QubitQuest provides hands-on quantum experiments through its Flask backend.
+Q-Spark provides hands-on quantum experiments through its Flask backend.
 
 | Experiment | Description |
 |---|---|
@@ -138,7 +106,7 @@ Quantum simulations use Qiskit and Qiskit Aer.
 
 ## 🎓 Learning & Certification
 
-QubitQuest uses an interactive progression system:
+Q-Spark uses an interactive progression system:
 
 1. Start with Module 1.
 2. Learn the concepts and complete the quiz.
@@ -174,7 +142,7 @@ Q-spark/
 
 ## 🎯 Project Objective
 
-The primary objective of QubitQuest is to make quantum computing more accessible to beginners through interactive education.
+The primary objective of Q-Spark is to make quantum computing more accessible to beginners through interactive education.
 
 Instead of relying only on theoretical explanations, the platform combines learning content, visual demonstrations, quantum simulations, and assessments to create an engaging learning experience.
 
@@ -190,9 +158,37 @@ Instead of relying only on theoretical explanations, the platform combines learn
 
 ---
 
+## Quantum Coin Trail narration
+
+The five steps each have a separate play/pause control in English (`en`), Kannada (`kn`), Telugu (`te`), and Hindi (`hi`). The browser plays the bundled MP3s from [frontend/fundamentals/audio](frontend/fundamentals/audio). Playback runs locally with no model install, account, or API key.
+
+Edit [narration.js](frontend/fundamentals/narration.js) to update both the visible caption and the source for synthesis. Keep the order **classical**, **qubit**, **interference**, **tilt**, **entanglement**. The audio filename is `<language>-<step number>.mp3`, starting at 1. When you edit a caption, regenerate its clip and check the pronunciation before sharing it.
+
+### Regenerate clips
+
+Use a separate Python 3.12 virtual environment and install FFmpeg with `libmp3lame` available on PATH. These commands use an activated environment. On macOS or Linux, activate it with `source .venv-audio/bin/activate` after creating it with `python3.12 -m venv .venv-audio`. On Windows, use `py -3.12 -m venv .venv-audio` and `.\.venv-audio\Scripts\Activate.ps1`.
+
+```sh
+python -m pip install "torch>=2.4" "transformers>=5,<6" safetensors sentencepiece numpy soundfile "misaki[en]>=0.9.4" espeakng-loader phonemizer-fork "spacy>=3.8" num2words
+python -m spacy download en_core_web_sm
+hf download Oomni/mithi-v2-flash --revision 1fc0dd68496a2483508ec764d310146c41ff90be --local-dir ../mithi-v2-flash --exclude "assets/*"
+```
+
+The model is [Mithi v2 Flash](https://huggingface.co/Oomni/mithi-v2-flash) under Apache-2.0. The script loads the pinned model's Python runtime from `--model-dir`, uses its built-in **Vaidehi** voice on CPU, and encodes mono MP3s at 64 kbps. Keep the downloaded model and weights outside the app repository.
+
+```sh
+# Update only the Kannada interference clip
+python tools/generate_coin_audio.py --model-dir ../mithi-v2-flash --language kn --step interference
+
+# Regenerate all 20 clips
+python tools/generate_coin_audio.py --model-dir ../mithi-v2-flash
+```
+
+Use `--output-dir` to preview generated files in a separate directory. The default output replaces only the selected clips in `frontend/fundamentals/audio`.
+
 ## 👩‍💻 About the Project
 
-**QubitQuest** is an educational technology project focused on making quantum computing accessible, interactive, and enjoyable for beginners.
+**Q-Spark** is an educational technology project focused on making quantum computing accessible, interactive, and enjoyable for beginners.
 
 **Built with curiosity. Powered by quantum computing. Designed for learning.**
 
