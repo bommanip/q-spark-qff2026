@@ -1,68 +1,23 @@
-# Q-Spark 🚀
-### Explore the World of Quantum Computing — One Qubit at a Time
+# Q-Spark
 
-**Q-Spark** is an interactive, beginner-friendly quantum computing learning platform designed to make complex quantum concepts easier to understand through visual demonstrations, hands-on experiments, quizzes, and real quantum circuit simulations powered by Qiskit.
+**Qiskit Fall Fest 2026 · Quantum for Humanity · Education track**
 
-Whether you're completely new to quantum computing or curious about how quantum computers work, Q-Spark takes you on a guided learning journey from classical bits to quantum algorithms.
+Q-Spark helps beginners build an intuition for quantum computing through familiar objects. A coin shows how measurement probabilities change. Linked dice introduce correlation. A four-box treasure hunt gives learners a way to compare Grover search with a classical guess.
 
----
+The intended learners are secondary-school and early university students, including students who prefer Kannada, Telugu, or Hindi to English. A browser and a laptop are enough to run the simulator after setup.
 
-## ✨ Key Features
+![Q-Spark homepage with the entry point to the learning journey](docs/screenshots/home.jpg)
 
-- **5 Interactive Learning Modules** — Learn quantum computing step by step.
-- **Multilingual Support** — Available in English, Kannada, Hindi, and Telugu.
-- **Interactive Experiments** — Explore quantum gates, superposition, and entanglement.
-- **Qiskit Integration** — Run quantum circuit simulations using Qiskit and Qiskit Aer.
-- **Knowledge Quizzes** — Test your understanding after each module.
-- **Progress Tracking** — Track completed modules and quiz scores.
-- **Module Unlocking System** — Progress through the learning journey by completing quizzes.
-- **Certificate Generation** — Generate and print a certificate after completing all five modules and meeting the quiz requirements.
-- **Responsive Interface** — Designed for an engaging learning experience across screen sizes.
+## What learners can do
 
----
+1. Open **Learning Journey** for five modules, from bits and qubits to gates, algorithms, and responsible applications. Each module has a quiz and browser-local progress.
+2. Try the **Quantum Coin Trail** to flip a classical bit, measure a qubit, compare phase choices, tilt the state, and measure a pair of entangled qubits.
+3. Play **Coin Lab**, **Linked Dice**, or **Treasure Hunt** in the Quantum Arcade. Controls call Qiskit Aer and show measured outcomes, circuit diagrams, or histograms.
+4. Switch among **English, Kannada, Telugu, and Hindi**. The app bundles 140 narration clips across the Trail, page guides, and module concepts. Learners choose when to play audio and can read the same captions.
 
-## 📚 Learning Modules
-
-| Module | Topic | What You'll Learn |
-|---|---|---|
-| 01 | Quantum Fundamentals | Computers, classical bits, quantum computers, and qubits |
-| 02 | Superposition & Entanglement | Understand two fundamental quantum phenomena |
-| 03 | Quantum Gates | Explore X, H, Z, CNOT, and combined gate operations |
-| 04 | Grover's Algorithm | Discover how quantum search works |
-| 05 | Quantum Computing Review | Test your knowledge and earn your certificate |
-
----
-
-## 🛠️ Technologies Used
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Responsive web design
-- Browser Local Storage
-
-### Backend
-- Python
-- Flask
-- Flask-CORS
-- Qiskit
-- Qiskit Aer
-
----
-
-## 🌍 Language Support
-
-Q-Spark supports four languages:
-
-- 🇬🇧 English
-- 🇮🇳 Kannada
-- 🇮🇳 Hindi
-- 🇮🇳 Telugu
-
-The selected language is saved so learners can continue using their preferred language while navigating the platform.
-
----
+| Kannada lesson with narration | Treasure Hunt with live simulator results |
+| --- | --- |
+| ![Module 2 in Kannada with its audio guide](docs/screenshots/kannada-lesson.jpg) | ![Treasure Hunt shows Crystal Valley and a 100 percent ideal simulator result](docs/screenshots/treasure-hunt.jpg) |
 
 ## Run Q-Spark locally
 
@@ -86,79 +41,49 @@ py -3.14 -m venv .venv
 
 Open <http://127.0.0.1:8056/>. The same server handles the pages, audio, and simulator. Press Ctrl+C to stop it.
 
-## 🔬 Quantum Experiments
+## Results and classical comparison
 
-Q-Spark provides hands-on quantum experiments through its Flask backend.
+Treasure Hunt encodes four boxes on two qubits. It prepares a uniform state, applies one phase-marking oracle and one Grover diffusion step, then measures both qubits. Success means the first returned box matches the marked box.
 
-| Experiment | Description |
-|---|---|
-| Superposition | Explore the Hadamard gate |
-| Entanglement | Simulate an entangled Bell state |
-| X Gate | Explore quantum bit flipping |
-| Z Gate | Understand phase flipping |
-| CNOT Gate | Explore controlled quantum operations |
-| Combined Gates | Experiment with multiple quantum gates |
-| Grover's Algorithm | Explore quantum search |
+Each method gets **1,024 trials per target**, across all four targets. The classical baseline makes a uniform blind guess per trial. Its theoretical success rate is 25%. The noisy run adds 2% depolarizing noise to each CX and CZ gate. It uses an illustrative noise model on a local simulator.
 
-Quantum simulations use Qiskit and Qiskit Aer.
+| Target | Random guess | Ideal Qiskit Aer | Noisy Qiskit Aer | Circuit depth |
+| --- | ---: | ---: | ---: | ---: |
+| `00` | 248 | 1,024 | 997 | 12 |
+| `01` | 228 | 1,024 | 994 | 12 |
+| `10` | 263 | 1,024 | 993 | 11 |
+| `11` | 235 | 1,024 | 992 | 10 |
+| **Total** | **974/4,096 (23.78%)** | **4,096/4,096 (100.00%)** | **3,976/4,096 (97.07%)** | **10–12** |
 
----
+In the activated app environment, run `python -m tools.benchmark_treasure` from the repository root. This reuses the app’s Grover circuit and checks that every ideal target is measured correctly. Depth is the Qiskit circuit depth including measurement, before hardware transpilation. The experiment demonstrates amplitude amplification for four items. It does not establish runtime advantage, and no hardware run or error mitigation is reported.
 
-## 🎓 Learning & Certification
+## Architecture
 
-Q-Spark uses an interactive progression system:
-
-1. Start with Module 1.
-2. Learn the concepts and complete the quiz.
-3. Unlock the next module by achieving the required score.
-4. Complete all five modules.
-5. Achieve the required final quiz score.
-6. Generate your completion certificate.
-
-Learning progress and quiz scores are stored in browser Local Storage.
-
----
-
-## 📁 Project Structure
-
-```text
-Q-spark/
-│
-├── frontend/
-│   ├── index.html
-│   ├── module1.html
-│   ├── module2.html
-│   ├── module3.html
-│   ├── module4.html
-│   └── module5.html
-│
-├── backend/
-│   └── app.py
-│
-└── README.md
+```mermaid
+flowchart LR
+    Browser["Browser<br/>Lessons, captions, quizzes"] -->|"Learner selects a move"| Flask["Flask API"]
+    Flask --> Circuit["Qiskit circuit"]
+    Circuit --> Aer["Qiskit Aer<br/>Local CPU simulator"]
+    Aer -->|"Counts and diagram"| Flask
+    Flask -->|"JSON and chart images"| Browser
+    Browser --- Storage["Browser-local progress"]
 ```
 
----
+| Path | Purpose |
+| --- | --- |
+| [frontend/](frontend/) | HTML, CSS, and JavaScript for modules and games |
+| [backend/app.py](backend/app.py) | Flask routes, circuit construction, and results |
+| [frontend/fundamentals/](frontend/fundamentals/) and [frontend/narration/](frontend/narration/) | Captions, bundled MP3s, and playback |
+| [tools/benchmark_treasure.py](tools/benchmark_treasure.py) | Reproducible classical, ideal, and noisy comparison |
+| [docs/](docs/) | GitHub Pages landing page, demo screenshots, and judging notes |
 
-## 🎯 Project Objective
+## Learner evidence and pitch
 
-The primary objective of Q-Spark is to make quantum computing more accessible to beginners through interactive education.
+Learner testing is pending. Use the short, anonymous test in the [judging guide](docs/judging.md) to record who can explain the measurement result before and after the demo. The guide also includes a three-minute recording plan and the submission checklist.
 
-Instead of relying only on theoretical explanations, the platform combines learning content, visual demonstrations, quantum simulations, and assessments to create an engaging learning experience.
+[Pitch deck](https://docs.google.com/presentation/d/1plBRwBEHsFzI0164nUXhAwoD4uV9jIAV5gVCmpI_Jvw/edit) · Three-minute pitch video link pending recording.
 
----
-
-## 🚀 Future Enhancements
-
-- Additional advanced quantum computing modules.
-- More interactive quantum circuit visualizations.
-- Additional regional language support.
-- Expanded quantum algorithm experiments.
-- Learner dashboards and detailed performance analytics.
-
----
-
-## Narration
+## Maintain the narration
 
 The five steps each have a separate play/pause control in English (`en`), Kannada (`kn`), Telugu (`te`), and Hindi (`hi`). The browser plays the bundled MP3s from [frontend/fundamentals/audio](frontend/fundamentals/audio). Playback runs locally with no model install, account, or API key.
 
@@ -200,12 +125,6 @@ python tools/generate_coin_audio.py --scope concepts --model-dir ../mithi-v2-fla
 
 Use `--output-dir` to preview generated files in a separate directory. The generator replaces only the selected clips in the output directory.
 
-## 👩‍💻 About the Project
+## License and credits
 
-**Q-Spark** is an educational technology project focused on making quantum computing accessible, interactive, and enjoyable for beginners.
-
-**Built with curiosity. Powered by quantum computing. Designed for learning.**
-
----
-
-⭐ If you find this project interesting, consider starring the repository!
+Project code is available under the [MIT License](LICENSE). [Qiskit](https://github.com/Qiskit/qiskit), [Qiskit Aer](https://github.com/Qiskit/qiskit-aer), [Flask](https://github.com/pallets/flask), and [Matplotlib](https://github.com/matplotlib/matplotlib) retain their own licenses. Narration uses [Mithi v2 Flash](https://huggingface.co/Oomni/mithi-v2-flash). The supplied ₹10 coin reference has [separate image credits](frontend/fundamentals/coin-credits.html) and its original license is unverified.

@@ -684,7 +684,7 @@ async function startSearch() {
             data.treasure_location;
 
         document.getElementById("successCount").textContent =
-            Number(data.success_count).toLocaleString();
+            Number(data.counts[selectedLocation] ?? 0).toLocaleString();
 
         document.getElementById("successRate").textContent =
             data.success_percentage + "%";
