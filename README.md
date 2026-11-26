@@ -6,18 +6,27 @@ Q-Spark helps beginners build an intuition for quantum computing through familia
 
 The intended learners are secondary-school and early university students, including students who prefer Kannada, Telugu, or Hindi to English. A browser and a laptop are enough to run the simulator after setup.
 
-![Q-Spark homepage with the entry point to the learning journey](docs/screenshots/home.jpg)
+## Three ways to learn
 
-## What learners can do
+Q-Spark offers **localized text and on-demand audio in English, Kannada, Telugu, and Hindi**. Read the explanations or listen while you try the activities. The app bundles 140 narration clips across lessons, arcade guides, and the Coin Trail.
 
-1. Open **Learning Journey** for five modules, from bits and qubits to gates, algorithms, and responsible applications. Each module has a quiz and browser-local progress.
-2. Try the **Quantum Coin Trail** to flip a classical bit, measure a qubit, compare phase choices, tilt the state, and measure a pair of entangled qubits.
-3. Play **Coin Lab**, **Linked Dice**, or **Treasure Hunt** in the Quantum Arcade. Controls call Qiskit Aer and show measured outcomes, circuit diagrams, or histograms.
-4. Switch among **English, Kannada, Telugu, and Hindi**. The app bundles 140 narration clips across the Trail, page guides, and module concepts. Learners choose when to play audio and can read the same captions.
+### Learning Journey
 
-| Kannada lesson with narration | Treasure Hunt with live simulator results |
-| --- | --- |
-| ![Module 2 in Kannada with its audio guide](docs/screenshots/kannada-lesson.jpg) | ![Treasure Hunt shows Crystal Valley and a 100 percent ideal simulator result](docs/screenshots/treasure-hunt.jpg) |
+Work through five guided lessons, from bits and qubits to gates, algorithms, and responsible applications. Each includes a quiz and tracks progress in the browser. The example below shows a Kannada entanglement lesson with its own audio control.
+
+![Kannada entanglement lesson with localized text, an audio button, and a two-qubit diagram](docs/screenshots/learning-kannada.jpg)
+
+### Quantum Arcade
+
+Play Coin Lab, Linked Dice, or Treasure Hunt. This Treasure Hunt run shows the distribution from 1,024 ideal Qiskit Aer shots and the circuit that produced it.
+
+![Treasure Hunt result showing all 1,024 ideal simulator shots at Crystal Valley and the Qiskit circuit](docs/screenshots/arcade-grover.jpg)
+
+### Quantum Coin Trail
+
+Flip a classical bit, measure a qubit, explore interference, and compare entangled outcomes. This tilt experiment pairs a spoken explanation with a coin visual and shows predicted odds alongside 100 measured outcomes.
+
+![Coin Trail tilt experiment at 30 degrees with a play button, expected odds, and results from 100 measurements](docs/screenshots/coin-trail-tilt.jpg)
 
 ## Run Q-Spark locally
 
