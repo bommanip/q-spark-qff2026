@@ -2,13 +2,16 @@
 
 **Qiskit Fall Fest 2026 · Quantum for Humanity · Education track**
 
+> [!IMPORTANT]
+> **[Live hackathon demo](https://bommanip.github.io/q-spark-qff2026/)**
+>
+> GitHub Pages redirects to the temporary demo over HTTP. If prompted, tap **Continue to site**. If the demo is offline, use the local setup link below.
+
 Q-Spark helps beginners build an intuition for quantum computing through familiar objects. A coin shows how measurement probabilities change. Linked dice introduce correlation. A four-box treasure hunt gives learners a way to compare Grover search with a classical guess.
 
 The intended learners are secondary-school and early university students, including students who prefer Kannada, Telugu, or Hindi to English. A browser and a laptop are enough to run the simulator after setup.
 
-[Live hackathon demo](https://bommanip.github.io/q-spark-qff2026/) · [Install and run Q-Spark](docs/technical-guide.md#run-q-spark-locally) · [Pitch deck](https://docs.google.com/presentation/d/1plBRwBEHsFzI0164nUXhAwoD4uV9jIAV5gVCmpI_Jvw/edit?slide=id.qspark_pitch_1#slide=id.qspark_pitch_1)
-
-GitHub Pages redirects to the temporary demo over HTTP. If prompted, tap **Continue to site**. If the demo is offline, use the local setup guide above.
+[Install and run Q-Spark](docs/technical-guide.md#run-q-spark-locally) · [Pitch deck](https://docs.google.com/presentation/d/1plBRwBEHsFzI0164nUXhAwoD4uV9jIAV5gVCmpI_Jvw/edit?slide=id.qspark_pitch_1#slide=id.qspark_pitch_1)
 
 ## Architecture
 
