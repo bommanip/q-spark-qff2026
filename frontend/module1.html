@@ -544,6 +544,7 @@ footer{
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <link rel="stylesheet" href="narration/player.css">
+<link rel="stylesheet" href="module.css">
 </head>
 
 <body data-module="1">
@@ -564,19 +565,15 @@ footer{
     </div>
 </nav>
 
-<main class="container">
+<main class="container course-layout">
     <nav class="module-jump" aria-label="Modules"></nav>
 
-    <header class="hero">
+    <header class="hero course-hero">
         <div class="tag" id="moduleTag">MODULE 01 · BEGINNER</div>
         <h1 id="heroTitle">Your Journey into <span>Quantum Computing.</span></h1>
         <p id="heroIntro">Start your quantum journey from absolute zero. Discover computers, classical bits, quantum computers and the fascinating world of qubits.</p>
 
-        <div class="stats">
-            <div class="stat" id="statLessons">📘 4 Learning Concepts</div>
-            <div class="stat" id="statActivities">⚡ 3 Interactive Activities</div>
-            <div class="stat" id="statQuestions">📝 3 Quiz Questions</div>
-        </div>
+        <ul class="course-stats"></ul>
     </header>
 
     <section class="page-narration" data-narration-page="module1" aria-labelledby="page-narration-title" hidden>
@@ -589,13 +586,13 @@ footer{
         <audio preload="none"></audio>
     </section>
 
-    <section class="progress-card">
-        <div class="progress-top">
+    <section class="progress-card course-progress">
+        <div class="progress-top course-progress-heading">
             <h3 id="progressHeading">Your Learning Progress</h3>
             <span class="progress-percent" id="progressPercent">0%</span>
         </div>
 
-        <div class="progress-track" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-track course-track" id="progressBar" aria-labelledby="progressHeading" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress-fill" id="moduleProgressFill"></div>
         </div>
 
@@ -605,9 +602,9 @@ footer{
 
     <!-- LESSON 1 -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section1">01 · THE BASICS</div>
-        <h2 id="lesson1Title">What is a Computer?</h2>
+        <h2 id="lesson1Title" data-course-concept>What is a Computer?</h2>
         <section class="page-narration" data-narration-concept="module1-computer" data-concept-heading="lesson1Title" aria-labelledby="module1-computer-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module1-computer-audio"></h3>
@@ -646,9 +643,9 @@ footer{
 
     <!-- LESSON 2 -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section2">02 · CLASSICAL COMPUTING</div>
-        <h2 id="lesson2Title">Classical Computers and Bits</h2>
+        <h2 id="lesson2Title" data-course-concept>Classical Computers and Bits</h2>
         <section class="page-narration" data-narration-concept="module1-bits" data-concept-heading="lesson2Title" aria-labelledby="module1-bits-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module1-bits-audio"></h3>
@@ -677,7 +674,7 @@ footer{
             <p id="bitVisualText">A classical bit is either 0 or 1.</p>
 
             <div class="demo-buttons">
-                <button class="secondary-button" onclick="changeBit(0)" id="zeroButton">Set to 0</button>
+                <button class="secondary-button" onclick="changeBit(0)" id="zeroButton" data-course-activity>Set to 0</button>
                 <button class="secondary-button" onclick="changeBit(1)" id="oneButton">Set to 1</button>
             </div>
 
@@ -689,9 +686,9 @@ footer{
 
     <!-- LESSON 3 -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section3">03 · THE QUANTUM WORLD</div>
-        <h2 id="lesson3Title">What is Quantum Computing?</h2>
+        <h2 id="lesson3Title" data-course-concept>What is Quantum Computing?</h2>
         <section class="page-narration" data-narration-concept="module1-quantum" data-concept-heading="lesson3Title" aria-labelledby="module1-quantum-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module1-quantum-audio"></h3>
@@ -721,9 +718,9 @@ footer{
 
     <!-- LESSON 4 -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section4">04 · MEET THE QUBIT</div>
-        <h2 id="lesson4Title">What is a Qubit?</h2>
+        <h2 id="lesson4Title" data-course-concept>What is a Qubit?</h2>
         <section class="page-narration" data-narration-concept="module1-qubit" data-concept-heading="lesson4Title" aria-labelledby="module1-qubit-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module1-qubit-audio"></h3>
@@ -748,7 +745,7 @@ footer{
             <p id="qubitVisualText">A qubit can be prepared in a superposition of |0⟩ and |1⟩.</p>
 
             <div class="demo-buttons">
-                <button class="secondary-button" onclick="showQubitState(0)" id="showZeroButton">Show |0⟩</button>
+                <button class="secondary-button" onclick="showQubitState(0)" id="showZeroButton" data-course-activity>Show |0⟩</button>
                 <button class="secondary-button" onclick="showQubitState(1)" id="showOneButton">Show |1⟩</button>
                 <button class="primary-button" onclick="showQubitState(2)" id="superpositionButton">Explore Superposition ✨</button>
             </div>
@@ -761,7 +758,7 @@ footer{
 
     <!-- QUICK COMPARISON -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section5">05 · QUICK RECAP</div>
         <h2 id="recapTitle">What Have You Learned?</h2>
 
@@ -780,13 +777,13 @@ footer{
 
     <!-- QUIZ -->
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <div class="section-label" id="section6">06 · KNOWLEDGE CHECK</div>
         <h2 id="quizTitle">Test Your Knowledge!</h2>
 
         <p id="quizIntro">Answer all three questions correctly to complete Module 1.</p>
 
-        <div class="quiz-card">
+        <div class="quiz-card course-question">
             <h3 id="question1Title">Question 1: What does a computer do?</h3>
 
             <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. Receives and processes information</button>
@@ -796,7 +793,7 @@ footer{
             <div class="feedback" id="feedback0"></div>
         </div>
 
-        <div class="quiz-card">
+        <div class="quiz-card course-question">
             <h3 id="question2Title">Question 2: What values can a classical bit hold?</h3>
 
             <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. 2 and 3</button>
@@ -806,7 +803,7 @@ footer{
             <div class="feedback" id="feedback1"></div>
         </div>
 
-        <div class="quiz-card">
+        <div class="quiz-card course-question">
             <h3 id="question3Title">Question 3: What is a qubit?</h3>
 
             <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. A computer screen</button>
@@ -860,9 +857,6 @@ tag:"MODULE 01 · BEGINNER",
 heroStart:"Your Journey into ",
 heroHighlight:"Quantum Computing.",
 intro:"Start your quantum journey from absolute zero. Discover computers, classical bits, quantum computers and the fascinating world of qubits.",
-lessons:"📘 4 Learning Concepts",
-activities:"⚡ 3 Interactive Activities",
-questions:"📝 3 Quiz Questions",
 progressHeading:"Your Learning Progress",
 progressIncomplete:"Answer all 3 quiz questions correctly to complete this module.",
 progressComplete:"Module 1 successfully completed!",
@@ -958,9 +952,6 @@ tag:"ಮಾಡ್ಯೂಲ್ 01 · ಆರಂಭಿಕ ಹಂತ",
 heroStart:"ನಿಮ್ಮ ಪ್ರಯಾಣ ",
 heroHighlight:"ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟಿಂಗ್ ಕಡೆಗೆ.",
 intro:"ಶೂನ್ಯದಿಂದ ನಿಮ್ಮ ಕ್ವಾಂಟಂ ಪ್ರಯಾಣವನ್ನು ಪ್ರಾರಂಭಿಸಿ. ಕಂಪ್ಯೂಟರ್‌ಗಳು, ಸಾಂಪ್ರದಾಯಿಕ ಬಿಟ್‌ಗಳು, ಕ್ವಾಂಟಂ ಕಂಪ್ಯೂಟರ್‌ಗಳು ಮತ್ತು ಕ್ಯೂಬಿಟ್‌ಗಳ ಜಗತ್ತನ್ನು ತಿಳಿಯಿರಿ.",
-lessons:"📘 4 ಕಲಿಕೆಯ ವಿಷಯಗಳು",
-activities:"⚡ 3 ಸಂವಾದಾತ್ಮಕ ಚಟುವಟಿಕೆಗಳು",
-questions:"📝 3 ಪ್ರಶ್ನೆಗಳು",
 progressHeading:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",
 progressIncomplete:"ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು ಎಲ್ಲಾ 3 ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿ.",
 progressComplete:"ಮಾಡ್ಯೂಲ್ 1 ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!",
@@ -1056,9 +1047,6 @@ tag:"मॉड्यूल 01 · शुरुआती स्तर",
 heroStart:"आपकी यात्रा ",
 heroHighlight:"क्वांटम कंप्यूटिंग की ओर।",
 intro:"शुरुआत से अपनी क्वांटम यात्रा शुरू करें। कंप्यूटर, पारंपरिक बिट्स, क्वांटम कंप्यूटर और क्यूबिट की दुनिया को जानें।",
-lessons:"📘 4 सीखने के विषय",
-activities:"⚡ 3 इंटरैक्टिव गतिविधियाँ",
-questions:"📝 3 प्रश्न",
 progressHeading:"आपकी सीखने की प्रगति",
 progressIncomplete:"इस मॉड्यूल को पूरा करने के लिए तीनों प्रश्नों के सही उत्तर दें।",
 progressComplete:"मॉड्यूल 1 सफलतापूर्वक पूरा हुआ!",
@@ -1154,9 +1142,6 @@ tag:"మాడ్యూల్ 01 · ప్రారంభ స్థాయి",
 heroStart:"మీ ప్రయాణం ",
 heroHighlight:"క్వాంటం కంప్యూటింగ్ వైపు.",
 intro:"సున్నా నుండి మీ క్వాంటం ప్రయాణాన్ని ప్రారంభించండి. కంప్యూటర్లు, సాంప్రదాయ బిట్లు, క్వాంటం కంప్యూటర్లు మరియు క్యూబిట్‌ల ప్రపంచాన్ని తెలుసుకోండి.",
-lessons:"📘 4 అభ్యాస అంశాలు",
-activities:"⚡ 3 ఇంటరాక్టివ్ కార్యకలాపాలు",
-questions:"📝 3 క్విజ్ ప్రశ్నలు",
 progressHeading:"మీ అభ్యాస పురోగతి",
 progressIncomplete:"ఈ మాడ్యూల్ పూర్తి చేయడానికి మూడు ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
 progressComplete:"మాడ్యూల్ 1 విజయవంతంగా పూర్తయింది!",
@@ -1257,9 +1242,6 @@ const translationIds = {
 homeLink:"home",
 moduleTag:"tag",
 heroIntro:"intro",
-statLessons:"lessons",
-statActivities:"activities",
-statQuestions:"questions",
 progressHeading:"progressHeading",
 section1:"section1",
 lesson1Title:"lesson1Title",

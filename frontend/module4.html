@@ -240,6 +240,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <link rel="stylesheet" href="narration/player.css">
+<link rel="stylesheet" href="module.css">
 </head>
 
 <body data-module="4">
@@ -261,9 +262,10 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </div>
 </nav>
 
-<main class="container">
+<main class="container course-layout">
     <nav class="module-jump" aria-label="Modules"></nav>
 
+<header class="course-hero">
 <span class="tag" id="moduleTag">MODULE 04 · INTERMEDIATE LEVEL</span>
 
 <h1 id="mainHeading">Discover the power of <span>quantum algorithms.</span></h1>
@@ -271,6 +273,8 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 <p class="intro" id="intro">
 Explore how quantum computers approach searching, factoring and real-world challenges.
 </p>
+    <ul class="course-stats"></ul>
+</header>
 
 <section class="page-narration" data-narration-page="module4" aria-labelledby="page-narration-title" hidden>
     <div class="narration-heading">
@@ -282,9 +286,13 @@ Explore how quantum computers approach searching, factoring and real-world chall
     <audio preload="none"></audio>
 </section>
 
-<p id="progressLabel">YOUR LEARNING PROGRESS</p>
 
-<div class="progress">
+<section class="course-progress">
+    <div class="course-progress-heading">
+        <h3 id="progressLabel">Your Learning Progress</h3>
+        <span id="course-progress-percent" class="progress-percent">0%</span>
+    </div>
+    <div class="progress course-track" id="course-progress-bar" role="progressbar" aria-labelledby="progressLabel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
     <div class="progress-fill" id="progressFill"></div>
 </div>
 
@@ -295,9 +303,10 @@ Module 4 completion: 0%
 <div class="completion" id="completion">
 ✓ Module 4 completed! Your progress has been saved.
 </div>
+</section>
 
-<section class="card">
-    <h2 id="section1Title">01. What is a quantum algorithm?</h2>
+<section class="card course-card">
+    <h2 id="section1Title" data-course-concept>01. What is a quantum algorithm?</h2>
     <section class="page-narration" data-narration-concept="module4-algorithm" data-concept-heading="section1Title" aria-labelledby="module4-algorithm-audio" hidden>
         <div class="narration-heading">
             <h3 id="module4-algorithm-audio"></h3>
@@ -327,8 +336,8 @@ Module 4 completion: 0%
     </div>
 </section>
 
-<section class="card">
-    <h2 id="section2Title">02. Grover's Search Algorithm</h2>
+<section class="card course-card">
+    <h2 id="section2Title" data-course-concept>02. Grover's Search Algorithm</h2>
     <section class="page-narration" data-narration-concept="module4-grover" data-concept-heading="section2Title" aria-labelledby="module4-grover-audio" hidden>
         <div class="narration-heading">
             <h3 id="module4-grover-audio"></h3>
@@ -359,7 +368,7 @@ Module 4 completion: 0%
         <h3 id="experimentTitle">Try Grover's Algorithm</h3>
         <p id="experimentDescription">Run the two-qubit Grover search using your Qiskit Aer simulator.</p>
 
-        <button class="primary" id="groverButton" onclick="runGrover()">
+        <button class="primary" id="groverButton" data-course-activity onclick="runGrover()">
             Run Grover Experiment →
         </button>
 
@@ -372,8 +381,8 @@ Module 4 completion: 0%
     </p>
 </section>
 
-<section class="card">
-    <h2 id="section3Title">03. What is Shor's Algorithm?</h2>
+<section class="card course-card">
+    <h2 id="section3Title" data-course-concept>03. What is Shor's Algorithm?</h2>
     <section class="page-narration" data-narration-concept="module4-shor" data-concept-heading="section3Title" aria-labelledby="module4-shor-audio" hidden>
         <div class="narration-heading">
             <h3 id="module4-shor-audio"></h3>
@@ -408,8 +417,8 @@ Module 4 completion: 0%
     </p>
 </section>
 
-<section class="card">
-    <h2 id="section4Title">04. Quantum computing in the real world</h2>
+<section class="card course-card">
+    <h2 id="section4Title" data-course-concept>04. Quantum computing in the real world</h2>
     <section class="page-narration" data-narration-concept="module4-applications" data-concept-heading="section4Title" aria-labelledby="module4-applications-audio" hidden>
         <div class="narration-heading">
             <h3 id="module4-applications-audio"></h3>
@@ -433,34 +442,40 @@ Module 4 completion: 0%
     <p id="aiText">Quantum machine learning is an active research area exploring how quantum circuits may be used in machine-learning workflows.</p>
 </section>
 
-<section class="card">
+<section class="card course-card">
     <h2 id="quizTitle">05. Test your knowledge!</h2>
 
-    <p id="question0">Question 1: What is Grover's algorithm mainly used for?</p>
+    <div class="course-question">
+        <p id="question0">Question 1: What is Grover's algorithm mainly used for?</p>
 
-    <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. Searching an unstructured collection</button>
-    <button class="quiz-option" onclick="answer(0,1)" id="q0b">B. Creating a website</button>
-    <button class="quiz-option" onclick="answer(0,2)" id="q0c">C. Storing photographs</button>
+        <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. Searching an unstructured collection</button>
+        <button class="quiz-option" onclick="answer(0,1)" id="q0b">B. Creating a website</button>
+        <button class="quiz-option" onclick="answer(0,2)" id="q0c">C. Storing photographs</button>
 
-    <div class="feedback" id="feedback0"></div>
+        <div class="feedback" id="feedback0"></div>
+    </div>
 
-    <h3 id="question2Heading">Question 2</h3>
-    <p id="question1">What problem is Shor's algorithm known for?</p>
+    <div class="course-question">
+        <h3 id="question2Heading">Question 2</h3>
+        <p id="question1">What problem is Shor's algorithm known for?</p>
 
-    <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. Image editing</button>
-    <button class="quiz-option" onclick="answer(1,1)" id="q1b">B. Integer factorization</button>
-    <button class="quiz-option" onclick="answer(1,2)" id="q1c">C. Video streaming</button>
+        <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. Image editing</button>
+        <button class="quiz-option" onclick="answer(1,1)" id="q1b">B. Integer factorization</button>
+        <button class="quiz-option" onclick="answer(1,2)" id="q1c">C. Video streaming</button>
 
-    <div class="feedback" id="feedback1"></div>
+        <div class="feedback" id="feedback1"></div>
+    </div>
 
-    <h3 id="question3Heading">Question 3</h3>
-    <p id="question2">Which statement about quantum computing is correct?</p>
+    <div class="course-question">
+        <h3 id="question3Heading">Question 3</h3>
+        <p id="question2">Which statement about quantum computing is correct?</p>
 
-    <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. It makes every computer task faster</button>
-    <button class="quiz-option" onclick="answer(2,1)" id="q2b">B. It has no possible real-world applications</button>
-    <button class="quiz-option" onclick="answer(2,2)" id="q2c">C. It may offer advantages for particular problems</button>
+        <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. It makes every computer task faster</button>
+        <button class="quiz-option" onclick="answer(2,1)" id="q2b">B. It has no possible real-world applications</button>
+        <button class="quiz-option" onclick="answer(2,2)" id="q2c">C. It may offer advantages for particular problems</button>
 
-    <div class="feedback" id="feedback2"></div>
+        <div class="feedback" id="feedback2"></div>
+    </div>
 
     <button class="primary" onclick="showScore()" id="checkButton">Check My Score →</button>
     <button class="retry" onclick="retryQuiz()" id="retryButton">Retry Quiz</button>
@@ -1012,6 +1027,8 @@ function updateProgress() {
 
     document.getElementById("progressFill").style.width =
         percent + "%";
+    document.getElementById("course-progress-percent").textContent = percent + "%";
+    document.getElementById("course-progress-bar").setAttribute("aria-valuenow", percent);
 
     document.getElementById("progressText").textContent =
         translations[currentLanguage].progress + percent + "%";

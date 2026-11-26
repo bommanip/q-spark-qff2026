@@ -113,6 +113,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <link rel="stylesheet" href="narration/player.css">
+<link rel="stylesheet" href="module.css">
 </head>
 
 <body data-module="2">
@@ -131,21 +132,17 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     </div>
 </nav>
 
-<main class="container">
+<main class="container course-layout">
     <nav class="module-jump" aria-label="Modules"></nav>
 
-<header class="hero">
+<header class="hero course-hero">
     <span class="tag" id="moduleTag">MODULE 02 · BEGINNER LEVEL</span>
     <h1 id="heroTitle">Welcome to the <span>quantum world.</span></h1>
     <p class="intro" id="heroIntro">
         You've learned what a qubit is. Now discover two fascinating quantum concepts:
         superposition and entanglement. Explore the ideas and run real Qiskit simulator experiments.
     </p>
-    <div class="hero-stats">
-        <div class="hero-stat" id="statConcepts">📘 <span>2</span> concepts</div>
-        <div class="hero-stat" id="statExperiments">⚛️ <span>2</span> experiments</div>
-        <div class="hero-stat" id="statQuestions">🧠 <span>3</span> quiz questions</div>
-    </div>
+    <ul class="course-stats"></ul>
 </header>
 
 <section class="page-narration" data-narration-page="module2" aria-labelledby="page-narration-title" hidden>
@@ -158,21 +155,21 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <audio preload="none"></audio>
 </section>
 
-<section class="progress-card">
-    <div class="progress-heading">
-        <strong id="progressHeading">YOUR LEARNING PROGRESS</strong>
+<section class="progress-card course-progress">
+    <div class="progress-heading course-progress-heading">
+        <h3 id="progressHeading">Your Learning Progress</h3>
         <span class="progress-percent" id="progressPercent">0%</span>
     </div>
-    <div class="progress" id="progressBar" role="progressbar" aria-label="Module 2 completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress course-track" id="progressBar" aria-labelledby="progressHeading" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <div class="progress-fill" id="moduleProgressFill"></div>
     </div>
     <p class="progress-status" id="moduleProgressText"></p>
     <div class="completion-status" id="completionStatus"></div>
 </section>
 
-<section class="lesson-card">
+<section class="lesson-card course-card">
     <span class="section-number" id="section1">01 · THE CONCEPT</span>
-    <h2 id="superpositionTitle">What is superposition?</h2>
+    <h2 id="superpositionTitle" data-course-concept>What is superposition?</h2>
     <section class="page-narration" data-narration-concept="module2-superposition" data-concept-heading="superpositionTitle" aria-labelledby="module2-superposition-audio" hidden>
         <div class="narration-heading">
             <h3 id="module2-superposition-audio"></h3>
@@ -194,7 +191,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <p class="note" id="superpositionNote">Superposition is a genuine quantum state, not simply an ordinary bit secretly holding two values.</p>
 </section>
 
-<section class="lesson-card">
+<section class="lesson-card course-card">
     <span class="section-number" id="section2">02 · INTERACTIVE EXPERIMENT</span>
     <h2 id="trySuperpositionTitle">Try superposition yourself!</h2>
     <section class="page-narration" data-narration-concept="module2-balanced" data-concept-heading="trySuperpositionTitle" aria-labelledby="module2-balanced-audio" hidden>
@@ -210,15 +207,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <div class="visual">
         <div class="qubit">H</div>
         <h3 id="hGateTitle">One qubit → H Gate → Measurement</h3>
-        <button class="primary" id="superpositionButton" onclick="runSuperposition()">Run H Gate Experiment →</button>
+        <button class="primary" id="superpositionButton" data-course-activity onclick="runSuperposition()">Run H Gate Experiment →</button>
         <div class="result" id="superpositionResult"></div>
     </div>
     <p class="note" id="superpositionExperimentNote">This experiment connects to your Flask backend and runs using the Qiskit Aer simulator.</p>
 </section>
 
-<section class="lesson-card">
+<section class="lesson-card course-card">
     <span class="section-number" id="section3">03 · THE CONCEPT</span>
-    <h2 id="entanglementTitle">What is entanglement?</h2>
+    <h2 id="entanglementTitle" data-course-concept>What is entanglement?</h2>
     <section class="page-narration" data-narration-concept="module2-entanglement" data-concept-heading="entanglementTitle" aria-labelledby="module2-entanglement-audio" hidden>
         <div class="narration-heading">
             <h3 id="module2-entanglement-audio"></h3>
@@ -239,7 +236,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <p id="bellStateText">For the Bell state (|00⟩ + |11⟩)/√2, the possible measurement outcomes are 00 and 11.</p>
 </section>
 
-<section class="lesson-card">
+<section class="lesson-card course-card">
     <span class="section-number" id="section4">04 · INTERACTIVE EXPERIMENT</span>
     <h2 id="runEntanglementTitle">Run real quantum entanglement!</h2>
     <section class="page-narration" data-narration-concept="module2-bell" data-concept-heading="runEntanglementTitle" aria-labelledby="module2-bell-audio" hidden>
@@ -256,13 +253,13 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
         <h3 id="bellExperimentTitle">Bell State Experiment</h3>
         <div class="correlation"><div class="particle">Q1</div><div class="connection">⟷</div><div class="particle">Q2</div></div>
         <p id="bellCircuitText">H Gate → CNOT Gate → Measure Both Qubits</p>
-        <button class="primary" id="entanglementButton" onclick="runEntanglement()">Run Real Entanglement Experiment →</button>
+        <button class="primary" id="entanglementButton" data-course-activity onclick="runEntanglement()">Run Real Entanglement Experiment →</button>
         <div class="result" id="entanglementResult"></div>
     </div>
     <p class="note" id="entanglementExperimentNote">This uses your Flask backend and Qiskit Aer simulator. It does not run on physical quantum hardware.</p>
 </section>
 
-<section class="lesson-card">
+<section class="lesson-card course-card">
     <span class="section-number" id="section5">05 · QUICK COMPARISON</span>
     <h2 id="comparisonTitle">Superposition vs Entanglement</h2>
     <section class="page-narration" data-narration-concept="module2-compare" data-concept-heading="comparisonTitle" aria-labelledby="module2-compare-audio" hidden>
@@ -285,7 +282,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     <h2 id="quizTitle">Test your knowledge!</h2>
     <p id="quizIntro">Answer all three questions correctly to complete Module 2.</p>
 
-    <div class="quiz-question">
+    <div class="quiz-question course-question">
         <h3 id="question1Title">Question 1</h3>
         <p id="question1Text">What is superposition?</p>
         <button class="quiz-option" onclick="answer(0,0)" id="q0a">A. A combination of quantum basis states</button>
@@ -294,7 +291,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
         <div id="feedback0" class="feedback"></div>
     </div>
 
-    <div class="quiz-question">
+    <div class="quiz-question course-question">
         <h3 id="question2Title">Question 2</h3>
         <p id="question2Text">Which gate creates an equal superposition from |0⟩?</p>
         <button class="quiz-option" onclick="answer(1,0)" id="q1a">A. X Gate</button>
@@ -303,7 +300,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
         <div id="feedback1" class="feedback"></div>
     </div>
 
-    <div class="quiz-question">
+    <div class="quiz-question course-question">
         <h3 id="question3Title">Question 3</h3>
         <p id="question3Text">What does entanglement describe?</p>
         <button class="quiz-option" onclick="answer(2,0)" id="q2a">A. A computer running slowly</button>
@@ -341,7 +338,6 @@ en: {
 home:"← Home",tag:"MODULE 02 · BEGINNER LEVEL",
 heroStart:"Welcome to the ",heroHighlight:"quantum world.",
 intro:"You've learned what a qubit is. Now discover two fascinating quantum concepts: superposition and entanglement. Explore the ideas and run real Qiskit simulator experiments.",
-concepts:"concepts",experiments:"experiments",questions:"quiz questions",
 progressHeading:"YOUR LEARNING PROGRESS",
 progressIncomplete:"Complete the quiz with 3/3 correct answers to finish this module.",
 progressComplete:"Module 2 successfully completed!",
@@ -407,7 +403,6 @@ kn: {
 home:"← ಮುಖಪುಟ",tag:"ಮಾಡ್ಯೂಲ್ 02 · ಆರಂಭಿಕ ಹಂತ",
 heroStart:"ಕ್ವಾಂಟಮ್ ",heroHighlight:"ಜಗತ್ತಿಗೆ ಸ್ವಾಗತ.",
 intro:"ನೀವು ಕ್ಯೂಬಿಟ್ ಎಂದರೇನು ಎಂದು ಕಲಿತಿದ್ದೀರಿ. ಈಗ ಸೂಪರ್‌ಪೊಸಿಷನ್ ಮತ್ತು ಎಂಟ್ಯಾಂಗಲ್‌ಮೆಂಟ್ ಎಂಬ ಎರಡು ಅದ್ಭುತ ಕ್ವಾಂಟಮ್ ಪರಿಕಲ್ಪನೆಗಳನ್ನು ತಿಳಿಯಿರಿ. Qiskit ಸಿಮ್ಯುಲೇಟರ್ ಪ್ರಯೋಗಗಳನ್ನು ನಡೆಸಿ.",
-concepts:"ಪರಿಕಲ್ಪನೆಗಳು",experiments:"ಪ್ರಯೋಗಗಳು",questions:"ರಸಪ್ರಶ್ನೆಗಳು",
 progressHeading:"ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಗತಿ",progressIncomplete:"ಈ ಮಾಡ್ಯೂಲ್ ಪೂರ್ಣಗೊಳಿಸಲು 3ರಲ್ಲಿ 3 ಸರಿಯಾದ ಉತ್ತರಗಳನ್ನು ನೀಡಿ.",
 progressComplete:"ಮಾಡ್ಯೂಲ್ 2 ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ!",completion:"✓ ಮಾಡ್ಯೂಲ್ 2 ಪೂರ್ಣಗೊಂಡಿದೆ! ನಿಮ್ಮ ಪ್ರಗತಿಯನ್ನು ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ.",
 section1:"01 · ಪರಿಕಲ್ಪನೆ",superTitle:"ಸೂಪರ್‌ಪೊಸಿಷನ್ ಎಂದರೇನು?",
@@ -471,7 +466,6 @@ hi: {
 home:"← होम",tag:"मॉड्यूल 02 · शुरुआती स्तर",
 heroStart:"क्वांटम ",heroHighlight:"दुनिया में आपका स्वागत है।",
 intro:"आपने सीख लिया है कि क्यूबिट क्या है। अब दो रोचक क्वांटम अवधारणाएँ जानें: सुपरपोज़िशन और एंटैंगलमेंट। Qiskit सिम्युलेटर के प्रयोग भी चलाएँ।",
-concepts:"अवधारणाएँ",experiments:"प्रयोग",questions:"प्रश्नोत्तरी के प्रश्न",
 progressHeading:"आपकी सीखने की प्रगति",progressIncomplete:"इस मॉड्यूल को पूरा करने के लिए सभी 3 प्रश्नों के सही उत्तर दें।",
 progressComplete:"मॉड्यूल 2 सफलतापूर्वक पूरा हुआ!",completion:"✓ मॉड्यूल 2 पूरा हुआ! आपकी प्रगति इस डिवाइस पर सहेजी गई है।",
 section1:"01 · अवधारणा",superTitle:"सुपरपोज़िशन क्या है?",
@@ -535,7 +529,6 @@ te: {
 home:"← హోమ్",tag:"మాడ్యూల్ 02 · ప్రారంభ స్థాయి",
 heroStart:"క్వాంటం ",heroHighlight:"ప్రపంచానికి స్వాగతం.",
 intro:"క్యూబిట్ అంటే ఏమిటో మీరు నేర్చుకున్నారు. ఇప్పుడు సూపర్‌పొజిషన్ మరియు ఎంటాంగిల్‌మెంట్ అనే రెండు ఆసక్తికరమైన క్వాంటం భావనలను తెలుసుకోండి. Qiskit సిమ్యులేటర్ ప్రయోగాలను అమలు చేయండి.",
-concepts:"భావనలు",experiments:"ప్రయోగాలు",questions:"క్విజ్ ప్రశ్నలు",
 progressHeading:"మీ అభ్యాస పురోగతి",progressIncomplete:"ఈ మాడ్యూల్ పూర్తి చేయడానికి 3 ప్రశ్నలకూ సరైన సమాధానాలు ఇవ్వండి.",
 progressComplete:"మాడ్యూల్ 2 విజయవంతంగా పూర్తయింది!",completion:"✓ మాడ్యూల్ 2 పూర్తయింది! మీ పురోగతి ఈ పరికరంలో సేవ్ చేయబడింది.",
 section1:"01 · భావన",superTitle:"సూపర్‌పొజిషన్ అంటే ఏమిటి?",
@@ -599,7 +592,6 @@ scoreLabel:"సరైనవి",scoreOutOf:" / 3 సరైన సమాధాన
 
 const translationIds = {
 homeLink:"home",moduleTag:"tag",heroIntro:"intro",
-statConcepts:"concepts",statExperiments:"experiments",statQuestions:"questions",
 progressHeading:"progressHeading",section1:"section1",superpositionTitle:"superTitle",
 superpositionText1:"superText1",superpositionVisualTitle:"superVisualTitle",
 superpositionVisualText:"superVisualText",superpositionText2:"superText2",

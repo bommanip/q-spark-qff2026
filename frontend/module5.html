@@ -449,6 +449,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <link rel="stylesheet" href="narration/player.css">
+<link rel="stylesheet" href="module.css">
 </head>
 
 <body data-module="5">
@@ -470,9 +471,10 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </div>
 </nav>
 
-<main class="container">
+<main class="container course-layout">
     <nav class="module-jump" aria-label="Modules"></nav>
 
+<header class="course-hero">
 <span class="tag" data-i18n="tag">MODULE 05 · FINAL LEVEL</span>
 
 <h1><span data-i18n="heading">Quantum computing for</span>
@@ -482,8 +484,8 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 Explore how quantum research could contribute to healthcare,
 sustainability and responsible innovation.
 </p>
-
-<p data-i18n="progressHeading">YOUR LEARNING PROGRESS</p>
+    <ul class="course-stats"></ul>
+</header>
 
 <section class="page-narration" data-narration-page="module5" aria-labelledby="page-narration-title" hidden>
     <div class="narration-heading">
@@ -495,7 +497,12 @@ sustainability and responsible innovation.
     <audio preload="none"></audio>
 </section>
 
-<div class="progress">
+<section class="course-progress">
+    <div class="course-progress-heading">
+        <h3 id="course-progress-title" data-i18n="progressHeading">Your Learning Progress</h3>
+        <span id="course-progress-percent" class="progress-percent">0%</span>
+    </div>
+    <div class="progress course-track" id="course-progress-bar" role="progressbar" aria-labelledby="course-progress-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
     <div class="progress-fill" id="progressFill"></div>
 </div>
 
@@ -504,9 +511,10 @@ sustainability and responsible innovation.
 <div class="completion" id="completion" data-i18n="completed">
 ✓ Module 5 completed! Your learning progress has been saved.
 </div>
+</section>
 
-<section class="card">
-    <h2 id="module5-healthcare-heading" data-i18n="section1">01. Quantum computing and healthcare</h2>
+<section class="card course-card">
+    <h2 id="module5-healthcare-heading" data-course-concept data-i18n="section1">01. Quantum computing and healthcare</h2>
     <section class="page-narration" data-narration-concept="module5-healthcare" data-concept-heading="module5-healthcare-heading" aria-labelledby="module5-healthcare-audio" hidden>
         <div class="narration-heading">
             <h3 id="module5-healthcare-audio"></h3>
@@ -541,8 +549,8 @@ sustainability and responsible innovation.
     </p>
 </section>
 
-<section class="card">
-    <h2 id="module5-sustainability-heading" data-i18n="section2">02. Quantum computing and sustainability</h2>
+<section class="card course-card">
+    <h2 id="module5-sustainability-heading" data-course-concept data-i18n="section2">02. Quantum computing and sustainability</h2>
     <section class="page-narration" data-narration-concept="module5-sustainability" data-concept-heading="module5-sustainability-heading" aria-labelledby="module5-sustainability-audio" hidden>
         <div class="narration-heading">
             <h3 id="module5-sustainability-audio"></h3>
@@ -577,8 +585,8 @@ sustainability and responsible innovation.
     </p>
 </section>
 
-<section class="card">
-    <h2 id="module5-security-heading" data-i18n="section3">03. Quantum computing and cybersecurity</h2>
+<section class="card course-card">
+    <h2 id="module5-security-heading" data-course-concept data-i18n="section3">03. Quantum computing and cybersecurity</h2>
     <section class="page-narration" data-narration-concept="module5-security" data-concept-heading="module5-security-heading" aria-labelledby="module5-security-audio" hidden>
         <div class="narration-heading">
             <h3 id="module5-security-audio"></h3>
@@ -607,8 +615,8 @@ sustainability and responsible innovation.
     </div>
 </section>
 
-<section class="card">
-    <h2 id="module5-ethics-heading" data-i18n="section4">04. Ethics and responsible innovation</h2>
+<section class="card course-card">
+    <h2 id="module5-ethics-heading" data-course-concept data-i18n="section4">04. Ethics and responsible innovation</h2>
     <section class="page-narration" data-narration-concept="module5-ethics" data-concept-heading="module5-ethics-heading" aria-labelledby="module5-ethics-audio" hidden>
         <div class="narration-heading">
             <h3 id="module5-ethics-audio"></h3>
@@ -650,7 +658,7 @@ sustainability and responsible innovation.
     </p>
 </section>
 
-<section class="card">
+<section class="card course-card">
     <h2 data-i18n="section5">05. Your final assessment! 🏆</h2>
 
     <p data-i18n="assessmentIntro">
@@ -658,53 +666,59 @@ sustainability and responsible innovation.
     your Q-Spark learning journey.
     </p>
 
-    <p data-i18n="question1">
-    Question 1: How could quantum computing contribute to healthcare research?
-    </p>
+    <div class="course-question">
+        <p data-i18n="question1">
+        Question 1: How could quantum computing contribute to healthcare research?
+        </p>
 
-    <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">
-    A. By helping researchers simulate molecular systems
-    </button>
-    <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">
-    B. By replacing every doctor
-    </button>
-    <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">
-    C. By eliminating all medical testing
-    </button>
+        <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">
+        A. By helping researchers simulate molecular systems
+        </button>
+        <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">
+        B. By replacing every doctor
+        </button>
+        <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">
+        C. By eliminating all medical testing
+        </button>
 
-    <div class="feedback" id="feedback0"></div>
+        <div class="feedback" id="feedback0"></div>
+    </div>
 
-    <h3 data-i18n="question2Heading">Question 2</h3>
-    <p data-i18n="question2">What is post-quantum cryptography designed to do?</p>
+    <div class="course-question">
+        <h3 data-i18n="question2Heading">Question 2</h3>
+        <p data-i18n="question2">What is post-quantum cryptography designed to do?</p>
 
-    <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">
-    A. Make computers display better graphics
-    </button>
-    <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">
-    B. Protect information against attacks from future quantum computers
-    </button>
-    <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">
-    C. Increase internet speed
-    </button>
+        <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">
+        A. Make computers display better graphics
+        </button>
+        <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">
+        B. Protect information against attacks from future quantum computers
+        </button>
+        <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">
+        C. Increase internet speed
+        </button>
 
-    <div class="feedback" id="feedback1"></div>
+        <div class="feedback" id="feedback1"></div>
+    </div>
 
-    <h3 data-i18n="question3Heading">Question 3</h3>
-    <p data-i18n="question3">
-    Which is an important principle of responsible quantum innovation?
-    </p>
+    <div class="course-question">
+        <h3 data-i18n="question3Heading">Question 3</h3>
+        <p data-i18n="question3">
+        Which is an important principle of responsible quantum innovation?
+        </p>
 
-    <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">
-    A. Communicating capabilities honestly and considering societal impact
-    </button>
-    <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">
-    B. Ignoring security risks
-    </button>
-    <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">
-    C. Making technology accessible to nobody
-    </button>
+        <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">
+        A. Communicating capabilities honestly and considering societal impact
+        </button>
+        <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">
+        B. Ignoring security risks
+        </button>
+        <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">
+        C. Making technology accessible to nobody
+        </button>
 
-    <div class="feedback" id="feedback2"></div>
+        <div class="feedback" id="feedback2"></div>
+    </div>
 
     <button class="primary" onclick="showScore()" data-i18n="submit">
     Submit Final Assessment →
@@ -717,7 +731,7 @@ sustainability and responsible innovation.
     <div class="feedback" id="score"></div>
 </section>
 
-<section class="card">
+<section class="card course-card">
     <h2 data-i18n="journeyHeading">Your quantum learning journey! ✨</h2>
 
     <p data-i18n="journeyText">
@@ -1414,6 +1428,8 @@ function updateProgress() {
     const percent = completed ? 100 : 0;
 
     document.getElementById("progressFill").style.width = percent + "%";
+    document.getElementById("course-progress-percent").textContent = percent + "%";
+    document.getElementById("course-progress-bar").setAttribute("aria-valuenow", percent);
 
     document.getElementById("progressText").textContent =
         t("progressText").replace("{percent}", percent);

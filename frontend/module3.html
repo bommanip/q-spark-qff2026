@@ -62,6 +62,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <link rel="stylesheet" href="narration/player.css">
+<link rel="stylesheet" href="module.css">
 </head>
 
 <body data-module="3">
@@ -80,9 +81,10 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </div>
 </nav>
 
-<main class="container">
+<main class="container course-layout">
     <nav class="module-jump" aria-label="Modules"></nav>
 
+<header class="course-hero">
     <span class="tag" data-i18n="tag">MODULE 03 · PRACTICAL LEVEL</span>
 
     <h1 data-i18n="heading">Meet the <span>quantum gates.</span></h1>
@@ -92,6 +94,8 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
         Now discover how quantum gates change quantum states
         and how we combine them to build circuits.
     </p>
+    <ul class="course-stats"></ul>
+</header>
 
     <section class="page-narration" data-narration-page="module3" aria-labelledby="page-narration-title" hidden>
         <div class="narration-heading">
@@ -103,9 +107,13 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
         <audio preload="none"></audio>
     </section>
 
-    <p data-i18n="progressLabel">YOUR LEARNING PROGRESS</p>
 
-    <div class="progress">
+    <section class="course-progress">
+    <div class="course-progress-heading">
+        <h3 id="course-progress-title" data-i18n="progressLabel">Your Learning Progress</h3>
+        <span id="course-progress-percent" class="progress-percent">0%</span>
+    </div>
+    <div class="progress course-track" id="course-progress-bar" role="progressbar" aria-labelledby="course-progress-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <div class="progress-fill" id="progressFill"></div>
     </div>
 
@@ -114,9 +122,10 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     <div class="completion" id="completion" data-i18n="completion">
         ✓ Module 3 completed! Your progress has been saved.
     </div>
+</section>
 
-    <section class="lesson-card">
-        <h2 id="module3-x-heading" data-i18n="xTitle">01. X Gate — The Bit Flip</h2>
+<section class="lesson-card course-card">
+        <h2 id="module3-x-heading" data-course-concept data-i18n="xTitle">01. X Gate — The Bit Flip</h2>
         <section class="page-narration" data-narration-concept="module3-x" data-concept-heading="module3-x-heading" aria-labelledby="module3-x-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module3-x-audio"></h3>
@@ -133,12 +142,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <p data-i18n="xVisual">Think of it like an ON/OFF switch. The X Gate flips the qubit's state.</p>
         </div>
         <p class="example" data-i18n="xExpected">Expected result: 100% measurement of 1 when starting from |0⟩.</p>
-        <button class="primary" onclick="runGate('x',this)" data-i18n="runX">Run X Gate Experiment →</button>
+        <button class="primary" onclick="runGate('x',this)" data-i18n="runX" data-course-activity>Run X Gate Experiment →</button>
         <div class="result" id="result-x"></div>
     </section>
 
-    <section class="lesson-card">
-        <h2 id="module3-h-heading" data-i18n="hTitle">02. H Gate — Superposition</h2>
+    <section class="lesson-card course-card">
+        <h2 id="module3-h-heading" data-course-concept data-i18n="hTitle">02. H Gate — Superposition</h2>
         <section class="page-narration" data-narration-concept="module3-h" data-concept-heading="module3-h-heading" aria-labelledby="module3-h-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module3-h-audio"></h3>
@@ -154,12 +163,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <h3 data-i18n="hVisualTitle">|0⟩ → H Gate → Superposition</h3>
             <p data-i18n="hVisual">When measured, the outcomes are approximately 50% zero and 50% one.</p>
         </div>
-        <button class="primary" onclick="runGate('h',this)" data-i18n="runH">Run H Gate Experiment →</button>
+        <button class="primary" onclick="runGate('h',this)" data-i18n="runH" data-course-activity>Run H Gate Experiment →</button>
         <div class="result" id="result-h"></div>
     </section>
 
-    <section class="lesson-card">
-        <h2 id="module3-z-heading" data-i18n="zTitle">03. Z Gate — The Phase Flip</h2>
+    <section class="lesson-card course-card">
+        <h2 id="module3-z-heading" data-course-concept data-i18n="zTitle">03. Z Gate — The Phase Flip</h2>
         <section class="page-narration" data-narration-concept="module3-z" data-concept-heading="module3-z-heading" aria-labelledby="module3-z-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module3-z-audio"></h3>
@@ -177,12 +186,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <p data-i18n="zVisual2">If the qubit is in |1⟩, Z changes its phase without changing its measurement value.</p>
         </div>
         <p class="example" data-i18n="zExpected">A phase change becomes observable when we combine gates such as H, Z and H.</p>
-        <button class="primary" onclick="runGate('z',this)" data-i18n="runZ">Run Z Gate Experiment →</button>
+        <button class="primary" onclick="runGate('z',this)" data-i18n="runZ" data-course-activity>Run Z Gate Experiment →</button>
         <div class="result" id="result-z"></div>
     </section>
 
-    <section class="lesson-card">
-        <h2 id="module3-cnot-heading" data-i18n="cnotTitle">04. CNOT Gate — Controlled Operation</h2>
+    <section class="lesson-card course-card">
+        <h2 id="module3-cnot-heading" data-course-concept data-i18n="cnotTitle">04. CNOT Gate — Controlled Operation</h2>
         <section class="page-narration" data-narration-concept="module3-cnot" data-concept-heading="module3-cnot-heading" aria-labelledby="module3-cnot-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module3-cnot-audio"></h3>
@@ -200,12 +209,12 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <p data-i18n="controlOne">Control = 1: target flips.</p>
         </div>
         <p class="example" data-i18n="cnotExpected">This gate is essential for creating entanglement in our Bell State experiment.</p>
-        <button class="primary" onclick="runCNOT(this)" data-i18n="runCNOT">Run CNOT Experiment →</button>
+        <button class="primary" onclick="runCNOT(this)" data-i18n="runCNOT" data-course-activity>Run CNOT Experiment →</button>
         <div class="result" id="result-cnot"></div>
     </section>
 
-    <section class="lesson-card">
-        <h2 id="module3-combine-heading" data-i18n="combinedTitle">05. Combine Gates into a Circuit</h2>
+    <section class="lesson-card course-card">
+        <h2 id="module3-combine-heading" data-course-concept data-i18n="combinedTitle">05. Combine Gates into a Circuit</h2>
         <section class="page-narration" data-narration-concept="module3-combine" data-concept-heading="module3-combine-heading" aria-labelledby="module3-combine-audio" hidden>
             <div class="narration-heading">
                 <h3 id="module3-combine-audio"></h3>
@@ -221,32 +230,38 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
             <p data-i18n="combinedVisual1">First, create superposition using H. Then apply X and another H gate. Finally, measure the qubit.</p>
             <p data-i18n="combinedVisual2">This sequence demonstrates how gates combine to transform a quantum state.</p>
         </div>
-        <button class="primary" onclick="runCombined(this)" data-i18n="runCombined">Run Combined Circuit →</button>
+        <button class="primary" onclick="runCombined(this)" data-i18n="runCombined" data-course-activity>Run Combined Circuit →</button>
         <div class="result" id="result-combined"></div>
     </section>
 
-    <section class="lesson-card">
+    <section class="lesson-card course-card">
         <h2 data-i18n="quizTitle">06. Test Your Knowledge!</h2>
 
-        <p data-i18n="q1">Question 1: What does the X Gate do?</p>
-        <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">A. Flips the qubit state</button>
-        <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">B. Creates entanglement</button>
-        <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">C. Measures a qubit</button>
-        <div id="feedback0" class="feedback"></div>
+        <div class="course-question">
+            <p data-i18n="q1">Question 1: What does the X Gate do?</p>
+            <button class="quiz-option" onclick="answer(0,0)" data-i18n="q1a">A. Flips the qubit state</button>
+            <button class="quiz-option" onclick="answer(0,1)" data-i18n="q1b">B. Creates entanglement</button>
+            <button class="quiz-option" onclick="answer(0,2)" data-i18n="q1c">C. Measures a qubit</button>
+            <div id="feedback0" class="feedback"></div>
+        </div>
 
-        <h3 data-i18n="question2">Question 2</h3>
-        <p data-i18n="q2">Which gate creates equal superposition from |0⟩?</p>
-        <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">A. Z Gate</button>
-        <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">B. H Gate</button>
-        <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">C. X Gate</button>
-        <div id="feedback1" class="feedback"></div>
+        <div class="course-question">
+            <h3 data-i18n="question2">Question 2</h3>
+            <p data-i18n="q2">Which gate creates equal superposition from |0⟩?</p>
+            <button class="quiz-option" onclick="answer(1,0)" data-i18n="q2a">A. Z Gate</button>
+            <button class="quiz-option" onclick="answer(1,1)" data-i18n="q2b">B. H Gate</button>
+            <button class="quiz-option" onclick="answer(1,2)" data-i18n="q2c">C. X Gate</button>
+            <div id="feedback1" class="feedback"></div>
+        </div>
 
-        <h3 data-i18n="question3">Question 3</h3>
-        <p data-i18n="q3">When does a CNOT gate flip its target?</p>
-        <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">A. When control is 0</button>
-        <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">B. Always</button>
-        <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">C. When control is 1</button>
-        <div id="feedback2" class="feedback"></div>
+        <div class="course-question">
+            <h3 data-i18n="question3">Question 3</h3>
+            <p data-i18n="q3">When does a CNOT gate flip its target?</p>
+            <button class="quiz-option" onclick="answer(2,0)" data-i18n="q3a">A. When control is 0</button>
+            <button class="quiz-option" onclick="answer(2,1)" data-i18n="q3b">B. Always</button>
+            <button class="quiz-option" onclick="answer(2,2)" data-i18n="q3c">C. When control is 1</button>
+            <div id="feedback2" class="feedback"></div>
+        </div>
 
         <button class="primary" onclick="showScore()" data-i18n="checkScore">Check My Score →</button>
         <button class="retry" onclick="retryQuiz()" data-i18n="retry">Retry Quiz</button>
@@ -561,6 +576,8 @@ function updateModuleProgress() {
     const percentage = completed ? 100 : 0;
 
     document.getElementById("progressFill").style.width = percentage + "%";
+    document.getElementById("course-progress-percent").textContent = percentage + "%";
+    document.getElementById("course-progress-bar").setAttribute("aria-valuenow", percentage);
     document.getElementById("progressText").textContent = t("progress") + percentage + "%";
     document.getElementById("completion").style.display = completed ? "block" : "none";
     document.getElementById("nextModule").style.display = completed ? "inline-block" : "none";

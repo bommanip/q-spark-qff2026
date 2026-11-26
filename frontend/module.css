@@ -1,0 +1,163 @@
+/* The five lessons share the Fundamentals layout and visual hierarchy. */
+body[data-module] {
+    --course-text: #f5f5ff;
+    --course-muted: #aeb6cf;
+    --course-accent: #a99bff;
+    --course-emphasis: #76dee2;
+    --course-border: #293657;
+    --course-card: linear-gradient(145deg, #151f3b, #111a31);
+    --course-inset: #10182e;
+    --course-track: #26314e;
+    --course-option: #0b1429;
+    --course-hover: #192440;
+}
+
+html[data-theme="light"] body[data-module] {
+    --course-text: #171c2b;
+    --course-muted: #4c576e;
+    --course-accent: #5540ad;
+    --course-emphasis: #076872;
+    --course-border: #d5dcea;
+    --course-card: #fff;
+    --course-inset: #f4f6fb;
+    --course-track: #e1e8f3;
+    --course-option: #f9faff;
+    --course-hover: #edf1fb;
+}
+
+body[data-module] .course-layout {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 35px 22px 70px;
+}
+
+.course-layout .course-hero {
+    padding: 45px 10px 35px;
+    text-align: center;
+    color: var(--course-text);
+    background: transparent;
+}
+
+.course-hero .tag {
+    display: inline-block;
+    padding: 7px 17px;
+    border: 1px solid color-mix(in srgb, var(--course-emphasis) 30%, transparent);
+    border-radius: 30px;
+    background: color-mix(in srgb, var(--course-emphasis) 10%, transparent);
+    color: var(--course-emphasis);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.course-hero h1 {
+    margin: 20px 0 15px;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.2;
+}
+
+.course-hero h1 span {
+    background: linear-gradient(90deg, var(--course-accent), var(--course-emphasis));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.course-hero p {
+    max-width: 720px;
+    margin: auto;
+    color: var(--course-muted);
+    font-size: 16px;
+}
+
+.course-layout :is(.course-card, .course-progress) {
+    margin: 0 0 25px;
+    padding: 28px;
+    border: 1px solid var(--course-border);
+    border-radius: 19px;
+    background: var(--course-card);
+    color: var(--course-text);
+}
+
+.course-layout .course-card h2 { margin: 0 0 15px; color: var(--course-accent); }
+.course-layout .course-progress { margin-bottom: 35px; padding: 22px; }
+.course-progress .course-progress-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 13px;
+}
+.course-progress-heading h3 { margin: 0; font-size: 17px; }
+.course-progress-heading .progress-percent { color: var(--course-emphasis); font-weight: 800; }
+.course-progress .course-track {
+    height: 10px;
+    overflow: hidden;
+    margin: 0;
+    border-radius: 20px;
+    background: var(--course-track);
+}
+.course-track .progress-fill {
+    border-radius: inherit;
+    background: linear-gradient(90deg, #8774ef, #46d9dc);
+}
+.course-progress :is(.progress-status, .progress-text) {
+    margin: 12px 0 0;
+    color: var(--course-muted);
+    font-size: 13px;
+}
+
+.course-layout .course-question {
+    margin: 17px 0;
+    padding: 20px;
+    border: 1px solid var(--course-border);
+    border-radius: 16px;
+    background: var(--course-inset);
+}
+.course-question > :is(h3, p):first-child {
+    margin: 0 0 12px;
+    color: var(--course-text);
+    font-size: 17px;
+    font-weight: 650;
+}
+.course-question .quiz-option {
+    margin: 9px 0;
+    padding: 12px 15px;
+    border: 1px solid var(--course-border);
+    border-radius: 10px;
+    background: var(--course-option);
+    color: var(--course-text);
+    font: inherit;
+}
+.course-question .quiz-option:hover:not(:disabled) {
+    border-color: var(--course-accent);
+    background: var(--course-hover);
+}
+.course-question .quiz-option:focus-visible { outline: 2px solid var(--course-accent); outline-offset: 2px; }
+
+@media (max-width: 600px) {
+    body[data-module] .course-layout { padding-inline: 16px; }
+    .course-layout .course-hero { padding: 32px 4px 24px; }
+    .course-layout :is(.course-card, .course-progress, .course-question) { padding: 16px; }
+}
+
+.course-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 13px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.course-stats li {
+    padding: 8px 15px;
+    border: 1px solid var(--course-border);
+    border-radius: 12px;
+    background: var(--course-option);
+    color: var(--course-muted);
+    font-size: 13px;
+    font-weight: 600;
+}
