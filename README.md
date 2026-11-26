@@ -6,7 +6,9 @@ Q-Spark helps beginners build an intuition for quantum computing through familia
 
 The intended learners are secondary-school and early university students, including students who prefer Kannada, Telugu, or Hindi to English. A browser and a laptop are enough to run the simulator after setup.
 
-[Install and run Q-Spark](docs/technical-guide.md#run-q-spark-locally) · [Pitch deck](https://docs.google.com/presentation/d/1plBRwBEHsFzI0164nUXhAwoD4uV9jIAV5gVCmpI_Jvw/edit?slide=id.qspark_pitch_1#slide=id.qspark_pitch_1)
+[Live hackathon demo (HTTP)](http://13.201.47.104/) · [Install and run Q-Spark](docs/technical-guide.md#run-q-spark-locally) · [Pitch deck](https://docs.google.com/presentation/d/1plBRwBEHsFzI0164nUXhAwoD4uV9jIAV5gVCmpI_Jvw/edit?slide=id.qspark_pitch_1#slide=id.qspark_pitch_1)
+
+The live demo runs on a temporary Lightsail instance. If it is offline, follow the local setup guide above.
 
 ## Architecture
 
