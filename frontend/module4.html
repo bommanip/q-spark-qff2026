@@ -239,6 +239,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body data-module="4">
@@ -271,6 +272,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 Explore how quantum computers approach searching, factoring and real-world challenges.
 </p>
 
+<section class="page-narration" data-narration-page="module4" aria-labelledby="page-narration-title" hidden>
+    <div class="narration-heading">
+        <h3 id="page-narration-title"></h3>
+        <button type="button" class="narration-toggle"></button>
+    </div>
+    <p class="narration-status" role="status"></p>
+    <p class="narration-caption"></p>
+    <audio preload="none"></audio>
+</section>
+
 <p id="progressLabel">YOUR LEARNING PROGRESS</p>
 
 <div class="progress">
@@ -287,6 +298,15 @@ Module 4 completion: 0%
 
 <section class="card">
     <h2 id="section1Title">01. What is a quantum algorithm?</h2>
+    <section class="page-narration" data-narration-concept="module4-algorithm" data-concept-heading="section1Title" aria-labelledby="module4-algorithm-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module4-algorithm-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p id="section1Text1">
     A quantum algorithm is a sequence of operations designed to use
@@ -309,6 +329,15 @@ Module 4 completion: 0%
 
 <section class="card">
     <h2 id="section2Title">02. Grover's Search Algorithm</h2>
+    <section class="page-narration" data-narration-concept="module4-grover" data-concept-heading="section2Title" aria-labelledby="module4-grover-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module4-grover-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p id="groverText1">
     Imagine searching through a collection of possibilities to find
@@ -345,6 +374,15 @@ Module 4 completion: 0%
 
 <section class="card">
     <h2 id="section3Title">03. What is Shor's Algorithm?</h2>
+    <section class="page-narration" data-narration-concept="module4-shor" data-concept-heading="section3Title" aria-labelledby="module4-shor-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module4-shor-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p id="shorText1">
     Shor's algorithm is a quantum algorithm for factoring large integers.
@@ -372,6 +410,15 @@ Module 4 completion: 0%
 
 <section class="card">
     <h2 id="section4Title">04. Quantum computing in the real world</h2>
+    <section class="page-narration" data-narration-concept="module4-applications" data-concept-heading="section4Title" aria-labelledby="module4-applications-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module4-applications-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <h3 id="healthTitle">Healthcare and drug discovery</h3>
     <p id="healthText">Researchers are exploring quantum methods for modelling molecules and studying chemical systems.</p>
@@ -1286,5 +1333,8 @@ updateProgress();
 </script>
 
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/concepts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

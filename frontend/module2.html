@@ -112,6 +112,7 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body data-module="2">
@@ -147,6 +148,16 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
     </div>
 </header>
 
+<section class="page-narration" data-narration-page="module2" aria-labelledby="page-narration-title" hidden>
+    <div class="narration-heading">
+        <h3 id="page-narration-title"></h3>
+        <button type="button" class="narration-toggle"></button>
+    </div>
+    <p class="narration-status" role="status"></p>
+    <p class="narration-caption"></p>
+    <audio preload="none"></audio>
+</section>
+
 <section class="progress-card">
     <div class="progress-heading">
         <strong id="progressHeading">YOUR LEARNING PROGRESS</strong>
@@ -162,6 +173,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card">
     <span class="section-number" id="section1">01 · THE CONCEPT</span>
     <h2 id="superpositionTitle">What is superposition?</h2>
+    <section class="page-narration" data-narration-concept="module2-superposition" data-concept-heading="superpositionTitle" aria-labelledby="module2-superposition-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module2-superposition-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
     <p id="superpositionText1">A classical bit has a definite value of either 0 or 1. A qubit can exist in a quantum combination of these basis states. This is called superposition.</p>
     <div class="visual">
         <h3 id="superpositionVisualTitle">Meet a qubit in superposition</h3>
@@ -177,6 +197,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card">
     <span class="section-number" id="section2">02 · INTERACTIVE EXPERIMENT</span>
     <h2 id="trySuperpositionTitle">Try superposition yourself!</h2>
+    <section class="page-narration" data-narration-concept="module2-balanced" data-concept-heading="trySuperpositionTitle" aria-labelledby="module2-balanced-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module2-balanced-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
     <p id="trySuperpositionText">The Hadamard (H) gate creates an equal superposition when applied to a qubit starting in |0⟩.</p>
     <div class="visual">
         <div class="qubit">H</div>
@@ -190,6 +219,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card">
     <span class="section-number" id="section3">03 · THE CONCEPT</span>
     <h2 id="entanglementTitle">What is entanglement?</h2>
+    <section class="page-narration" data-narration-concept="module2-entanglement" data-concept-heading="entanglementTitle" aria-labelledby="module2-entanglement-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module2-entanglement-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
     <p id="entanglementText1">Entanglement is a quantum phenomenon in which two or more qubits share a joint quantum state.</p>
     <p id="entanglementText2">Their measurement results can be strongly correlated, even when the qubits are far apart.</p>
     <div class="visual">
@@ -204,6 +242,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card">
     <span class="section-number" id="section4">04 · INTERACTIVE EXPERIMENT</span>
     <h2 id="runEntanglementTitle">Run real quantum entanglement!</h2>
+    <section class="page-narration" data-narration-concept="module2-bell" data-concept-heading="runEntanglementTitle" aria-labelledby="module2-bell-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module2-bell-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
     <p id="runEntanglementText">Now run a two-qubit Bell state circuit using Qiskit Aer.</p>
     <div class="visual">
         <h3 id="bellExperimentTitle">Bell State Experiment</h3>
@@ -218,6 +265,15 @@ footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid va
 <section class="lesson-card">
     <span class="section-number" id="section5">05 · QUICK COMPARISON</span>
     <h2 id="comparisonTitle">Superposition vs Entanglement</h2>
+    <section class="page-narration" data-narration-concept="module2-compare" data-concept-heading="comparisonTitle" aria-labelledby="module2-compare-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module2-compare-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
     <p><strong id="comparisonSuperpositionLabel">Superposition</strong></p>
     <p id="comparisonSuperpositionText">A single qubit can exist in a combination of basis states.</p>
     <p><strong id="comparisonEntanglementLabel">Entanglement</strong></p>
@@ -991,5 +1047,8 @@ updateModuleProgress();
 
 </script>
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/concepts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

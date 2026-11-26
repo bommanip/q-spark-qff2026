@@ -109,6 +109,7 @@ select:not(.language-select){width:100%}
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body>
@@ -190,6 +191,15 @@ select:not(.language-select){width:100%}
             <p style="color:#9da9c8;font-size:12px;line-height:1.7;margin-bottom:18px;" data-i18n="mapInstruction">
                 Choose a location to hide the treasure. Then use quantum search to discover it.
             </p>
+            <section class="page-narration" data-narration-page="treasure-hunt" aria-labelledby="page-narration-title" hidden>
+                <div class="narration-heading">
+                    <h3 id="page-narration-title"></h3>
+                    <button type="button" class="narration-toggle"></button>
+                </div>
+                <p class="narration-status" role="status"></p>
+                <p class="narration-caption"></p>
+                <audio preload="none"></audio>
+            </section>
 
             <div class="map-grid">
                 <button class="location" data-state="00" onclick="selectLocation('00')">
@@ -717,5 +727,7 @@ document.getElementById("status").textContent = t("welcome");
 </script>
 
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

@@ -543,6 +543,7 @@ footer{
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body data-module="1">
@@ -578,6 +579,16 @@ footer{
         </div>
     </header>
 
+    <section class="page-narration" data-narration-page="module1" aria-labelledby="page-narration-title" hidden>
+        <div class="narration-heading">
+            <h3 id="page-narration-title"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
+
     <section class="progress-card">
         <div class="progress-top">
             <h3 id="progressHeading">Your Learning Progress</h3>
@@ -597,6 +608,15 @@ footer{
     <section class="lesson-card">
         <div class="section-label" id="section1">01 · THE BASICS</div>
         <h2 id="lesson1Title">What is a Computer?</h2>
+        <section class="page-narration" data-narration-concept="module1-computer" data-concept-heading="lesson1Title" aria-labelledby="module1-computer-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module1-computer-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
 
         <p id="lesson1Text">A computer is an electronic machine that receives information, processes it according to instructions, and produces a result.</p>
 
@@ -629,6 +649,15 @@ footer{
     <section class="lesson-card">
         <div class="section-label" id="section2">02 · CLASSICAL COMPUTING</div>
         <h2 id="lesson2Title">Classical Computers and Bits</h2>
+        <section class="page-narration" data-narration-concept="module1-bits" data-concept-heading="lesson2Title" aria-labelledby="module1-bits-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module1-bits-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
 
         <p id="lesson2Text">Traditional computers use tiny units of information called bits. Each bit can hold one of two possible values: 0 or 1.</p>
 
@@ -663,6 +692,15 @@ footer{
     <section class="lesson-card">
         <div class="section-label" id="section3">03 · THE QUANTUM WORLD</div>
         <h2 id="lesson3Title">What is Quantum Computing?</h2>
+        <section class="page-narration" data-narration-concept="module1-quantum" data-concept-heading="lesson3Title" aria-labelledby="module1-quantum-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module1-quantum-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
 
         <p id="lesson3Text">Quantum computing is a new way of processing information using the principles of quantum physics.</p>
 
@@ -686,6 +724,15 @@ footer{
     <section class="lesson-card">
         <div class="section-label" id="section4">04 · MEET THE QUBIT</div>
         <h2 id="lesson4Title">What is a Qubit?</h2>
+        <section class="page-narration" data-narration-concept="module1-qubit" data-concept-heading="lesson4Title" aria-labelledby="module1-qubit-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module1-qubit-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
 
         <p id="lesson4Text">A qubit, or quantum bit, is the basic unit of information in a quantum computer.</p>
 
@@ -1648,5 +1695,8 @@ updateModuleProgress();
 </script>
 
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/concepts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

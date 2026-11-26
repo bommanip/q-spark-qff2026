@@ -448,6 +448,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body data-module="5">
@@ -484,6 +485,16 @@ sustainability and responsible innovation.
 
 <p data-i18n="progressHeading">YOUR LEARNING PROGRESS</p>
 
+<section class="page-narration" data-narration-page="module5" aria-labelledby="page-narration-title" hidden>
+    <div class="narration-heading">
+        <h3 id="page-narration-title"></h3>
+        <button type="button" class="narration-toggle"></button>
+    </div>
+    <p class="narration-status" role="status"></p>
+    <p class="narration-caption"></p>
+    <audio preload="none"></audio>
+</section>
+
 <div class="progress">
     <div class="progress-fill" id="progressFill"></div>
 </div>
@@ -495,7 +506,16 @@ sustainability and responsible innovation.
 </div>
 
 <section class="card">
-    <h2 data-i18n="section1">01. Quantum computing and healthcare</h2>
+    <h2 id="module5-healthcare-heading" data-i18n="section1">01. Quantum computing and healthcare</h2>
+    <section class="page-narration" data-narration-concept="module5-healthcare" data-concept-heading="module5-healthcare-heading" aria-labelledby="module5-healthcare-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module5-healthcare-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p data-i18n="health1">
     Healthcare research involves understanding complex biological
@@ -522,7 +542,16 @@ sustainability and responsible innovation.
 </section>
 
 <section class="card">
-    <h2 data-i18n="section2">02. Quantum computing and sustainability</h2>
+    <h2 id="module5-sustainability-heading" data-i18n="section2">02. Quantum computing and sustainability</h2>
+    <section class="page-narration" data-narration-concept="module5-sustainability" data-concept-heading="module5-sustainability-heading" aria-labelledby="module5-sustainability-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module5-sustainability-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p data-i18n="sustainIntro">
     Climate change and sustainability involve complicated problems
@@ -549,7 +578,16 @@ sustainability and responsible innovation.
 </section>
 
 <section class="card">
-    <h2 data-i18n="section3">03. Quantum computing and cybersecurity</h2>
+    <h2 id="module5-security-heading" data-i18n="section3">03. Quantum computing and cybersecurity</h2>
+    <section class="page-narration" data-narration-concept="module5-security" data-concept-heading="module5-security-heading" aria-labelledby="module5-security-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module5-security-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p data-i18n="cyber1">
     Powerful future quantum computers could threaten some cryptographic
@@ -570,7 +608,16 @@ sustainability and responsible innovation.
 </section>
 
 <section class="card">
-    <h2 data-i18n="section4">04. Ethics and responsible innovation</h2>
+    <h2 id="module5-ethics-heading" data-i18n="section4">04. Ethics and responsible innovation</h2>
+    <section class="page-narration" data-narration-concept="module5-ethics" data-concept-heading="module5-ethics-heading" aria-labelledby="module5-ethics-audio" hidden>
+        <div class="narration-heading">
+            <h3 id="module5-ethics-audio"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
 
     <p data-i18n="ethicsIntro">
     Powerful technologies bring responsibilities. Quantum computing
@@ -1586,5 +1633,8 @@ applyLanguage(currentLanguage);
 </script>
 
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/concepts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

@@ -310,6 +310,7 @@ button:disabled {
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body>
@@ -348,6 +349,15 @@ button:disabled {
         <section class="card">
 
             <h2 data-i18n="yourCoin">Your Quantum Coin</h2>
+            <section class="page-narration" data-narration-page="coin-lab" aria-labelledby="page-narration-title" hidden>
+                <div class="narration-heading">
+                    <h3 id="page-narration-title"></h3>
+                    <button type="button" class="narration-toggle"></button>
+                </div>
+                <p class="narration-status" role="status"></p>
+                <p class="narration-caption"></p>
+                <audio preload="none"></audio>
+            </section>
 
             <p class="section-text" data-i18n="coinDescription">
                 Adjust the angle and see how the probability of
@@ -965,5 +975,7 @@ updateLiveProbability();
 </script>
 
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

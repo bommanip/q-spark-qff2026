@@ -61,6 +61,7 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
 </style>
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
+<link rel="stylesheet" href="narration/player.css">
 </head>
 
 <body data-module="3">
@@ -92,6 +93,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
         and how we combine them to build circuits.
     </p>
 
+    <section class="page-narration" data-narration-page="module3" aria-labelledby="page-narration-title" hidden>
+        <div class="narration-heading">
+            <h3 id="page-narration-title"></h3>
+            <button type="button" class="narration-toggle"></button>
+        </div>
+        <p class="narration-status" role="status"></p>
+        <p class="narration-caption"></p>
+        <audio preload="none"></audio>
+    </section>
+
     <p data-i18n="progressLabel">YOUR LEARNING PROGRESS</p>
 
     <div class="progress">
@@ -105,7 +116,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </div>
 
     <section class="lesson-card">
-        <h2 data-i18n="xTitle">01. X Gate — The Bit Flip</h2>
+        <h2 id="module3-x-heading" data-i18n="xTitle">01. X Gate — The Bit Flip</h2>
+        <section class="page-narration" data-narration-concept="module3-x" data-concept-heading="module3-x-heading" aria-labelledby="module3-x-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module3-x-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
         <p data-i18n="xDescription">The X Gate changes |0⟩ into |1⟩ and |1⟩ into |0⟩.</p>
         <div class="visual">
             <div class="gate-box">X</div>
@@ -118,7 +138,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </section>
 
     <section class="lesson-card">
-        <h2 data-i18n="hTitle">02. H Gate — Superposition</h2>
+        <h2 id="module3-h-heading" data-i18n="hTitle">02. H Gate — Superposition</h2>
+        <section class="page-narration" data-narration-concept="module3-h" data-concept-heading="module3-h-heading" aria-labelledby="module3-h-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module3-h-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
         <p data-i18n="hDescription">The Hadamard Gate transforms |0⟩ into an equal superposition of |0⟩ and |1⟩.</p>
         <div class="visual">
             <div class="gate-box">H</div>
@@ -130,7 +159,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </section>
 
     <section class="lesson-card">
-        <h2 data-i18n="zTitle">03. Z Gate — The Phase Flip</h2>
+        <h2 id="module3-z-heading" data-i18n="zTitle">03. Z Gate — The Phase Flip</h2>
+        <section class="page-narration" data-narration-concept="module3-z" data-concept-heading="module3-z-heading" aria-labelledby="module3-z-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module3-z-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
         <p data-i18n="zDescription">The Z Gate changes the phase of the |1⟩ component of a quantum state.</p>
         <div class="visual">
             <div class="gate-box">Z</div>
@@ -144,7 +182,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </section>
 
     <section class="lesson-card">
-        <h2 data-i18n="cnotTitle">04. CNOT Gate — Controlled Operation</h2>
+        <h2 id="module3-cnot-heading" data-i18n="cnotTitle">04. CNOT Gate — Controlled Operation</h2>
+        <section class="page-narration" data-narration-concept="module3-cnot" data-concept-heading="module3-cnot-heading" aria-labelledby="module3-cnot-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module3-cnot-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
         <p data-i18n="cnotDescription">CNOT is a two-qubit gate. It flips the target qubit only when the control qubit is 1.</p>
         <div class="visual">
             <div class="gate-box">CX</div>
@@ -158,7 +205,16 @@ footer{text-align:center;padding:30px;color:#aeb6cf}
     </section>
 
     <section class="lesson-card">
-        <h2 data-i18n="combinedTitle">05. Combine Gates into a Circuit</h2>
+        <h2 id="module3-combine-heading" data-i18n="combinedTitle">05. Combine Gates into a Circuit</h2>
+        <section class="page-narration" data-narration-concept="module3-combine" data-concept-heading="module3-combine-heading" aria-labelledby="module3-combine-audio" hidden>
+            <div class="narration-heading">
+                <h3 id="module3-combine-audio"></h3>
+                <button type="button" class="narration-toggle"></button>
+            </div>
+            <p class="narration-status" role="status"></p>
+            <p class="narration-caption"></p>
+            <audio preload="none"></audio>
+        </section>
         <p data-i18n="combinedDescription">A quantum circuit is built by applying gates in a particular sequence.</p>
         <div class="visual">
             <h3>H → X → H → Measurement</h3>
@@ -821,5 +877,8 @@ updateModuleProgress();
 
 </script>
 <script src="lesson-nav.js"></script>
+<script src="narration/scripts.js"></script>
+<script src="narration/concepts.js"></script>
+<script src="narration/player.js"></script>
 </body>
 </html>

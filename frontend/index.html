@@ -218,6 +218,7 @@ html[data-theme="light"] #home {
             <a href="#home" data-i18n="navHome">Home</a>
             <a href="#modules" data-i18n="navModules">Learning Modules</a>
             <a href="#arcade" data-i18n="navArcade">Quantum Arcade</a>
+            <a href="#coin">Quantum Coin Trail</a>
             <a href="#features" data-i18n="navFeatures">Features</a>
         </nav>
 
@@ -251,13 +252,141 @@ html[data-theme="light"] #home {
 
 <main class="container">
 
-<div id="learn-tabs" class="home-tabs" role="tablist" aria-label="Explore Q-Spark">
-    <button type="button" role="tab" id="home-tab-coin" aria-controls="coin" aria-selected="true" data-home-label="coin">Quantum Coin Trail</button>
-    <button type="button" role="tab" id="home-tab-modules" aria-controls="modules" aria-selected="false" tabindex="-1" data-home-label="journey">Learning Journey</button>
-    <button type="button" role="tab" id="home-tab-arcade" aria-controls="arcade" aria-selected="false" tabindex="-1" data-home-label="arcade">Quantum Arcade</button>
-</div>
+<section id="modules" class="home-section" aria-labelledby="learning-journey-title">
+    <div class="section-heading">
+        <h2 id="learning-journey-title" data-i18n="exploreJourney">Explore Your Learning Journey</h2>
+        <p data-i18n="fiveModules">Five carefully structured modules. One step at a time.</p>
+    </div>
 
-<div id="coin" class="home-panel" role="tabpanel" aria-labelledby="home-tab-coin">
+    <div class="journey-progress">
+        <div class="journey-progress-meter">
+            <p id="progressMessage">0 of 5 lessons complete</p>
+            <div class="progress-track" id="journey-progress-bar" role="progressbar"
+                 aria-labelledby="progressMessage" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+                <div class="progress-fill" id="journey-progress-fill"></div>
+            </div>
+        </div>
+        <a href="module1.html" class="primary-button" id="continueButton">Start learning →</a>
+    </div>
+
+    <div class="module-grid">
+        <article class="module-card">
+            <div class="module-number">MODULE 01</div>
+            <h3 data-i18n="module1Title">Quantum Fundamentals</h3>
+            <p data-i18n="module1Desc">Discover computers, classical bits, quantum computers and qubits from absolute zero.</p>
+            <div class="card-progress">
+                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage1">0%</span></div>
+                <div class="card-progress-track"><div class="card-progress-fill" id="bar1"></div></div>
+                <div class="module-status" id="status1">Not completed</div>
+            </div>
+            <a href="module1.html" id="link1">Explore Module →</a>
+        </article>
+
+        <article class="module-card">
+            <div class="module-number">MODULE 02</div>
+            <h3 data-i18n="module2Title">Superposition & Entanglement</h3>
+            <p data-i18n="module2Desc">Understand the fascinating behaviour of qubits and explore your first quantum experiments.</p>
+            <div class="card-progress">
+                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage2">0%</span></div>
+                <div class="card-progress-track"><div class="card-progress-fill" id="bar2"></div></div>
+                <div class="module-status" id="status2">Not completed</div>
+            </div>
+            <a href="module2.html" id="link2">Explore Module →</a>
+        </article>
+
+        <article class="module-card">
+            <div class="module-number">MODULE 03</div>
+            <h3 data-i18n="module3Title">Quantum Gates & Circuits</h3>
+            <p data-i18n="module3Desc">Explore H, X, Z and CNOT gates. Build and run quantum circuits using Qiskit.</p>
+            <div class="card-progress">
+                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage3">0%</span></div>
+                <div class="card-progress-track"><div class="card-progress-fill" id="bar3"></div></div>
+                <div class="module-status" id="status3">Not completed</div>
+            </div>
+            <a href="module3.html" id="link3">Explore Module →</a>
+        </article>
+
+        <article class="module-card">
+            <div class="module-number">MODULE 04</div>
+            <h3 data-i18n="module4Title">Quantum Algorithms</h3>
+            <p data-i18n="module4Desc">Discover Grover's and Shor's algorithms and explore quantum computing applications.</p>
+            <div class="card-progress">
+                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage4">0%</span></div>
+                <div class="card-progress-track"><div class="card-progress-fill" id="bar4"></div></div>
+                <div class="module-status" id="status4">Not completed</div>
+            </div>
+            <a href="module4.html" id="link4">Explore Module →</a>
+        </article>
+
+        <article class="module-card">
+            <div class="module-number">MODULE 05</div>
+            <h3 data-i18n="module5Title">Quantum for Humanity</h3>
+            <p data-i18n="module5Desc">Explore healthcare, sustainability, ethical innovation and responsible technology.</p>
+            <div class="card-progress">
+                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage5">0%</span></div>
+                <div class="card-progress-track"><div class="card-progress-fill" id="bar5"></div></div>
+                <div class="module-status" id="status5">Not completed</div>
+            </div>
+            <a href="module5.html" id="link5">Explore Module →</a>
+        </article>
+    </div>
+</section>
+
+<section class="arcade-section home-section" id="arcade" aria-labelledby="arcade-title">
+    <div class="arcade-top">
+        <span class="arcade-label" data-i18n="arcadeLabel">✦ INTERACTIVE QUANTUM ZONE</span>
+        <span class="arcade-live" data-i18n="arcadeLive">● 3 EXPERIMENTS AVAILABLE</span>
+    </div>
+    <h2 class="arcade-heading" id="arcade-title">
+        <span data-i18n="welcomeArcade">Welcome to the</span>
+        <span data-i18n="quantumArcade">Quantum Arcade</span>
+    </h2>
+    <p class="arcade-description" data-i18n="arcadeDescription">Learning quantum computing doesn't have to stop at theory. Enter the arcade, experiment with real quantum circuits, and discover the fascinating behaviour of qubits through interactive games powered by Qiskit.</p>
+
+    <div class="arcade-grid">
+        <article class="arcade-card">
+            <div class="game-art coin-art"><span>🪙</span></div>
+            <div class="game-content">
+                <div class="game-number" data-i18n="experiment1">EXPERIMENT 01</div>
+                <h3 data-i18n="coinLab">Quantum Coin Lab</h3>
+                <p data-i18n="coinDesc">Can a quantum coin behave differently from an ordinary coin? Adjust the quantum rotation, flip your coin and explore how measurement probabilities change.</p>
+                <span class="game-concept" data-i18n="randomness">QUANTUM RANDOMNESS</span>
+                <a href="coin-lab.html" class="game-button" data-i18n="enterCoin">ENTER COIN LAB →</a>
+            </div>
+        </article>
+
+        <article class="arcade-card">
+            <div class="game-art dice-art"><span>🎲</span></div>
+            <div class="game-content">
+                <div class="game-number" data-i18n="experiment2">EXPERIMENT 02</div>
+                <h3 data-i18n="linkedDice">Linked Dice</h3>
+                <p data-i18n="diceDesc">Roll two quantum dice and explore the difference between independent measurements and entangled quantum pairs. Discover correlations through real experiments.</p>
+                <span class="game-concept" data-i18n="entanglement">QUANTUM ENTANGLEMENT</span>
+                <a href="linked-dice.html" class="game-button" data-i18n="rollDice">ROLL THE DICE →</a>
+            </div>
+        </article>
+
+        <article class="arcade-card">
+            <div class="game-art treasure-art"><span>🏆</span></div>
+            <div class="game-content">
+                <div class="game-number" data-i18n="experiment3">EXPERIMENT 03</div>
+                <h3 data-i18n="treasureHunt">Quantum Treasure Hunt</h3>
+                <p data-i18n="treasureDesc">Four mysterious locations. One hidden treasure. Use Grover's quantum search algorithm to find the marked location and reveal the treasure.</p>
+                <span class="game-concept" data-i18n="groverSearch">GROVER'S SEARCH</span>
+                <a href="treasure-hunt.html" class="game-button" data-i18n="findTreasure">FIND THE TREASURE →</a>
+            </div>
+        </article>
+    </div>
+
+    <div class="arcade-footer">
+        <span data-i18n="poweredBy">Powered by</span>
+        <strong>Python · Qiskit · Qiskit Aer</strong>
+        &nbsp;|&nbsp;
+        <span data-i18n="learnExperiment">Learn quantum concepts by experimenting.</span>
+    </div>
+</section>
+
+<div id="coin" class="home-section">
     <section class="coin-lesson" aria-labelledby="coin-lesson-title">
         <h2 id="coin-lesson-title" data-coin-copy="title">Quantum Coin Trail</h2>
         <p data-coin-copy="intro"></p>
@@ -415,134 +544,6 @@ html[data-theme="light"] #home {
         <p class="coin-credit">Coin photos: <a href="fundamentals/coin-credits.html">Supplied reference image</a>.</p>
     </section>
 </div>
-
-<section id="modules" class="home-panel" role="tabpanel" aria-labelledby="home-tab-modules" hidden>
-    <div class="section-heading">
-        <h2 data-i18n="exploreJourney">Explore Your Learning Journey</h2>
-        <p data-i18n="fiveModules">Five carefully structured modules. One step at a time.</p>
-    </div>
-
-    <div class="journey-progress">
-        <p id="progressMessage"></p>
-        <a href="module1.html" class="primary-button" id="continueButton">Start learning →</a>
-    </div>
-
-    <div class="module-grid">
-        <article class="module-card">
-            <div class="module-number">MODULE 01</div>
-            <h3 data-i18n="module1Title">Quantum Fundamentals</h3>
-            <p data-i18n="module1Desc">Discover computers, classical bits, quantum computers and qubits from absolute zero.</p>
-            <div class="card-progress">
-                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage1">0%</span></div>
-                <div class="card-progress-track"><div class="card-progress-fill" id="bar1"></div></div>
-                <div class="module-status" id="status1">Not completed</div>
-            </div>
-            <a href="module1.html" id="link1">Explore Module →</a>
-        </article>
-
-        <article class="module-card">
-            <div class="module-number">MODULE 02</div>
-            <h3 data-i18n="module2Title">Superposition & Entanglement</h3>
-            <p data-i18n="module2Desc">Understand the fascinating behaviour of qubits and explore your first quantum experiments.</p>
-            <div class="card-progress">
-                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage2">0%</span></div>
-                <div class="card-progress-track"><div class="card-progress-fill" id="bar2"></div></div>
-                <div class="module-status" id="status2">Not completed</div>
-            </div>
-            <a href="module2.html" id="link2">Explore Module →</a>
-        </article>
-
-        <article class="module-card">
-            <div class="module-number">MODULE 03</div>
-            <h3 data-i18n="module3Title">Quantum Gates & Circuits</h3>
-            <p data-i18n="module3Desc">Explore H, X, Z and CNOT gates. Build and run quantum circuits using Qiskit.</p>
-            <div class="card-progress">
-                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage3">0%</span></div>
-                <div class="card-progress-track"><div class="card-progress-fill" id="bar3"></div></div>
-                <div class="module-status" id="status3">Not completed</div>
-            </div>
-            <a href="module3.html" id="link3">Explore Module →</a>
-        </article>
-
-        <article class="module-card">
-            <div class="module-number">MODULE 04</div>
-            <h3 data-i18n="module4Title">Quantum Algorithms</h3>
-            <p data-i18n="module4Desc">Discover Grover's and Shor's algorithms and explore quantum computing applications.</p>
-            <div class="card-progress">
-                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage4">0%</span></div>
-                <div class="card-progress-track"><div class="card-progress-fill" id="bar4"></div></div>
-                <div class="module-status" id="status4">Not completed</div>
-            </div>
-            <a href="module4.html" id="link4">Explore Module →</a>
-        </article>
-
-        <article class="module-card">
-            <div class="module-number">MODULE 05</div>
-            <h3 data-i18n="module5Title">Quantum for Humanity</h3>
-            <p data-i18n="module5Desc">Explore healthcare, sustainability, ethical innovation and responsible technology.</p>
-            <div class="card-progress">
-                <div class="card-progress-label"><span data-i18n="moduleProgress">Module Progress</span><span id="percentage5">0%</span></div>
-                <div class="card-progress-track"><div class="card-progress-fill" id="bar5"></div></div>
-                <div class="module-status" id="status5">Not completed</div>
-            </div>
-            <a href="module5.html" id="link5">Explore Module →</a>
-        </article>
-    </div>
-</section>
-
-<section class="arcade-section home-panel" id="arcade" role="tabpanel" aria-labelledby="home-tab-arcade" hidden>
-    <div class="arcade-top">
-        <span class="arcade-label" data-i18n="arcadeLabel">✦ INTERACTIVE QUANTUM ZONE</span>
-        <span class="arcade-live" data-i18n="arcadeLive">● 3 EXPERIMENTS AVAILABLE</span>
-    </div>
-    <h2 class="arcade-heading">
-        <span data-i18n="welcomeArcade">Welcome to the</span>
-        <span data-i18n="quantumArcade">Quantum Arcade</span>
-    </h2>
-    <p class="arcade-description" data-i18n="arcadeDescription">Learning quantum computing doesn't have to stop at theory. Enter the arcade, experiment with real quantum circuits, and discover the fascinating behaviour of qubits through interactive games powered by Qiskit.</p>
-
-    <div class="arcade-grid">
-        <article class="arcade-card">
-            <div class="game-art coin-art"><span>🪙</span></div>
-            <div class="game-content">
-                <div class="game-number" data-i18n="experiment1">EXPERIMENT 01</div>
-                <h3 data-i18n="coinLab">Quantum Coin Lab</h3>
-                <p data-i18n="coinDesc">Can a quantum coin behave differently from an ordinary coin? Adjust the quantum rotation, flip your coin and explore how measurement probabilities change.</p>
-                <span class="game-concept" data-i18n="randomness">QUANTUM RANDOMNESS</span>
-                <a href="coin-lab.html" class="game-button" data-i18n="enterCoin">ENTER COIN LAB →</a>
-            </div>
-        </article>
-
-        <article class="arcade-card">
-            <div class="game-art dice-art"><span>🎲</span></div>
-            <div class="game-content">
-                <div class="game-number" data-i18n="experiment2">EXPERIMENT 02</div>
-                <h3 data-i18n="linkedDice">Linked Dice</h3>
-                <p data-i18n="diceDesc">Roll two quantum dice and explore the difference between independent measurements and entangled quantum pairs. Discover correlations through real experiments.</p>
-                <span class="game-concept" data-i18n="entanglement">QUANTUM ENTANGLEMENT</span>
-                <a href="linked-dice.html" class="game-button" data-i18n="rollDice">ROLL THE DICE →</a>
-            </div>
-        </article>
-
-        <article class="arcade-card">
-            <div class="game-art treasure-art"><span>🏆</span></div>
-            <div class="game-content">
-                <div class="game-number" data-i18n="experiment3">EXPERIMENT 03</div>
-                <h3 data-i18n="treasureHunt">Quantum Treasure Hunt</h3>
-                <p data-i18n="treasureDesc">Four mysterious locations. One hidden treasure. Use Grover's quantum search algorithm to find the marked location and reveal the treasure.</p>
-                <span class="game-concept" data-i18n="groverSearch">GROVER'S SEARCH</span>
-                <a href="treasure-hunt.html" class="game-button" data-i18n="findTreasure">FIND THE TREASURE →</a>
-            </div>
-        </article>
-    </div>
-
-    <div class="arcade-footer">
-        <span data-i18n="poweredBy">Powered by</span>
-        <strong>Python · Qiskit · Qiskit Aer</strong>
-        &nbsp;|&nbsp;
-        <span data-i18n="learnExperiment">Learn quantum concepts by experimenting.</span>
-    </div>
-</section>
 
 <section class="feature-section" id="features">
     <div class="section-heading">
@@ -815,8 +816,13 @@ function updateDashboard() {
     const completed = modules.filter(module => progress.completedModules.includes(module.number)).length;
     const nextModule = modules.find(module => !progress.completedModules.includes(module.number));
     const button = document.getElementById("continueButton");
-    document.getElementById("progressMessage").textContent = t("progressSome")
-        .replace("{done}", completed).replace("{total}", modules.length);
+    const summary = t("progressSome").replace("{done}", completed).replace("{total}", modules.length);
+    document.getElementById("progressMessage").textContent = summary;
+    const progressBar = document.getElementById("journey-progress-bar");
+    progressBar.setAttribute("aria-valuemax", modules.length);
+    progressBar.setAttribute("aria-valuenow", completed);
+    progressBar.setAttribute("aria-valuetext", summary);
+    document.getElementById("journey-progress-fill").style.width = `${completed / modules.length * 100}%`;
     button.href = nextModule ? nextModule.file : "module5.html";
     button.textContent = nextModule ? (completed ? t("continueTitle") : t("startLearning")) : t("reviewFinal");
     updateModuleCards(progress);

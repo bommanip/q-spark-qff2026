@@ -152,20 +152,13 @@ def execute_grover(marked_state, shots=1024):
     # Initial superposition
     circuit.h([0, 1])
 
-    # Oracle
-    if marked_state[0] == "0":
-        circuit.x(0)
-
-    if marked_state[1] == "0":
-        circuit.x(1)
-
+    # Qiskit displays bit 0 at the right end of each measurement string.
+    zero_qubits = [qubit for qubit, bit in enumerate(reversed(marked_state)) if bit == "0"]
+    for qubit in zero_qubits:
+        circuit.x(qubit)
     circuit.cz(0, 1)
-
-    if marked_state[0] == "0":
-        circuit.x(0)
-
-    if marked_state[1] == "0":
-        circuit.x(1)
+    for qubit in zero_qubits:
+        circuit.x(qubit)
 
     # Diffusion operator
     circuit.h([0, 1])

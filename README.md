@@ -158,7 +158,7 @@ Instead of relying only on theoretical explanations, the platform combines learn
 
 ---
 
-## Quantum Coin Trail narration
+## Narration
 
 The five steps each have a separate play/pause control in English (`en`), Kannada (`kn`), Telugu (`te`), and Hindi (`hi`). The browser plays the bundled MP3s from [frontend/fundamentals/audio](frontend/fundamentals/audio). Playback runs locally with no model install, account, or API key.
 
@@ -184,7 +184,21 @@ python tools/generate_coin_audio.py --model-dir ../mithi-v2-flash --language kn 
 python tools/generate_coin_audio.py --model-dir ../mithi-v2-flash
 ```
 
-Use `--output-dir` to preview generated files in a separate directory. The default output replaces only the selected clips in `frontend/fundamentals/audio`.
+The five modules and three arcade games also have one localized guide each. Edit [their caption scripts](frontend/narration/scripts.js) in page order: Modules 1–5, Coin Lab, Linked Dice, Treasure Hunt. Use `--scope pages` to regenerate all 32 page clips, or limit the command to a specific language and page.
+
+```sh
+python tools/generate_coin_audio.py --scope pages --model-dir ../mithi-v2-flash --language te --step linked-dice
+```
+
+For page narration the default output is `frontend/narration/audio`, with filenames such as `te-linked-dice.mp3`.
+
+Each module also has a separate clip for every concept or activity section. Edit [the concept scripts](frontend/narration/concepts.js) under the matching concept key and language. Use `--scope concepts` to regenerate all 88 concept clips, or add filters for the clip you changed. The generator writes them to `frontend/narration/audio` using the concept key, such as `kn-module2-bell.mp3`.
+
+```sh
+python tools/generate_coin_audio.py --scope concepts --model-dir ../mithi-v2-flash --language kn --step module2-bell
+```
+
+Use `--output-dir` to preview generated files in a separate directory. The generator replaces only the selected clips in the output directory.
 
 ## 👩‍💻 About the Project
 
